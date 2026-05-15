@@ -454,8 +454,15 @@
 
   // Sidebar click → scroll to center
   const mainContent = document.getElementById('main-content');
+  function setActiveSidebarItem(targetId) {
+    sidebar.querySelectorAll('.sidebar-item').forEach(i => {
+      i.classList.toggle('active', i.dataset.target === targetId);
+    });
+  }
+
   sidebar.querySelectorAll('.sidebar-item').forEach(item => {
     item.addEventListener('click', () => {
+      setActiveSidebarItem(item.dataset.target);
       const target = document.getElementById(item.dataset.target);
       if (!target) return;
       const containerH = mainContent.clientHeight;
@@ -479,11 +486,7 @@
   // IntersectionObserver → active sidebar
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        sidebar.querySelectorAll('.sidebar-item').forEach(item => {
-          item.classList.toggle('active', item.dataset.target === entry.target.id);
-        });
-      }
+      if (entry.isIntersecting) setActiveSidebarItem(entry.target.id);
     });
   }, { root: mainContent, threshold: 0.5 });
 
