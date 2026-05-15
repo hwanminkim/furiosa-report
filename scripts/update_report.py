@@ -20,27 +20,18 @@ REPO_ROOT   = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
 
 COMPANIES = [
-    {"name": "NVIDIA",      "website": "https://www.nvidia.com",    "blog": "https://blogs.nvidia.com"},
-    {"name": "Groq",        "website": "https://groq.com",           "blog": "https://groq.com/blog"},
-    {"name": "Cerebras",    "website": "https://cerebras.net",       "blog": "https://cerebras.net/blog"},
-    {"name": "SambaNova",   "website": "https://sambanova.ai",       "blog": "https://sambanova.ai/blog"},
-    {"name": "Tenstorrent", "website": "https://tenstorrent.com",    "blog": "https://tenstorrent.com/blog"},
+    {"name": "NVIDIA",      "website": "https://www.nvidia.com",    "blog": "https://blogs.nvidia.com",   "query": "NVIDIA AI chip GPU inference"},
+    {"name": "Groq",        "website": "https://groq.com",           "blog": "https://groq.com/blog",      "query": "Groq AI inference chip LPU"},
+    {"name": "Cerebras",    "website": "https://cerebras.net",       "blog": "https://cerebras.net/blog",  "query": "Cerebras AI chip wafer"},
+    {"name": "SambaNova",   "website": "https://sambanova.ai",       "blog": "https://sambanova.ai/blog",  "query": "SambaNova AI chip RDU"},
+    {"name": "Tenstorrent", "website": "https://tenstorrent.com",    "blog": "https://tenstorrent.com/blog","query": "Tenstorrent AI chip RISC-V"},
 ]
 
-# Public RSS feeds covering AI chip / infrastructure news
-RSS_FEEDS = [
-    "https://techcrunch.com/feed/",
-    "https://venturebeat.com/feed/",
-    "https://siliconangle.com/feed/",
-    "https://www.theregister.com/headlines.rss",
-    "https://feeds.arstechnica.com/arstechnica/technology-lab",
-    # Company blogs
-    "https://blogs.nvidia.com/feed/",
-    "https://cerebras.net/blog/feed/",
-    "https://sambanova.ai/blog/feed/",
-    "https://tenstorrent.com/blog/feed/",
-    "https://groq.com/blog/feed/",
-]
+FURIOSA_QUERY = 'FuriosaAI OR "Furiosa AI" chip'
+
+def gnews_url(query: str) -> str:
+    from urllib.parse import quote
+    return f"https://news.google.com/rss/search?q={quote(query)}&hl=en-US&gl=US&ceid=US:en"
 
 NS = {
     "atom": "http://www.w3.org/2005/Atom",
@@ -81,52 +72,34 @@ def fetch_feed(url: str, timeout: int = 10) -> list[dict]:
     return entries
 
 
-def collect_articles(hours: int = 30) -> tuple[list[dict], list[dict]]:
-    """Collect recent articles for competitors and Furiosa separately."""
-    company_names = [c["name"].lower() for c in COMPANIES]
-    furiosa_terms = {"furiosa", "furiosaai", "furiosa ai"}
-
+def collect_articles() -> tuple[list[dict], list[dict]]:
+    """Fetch recent articles per-company via Google News RSS search."""
     competitor_found: list[dict] = []
     furiosa_found:    list[dict] = []
 
-    print("Fetching RSS feeds...")
-    for url in RSS_FEEDS:
-        for entry in fetch_feed(url):
-            text = (entry["title"] + " " + entry["summary"]).lower()
-            clean_summary = re.sub(r"<[^>]+>", "", entry["summary"])[:300]
+    print("Fetching Google News RSS per company...")
+    for company in COMPANIES:
+        entries = fetch_feed(gnews_url(company["query"]))[:10]  # top 10 per company
+        for entry in entries:
+            clean = re.sub(r"<[^>]+>", "", entry["summary"])[:300]
+            competitor_found.append({
+                "company": company["name"],
+                "title":   entry["title"],
+                "url":     entry["url"],
+                "summary": clean,
+            })
+        print(f"  {company['name']}: {len(entries)} articles")
 
-            # Check Furiosa first
-            if any(t in text for t in furiosa_terms):
-                furiosa_found.append({
-                    "title":   entry["title"],
-                    "url":     entry["url"],
-                    "summary": clean_summary,
-                })
-                continue
+    print("Fetching Google News RSS for Furiosa AI...")
+    for entry in fetch_feed(gnews_url(FURIOSA_QUERY))[:10]:
+        clean = re.sub(r"<[^>]+>", "", entry["summary"])[:300]
+        furiosa_found.append({
+            "title":   entry["title"],
+            "url":     entry["url"],
+            "summary": clean,
+        })
+    print(f"  Furiosa: {len(furiosa_found)} articles")
 
-            # Then competitors
-            for name in company_names:
-                if name in text:
-                    competitor_found.append({
-                        "company": name.title() if name != "sambanova" else "SambaNova",
-                        "title":   entry["title"],
-                        "url":     entry["url"],
-                        "summary": clean_summary,
-                    })
-                    break
-
-    def dedup(items):
-        seen: set[str] = set()
-        result = []
-        for a in items:
-            if a["url"] not in seen:
-                seen.add(a["url"])
-                result.append(a)
-        return result
-
-    competitor_found = dedup(competitor_found)
-    furiosa_found    = dedup(furiosa_found)
-    print(f"  Competitor articles: {len(competitor_found)}, Furiosa articles: {len(furiosa_found)}")
     return competitor_found, furiosa_found
 
 
@@ -223,7 +196,7 @@ def main():
     now = datetime.datetime.now(kst)
     print(f"[{now.strftime('%Y-%m-%d %H:%M KST')}] Starting report update...")
 
-    articles, furiosa_articles = collect_articles(hours=30)
+    articles, furiosa_articles = collect_articles()
     report = analyze(articles, furiosa_articles, now)
 
     # Always keep correct website/blog metadata
