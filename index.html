@@ -237,7 +237,7 @@
 
 <script>
   fetch("report.json").then(r => r.json()).then(d => {
-    document.getElementById("meta").textContent = d.period + " · Furiosa BD 참고용";
+    document.getElementById("meta").textContent = d.period + " ";
     document.getElementById("content").innerHTML = d.companies.map(c => `
       <div class="company">
         <div class="company-header">
