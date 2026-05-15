@@ -85,27 +85,27 @@ def collect_articles() -> tuple[list[dict], list[dict]]:
 
     print("Fetching Google News RSS per company...")
     for company in ALL_COMPANIES:
-        entries = fetch_feed(gnews_url(company["query"], company["lang"]))[:5]
+        entries = fetch_feed(gnews_url(company["query"], company["lang"]))[:3]
         for entry in entries:
             competitor_found.append({
                 "company": company["name"],
                 "region":  company["region"],
                 "title":   entry["title"],
                 "url":     entry["url"],
-                "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:150],
+                "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:80],
             })
         print(f"  {company['name']}: {len(entries)} articles")
 
     print("Fetching Google News RSS for Furiosa AI...")
     seen_urls: set[str] = set()
     for query, lang in FURIOSA_QUERIES:
-        for entry in fetch_feed(gnews_url(query, lang))[:5]:
+        for entry in fetch_feed(gnews_url(query, lang))[:4]:
             if entry["url"] not in seen_urls:
                 seen_urls.add(entry["url"])
                 furiosa_found.append({
                     "title":   entry["title"],
                     "url":     entry["url"],
-                    "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:150],
+                    "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:80],
                 })
     print(f"  Furiosa: {len(furiosa_found)} articles")
 
@@ -137,55 +137,35 @@ def analyze(articles: list[dict], furiosa_articles: list[dict], now: datetime.da
         for a in furiosa_articles
     ) or "수집된 기사가 없습니다."
 
-    companies_template = json.dumps(
+    companies_list = json.dumps(
         [{"name": c["name"], "region": c["region"],
           "website": c["website"], "blog": c["blog"],
-          "no_update": False,
-          "items": [{"text": "N. 제목 (MM-DD) — 한줄요약", "url": "기사URL", "summary": "기사 내용 2-3문장 요약 (Korean)", "bd_watch": "이 기사의 Furiosa BD 시사점 한 문장 (Korean)"}]}
+          "no_update": False, "items": []}
          for c in ALL_COMPANIES],
-        ensure_ascii=False, indent=2
+        ensure_ascii=False
     )
 
-    prompt = f"""Today is {now.strftime('%Y-%m-%d %H:%M KST')}.
-You are a competitive intelligence analyst for Furiosa AI (Korean AI chip startup).
+    prompt = f"""Date: {now.strftime('%Y-%m-%d KST')}. You are a competitive intelligence analyst for Furiosa AI (Korean AI chip startup).
 
-=== COMPETITOR ARTICLES ===
+COMPETITOR ARTICLES:
 {articles_text}
-=== END ===
 
-=== FURIOSA AI ARTICLES ===
+FURIOSA ARTICLES:
 {furiosa_text}
-=== END ===
 
-Return ONLY valid JSON — no markdown fences, no explanation:
-
-{{
-  "period": "{build_period(now)}",
-  "updated_at": "{now.isoformat()}",
-  "furiosa_highlights": [
-    {{"text": "Furiosa AI 관련 뉴스 팩트 한 줄 요약 (Korean)", "url": "기사URL또는빈문자열"}}
-  ],
-  "highlights": [
-    {{"company": "회사명", "text": "뉴스 팩트 요약 한 줄 (Korean)", "url": "기사URL또는빈문자열"}}
-  ],
-  "companies": {companies_template}
-}}
+Return ONLY valid JSON (no markdown):
+{{"period":"{build_period(now)}","updated_at":"{now.isoformat()}","furiosa_highlights":[{{"text":"팩트 한줄(Korean)","url":""}}],"highlights":[{{"company":"name","text":"팩트 한줄(Korean)","url":""}}],"companies":{companies_list}}}
 
 Rules:
-- furiosa_highlights: 1–3 items — write ONLY the factual news about Furiosa (what happened, numbers, dates). Pure news facts only. No recommendations, no advice.
-- highlights: 2–3 most impactful competitor news items — write ONLY the factual news (what happened, numbers, dates). Do NOT mention Furiosa at all. Do NOT write any implications, recommendations, or sentences starting with "Furiosa는". Pure competitor news facts only.
-- companies: include ALL companies (global + korea) with their region field preserved
-- For EVERY company: fill items with the most recent articles available (max 3). ALWAYS use actual articles from the data above — do NOT set no_update: true unless there are truly zero articles for that company in the provided data.
-- items MUST be objects with "text", "url", "summary", "bd_watch" fields
-- summary: 2-3 sentence factual summary of the article in Korean
-- bd_watch: one sentence of concrete BD intelligence for Furiosa — what specific deal/customer/market shift this represents. No generic advice.
-- Keep website/blog/region values exactly as in the template above
-"""
+- furiosa_highlights: 1-2 Furiosa news facts only (Korean). No advice.
+- highlights: 2-3 competitor news facts only (Korean). Never mention Furiosa. No "Furiosa는" sentences.
+- companies: fill items for EVERY company using articles above. Each item: {{"text":"N. 제목(MM-DD)","url":"URL","summary":"한국어 1문장 요약","bd_watch":"BD 시사점 15자 이내"}}. Max 2 items per company. no_update stays false if any articles exist.
+- Keep website/blog/region exactly as given."""
 
     resp = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=5000,
+        max_tokens=3500,
         temperature=0.3,
     )
     raw = resp.choices[0].message.content
