@@ -1,38 +1,58 @@
 {
   "period": "2026-05-11(월) ~ 2026-05-15(금)",
-  "updated_at": "2026-05-15T17:46:04.923396+09:00",
+  "updated_at": "2026-05-15T17:49:17.267446+09:00",
   "furiosa_daily": [
     {
       "title": "메가존클라우드, 사우디 아람코서 국산 AI 반도체 실증…중동 AI 인프라...",
       "url": "https://www.epnc.co.kr/news/articleView.html?idxno=401851",
       "date": "05-15"
+    },
+    {
+      "title": "사우디 아람코가 선택한 'K-반도체'…엔비디아 아성 깨고 중동 에너지 ...",
+      "url": "https://www.goodkyung.com/news/articleView.html?idxno=287033",
+      "date": "05-15"
+    },
+    {
+      "title": "메가존클라우드, 2026년 AI-반도체 해외실증 지원 사업 서버형 부문 주관...",
+      "url": "https://www.dailysecu.com/news/articleView.html?idxno=206749",
+      "date": "05-15"
+    },
+    {
+      "title": "[정책포커스] 금융위, 인공지능 분야 2조원 자금지원 완료...초격차 인공...",
+      "url": "http://www.sisacast.kr/news/articleView.html?idxno=95853",
+      "date": "05-15"
+    },
+    {
+      "title": "메가존클라우드, 사우디 아람코 대상 국산 AI반도체 현장 실증 나선다",
+      "url": "https://www.mk.co.kr/article/12048948",
+      "date": "05-15"
     }
   ],
   "furiosa_weekly": [
     {
-      "title": "장원재 메리츠증권 \"주식 익스포저 확대…미코파워·퓨리오사AI 등 투자...",
-      "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4414894",
-      "date": "05-14"
+      "title": "카카오모빌리티 미국 상장 검토…우버와 손잡나",
+      "url": "https://www.sedaily.com/article/20044370?ref=naver",
+      "date": "05-15"
     },
     {
-      "title": "퓨리오사 찾은 이억원 금융위원장 \"AI·반도체 5년간 50조 이상 투자\"",
-      "url": "https://www.news1.kr/finance/general-finance/6163655",
-      "date": "05-12"
+      "title": "청년미래적금, 월 50만 원씩 3년 납입하면 2255만 원",
+      "url": "https://www.sedaily.com/article/20044368?ref=naver",
+      "date": "05-15"
     },
     {
-      "title": "금융위, 퓨리오사AI 방문해 AI 생태계 지원 강화",
-      "url": "https://www.newscammp.co.kr/news/articleView.html?idxno=6207",
-      "date": "05-12"
+      "title": "[더벨][산은 넥스트라운드 IN 실리콘밸리] 글로벌 무대 오른 K-스타트업...",
+      "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202605131546327960104586",
+      "date": "05-15"
     },
     {
-      "title": "리벨리온 이기려는 퓨리오사…프리IPO 3조 고수",
-      "url": "https://dealsite.co.kr/articles/161657",
-      "date": "05-14"
+      "title": "리벨리온 글로벌 IR 마무리…IPO 전 해외투심 ‘가늠자’ [시그널]",
+      "url": "https://www.sedaily.com/article/20044100?ref=naver",
+      "date": "05-15"
     },
     {
-      "title": "[포토] 퓨리오사 레니게이드 서버 소개하는 백종현 대표...\"AI 성능 극대...",
-      "url": "https://www.ilovepc.co.kr/news/articleView.html?idxno=59301",
-      "date": "05-12"
+      "title": "﻿'엔비디아·클라우드·GPU' 없이… AI가 책상 위로﻿ [정원훈의 AI 트렌...",
+      "url": "https://it.chosun.com/news/articleView.html?idxno=2023092162118",
+      "date": "05-15"
     }
   ],
   "companies": [
@@ -146,18 +166,18 @@
       "region": "korea",
       "items": [
         {
-          "title": "국내 첫 'NPU 데이터센터' 건설…AI칩 스타트업 실험실 된다",
-          "url": "https://www.hankyung.com/article/2026051472091",
-          "date": "05-14"
+          "title": "커피 1000잔 동나고 강연장 앞 줄 서…1900명 몰린 'KIW 2026' 성황",
+          "url": "https://www.hankyung.com/article/202605159553i",
+          "date": "05-15"
         },
         {
-          "title": "[stock-in] 가비아, AI 인프라·플랫폼 확장 가속…\"수요 확대 관건\"",
-          "url": "https://daily.hankooki.com/news/articleView.html?idxno=1367204",
-          "date": "05-14"
+          "title": "아크릴, 'GPUBASE' 최적화 검증 국산 DPU로 확대",
+          "url": "https://zdnet.co.kr/view/?no=20260515163132",
+          "date": "05-15"
         },
         {
-          "title": "﻿'엔비디아·클라우드·GPU' 없이… AI가 책상 위로﻿ [정원훈의 AI 트렌...",
-          "url": "https://it.chosun.com/news/articleView.html?idxno=2023092162118",
+          "title": "[분석] 한성숙의 47일 캠퍼스 대장정…'모두의 창업' 4만 5천명 신청",
+          "url": "http://www.smedaily.co.kr/news/articleView.html?idxno=357111",
           "date": "05-15"
         }
       ]
@@ -172,13 +192,13 @@
           "date": "05-15"
         },
         {
-          "title": "딥엑스-울트라리틱스 맞손…K-AI 반도체, 글로벌 생태계 정조준",
-          "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=03808086645449248",
+          "title": "딥엑스, 세계 표준 AI 모델 YOLO 플랫폼에 네이티브 통합",
+          "url": "https://zdnet.co.kr/view/?no=20260515100731",
           "date": "05-15"
         },
         {
-          "title": "딥엑스, 세계 표준 AI 모델 YOLO 플랫폼에 네이티브 통합",
-          "url": "https://zdnet.co.kr/view/?no=20260515100731",
+          "title": "딥엑스, 글로벌 비전 개발 플랫폼에 NPU 탑재",
+          "url": "https://www.yna.co.kr/view/AKR20260515120700017?input=1195m",
           "date": "05-15"
         }
       ]
@@ -188,19 +208,19 @@
       "region": "korea",
       "items": [
         {
-          "title": "“AI가 직접 일하고 움직였다”…AI EXPO 2026 달군 에이전트·피지컬 AI",
-          "url": "https://www.venturesquare.net/1080574/",
-          "date": "05-07"
+          "title": "[더벨][산은 넥스트라운드 IN 실리콘밸리] 글로벌 무대 오른 K-스타트업...",
+          "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202605131546327960104586",
+          "date": "05-15"
         },
         {
-          "title": "“실리콘밸리서 손잡은 K-반도체”…큐알티·하이퍼엑셀 MOU 체결",
-          "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=03053686645421368",
-          "date": "04-30"
+          "title": "국내 첫 'NPU 데이터센터' 건설…AI칩 스타트업 실험실 된다",
+          "url": "https://www.hankyung.com/article/2026051472091",
+          "date": "05-14"
         },
         {
-          "title": "[테크 핫플레이스] \"효율적인 AI 구동 방안 제시\"... 국산 LLM 가속기 칩...",
-          "url": "https://www.ilovepc.co.kr/news/articleView.html?idxno=59221",
-          "date": "05-07"
+          "title": "리벨리온 이기려는 퓨리오사…프리IPO 3조 고수",
+          "url": "https://dealsite.co.kr/articles/161657",
+          "date": "05-14"
         }
       ]
     },
@@ -209,19 +229,19 @@
       "region": "korea",
       "items": [
         {
-          "title": "전장 아닌 ‘현장’으로 들어온 AI…인텔리빅스, 순찰·보고까지 수행하...",
-          "url": "https://www.venturesquare.net/1080020/",
-          "date": "05-04"
+          "title": "[150조 국민성장펀드] [간접투자 1차] 두 곳에 1200억 주는데…AI·반도체...",
+          "url": "https://dealsite.co.kr/articles/161803",
+          "date": "05-15"
         },
         {
-          "title": "연세대미래캠퍼스, 글로벌 의료·AI 반도체 파트너 서밋 개최",
-          "url": "https://www.yna.co.kr/view/AKR20260421118600062?input=1195m",
-          "date": "04-21"
+          "title": "국내 첫 'NPU 데이터센터' 건설…AI칩 스타트업 실험실 된다",
+          "url": "https://www.hankyung.com/article/2026051472091",
+          "date": "05-14"
         },
         {
-          "title": "경북도, ‘양자·AI 하이브리드 데이터센터’ 구축 나선다",
-          "url": "http://www.breaknews.com/1203304",
-          "date": "04-27"
+          "title": "리벨리온 이기려는 퓨리오사…프리IPO 3조 고수",
+          "url": "https://dealsite.co.kr/articles/161657",
+          "date": "05-14"
         }
       ]
     }
