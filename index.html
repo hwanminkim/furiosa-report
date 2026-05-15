@@ -179,6 +179,57 @@
     margin-bottom: 12px;
   }
 
+  /* ── Highlights grid ── */
+  .top-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+
+  .highlight-badge {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--red);
+    background: rgba(226,21,0,0.12);
+    padding: 2px 7px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  .hl-card {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s;
+  }
+
+  .hl-card.linked:hover { border-color: var(--red); }
+  .hl-card.furiosa-card { border-left: 2px solid var(--red); }
+
+  .hl-card-company {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .hl-card-text { font-size: 0.84rem; color: #C8C8C8; line-height: 1.55; }
+  .item-arrow { font-size: 0.68rem; color: var(--muted); margin-left: 3px; }
+
   /* ── Company cards ── */
   .company {
     border: 1px solid var(--border);
@@ -296,7 +347,18 @@
   <main id="main-content">
     <div class="page-eyebrow">Competitive Intelligence</div>
     <h1>경쟁사 동향 리포트</h1>
-    <div class="meta">Furiosa BD 참고용</div>
+    <div class="meta" id="meta">Furiosa BD 참고용</div>
+
+    <div class="top-grid" id="highlights">
+      <div>
+        <div class="section-label">Furiosa 주간 하이라이트</div>
+        <div id="furiosa-highlights"></div>
+      </div>
+      <div>
+        <div class="section-label">이번 주 경쟁사 하이라이트</div>
+        <div id="competitor-highlights"></div>
+      </div>
+    </div>
 
     <div class="section-label">회사별 동향 — Global</div>
     <div id="companies-global"></div>
@@ -373,6 +435,10 @@
   // Sidebar
   const sidebar = document.getElementById('sidebar');
   sidebar.innerHTML = `
+    <div class="sidebar-item" data-target="highlights" style="margin-bottom:4px;">
+      <span class="sidebar-dot"></span>이번 주 하이라이트
+    </div>
+    <hr class="sidebar-divider">
     <div class="sidebar-label">Global</div>
     ${COMPANIES.global.map(c => `
       <div class="sidebar-item" data-target="co-${c.name}">
@@ -422,6 +488,30 @@
   }, { root: mainContent, threshold: 0.5 });
 
   document.querySelectorAll('.company').forEach(el => observer.observe(el));
+
+  // Load highlights from report.json
+  fetch('report.json').then(r => r.json()).then(d => {
+    if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
+
+    function renderHighlights(items, containerId, isFuriosa) {
+      const el = document.getElementById(containerId);
+      if (!items || items.length === 0) {
+        el.innerHTML = '<div style="font-size:0.82rem;color:var(--muted)">업데이트 없음</div>';
+        return;
+      }
+      el.innerHTML = items.map(h => {
+        const tag   = h.url ? 'a' : 'div';
+        const attrs = h.url ? `href="${h.url}" target="_blank" rel="noopener"` : '';
+        const company = (!isFuriosa && h.company) ? `<span class="hl-card-company">${h.company}</span>` : '';
+        return `<${tag} class="hl-card${isFuriosa ? ' furiosa-card' : ''}${h.url ? ' linked' : ''}" ${attrs}>
+          ${company}<span class="hl-card-text">${h.text}${h.url ? ' <span class="item-arrow">↗</span>' : ''}</span>
+        </${tag}>`;
+      }).join('');
+    }
+
+    renderHighlights(d.furiosa_highlights, 'furiosa-highlights', true);
+    renderHighlights(d.highlights,         'competitor-highlights', false);
+  }).catch(() => {});
 </script>
 </body>
 </html>
