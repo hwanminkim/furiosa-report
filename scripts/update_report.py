@@ -172,8 +172,8 @@ Return ONLY valid JSON — no markdown fences, no explanation:
 }}
 
 Rules:
-- furiosa_highlights: 1–3 items summarizing Furiosa news — facts only, no recommendations
-- highlights: 2–3 most impactful items from global companies — facts only
+- furiosa_highlights: 1–3 items — write ONLY the factual news about Furiosa (what happened, numbers, dates). Pure news facts only. No recommendations, no advice.
+- highlights: 2–3 most impactful competitor news items — write ONLY the factual news (what happened, numbers, dates). Do NOT mention Furiosa at all. Do NOT write any implications, recommendations, or sentences starting with "Furiosa는". Pure competitor news facts only.
 - companies: include ALL companies (global + korea) with their region field preserved
 - For EVERY company: fill items with the most recent articles available (max 3). ALWAYS use actual articles from the data above — do NOT set no_update: true unless there are truly zero articles for that company in the provided data.
 - items MUST be objects with "text", "url", "summary", "bd_watch" fields
