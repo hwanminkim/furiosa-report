@@ -6,7 +6,8 @@ on:
   workflow_dispatch:         # manual trigger from GitHub Actions tab
 
 permissions:
-  contents: write
+  contents: write   # needed to push report.json
+  models: read      # needed for GitHub Models API
 
 jobs:
   update:
@@ -19,11 +20,11 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install anthropic pytz
+        run: pip install openai pytz
 
       - name: Run update script
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/update_report.py
 
       - name: Commit and push if changed
@@ -31,7 +32,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add report.json
-          git diff --staged --quiet && echo "No changes" || (
+          git diff --staged --quiet && echo "No changes to commit" || (
             git commit -m "chore: auto-update report $(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M KST')"
             git push
           )
