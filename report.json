@@ -1,47 +1,37 @@
 {
   "period": "2026-05-11(월) ~ 2026-05-15(금)",
-  "updated_at": "2026-05-15T17:39:37.779229+09:00",
+  "updated_at": "2026-05-15T17:46:04.923396+09:00",
   "furiosa_daily": [
     {
-      "title": "메가존클라우드, 사우디 아람코 국산AI반도체 실증사업 컨소시엄 참여 - 디일렉",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBXMEFsZGJ0LTIzZ2h1ODI4RTlmVnNiUWUwMDRlTGlpbXZwU21vNjlsRTdtTVh0TkYtM0FaRUJpelJYUUp6b1ZkbndZNU1BQ2N0LXNxbHMxRmlsY1BlZ2FMLWt4VHpCUQ?oc=5",
-      "date": "05-15"
-    },
-    {
-      "title": "[단독] 1兆 투입하려던 ‘K-온디바이스 AI 반도체 사업’ 총사업비 최대 3000억 감액 전망 - 조선비즈 - Chosunbiz",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPeXdRVUJGUVVUWW5RampycHMwSlhucnBmaE93dFczYWNwemUtSm5ZNGJrOXlfcTlGSmZ3ZGVla1p0OFZVRVpyd1pnS3VmemppUVlzbHkxZlZxcTRkN1g5NmxHa2dtZjFOUVd1dTFQR3R6dFc3Y0tqMUR0SE9BUG5lNkx5eVFOQdIBmgFBVV95cUxPTkVTa2FjejR4QkduQ2htUVlLTW9ONXlDSmFBRVZ6ei05a19DVjVZcjRTVVJoUE9YTGE2YnNDZ1IwWGtEbXBxZnlyZ3lzR2gtSV9UdU5ZaGJuN3Q4U2FjRy1reWM1SERlUmNPdUFKU1Vnb0h2QkU4Y094QVZXcnJCSzVNOVUtQVVldVo0cjFRQ2FPSWFBT3pWSzFR?oc=5",
-      "date": "05-15"
-    },
-    {
-      "title": "메가존클라우드, 정부 ‘AI-반도체 해외실증 지원 사업’ 주관사업자 선정 - 디지털투데이",
-      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBPc2FkbzVfaHdqNzBSRV95VnJ1UThadG9BSXlsUkpnb0ZTTnJTTzJ3dHhHY0xfTjZKdDI2dUhXTDc4UEZMOXJreU4wblZ6MGxySnBiXzg2OGhBYjFuZEUtVlBfbUp6QzJsZGVidFJNWUN5VlE?oc=5",
+      "title": "메가존클라우드, 사우디 아람코서 국산 AI 반도체 실증…중동 AI 인프라...",
+      "url": "https://www.epnc.co.kr/news/articleView.html?idxno=401851",
       "date": "05-15"
     }
   ],
   "furiosa_weekly": [
     {
-      "title": "'퓨리오사AI' 방문한 이억원 \"국민성장펀드, 5년간 AI분야 50조 지원\" - v.daum.net",
-      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1sbEVrRzNrY0lMNjJxaFQwOVBYNUFKZlZkcHZpanhnVm9RMXJsMVFHWkJnLWlvWGVqcmlCNHFBdzRmZHpMbWJyWDRNVWNHeUk?oc=5",
+      "title": "장원재 메리츠증권 \"주식 익스포저 확대…미코파워·퓨리오사AI 등 투자...",
+      "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4414894",
+      "date": "05-14"
+    },
+    {
+      "title": "퓨리오사 찾은 이억원 금융위원장 \"AI·반도체 5년간 50조 이상 투자\"",
+      "url": "https://www.news1.kr/finance/general-finance/6163655",
       "date": "05-12"
     },
     {
-      "title": "퓨리오사AI, 메타 1조원 인수 거절 후 프리IPO 추진 - 중기이코노미",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE43V25qY2x1RlFiSXFTSWFyRS11Qi1GXzhPZDk0VXZPQmQ2a0xMMmlPUGozMENObDZiZXpjVFZBelI2eXpuaWVILXNmUW90NnQzekx3QjVqVl9JS1JRclMxRzY1eE9adGRPTmc?oc=5",
-      "date": "05-11"
-    },
-    {
-      "title": "이억원 “AI는 국가 인프라”…퓨리오사AI 찾아 첨단산업 지원 논의 - 조세일보",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFA5MGdsRGk2am1zYmhIUVA4cGZwUXpqVVZCLUZIdUUweEtTel95VWl3eVNKelNYcHhIMDZqVHZmbEo1R1Z1QXVJdGUtVTdXVkM3RGpFZTNRczhUTG1iV25qT053YjhzaUQ3djZkZTctbw?oc=5",
+      "title": "금융위, 퓨리오사AI 방문해 AI 생태계 지원 강화",
+      "url": "https://www.newscammp.co.kr/news/articleView.html?idxno=6207",
       "date": "05-12"
     },
     {
-      "title": "퓨리오사·업스테이지 등 만난 이억원 금융위원장…\"AI주권 확보는 국가 전략 과제\" - 매일신문",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBkanE5NEcxVTdaUmJIbmQ0Si1QZl9YODFBQWhhOTZ3MnJpMk94cGVpdkZFaTZRdVZpT1hlQjVPSFliZ2RqVzFmNDJ2VmlXdU04TGJnZWJKMlpudVRZUDZ5XzVn?oc=5",
-      "date": "05-12"
+      "title": "리벨리온 이기려는 퓨리오사…프리IPO 3조 고수",
+      "url": "https://dealsite.co.kr/articles/161657",
+      "date": "05-14"
     },
     {
-      "title": "인사하는 백준호 퓨리오사 AI 대표 - 뉴시스",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1fT0hWa3FSbzFVeGJhNFA0c1ptbGI5cnZDbVN2VEFNTWFsaWdrV01aVFN6UzFCYXF0eFdSRC00OUFqeHRteHJISEhYWHBrUUZST19UMWMxaFo1d2hCVmFHQg?oc=5",
+      "title": "[포토] 퓨리오사 레니게이드 서버 소개하는 백종현 대표...\"AI 성능 극대...",
+      "url": "https://www.ilovepc.co.kr/news/articleView.html?idxno=59301",
       "date": "05-12"
     }
   ],
@@ -156,19 +146,19 @@
       "region": "korea",
       "items": [
         {
-          "title": "국내 첫 'NPU 데이터센터' 건설…AI칩 스타트업 실험실 된다 - 한국경제",
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5mTEhuRXZaZzRMTFZOM3lUYU5CeWMzY1NnVWtmdExyY09JM1kyNXlLNHZJODd1MTdVYkJJUkh6X0dhTDQ4YmZ4V2gyQmxkeHgzZ0EwendZWktIQdIBVEFVX3lxTE1IdVlscmpDbExFYko4NHlZSU1ycDlOMWZZNlpXWFdmSG1IMEZ0LTRyX1d4TUUzZ2R6ZXNIMnd0ajFObzdKQW14THQ2TXlYcnBrNzg3Tw?oc=5",
+          "title": "국내 첫 'NPU 데이터센터' 건설…AI칩 스타트업 실험실 된다",
+          "url": "https://www.hankyung.com/article/2026051472091",
           "date": "05-14"
         },
         {
-          "title": "SKT, 리벨리온과 국산 NPU 실증…‘K-AI 반도체’ 상용화 앞장선다 - 한국금융신문",
-          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBwS0VKY1dkQnlpUmpnZk82eUhhRHMyZFl1eWhUdU03bXVIN1RlQWVEdHVfN0MxZjdleHlqMjNWSjBmVVFIODB6Q1NMakpCejBSQ3JaUGtRUGdPSlEyUXp6d050Y0NIbXZ3ZG1CekRucDNUQ1BDUHNuVm92WVU?oc=5",
-          "date": "04-29"
+          "title": "[stock-in] 가비아, AI 인프라·플랫폼 확장 가속…\"수요 확대 관건\"",
+          "url": "https://daily.hankooki.com/news/articleView.html?idxno=1367204",
+          "date": "05-14"
         },
         {
-          "title": "GPU 잡는 NPU 한국에 있다…AI반도체 2세대 승부사들 ① - 중앙일보",
-          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5uSnRqUkNOeDhZaUcyeDRCV3Rwa3VwM19vWVdsaW90b3pXOEI3ZHY5N3Q3bGZHcUZRbHJpVkNndF9hdV9ob09IOWFWN3o0VzVwdGI4QXpB?oc=5",
-          "date": "03-17"
+          "title": "﻿'엔비디아·클라우드·GPU' 없이… AI가 책상 위로﻿ [정원훈의 AI 트렌...",
+          "url": "https://it.chosun.com/news/articleView.html?idxno=2023092162118",
+          "date": "05-15"
         }
       ]
     },
@@ -177,19 +167,19 @@
       "region": "korea",
       "items": [
         {
-          "title": "폴라리스AI, 국산 AI 반도체 간담회 수요기업 참석 - 뉴시스",
-          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE80dXk0aWZFMmlNZzA3UnZYZ3pKc01JT2pyQnVGLWJmc0xaSjdId29fT2JjdVF0N1c2cGhxMlZfWm1rMkFpdThsRkdPZ090Zi1jQU5LUWJqZ2VxN2gwb0lzZWRfMEVWS0l2MlFDUUlhN09OZ0xUSVNKZ9IBeEFVX3lxTE80dXk0aWZFMmlNZzA3UnZYZ3pKc01JT2pyQnVGLWJmc0xaSjdId29fT2JjdVF0N1c2cGhxMlZfWm1rMkFpdThsRkdPZ090Zi1jQU5LUWJqZ2VxN2gwb0lzZWRfMEVWS0l2MlFDUUlhN09OZ0xUSVNKZw?oc=5",
-          "date": "05-14"
+          "title": "딥엑스 NPU, 비전AI 플랫폼 'YOLO' 디폴트 HW 옵션 중 하나로",
+          "url": "https://www.mt.co.kr/future/2026/05/15/2026051515240463618",
+          "date": "05-15"
         },
         {
-          "title": "폴라리스AI, 국산 NPU 기반 ‘피지컬 AI’ 확대…유비테크 로봇과 결합 - v.daum.net",
-          "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE9CeHIxUUFmRVZYcEJXMDBQdFI1RXBCU0ZvWTZoN3JGRHFFaFJNeFU2MmpCcnZpR3BfLTlIWXNRQ1pqVjVVMEE?oc=5",
-          "date": "05-14"
+          "title": "딥엑스-울트라리틱스 맞손…K-AI 반도체, 글로벌 생태계 정조준",
+          "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=03808086645449248",
+          "date": "05-15"
         },
         {
-          "title": "폴라리스AI, 국산 AI 반도체 생태계 확대 나선다…온디바이스 AI·로봇 전략 공개 - 아시아경제",
-          "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1ObWNYazl2LUhXLVAwSHMyTm9rQ1FxWVNNZ3lOSGpzYUVQY0dWbDctTzNBR0VUdUlHanIyNHZBa21DUzVmOTF4UVFVS0MzcHE4bTZPeEFQZGp0a2JMeFdfbUln?oc=5",
-          "date": "05-14"
+          "title": "딥엑스, 세계 표준 AI 모델 YOLO 플랫폼에 네이티브 통합",
+          "url": "https://zdnet.co.kr/view/?no=20260515100731",
+          "date": "05-15"
         }
       ]
     },
@@ -198,19 +188,19 @@
       "region": "korea",
       "items": [
         {
-          "title": "하이퍼엑셀-망고부스트, 차세대 AI 인프라 고도화 MOU - 지디넷코리아",
-          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB3dENzMGFvMjhEdTVMTDBEU3RtSDJtOTZ2bnA0Wm1Edm9KOS1iM08tc0FKSlEtNjUzaW1GSDZadmQ4ZXA1RGxtOVozVkdNVDEyZ2VERlJn?oc=5",
-          "date": "12-23"
+          "title": "“AI가 직접 일하고 움직였다”…AI EXPO 2026 달군 에이전트·피지컬 AI",
+          "url": "https://www.venturesquare.net/1080574/",
+          "date": "05-07"
         },
         {
-          "title": "하이퍼엑셀, 대만 어드밴텍과 차세대 AI 인프라 구축을 위한 기술 협력 및 글로벌 협력 체계 강화 - 인공지능신문",
-          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE0xOGR3UHpWcUdBZ1V1MjFEN0V1NEN2T3FmWlNEVmI0UG5lcFRlWFg5VXE4SmJwZ3ZjYjRmQUozdkE4MnllZ1hHZ3hSc2JjdnB0R2R4NjNESFVQTGlrOXY0amJfSzhZckE?oc=5",
-          "date": "02-03"
+          "title": "“실리콘밸리서 손잡은 K-반도체”…큐알티·하이퍼엑셀 MOU 체결",
+          "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=03053686645421368",
+          "date": "04-30"
         },
         {
-          "title": "하이퍼엑셀 김주영 대표, '2026 정보통신 유공 포장' 수상… 차세대 AI 반도체 혁신 주도 - 코리아스타트업포스트",
-          "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1BUEJoMXRvNWljU001SjBlVzhrM3htY3U1aU5la2wzdnJ3X1JpdnFOdlpMckczWkR4Z2tMTFI4U2dyVGVzTS1sTnRyMkV1dF9qd2hzTA?oc=5",
-          "date": "04-22"
+          "title": "[테크 핫플레이스] \"효율적인 AI 구동 방안 제시\"... 국산 LLM 가속기 칩...",
+          "url": "https://www.ilovepc.co.kr/news/articleView.html?idxno=59221",
+          "date": "05-07"
         }
       ]
     },
@@ -219,19 +209,19 @@
       "region": "korea",
       "items": [
         {
-          "title": "롯데이노베이트, 모빌린트와 맞손…NPU 스마트 인프라 최적화 '가속도' - 인공지능신문",
-          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBFTDFpZTNDRFVwWnE0eFdoWlFKc0hBRTV2ZVQxNzU1Um5HRXBBRTRQdHA1dEV2aTVXWDhQNkdxWTIwalh5UFpGbnotX09tdEVvUHdKM0p0UVJ0Yl9rZ3hVTllKT095SlE?oc=5",
-          "date": "04-07"
+          "title": "전장 아닌 ‘현장’으로 들어온 AI…인텔리빅스, 순찰·보고까지 수행하...",
+          "url": "https://www.venturesquare.net/1080020/",
+          "date": "05-04"
         },
         {
-          "title": "[CES 2026] '양산 돌입' NPU 팹리스 딥엑스vs모빌린트, 올해 수익성 승자는? - 녹색경제신문",
-          "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9kT1MwWTdEYkJJRV91Z00yV3BVVGluN1dDUTdLOUdlbzVna2VLUkNLdVktVVlsR3VkZG1YcjhiLWkzUmVLTFI0ODRTQjNxbWJSUWtHNVFYb3dsZEVYZWYtUjVld3VzMGhL?oc=5",
-          "date": "01-12"
+          "title": "연세대미래캠퍼스, 글로벌 의료·AI 반도체 파트너 서밋 개최",
+          "url": "https://www.yna.co.kr/view/AKR20260421118600062?input=1195m",
+          "date": "04-21"
         },
         {
-          "title": "모빌린트, 2025 AIoT 국제전시회서 NPU 중심 고효율 AI 하드웨어 및 응용 기술 선보여... “NPU 중심의 새로운 생태계 선도” - 에이빙",
-          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1uaHZhME4tNk9wREdYUzV1Z1p6SVVBZUlTc0RJOGNNYVg0ZUVCelpBNXd2ZEFvbEh4U1J3dURUeklfSnRMY1p0WlhOMmthSEJNWE9FN2JYSm5KUVlBUXh5TS1Sa3Azd3PSAWtBVV95cUxNQVlXZzlJdHZ2VU5rUzBYSHZHMHNIYVRPWHBRVVg5NjhJbzZ5Tk9LOERoczF2YlFMTUhDY2RaU0tuRWtQaGJMaDBKc25NWi1RRUEwZlFITDBZZHVESUIyd3l3a3V0TjRoaVVsMA?oc=5",
-          "date": "11-28"
+          "title": "경북도, ‘양자·AI 하이브리드 데이터센터’ 구축 나선다",
+          "url": "http://www.breaknews.com/1203304",
+          "date": "04-27"
         }
       ]
     }
