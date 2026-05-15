@@ -158,17 +158,17 @@ Return ONLY valid JSON — no markdown fences, no explanation:
   "period": "{build_period(now)}",
   "updated_at": "{now.isoformat()}",
   "highlights": [
-    {{"company": "회사명", "text": "핵심 요약 한 줄 — Furiosa 시사점 포함 (Korean)", "url": "기사URL또는빈문자열"}}
+    {{"company": "회사명", "text": "뉴스 팩트 요약 한 줄 (Korean)", "url": "기사URL또는빈문자열"}}
   ],
   "companies": {companies_template}
 }}
 
 Rules:
-- highlights: 2–3 most impactful items across all companies
+- highlights: 2–3 most impactful news items — write ONLY the factual news summary, NO recommendations, NO "Furiosa는..." sentences
 - For each company with news: set no_update=false, fill items (max 3)
-- items MUST be objects with "text" and "url" fields — use the exact article URL from the ARTICLES section above
+- items MUST be objects with "text" and "url" — use the exact article URL from ARTICLES above
 - items text format: "N. 제목 (MM-DD) — 핵심내용" in Korean
-- watch: one sentence on business implications for Furiosa AI (Korean)
+- watch: specific, actionable intelligence for Furiosa's BD team — e.g. which customers/deals/markets are shifting, what competitive threat is emerging. Do NOT write generic advice like "Furiosa는 주의 깊게 살펴봐야 한다". Write what is concretely happening and why it matters for BD.
 - Keep website/blog URLs exactly as in the template above
 - If no articles for a company → no_update: true, items: [], watch: ""
 """
