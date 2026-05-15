@@ -396,12 +396,12 @@
       { name: "Groq",        website: "https://groq.com",           blog: "https://groq.com/blog" },
       { name: "Cerebras",    website: "https://cerebras.net",       blog: "https://cerebras.net/blog" },
       { name: "SambaNova",   website: "https://sambanova.ai",       blog: "https://sambanova.ai/blog" },
-      { name: "Tenstorrent", website: "https://tenstorrent.com",    blog: "https://tenstorrent.com/blog" },
+      { name: "Tenstorrent", website: "https://tenstorrent.com",    blog: "https://tenstorrent.com/developers" },
     ],
     korea: [
-      { name: "Rebellions", website: "https://rebellions.ai",  blog: "https://rebellions.ai/blog" },
-      { name: "DeepX",      website: "https://deepx.ai",        blog: "https://deepx.ai/blog" },
-      { name: "HyperAccel", website: "https://hyperaccel.ai",   blog: "https://hyperaccel.ai/blog" },
+      { name: "Rebellions", website: "https://rebellions.ai",  blog: "https://kr.rebellions.ai/category/blogs/" },
+      { name: "DeepX",      website: "https://deepx.ai",        blog: "https://developer.deepx.ai/" },
+      { name: "HyperAccel", website: "https://hyperaccel.ai",   blog: "https://hyper-accel.github.io/" },
       { name: "Mobilint",   website: "https://mobilint.com",    blog: "https://mobilint.com/blog" },
     ]
   };
@@ -499,7 +499,7 @@
     function renderHighlights(items, containerId, isFuriosa) {
       const el = document.getElementById(containerId);
       if (!items || items.length === 0) {
-        el.innerHTML = '<div style="font-size:0.9rem;color:var(--muted)">업데이트 없음</div>';
+        el.innerHTML = '<div style="font-size:0.9rem;color:var(--muted)">No Update</div>';
         return;
       }
       el.innerHTML = items.map(h => {
