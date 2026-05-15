@@ -263,6 +263,36 @@
 
   .header-chevron { margin-left: auto; font-size: 0.72rem; color: var(--muted); }
 
+  .company-body { padding: 4px 18px 14px; border-top: 1px solid var(--border); }
+
+  .news-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 7px 0;
+    border-bottom: 1px solid #222;
+  }
+
+  .news-item:last-child { border-bottom: none; }
+
+  .news-date {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.7rem;
+    color: var(--muted);
+    flex-shrink: 0;
+    min-width: 32px;
+  }
+
+  .news-title {
+    font-size: 0.88rem;
+    color: #C8C8C8;
+    line-height: 1.5;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .news-title:hover { color: #fff; }
+
   /* ── Modal ── */
   .modal-backdrop {
     display: none;
@@ -419,18 +449,26 @@
     backdrop.classList.add('open');
   }
 
-  function renderCompany(c) {
+  function renderCompany(c, newsItems) {
+    const body = newsItems && newsItems.length > 0
+      ? `<div class="company-body">${newsItems.map(item =>
+          `<div class="news-item">
+            <span class="news-date">${item.date || ''}</span>
+            <a class="news-title" href="${item.url}" target="_blank" rel="noopener">${item.title} ↗</a>
+          </div>`).join('')}</div>`
+      : '';
     return `<div class="company" id="co-${c.name}">
       <div class="company-header" data-name="${c.name}">
         <div class="company-dot"></div>
         <span class="company-name">${c.name}</span>
         <span class="header-chevron">⊕</span>
       </div>
+      ${body}
     </div>`;
   }
 
-  document.getElementById('companies-global').innerHTML = COMPANIES.global.map(renderCompany).join('');
-  document.getElementById('companies-korea').innerHTML  = COMPANIES.korea.map(renderCompany).join('');
+  document.getElementById('companies-global').innerHTML = COMPANIES.global.map(c => renderCompany(c, [])).join('');
+  document.getElementById('companies-korea').innerHTML  = COMPANIES.korea.map(c => renderCompany(c, [])).join('');
 
   // Sidebar
   const sidebar = document.getElementById('sidebar');
@@ -514,6 +552,24 @@
 
     renderHighlights(d.furiosa_highlights, 'furiosa-highlights', true);
     renderHighlights(d.highlights,         'competitor-highlights', false);
+
+    // Inject news items into company cards
+    if (d.companies) {
+      d.companies.forEach(co => {
+        const card = document.getElementById('co-' + co.name);
+        if (!card || !co.items || co.items.length === 0) return;
+        const existing = card.querySelector('.company-body');
+        if (existing) existing.remove();
+        const body = document.createElement('div');
+        body.className = 'company-body';
+        body.innerHTML = co.items.map(item =>
+          `<div class="news-item">
+            <span class="news-date">${item.date || ''}</span>
+            <a class="news-title" href="${item.url}" target="_blank" rel="noopener">${item.title} ↗</a>
+          </div>`).join('');
+        card.appendChild(body);
+      });
+    }
   }).catch(() => {});
 </script>
 </body>
