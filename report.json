@@ -1,21 +1,21 @@
 {
   "period": "2026-05-11(월) ~ 2026-05-15(금)",
-  "updated_at": "2026-05-15T14:49:10.573936+09:00",
+  "updated_at": "2026-05-15T14:51:42.981989+09:00",
   "highlights": [
     {
       "company": "Cerebras",
-      "text": "Cerebras가 55억 달러를 모금하고 주가가 108% 상승하며 2026년 IPO 시즌을 화려하게 시작함 — Furiosa는 시장의 반응을 주의 깊게 살펴봐야 함.",
+      "text": "Cerebras가 55억 달러를 모금하고 IPO 첫날 주가가 108% 상승하여 1000억 달러 기업 가치에 도달했습니다. — Furiosa는 AI 칩 시장에서의 경쟁력을 높이기 위해 기술 혁신에 집중해야 합니다.",
       "url": "https://techcrunch.com/2026/05/14/cerebras-raises-5-5b-kicking-off-2026s-ipo-season-with-a-bang/"
     },
     {
-      "company": "Cerebras",
-      "text": "Cerebras의 주식이 첫날에 거의 두 배로 상승하며 1천억 달러의 가치를 기록함 — Furiosa는 AI 인프라의 변화에 대비해야 함.",
-      "url": "https://venturebeat.com/technology/cerebras-stock-nearly-doubles-on-day-one-as-ai-chipmaker-hits-100-billion-what-it-means-for-ai-infrastructure"
+      "company": "NVIDIA",
+      "text": "NVIDIA가 SAP와 협력하여 보안 및 거버넌스 제어가 포함된 전문 AI 에이전트를 운영하는 방안을 발표했습니다. — Furiosa는 기업 고객을 위한 신뢰할 수 있는 솔루션 개발에 주력해야 합니다.",
+      "url": "https://blogs.nvidia.com/blog/sap-specialized-agents/"
     },
     {
       "company": "NVIDIA",
-      "text": "NVIDIA가 SAP와 협력하여 전문 에이전트를 위한 보안 및 거버넌스 제어를 지원함 — Furiosa는 기업 AI 솔루션의 보안성을 강화할 필요가 있음.",
-      "url": "https://blogs.nvidia.com/blog/sap-specialized-agents/"
+      "text": "NVIDIA가 새로운 자율 AI 에이전트를 기업에 제공하기 위해 ServiceNow와 파트너십을 체결했습니다. — Furiosa는 자율 AI 솔루션 개발에 투자하여 시장 경쟁력을 강화해야 합니다.",
+      "url": "https://blogs.nvidia.com/blog/servicenow-autonomous-ai-agents-enterprises/"
     }
   ],
   "companies": [
@@ -26,19 +26,15 @@
       "no_update": false,
       "items": [
         {
-          "text": "05-14 — NVIDIA, Ineffable Intelligence와 협력하여 강화 학습 인프라 구축",
-          "url": "https://blogs.nvidia.com/blog/ineffable-intelligence-reinforcement-learning-infrastructure/"
-        },
-        {
-          "text": "05-15 — NVIDIA가 SAP와 협력하여 전문 에이전트의 신뢰성을 높임",
+          "text": "N. NVIDIA와 SAP, 전문 AI 에이전트 운영 협력 (05-15) — 보안 및 거버넌스 제어가 포함된 솔루션 제공",
           "url": "https://blogs.nvidia.com/blog/sap-specialized-agents/"
         },
         {
-          "text": "05-15 — NVIDIA가 Nemotron 3 Nano Omni 모델을 출시하여 AI 에이전트의 효율성을 9배 향상시킴",
-          "url": "https://blogs.nvidia.com/blog/nemotron-3-nano-omni-multimodal-ai-agents/"
+          "text": "N. NVIDIA, ServiceNow와 자율 AI 에이전트 개발 (05-15) — 기업을 위한 새로운 AI 솔루션 제공",
+          "url": "https://blogs.nvidia.com/blog/servicenow-autonomous-ai-agents-enterprises/"
         }
       ],
-      "watch": "Furiosa는 NVIDIA의 기술 발전을 주의 깊게 살펴보아야 하며, 경쟁력을 유지하기 위해 혁신적인 솔루션을 개발해야 함."
+      "watch": "Furiosa는 자율 AI 솔루션 개발에 투자하여 시장 경쟁력을 강화해야 합니다."
     },
     {
       "name": "Groq",
@@ -55,19 +51,11 @@
       "no_update": false,
       "items": [
         {
-          "text": "05-14 — Cerebras가 55억 달러를 모금하고 IPO에서 주가가 108% 상승함",
+          "text": "N. Cerebras, 55억 달러 모금 및 IPO 첫날 주가 108% 상승 (05-14) — 1000억 달러 기업 가치 도달",
           "url": "https://techcrunch.com/2026/05/14/cerebras-raises-5-5b-kicking-off-2026s-ipo-season-with-a-bang/"
-        },
-        {
-          "text": "05-15 — Cerebras의 IPO가 1000억 달러 가치를 기록하며 AI 인프라에 미치는 영향 분석",
-          "url": "https://venturebeat.com/technology/cerebras-stock-nearly-doubles-on-day-one-as-ai-chipmaker-hits-100-billion-what-it-means-for-ai-infrastructure"
-        },
-        {
-          "text": "05-15 — Cerebras의 대형 AI 가속기 기술이 IPO 성공에 기여함",
-          "url": "https://www.theregister.com/ai-ml/2026/05/15/cerebras-wafer-scale-ai-bet-delivers-blockbuster-ipo/5240821"
         }
       ],
-      "watch": "Furiosa는 Cerebras의 성공적인 IPO와 기술 혁신을 분석하여 시장에서의 위치를 강화해야 함."
+      "watch": "Furiosa는 AI 칩 시장에서의 경쟁력을 높이기 위해 기술 혁신에 집중해야 합니다."
     },
     {
       "name": "SambaNova",
