@@ -85,27 +85,27 @@ def collect_articles() -> tuple[list[dict], list[dict]]:
 
     print("Fetching Google News RSS per company...")
     for company in ALL_COMPANIES:
-        entries = fetch_feed(gnews_url(company["query"], company["lang"]))[:10]
+        entries = fetch_feed(gnews_url(company["query"], company["lang"]))[:5]
         for entry in entries:
             competitor_found.append({
                 "company": company["name"],
                 "region":  company["region"],
                 "title":   entry["title"],
                 "url":     entry["url"],
-                "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:300],
+                "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:150],
             })
         print(f"  {company['name']}: {len(entries)} articles")
 
     print("Fetching Google News RSS for Furiosa AI...")
     seen_urls: set[str] = set()
     for query, lang in FURIOSA_QUERIES:
-        for entry in fetch_feed(gnews_url(query, lang))[:8]:
+        for entry in fetch_feed(gnews_url(query, lang))[:5]:
             if entry["url"] not in seen_urls:
                 seen_urls.add(entry["url"])
                 furiosa_found.append({
                     "title":   entry["title"],
                     "url":     entry["url"],
-                    "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:300],
+                    "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:150],
                 })
     print(f"  Furiosa: {len(furiosa_found)} articles")
 
