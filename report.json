@@ -17,41 +17,90 @@
   "companies": [
     {
       "name": "NVIDIA",
+      "region": "global",
       "website": "https://www.nvidia.com",
       "blog": "https://blogs.nvidia.com",
       "no_update": false,
       "items": [
-        {
-          "text": "N. 제목 (05-14) — NVIDIA와 Ineffable Intelligence가 강화 학습 인프라 구축을 위한 협력 발표.",
-          "url": "https://blogs.nvidia.com/blog/ineffable-intelligence-reinforcement-learning-infrastructure/"
-        },
-        {
-          "text": "N. 제목 (05-14) — NVIDIA가 SAP와 협력하여 전문 에이전트에 대한 보안 및 거버넌스 제어를 제공하다.",
-          "url": "https://blogs.nvidia.com/blog/sap-specialized-agents/"
-        },
-        {
-          "text": "N. 제목 (05-14) — NVIDIA가 새로운 자율 AI 에이전트를 기업에 제공하기 위해 ServiceNow와 파트너십 체결.",
-          "url": "https://blogs.nvidia.com/blog/servicenow-autonomous-ai-agents-enterprises/"
-        }
+        {"text": "1. NVIDIA-Ineffable Intelligence 강화학습 인프라 협력 발표 (05-14)", "url": "https://blogs.nvidia.com/blog/ineffable-intelligence-reinforcement-learning-infrastructure/"},
+        {"text": "2. NVIDIA-ServiceNow 기업용 자율 AI 에이전트 파트너십 체결 (05-15)", "url": "https://blogs.nvidia.com/blog/servicenow-autonomous-ai-agents-enterprises/"}
       ],
-      "watch": "NVIDIA는 강화 학습과 자율 AI 에이전트의 발전을 통해 기업 시장에서의 입지를 더욱 강화하고 있으며, 이는 Furiosa AI의 시장 경쟁력에 직접적인 영향을 미칠 수 있다."
+      "watch": "NVIDIA가 기업 AI 에이전트 시장 공략을 강화하며 SW 생태계 락인 전략 가속화 중."
+    },
+    {
+      "name": "Groq",
+      "region": "global",
+      "website": "https://groq.com",
+      "blog": "https://groq.com/blog",
+      "no_update": true,
+      "items": [],
+      "watch": ""
     },
     {
       "name": "Cerebras",
+      "region": "global",
       "website": "https://cerebras.net",
       "blog": "https://cerebras.net/blog",
       "no_update": false,
       "items": [
-        {
-          "text": "N. 제목 (05-15) — Cerebras가 10년 전의 대담한 베팅으로 660억 달러의 가치를 달성하다.",
-          "url": "https://www.theregister.com/ai-ml/2026/05/15/cerebras-wafer-scale-ai-bet-delivers-blockbuster-ipo/5240821"
-        },
-        {
-          "text": "N. 제목 (05-14) — Cerebras의 IPO가 벤치마크에 수십억 달러를 안겨주다.",
-          "url": "https://techcrunch.com/2026/05/14/cerebras-ipo-makes-billions-for-benchmark-but-vc-eric-vishria-almost-didnt-take-the-meeting/"
-        }
+        {"text": "1. IPO 공모가 $185 확정, 주가 첫날 108% 급등 — 기업가치 $66B (05-15)", "url": "https://www.theregister.com/ai-ml/2026/05/15/cerebras-wafer-scale-ai-bet-delivers-blockbuster-ipo/5240821"},
+        {"text": "2. Cerebras IPO로 Benchmark VC 수십억 달러 수익 실현 (05-14)", "url": "https://techcrunch.com/2026/05/14/cerebras-ipo-makes-billions-for-benchmark-but-vc-eric-vishria-almost-didnt-take-the-meeting/"}
       ],
-      "watch": "Cerebras의 성공적인 IPO는 AI 칩 시장의 투자자 관심을 높이고 있으며, Furiosa AI는 자본 조달 및 시장 확장 전략을 재검토할 필요가 있다."
+      "watch": "IPO 성공으로 대규모 자금 확보, 인퍼런스 시장 영업·인프라 투자 본격화 예상."
+    },
+    {
+      "name": "SambaNova",
+      "region": "global",
+      "website": "https://sambanova.ai",
+      "blog": "https://sambanova.ai/blog",
+      "no_update": true,
+      "items": [],
+      "watch": ""
+    },
+    {
+      "name": "Tenstorrent",
+      "region": "global",
+      "website": "https://tenstorrent.com",
+      "blog": "https://tenstorrent.com/blog",
+      "no_update": true,
+      "items": [],
+      "watch": ""
+    },
+    {
+      "name": "리벨리온",
+      "region": "korea",
+      "website": "https://rebellions.ai",
+      "blog": "https://rebellions.ai/blog",
+      "no_update": true,
+      "items": [],
+      "watch": ""
+    },
+    {
+      "name": "딥엑스",
+      "region": "korea",
+      "website": "https://deepx.ai",
+      "blog": "https://deepx.ai/blog",
+      "no_update": true,
+      "items": [],
+      "watch": ""
+    },
+    {
+      "name": "하이퍼엑셀",
+      "region": "korea",
+      "website": "https://hyperaccel.ai",
+      "blog": "https://hyperaccel.ai/blog",
+      "no_update": true,
+      "items": [],
+      "watch": ""
+    },
+    {
+      "name": "모빌린트",
+      "region": "korea",
+      "website": "https://mobilint.com",
+      "blog": "https://mobilint.com/blog",
+      "no_update": true,
+      "items": [],
+      "watch": ""
     }
   ]
 }

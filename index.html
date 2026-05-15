@@ -444,8 +444,10 @@
       </div>
     </div>
 
-    <div class="section-label">회사별 동향</div>
-    <div id="companies"></div>
+    <div class="section-label">회사별 동향 — Global</div>
+    <div id="companies-global"></div>
+    <div class="section-label" style="margin-top:28px;">회사별 동향 — Korea</div>
+    <div id="companies-korea"></div>
   </main>
 </div>
 
@@ -504,28 +506,34 @@
     renderCards(d.highlights        || [], 'competitor-highlights', '');
 
     // Companies
-    document.getElementById('companies').innerHTML = d.companies.map(c => `
-      <div class="company" id="co-${c.name}">
-        <div class="company-header" data-name="${c.name}" data-website="${c.website||''}" data-blog="${c.blog||''}">
-          <div class="company-dot${c.no_update ? ' no-update' : ''}"></div>
-          <span class="company-name">${c.name}</span>
-          <span class="header-chevron">⊕</span>
-        </div>
-        <div class="company-body">
-          ${c.no_update
-            ? `<div class="no-update-text">특이사항 없음</div>`
-            : `${c.items.map(i => {
-                const text = typeof i === 'object' ? i.text : i;
-                const url  = typeof i === 'object' ? i.url  : '';
-                return `<div class="item">${url
-                  ? `<a href="${url}" target="_blank" rel="noopener">${text}<span class="item-arrow">↗</span></a>`
-                  : text}</div>`;
-              }).join('')}
-              <div class="watch"><span class="watch-label">BD Watch</span>${c.watch}</div>`
-          }
-        </div>
-      </div>
-    `).join('');
+    function renderCompany(c) {
+      return `
+        <div class="company" id="co-${c.name}">
+          <div class="company-header" data-name="${c.name}" data-website="${c.website||''}" data-blog="${c.blog||''}">
+            <div class="company-dot${c.no_update ? ' no-update' : ''}"></div>
+            <span class="company-name">${c.name}</span>
+            <span class="header-chevron">⊕</span>
+          </div>
+          <div class="company-body">
+            ${c.no_update
+              ? `<div class="no-update-text">최근 기사 없음</div>`
+              : `${(c.items||[]).map(i => {
+                  const text = typeof i === 'object' ? i.text : i;
+                  const url  = typeof i === 'object' ? i.url  : '';
+                  return `<div class="item">${url
+                    ? `<a href="${url}" target="_blank" rel="noopener">${text}<span class="item-arrow">↗</span></a>`
+                    : text}</div>`;
+                }).join('')}
+                <div class="watch"><span class="watch-label">BD Watch</span>${c.watch}</div>`
+            }
+          </div>
+        </div>`;
+    }
+
+    const globalCos = d.companies.filter(c => c.region === 'global' || !c.region);
+    const koreaCos  = d.companies.filter(c => c.region === 'korea');
+    document.getElementById('companies-global').innerHTML = globalCos.map(renderCompany).join('');
+    document.getElementById('companies-korea').innerHTML  = koreaCos.map(renderCompany).join('');
 
     // Sidebar
     const sidebar = document.getElementById('sidebar');
@@ -534,8 +542,14 @@
         <span class="sidebar-dot"></span>이번 주 하이라이트
       </div>
       <hr class="sidebar-divider">
-      <div class="sidebar-label">회사별 동향</div>
-      ${d.companies.map(c => `
+      <div class="sidebar-label">Global</div>
+      ${globalCos.map(c => `
+        <div class="sidebar-item" data-target="co-${c.name}">
+          <span class="sidebar-dot${c.no_update ? ' none' : ''}"></span>${c.name}
+        </div>`).join('')}
+      <hr class="sidebar-divider">
+      <div class="sidebar-label">Korea</div>
+      ${koreaCos.map(c => `
         <div class="sidebar-item" data-target="co-${c.name}">
           <span class="sidebar-dot${c.no_update ? ' none' : ''}"></span>${c.name}
         </div>`).join('')}
@@ -577,7 +591,7 @@
       });
     }, { root: document.getElementById('main-content'), threshold: 0.4 });
 
-    document.querySelectorAll('.company').forEach(el => observer.observe(el));
+    document.querySelectorAll('#companies-global .company, #companies-korea .company').forEach(el => observer.observe(el));
     const hlEl2 = document.getElementById('highlights');
     if (hlEl2) observer.observe(hlEl2);
 
