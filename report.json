@@ -1,6 +1,18 @@
 {
   "period": "2026-05-08(목) ~ 2026-05-14(목)",
   "updated_at": "2026-05-14T07:00:00+09:00",
+  "highlights": [
+    {
+      "company": "Cerebras",
+      "text": "Nasdaq 상장 (CBRS) — 기업가치 $56.43B, 청약 20배 초과로 인퍼런스 시장 경쟁 급격히 심화",
+      "url": ""
+    },
+    {
+      "company": "NVIDIA",
+      "text": "Vera Rubin 7월 빅테크 초도 납품 확정 — 빅테크 procurement 사이클 재편 임박",
+      "url": ""
+    }
+  ],
   "companies": [
     {
       "name": "NVIDIA",
