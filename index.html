@@ -217,6 +217,123 @@
     font-size: 0.85rem;
     color: var(--muted);
   }
+
+  .company-header {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .company-header:hover .company-name {
+    color: #fff;
+  }
+
+  .company-name {
+    transition: color 0.15s;
+  }
+
+  .header-chevron {
+    margin-left: auto;
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  /* Modal */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-backdrop.open {
+    display: flex;
+  }
+
+  .modal {
+    background: #1E1E1E;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 24px;
+    width: 300px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+  }
+
+  .modal-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .modal-company {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .modal-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .modal-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.88rem;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .modal-link:hover {
+    border-color: var(--red);
+    background: rgba(226,21,0,0.06);
+  }
+
+  .modal-link-icon {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+  }
+
+  .modal-link-label {
+    flex: 1;
+  }
+
+  .modal-link-arrow {
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  .modal-close {
+    display: block;
+    margin-top: 16px;
+    width: 100%;
+    padding: 8px;
+    background: none;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .modal-close:hover {
+    border-color: #555;
+    color: var(--text);
+  }
 </style>
 </head>
 <body>
@@ -228,6 +345,27 @@
   <span class="header-tag">BD Internal</span>
 </header>
 
+<!-- Company modal -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal">
+    <div class="modal-title">바로가기</div>
+    <div class="modal-company" id="modal-company-name"></div>
+    <div class="modal-links">
+      <a class="modal-link" id="modal-website" href="#" target="_blank" rel="noopener">
+        <span class="modal-link-icon">🌐</span>
+        <span class="modal-link-label">공식 웹사이트</span>
+        <span class="modal-link-arrow">↗</span>
+      </a>
+      <a class="modal-link" id="modal-blog" href="#" target="_blank" rel="noopener">
+        <span class="modal-link-icon">📝</span>
+        <span class="modal-link-label">블로그</span>
+        <span class="modal-link-arrow">↗</span>
+      </a>
+    </div>
+    <button class="modal-close" id="modal-close">닫기</button>
+  </div>
+</div>
+
 <main>
   <div class="page-title">Competitive Intelligence</div>
   <h1>경쟁사 동향 리포트</h1>
@@ -236,13 +374,36 @@
 </main>
 
 <script>
+  // Modal
+  const backdrop = document.getElementById('modal-backdrop');
+  const modalName = document.getElementById('modal-company-name');
+  const modalWebsite = document.getElementById('modal-website');
+  const modalBlog = document.getElementById('modal-blog');
+
+  function openModal(name, website, blog) {
+    modalName.textContent = name;
+    modalWebsite.href = website;
+    modalBlog.href = blog;
+    backdrop.classList.add('open');
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('open');
+  }
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Report
   fetch("report.json").then(r => r.json()).then(d => {
     document.getElementById("meta").textContent = d.period + " ";
     document.getElementById("content").innerHTML = d.companies.map(c => `
       <div class="company">
-        <div class="company-header">
+        <div class="company-header" data-name="${c.name}" data-website="${c.website || ''}" data-blog="${c.blog || ''}">
           <div class="company-dot${c.no_update ? ' no-update' : ''}"></div>
-          <h2>${c.name}</h2>
+          <h2 class="company-name">${c.name}</h2>
+          <span class="header-chevron">⊕</span>
         </div>
         <div class="company-body">
           ${c.no_update
@@ -265,6 +426,12 @@
         </div>
       </div>
     `).join("");
+
+    document.querySelectorAll('.company-header').forEach(el => {
+      el.addEventListener('click', () => {
+        openModal(el.dataset.name, el.dataset.website, el.dataset.blog);
+      });
+    });
   }).catch(() => {});
 </script>
 </body>

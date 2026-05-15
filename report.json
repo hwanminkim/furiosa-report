@@ -4,6 +4,8 @@
   "companies": [
     {
       "name": "NVIDIA",
+      "website": "https://www.nvidia.com",
+      "blog": "https://blogs.nvidia.com",
       "no_update": false,
       "items": [
         { "text": "1. Vera Rubin 양산 확정 (05-11) — 6월 시험생산, 7월 MS·Google·Amazon·Meta·Oracle 초도 납품", "url": "" },
@@ -13,12 +15,16 @@
     },
     {
       "name": "Groq",
+      "website": "https://groq.com",
+      "blog": "https://groq.com/blog",
       "no_update": true,
       "items": [],
       "watch": ""
     },
     {
       "name": "Cerebras",
+      "website": "https://cerebras.net",
+      "blog": "https://cerebras.net/blog",
       "no_update": false,
       "items": [
         { "text": "1. IPO 공모가 $185 확정 (05-13) — 목표 범위($150~160) 초과, $5.55B 조달", "url": "" },
@@ -28,6 +34,8 @@
     },
     {
       "name": "SambaNova",
+      "website": "https://sambanova.ai",
+      "blog": "https://sambanova.ai/blog",
       "no_update": false,
       "items": [
         { "text": "1. Intel 투자 미국 규제 최종 승인 (05-08) — Intel-SambaNova 협력 공식화", "url": "" },
@@ -37,6 +45,8 @@
     },
     {
       "name": "Tenstorrent",
+      "website": "https://tenstorrent.com",
+      "blog": "https://tenstorrent.com/blog",
       "no_update": false,
       "items": [
         { "text": "1. Galaxy Blackhole GA 및 TT-Deploy 이벤트 (05-01) — 32 ASIC, 23 PFLOPS, 상업 판매 시작", "url": "" },
