@@ -201,7 +201,7 @@ Rules:
 - items text format: "N. 제목 (MM-DD) — 핵심내용" in Korean
 - watch: specific market intelligence for Furiosa BD — what deals/customers/markets are shifting and why it matters. No generic advice.
 - Keep website/blog URLs exactly as in the template above
-- If no articles for a company → no_update: true, items: [], watch: ""
+- ALWAYS fill items with the most recent articles available, even if they are older than 24h. Do NOT set no_update: true just because there is no news today. Only set no_update: true if there are truly zero articles about that company across all provided data.
 """
 
     resp = client.chat.completions.create(
