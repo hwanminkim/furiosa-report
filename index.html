@@ -346,24 +346,24 @@
 
   <main id="main-content">
     <div class="page-eyebrow">Competitive Intelligence</div>
-    <h1>Competitor Intelligence Report</h1>
-    <div class="meta" id="meta">Furiosa BD Internal</div>
+    <h1>경쟁사 동향 리포트</h1>
+    <div class="meta" id="meta">Furiosa BD 참고용</div>
 
     <div class="top-grid" id="highlights">
       <div>
-        <div class="section-label">Furiosa Weekly Highlights</div>
+        <div class="section-label">Furiosa 주간 하이라이트</div>
         <div id="furiosa-highlights"></div>
       </div>
       <div>
-        <div class="section-label">Competitor Weekly Highlights</div>
+        <div class="section-label">이번 주 경쟁사 하이라이트</div>
         <div id="competitor-highlights"></div>
       </div>
     </div>
 
-    <div class="section-label">Company Updates — Global</div>
+    <div class="section-label">회사별 동향 — Global</div>
     <div id="companies-global"></div>
 
-    <div class="section-label" style="margin-top:28px;">Company Updates — Korea</div>
+    <div class="section-label" style="margin-top:28px;">회사별 동향 — Korea</div>
     <div id="companies-korea"></div>
   </main>
 </div>
@@ -376,16 +376,16 @@
     <div class="modal-links">
       <a class="modal-link" id="modal-website" href="#" target="_blank" rel="noopener">
         <span class="modal-link-icon">🌐</span>
-        <span class="modal-link-label">Website</span>
+        <span class="modal-link-label">웹사이트</span>
         <span class="modal-link-arrow">↗</span>
       </a>
       <a class="modal-link" id="modal-blog" href="#" target="_blank" rel="noopener">
         <span class="modal-link-icon">📝</span>
-        <span class="modal-link-label">Blog</span>
+        <span class="modal-link-label">블로그</span>
         <span class="modal-link-arrow">↗</span>
       </a>
     </div>
-    <button class="modal-close" id="modal-close">Close</button>
+    <button class="modal-close" id="modal-close">닫기</button>
   </div>
 </div>
 
@@ -399,10 +399,10 @@
       { name: "Tenstorrent", website: "https://tenstorrent.com",    blog: "https://tenstorrent.com/blog" },
     ],
     korea: [
-      { name: "리벨리온",   website: "https://rebellions.ai",  blog: "https://rebellions.ai/blog" },
-      { name: "딥엑스",     website: "https://deepx.ai",        blog: "https://deepx.ai/blog" },
-      { name: "하이퍼엑셀", website: "https://hyperaccel.ai",   blog: "https://hyperaccel.ai/blog" },
-      { name: "모빌린트",   website: "https://mobilint.com",    blog: "https://mobilint.com/blog" },
+      { name: "Rebellions", website: "https://rebellions.ai",  blog: "https://rebellions.ai/blog" },
+      { name: "DeepX",      website: "https://deepx.ai",        blog: "https://deepx.ai/blog" },
+      { name: "HyperAccel", website: "https://hyperaccel.ai",   blog: "https://hyperaccel.ai/blog" },
+      { name: "Mobilint",   website: "https://mobilint.com",    blog: "https://mobilint.com/blog" },
     ]
   };
 
@@ -436,7 +436,7 @@
   const sidebar = document.getElementById('sidebar');
   sidebar.innerHTML = `
     <div class="sidebar-item" data-target="highlights" style="margin-bottom:4px;">
-      <span class="sidebar-dot"></span>Weekly Highlights
+      <span class="sidebar-dot"></span>이번 주 하이라이트
     </div>
     <hr class="sidebar-divider">
     <div class="sidebar-label">Global</div>
@@ -494,12 +494,12 @@
 
   // Load highlights from report.json
   fetch('report.json').then(r => r.json()).then(d => {
-    if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD Internal';
+    if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
 
     function renderHighlights(items, containerId, isFuriosa) {
       const el = document.getElementById(containerId);
       if (!items || items.length === 0) {
-        el.innerHTML = '<div style="font-size:0.9rem;color:var(--muted)">No updates</div>';
+        el.innerHTML = '<div style="font-size:0.9rem;color:var(--muted)">업데이트 없음</div>';
         return;
       }
       el.innerHTML = items.map(h => {
