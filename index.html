@@ -35,9 +35,7 @@
     src: url('assets/fonts/ABCFavoritHangul-Bold.otf') format('opentype');
     font-weight: 700;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --red: #E21500;
     --black: #0D0D0D;
@@ -47,9 +45,7 @@
     --muted: #777;
     --header-h: 64px;
   }
-
   html, body { height: 100%; overflow: hidden; }
-
   body {
     font-family: 'ABCFavoritHangul', 'ABCFavorit', -apple-system, sans-serif;
     background: var(--black);
@@ -57,7 +53,6 @@
     display: flex;
     flex-direction: column;
   }
-
   /* ── Header ── */
   header {
     height: var(--header-h);
@@ -70,10 +65,8 @@
     background: var(--black);
     z-index: 10;
   }
-
   header a { display: block; line-height: 0; }
   header img { height: 26px; }
-
   .header-tag {
     font-family: 'ABCFavorit', sans-serif;
     font-size: 0.68rem;
@@ -85,10 +78,8 @@
     padding: 4px 10px;
     border-radius: 2px;
   }
-
   /* ── Layout ── */
   .layout { flex: 1; display: flex; overflow: hidden; }
-
   /* ── Sidebar ── */
   aside {
     width: 188px;
@@ -97,7 +88,6 @@
     overflow-y: auto;
     padding: 28px 0 40px;
   }
-
   .sidebar-label {
     font-family: 'ABCFavorit', sans-serif;
     font-size: 0.7rem;
@@ -107,13 +97,11 @@
     color: var(--muted);
     padding: 0 20px 8px;
   }
-
   .sidebar-divider {
     border: none;
     border-top: 1px solid var(--border);
     margin: 16px 20px;
   }
-
   .sidebar-item {
     display: flex;
     align-items: center;
@@ -125,15 +113,12 @@
     transition: color 0.15s, background 0.1s;
     border-left: 2px solid transparent;
   }
-
   .sidebar-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
-
   .sidebar-item.active {
     color: var(--text);
     border-left-color: var(--red);
     background: rgba(226,21,0,0.06);
   }
-
   .sidebar-dot {
     width: 5px;
     height: 5px;
@@ -141,14 +126,12 @@
     background: var(--red);
     flex-shrink: 0;
   }
-
   /* ── Main ── */
   main {
     flex: 1;
     overflow-y: auto;
     padding: 36px 40px 80px;
   }
-
   .page-eyebrow {
     font-family: 'ABCFavorit', sans-serif;
     font-size: 0.75rem;
@@ -158,9 +141,7 @@
     color: var(--red);
     margin-bottom: 10px;
   }
-
   h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; }
-
   .meta {
     font-size: 0.88rem;
     color: var(--muted);
@@ -168,7 +149,6 @@
     padding-bottom: 28px;
     border-bottom: 1px solid var(--border);
   }
-
   .section-label {
     font-family: 'ABCFavorit', sans-serif;
     font-size: 0.7rem;
@@ -178,29 +158,13 @@
     color: var(--muted);
     margin-bottom: 12px;
   }
-
-  /* ── Highlights grid ── */
+  /* ── Furiosa news grid ── */
   .top-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     margin-bottom: 36px;
   }
-
-  .highlight-badge {
-    font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--red);
-    background: rgba(226,21,0,0.12);
-    padding: 2px 7px;
-    border-radius: 2px;
-    display: inline-block;
-    margin-bottom: 8px;
-  }
-
   .hl-card {
     display: block;
     background: var(--card);
@@ -212,24 +176,20 @@
     color: inherit;
     transition: border-color 0.15s;
   }
-
   .hl-card.linked:hover { border-color: var(--red); }
   .hl-card.furiosa-card { border-left: 2px solid var(--red); }
-
-  .hl-card-company {
+  .hl-card-date {
     font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--red);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--muted);
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
-
-  .hl-card-text { font-size: 0.94rem; color: #C8C8C8; line-height: 1.6; }
+  .hl-card-text { font-size: 0.92rem; color: #C8C8C8; line-height: 1.55; }
   .item-arrow { font-size: 0.72rem; color: var(--muted); margin-left: 3px; }
-
+  .empty-note { font-size: 0.9rem; color: var(--muted); padding: 6px 2px; }
   /* ── Company cards ── */
   .company {
     border: 1px solid var(--border);
@@ -239,7 +199,6 @@
     transition: border-color 0.15s;
     scroll-margin-top: 20px;
   }
-
   .company-header {
     display: flex;
     align-items: center;
@@ -248,9 +207,7 @@
     cursor: pointer;
     user-select: none;
   }
-
   .company-header:hover .company-name { color: #fff; }
-
   .company-dot {
     width: 6px;
     height: 6px;
@@ -258,13 +215,9 @@
     background: var(--red);
     flex-shrink: 0;
   }
-
   .company-name { font-size: 1rem; font-weight: 600; transition: color 0.15s; }
-
   .header-chevron { margin-left: auto; font-size: 0.72rem; color: var(--muted); }
-
   .company-body { padding: 4px 18px 14px; border-top: 1px solid var(--border); }
-
   .news-item {
     display: flex;
     align-items: baseline;
@@ -272,9 +225,7 @@
     padding: 7px 0;
     border-bottom: 1px solid #222;
   }
-
   .news-item:last-child { border-bottom: none; }
-
   .news-date {
     font-family: 'ABCFavorit', sans-serif;
     font-size: 0.7rem;
@@ -282,7 +233,6 @@
     flex-shrink: 0;
     min-width: 32px;
   }
-
   .news-title {
     font-size: 0.88rem;
     color: #C8C8C8;
@@ -290,9 +240,7 @@
     text-decoration: none;
     transition: color 0.15s;
   }
-
   .news-title:hover { color: #fff; }
-
   /* ── Modal ── */
   .modal-backdrop {
     display: none;
@@ -303,9 +251,7 @@
     align-items: center;
     justify-content: center;
   }
-
   .modal-backdrop.open { display: flex; }
-
   .modal {
     background: #1E1E1E;
     border: 1px solid #333;
@@ -314,7 +260,6 @@
     width: 300px;
     box-shadow: 0 24px 48px rgba(0,0,0,0.5);
   }
-
   .modal-title {
     font-size: 0.68rem;
     font-weight: 600;
@@ -323,11 +268,8 @@
     color: var(--muted);
     margin-bottom: 5px;
   }
-
   .modal-company { font-size: 1.1rem; font-weight: 700; margin-bottom: 18px; }
-
   .modal-links { display: flex; flex-direction: column; gap: 8px; }
-
   .modal-link {
     display: flex;
     align-items: center;
@@ -340,12 +282,10 @@
     font-size: 0.94rem;
     transition: border-color 0.15s, background 0.15s;
   }
-
   .modal-link:hover { border-color: var(--red); background: rgba(226,21,0,0.06); }
   .modal-link-icon { font-size: 1rem; width: 20px; text-align: center; }
   .modal-link-label { flex: 1; }
   .modal-link-arrow { font-size: 0.68rem; color: var(--muted); }
-
   .modal-close {
     display: block;
     margin-top: 14px;
@@ -360,44 +300,36 @@
     font-family: inherit;
     transition: border-color 0.15s, color 0.15s;
   }
-
   .modal-close:hover { border-color: #555; color: var(--text); }
 </style>
 </head>
 <body>
-
 <header>
   <a href="index.html"><img src="assets/img/Furiosa_AI_h_w.png" alt="Furiosa AI"></a>
   <span class="header-tag">BD & Sales</span>
 </header>
-
 <div class="layout">
   <aside id="sidebar"></aside>
-
   <main id="main-content">
     <div class="page-eyebrow">Competitive Intelligence</div>
     <h1>경쟁사 동향 리포트</h1>
     <div class="meta" id="meta">Furiosa BD 참고용</div>
-
     <div class="top-grid" id="highlights">
       <div>
-        <div class="section-label">Furiosa 주간 하이라이트</div>
-        <div id="furiosa-highlights"></div>
+        <div class="section-label">Furiosa 일간 (최근 24시간)</div>
+        <div id="furiosa-daily"></div>
       </div>
       <div>
-        <div class="section-label">이번 주 경쟁사 하이라이트</div>
-        <div id="competitor-highlights"></div>
+        <div class="section-label">Furiosa 주간 (최근 7일)</div>
+        <div id="furiosa-weekly"></div>
       </div>
     </div>
-
     <div class="section-label">회사별 동향 — Global</div>
     <div id="companies-global"></div>
-
     <div class="section-label" style="margin-top:28px;">회사별 동향 — Korea</div>
     <div id="companies-korea"></div>
   </main>
 </div>
-
 <!-- Company link modal -->
 <div class="modal-backdrop" id="modal-backdrop">
   <div class="modal">
@@ -418,7 +350,6 @@
     <button class="modal-close" id="modal-close">닫기</button>
   </div>
 </div>
-
 <script>
   const COMPANIES = {
     global: [
@@ -441,7 +372,6 @@
   document.getElementById('modal-close').addEventListener('click', () => backdrop.classList.remove('open'));
   backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') backdrop.classList.remove('open'); });
-
   function openModal(company) {
     document.getElementById('modal-company-name').textContent = company.name;
     document.getElementById('modal-website').href = company.website;
@@ -466,7 +396,6 @@
       ${body}
     </div>`;
   }
-
   document.getElementById('companies-global').innerHTML = COMPANIES.global.map(c => renderCompany(c, [])).join('');
   document.getElementById('companies-korea').innerHTML  = COMPANIES.korea.map(c => renderCompany(c, [])).join('');
 
@@ -474,7 +403,7 @@
   const sidebar = document.getElementById('sidebar');
   sidebar.innerHTML = `
     <div class="sidebar-item" data-target="highlights" style="margin-bottom:4px;">
-      <span class="sidebar-dot"></span>이번 주 하이라이트
+      <span class="sidebar-dot"></span>Furiosa 동향
     </div>
     <hr class="sidebar-divider">
     <div class="sidebar-label">Global</div>
@@ -497,7 +426,6 @@
       i.classList.toggle('active', i.dataset.target === targetId);
     });
   }
-
   sidebar.querySelectorAll('.sidebar-item').forEach(item => {
     item.addEventListener('click', () => {
       setActiveSidebarItem(item.dataset.target);
@@ -527,31 +455,42 @@
       if (entry.isIntersecting) setActiveSidebarItem(entry.target.id);
     });
   }, { root: mainContent, threshold: 0.5 });
-
   document.querySelectorAll('.company').forEach(el => observer.observe(el));
 
-  // Load highlights from report.json
+  // ── Render article list (Furiosa daily / weekly) ─────────────────────
+  function escapeHtml(s) {
+    return String(s ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+  function renderArticles(items, containerId) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    if (!items || items.length === 0) {
+      el.innerHTML = '<div class="empty-note">No Update</div>';
+      return;
+    }
+    el.innerHTML = items.map(a => {
+      const title = escapeHtml(a.title);
+      const url   = escapeHtml(a.url);
+      const date  = escapeHtml(a.date || '');
+      return `
+        <a class="hl-card linked furiosa-card" href="${url}" target="_blank" rel="noopener">
+          ${date ? `<span class="hl-card-date">${date}</span>` : ''}
+          <span class="hl-card-text">${title} <span class="item-arrow">↗</span></span>
+        </a>`;
+    }).join('');
+  }
+
+  // Load report.json
   fetch('report.json').then(r => r.json()).then(d => {
     if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
 
-    function renderHighlights(items, containerId, isFuriosa) {
-      const el = document.getElementById(containerId);
-      if (!items || items.length === 0) {
-        el.innerHTML = '<div style="font-size:0.9rem;color:var(--muted)">No Update</div>';
-        return;
-      }
-      el.innerHTML = items.map(h => {
-        const tag   = h.url ? 'a' : 'div';
-        const attrs = h.url ? `href="${h.url}" target="_blank" rel="noopener"` : '';
-        const company = (!isFuriosa && h.company) ? `<span class="hl-card-company">${h.company}</span>` : '';
-        return `<${tag} class="hl-card${isFuriosa ? ' furiosa-card' : ''}${h.url ? ' linked' : ''}" ${attrs}>
-          ${company}<span class="hl-card-text">${h.text}${h.url ? ' <span class="item-arrow">↗</span>' : ''}</span>
-        </${tag}>`;
-      }).join('');
-    }
-
-    renderHighlights(d.furiosa_highlights, 'furiosa-highlights', true);
-    renderHighlights(d.highlights,         'competitor-highlights', false);
+    renderArticles(d.furiosa_daily,  'furiosa-daily');
+    renderArticles(d.furiosa_weekly, 'furiosa-weekly');
 
     // Inject news items into company cards
     if (d.companies) {
@@ -564,8 +503,8 @@
         body.className = 'company-body';
         body.innerHTML = co.items.map(item =>
           `<div class="news-item">
-            <span class="news-date">${item.date || ''}</span>
-            <a class="news-title" href="${item.url}" target="_blank" rel="noopener">${item.title} ↗</a>
+            <span class="news-date">${escapeHtml(item.date || '')}</span>
+            <a class="news-title" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)} ↗</a>
           </div>`).join('');
         card.appendChild(body);
       });
