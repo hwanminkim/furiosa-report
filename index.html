@@ -172,6 +172,25 @@
     background: var(--muted);
   }
 
+  .item a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .item a:hover {
+    color: #fff;
+    border-bottom-color: var(--red);
+  }
+
+  .item-arrow {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
   .watch {
     margin-top: 14px;
     padding: 10px 14px;
@@ -203,7 +222,9 @@
 <body>
 
 <header>
-  <img src="assets/img/Furiosa_AI_h_w.png" alt="Furiosa AI">
+  <a href="index.html" style="display:block;line-height:0;">
+    <img src="assets/img/Furiosa_AI_h_w.png" alt="Furiosa AI">
+  </a>
   <span class="header-tag">BD Internal</span>
 </header>
 
@@ -227,7 +248,14 @@
           ${c.no_update
             ? `<div class="no-update-text">특이사항 없음</div>`
             : `
-              ${c.items.map(i => `<div class="item">${i}</div>`).join("")}
+              ${c.items.map(i => {
+                const text = typeof i === 'object' ? i.text : i;
+                const url = typeof i === 'object' ? i.url : '';
+                const content = url
+                  ? `<a href="${url}" target="_blank" rel="noopener">${text}<span class="item-arrow">↗</span></a>`
+                  : text;
+                return `<div class="item">${content}</div>`;
+              }).join("")}
               <div class="watch">
                 <span class="watch-label">BD Watch</span>
                 ${c.watch}

@@ -6,8 +6,8 @@
       "name": "NVIDIA",
       "no_update": false,
       "items": [
-        "1. Vera Rubin 양산 확정 (05-11) — 6월 시험생산, 7월 MS·Google·Amazon·Meta·Oracle 초도 납품",
-        "2. Nscale-Microsoft 66,000 Rubin GPU 계약 (05-05) — EU 최대 AI 인프라 프로젝트"
+        { "text": "1. Vera Rubin 양산 확정 (05-11) — 6월 시험생산, 7월 MS·Google·Amazon·Meta·Oracle 초도 납품", "url": "" },
+        { "text": "2. Nscale-Microsoft 66,000 Rubin GPU 계약 (05-05) — EU 최대 AI 인프라 프로젝트", "url": "" }
       ],
       "watch": "7월 Rubin 공급 시작 → 빅테크 procurement 사이클 재편, 고객 예산 집행 시점 임박"
     },
@@ -21,8 +21,8 @@
       "name": "Cerebras",
       "no_update": false,
       "items": [
-        "1. IPO 공모가 $185 확정 (05-13) — 목표 범위($150~160) 초과, $5.55B 조달",
-        "2. 오늘(05-14) Nasdaq 상장 (CBRS) — 기업가치 $56.43B, 청약 20배 초과"
+        { "text": "1. IPO 공모가 $185 확정 (05-13) — 목표 범위($150~160) 초과, $5.55B 조달", "url": "" },
+        { "text": "2. 오늘(05-14) Nasdaq 상장 (CBRS) — 기업가치 $56.43B, 청약 20배 초과", "url": "" }
       ],
       "watch": "상장으로 대규모 자금 확보 → 영업·인프라 투자 가속화, 인퍼런스 시장 경쟁 급격히 심화 예상"
     },
@@ -30,8 +30,8 @@
       "name": "SambaNova",
       "no_update": false,
       "items": [
-        "1. Intel 투자 미국 규제 최종 승인 (05-08) — Intel-SambaNova 협력 공식화",
-        "2. Intel+Xeon+RDU 통합 HW 시스템 2H26 출시 예정"
+        { "text": "1. Intel 투자 미국 규제 최종 승인 (05-08) — Intel-SambaNova 협력 공식화", "url": "" },
+        { "text": "2. Intel+Xeon+RDU 통합 HW 시스템 2H26 출시 예정", "url": "" }
       ],
       "watch": "Intel 생태계 결합으로 엔터프라이즈·공공 시장 공략 강화, Furiosa 잠재 고객 레퍼런스 확대 주의"
     },
@@ -39,9 +39,9 @@
       "name": "Tenstorrent",
       "no_update": false,
       "items": [
-        "1. Galaxy Blackhole GA 및 TT-Deploy 이벤트 (05-01) — 32 ASIC, 23 PFLOPS, 상업 판매 시작",
-        "2. DeepSeek-R1 671B에서 350+ tok/s/user, 비디오 2.4초 생성 기록",
-        "3. Cirrascale·Equinix 등 채널 파트너 통해 클라우드 제공 시작"
+        { "text": "1. Galaxy Blackhole GA 및 TT-Deploy 이벤트 (05-01) — 32 ASIC, 23 PFLOPS, 상업 판매 시작", "url": "" },
+        { "text": "2. DeepSeek-R1 671B에서 350+ tok/s/user, 비디오 2.4초 생성 기록", "url": "" },
+        { "text": "3. Cirrascale·Equinix 등 채널 파트너 통해 클라우드 제공 시작", "url": "" }
       ],
       "watch": "GPU 절반 가격 + 오픈소스 SW 스택이 Furiosa 고객군과 직접 겹침 → 채널·레퍼런스 고객 동향 긴밀 추적 필요"
     }
