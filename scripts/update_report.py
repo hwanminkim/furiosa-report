@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
 """
 Daily report updater.
-- Furiosa daily / weekly: raw RSS, deduped, filtered by pubDate
+- Furiosa daily / weekly: raw RSS, deduped (URL + normalized title + LLM clustering)
 - Company news (competitors): raw RSS titles + URLs
-- No AI calls (no token issues)
+- LLM clustering uses GitHub Models gpt-4o-mini with JSON mode.
+  Falls back to non-LLM dedup if the call fails or GITHUB_TOKEN is missing.
 """
 import datetime
 import email.utils
 import json
+import os
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import quote
 from urllib.request import urlopen, Request
 import pytz
+from openai import OpenAI
 
 REPO_ROOT   = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
@@ -112,6 +115,85 @@ def build_period(now: datetime.datetime) -> str:
             f"~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}")
 
 
+def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> list[dict]:
+    """
+    Group articles that report the same news event and return one representative
+    per group (preserving the original Google News order).
+
+    Falls back to the original list on any failure (network, parse, model error).
+    """
+    if client is None or len(articles) < 2:
+        return articles
+
+    numbered = "\n".join(f"[{i}] {a['title']}" for i, a in enumerate(articles))
+    prompt = f"""다음은 Furiosa AI 관련 뉴스 제목 목록입니다. 각 줄은 [번호] 제목 형식.
+같은 사건(같은 발표, 같은 인사이동, 같은 정책 등)을 다룬 제목들을 같은 클러스터로 묶어주세요.
+표현이 달라도 핵심 사실이 같으면 같은 클러스터입니다.
+다른 사건이면 각각 별도 클러스터입니다.
+
+제목 목록:
+{numbered}
+
+응답 형식 (오직 JSON):
+{{"clusters": [[0, 2], [1], [3, 4, 5]]}}
+
+규칙:
+- 0부터 {len(articles)-1}까지 모든 인덱스가 정확히 한 번씩만 포함되어야 합니다.
+- 확신이 없으면 별도 클러스터로 두세요 (과도한 병합 금지)."""
+
+    try:
+        try:
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=600,
+                temperature=0.1,
+                response_format={"type": "json_object"},
+            )
+        except Exception as e:
+            print(f"  [warn] response_format unsupported, retrying without it: {e}")
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=600,
+                temperature=0.1,
+            )
+
+        raw = resp.choices[0].message.content or ""
+        m = re.search(r"\{[\s\S]*\}", raw)
+        data = json.loads(m.group() if m else raw)
+        clusters = data.get("clusters", [])
+
+        used: set[int] = set()
+        kept_indices: list[int] = []
+        for cluster in clusters:
+            valid = [i for i in cluster
+                     if isinstance(i, int) and 0 <= i < len(articles)]
+            if not valid:
+                continue
+            rep = min(valid)  # preserve Google News order
+            if rep not in used:
+                kept_indices.append(rep)
+            for i in valid:
+                used.add(i)
+
+        # 클러스터에 포함되지 않은 항목은 별도 클러스터로 살림
+        for i in range(len(articles)):
+            if i not in used:
+                kept_indices.append(i)
+
+        kept_indices.sort()
+        deduped = [articles[i] for i in kept_indices]
+
+        print(f"  LLM clustering: {len(articles)} → {len(deduped)} articles "
+              f"({len(articles) - len(deduped)} merged)")
+        return deduped
+
+    except Exception as e:
+        print(f"  [warn] LLM clustering failed, falling back to raw dedup: {e}")
+        return articles
+
+
 def to_output(a: dict, kst: pytz.BaseTzInfo) -> dict:
     """Strip non-JSON-serializable fields and format date for display."""
     return {
@@ -165,6 +247,19 @@ def main():
     # 날짜 필터만 걸고 재정렬은 안 함. pub_dt 없는 기사는 제외.
     def in_window(a: dict, cutoff: datetime.datetime) -> bool:
         return a.get("pub_dt") is not None and a["pub_dt"] >= cutoff
+
+    # ── 2.5 LLM 기반 의미 단위 클러스터링 (같은 사건 dedup) ───────────────
+    # 7일 안의 기사들만 클러스터링 대상으로 (오래된 기사 토큰 낭비 방지)
+    in_weekly_window = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
+    token = os.environ.get("GITHUB_TOKEN")
+    if token:
+        client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token)
+        deduped = cluster_articles_by_event(in_weekly_window, client)
+        deduped_urls = {a["url"] for a in deduped}
+        all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls
+                       or not in_window(a, weekly_cutoff)]
+    else:
+        print("  [warn] GITHUB_TOKEN not set, skipping LLM clustering")
 
     # 일간: 최근 24시간 top N
     furiosa_daily = [a for a in all_furiosa if in_window(a, daily_cutoff)][:DAILY_LIMIT]
