@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
 """
 Daily report updater.
-- Highlights (Furiosa + competitor): AI-generated via GitHub Models
-- Company news: raw RSS titles + URLs, no AI (no token issues)
+- Furiosa daily / weekly: raw RSS, deduped, filtered by pubDate
+- Company news (competitors): raw RSS titles + URLs
+- No AI calls (no token issues)
 """
 import datetime
 import email.utils
 import json
-import os
-import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import quote
 from urllib.request import urlopen, Request
 import pytz
-from openai import OpenAI
 
 REPO_ROOT   = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
@@ -43,17 +41,29 @@ def gnews_url(query: str, lang: str) -> str:
     return f"https://news.google.com/rss/search?q={quote(query)}&hl=en-US&gl=US&ceid=US:en"
 
 
-def parse_date(raw: str) -> str:
+def parse_pub_datetime(raw: str) -> datetime.datetime | None:
+    """Parse RSS pubDate into a timezone-aware UTC datetime, or None on failure."""
+    if not raw:
+        return None
     try:
-        t = email.utils.parsedate(raw)
-        if t:
-            return datetime.datetime(*t[:6]).strftime("%m-%d")
+        dt = email.utils.parsedate_to_datetime(raw)
+        if dt is None:
+            return None
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=pytz.utc)
+        return dt.astimezone(pytz.utc)
     except Exception:
-        pass
-    return ""
+        return None
 
 
-def fetch_articles(query: str, lang: str, n: int = 3) -> list[dict]:
+def format_date_kst(dt: datetime.datetime | None, kst: pytz.BaseTzInfo) -> str:
+    if dt is None:
+        return ""
+    return dt.astimezone(kst).strftime("%m-%d")
+
+
+def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
+    """Fetch RSS items. Returns up to n items with title/url/pub_dt."""
     try:
         req = Request(gnews_url(query, lang),
                       headers={"User-Agent": "Mozilla/5.0 (compatible; FuriosaReport/1.0)"})
@@ -67,9 +77,9 @@ def fetch_articles(query: str, lang: str, n: int = 3) -> list[dict]:
     for item in root.findall(".//item")[:n]:
         title = (item.findtext("title") or "").strip()
         link  = (item.findtext("link")  or "").strip()
-        date  = parse_date(item.findtext("pubDate") or "")
-        if title:
-            results.append({"title": title, "url": link, "date": date})
+        pub_dt = parse_pub_datetime(item.findtext("pubDate") or "")
+        if title and link:
+            results.append({"title": title, "url": link, "pub_dt": pub_dt})
     return results
 
 
@@ -81,132 +91,69 @@ def build_period(now: datetime.datetime) -> str:
             f"~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}")
 
 
-def safe_json_parse(raw: str) -> dict:
-    """
-    Robust JSON parser for LLM output.
-    Tries strict parse first, then a few common-fix fallbacks.
-    Raises ValueError with the raw output if all attempts fail.
-    """
-    # 1) Strict parse on the whole string
-    try:
-        return json.loads(raw)
-    except json.JSONDecodeError:
-        pass
-
-    # 2) Extract the largest {...} block (in case model added prose)
-    match = re.search(r"\{[\s\S]*\}", raw)
-    if not match:
-        raise ValueError(f"No JSON object found in model output:\n{raw[:800]}")
-    candidate = match.group()
-
-    try:
-        return json.loads(candidate)
-    except json.JSONDecodeError:
-        pass
-
-    # 3) Remove trailing commas (",}" or ",]")
-    cleaned = re.sub(r",\s*([}\]])", r"\1", candidate)
-    try:
-        return json.loads(cleaned)
-    except json.JSONDecodeError as e:
-        raise ValueError(
-            f"Failed to parse JSON (last attempt): {e}\n"
-            f"--- raw model output ---\n{raw}\n"
-            f"--- extracted candidate ---\n{candidate}"
-        ) from e
+def to_output(a: dict, kst: pytz.BaseTzInfo) -> dict:
+    """Strip non-JSON-serializable fields and format date for display."""
+    return {
+        "title": a["title"],
+        "url":   a["url"],
+        "date":  format_date_kst(a.get("pub_dt"), kst),
+    }
 
 
 def main():
     kst = pytz.timezone("Asia/Seoul")
     now = datetime.datetime.now(kst)
+    now_utc = now.astimezone(pytz.utc)
+    daily_cutoff  = now_utc - datetime.timedelta(hours=24)
+    weekly_cutoff = now_utc - datetime.timedelta(days=7)
+
     print(f"[{now.strftime('%Y-%m-%d %H:%M KST')}] Starting report update...")
 
-    # ── 1. Company news (raw RSS, no AI) ─────────────────────────────────
+    # ── 1. Competitor news (raw RSS) ─────────────────────────────────────
     companies_out = []
-    all_competitor_lines = []
     for co in COMPANIES:
         articles = fetch_articles(co["query"], co["lang"], n=3)
-        items = [{"title": a["title"], "url": a["url"], "date": a["date"]} for a in articles]
+        items = [to_output(a, kst) for a in articles]
         companies_out.append({
             "name":   co["name"],
             "region": co["region"],
             "items":  items,
         })
-        for a in articles[:2]:
-            all_competitor_lines.append(f"[{co['name']}] {a['title']} | {a['url']}")
         print(f"  {co['name']}: {len(articles)} articles")
 
-    # ── 2. Highlights (AI) ────────────────────────────────────────────────
-    furiosa_lines = []
-    seen = set()
+    # ── 2. Furiosa daily / weekly (raw RSS, deduped by URL) ──────────────
+    all_furiosa: list[dict] = []
+    seen_urls = set()
     for query, lang in FURIOSA_QUERIES:
-        for a in fetch_articles(query, lang, n=4):
-            if a["url"] not in seen:
-                seen.add(a["url"])
-                furiosa_lines.append(f"{a['title']} | {a['url']}")
-    print(f"  Furiosa: {len(furiosa_lines)} articles")
+        for a in fetch_articles(query, lang, n=30):
+            if a["url"] in seen_urls:
+                continue
+            seen_urls.add(a["url"])
+            all_furiosa.append(a)
 
-    token = os.environ.get("GITHUB_TOKEN")
-    if not token:
-        raise EnvironmentError("GITHUB_TOKEN is not set")
+    # Google News 기본 정렬을 그대로 보존 (인기도/relevance proxy).
+    # 날짜 필터만 걸고 재정렬은 안 함. pub_dt 없는 기사는 제외.
+    def in_window(a: dict, cutoff: datetime.datetime) -> bool:
+        return a.get("pub_dt") is not None and a["pub_dt"] >= cutoff
 
-    client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token)
+    furiosa_daily  = [a for a in all_furiosa if in_window(a, daily_cutoff)]
+    furiosa_weekly = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
 
-    prompt = f"""Date: {now.strftime('%Y-%m-%d KST')}. Competitive intelligence analyst for Furiosa AI.
+    print(f"  Furiosa: total={len(all_furiosa)}, daily(24h)={len(furiosa_daily)}, weekly(7d)={len(furiosa_weekly)}")
 
-COMPETITOR ARTICLES:
-{chr(10).join(all_competitor_lines) or '없음'}
-
-FURIOSA ARTICLES:
-{chr(10).join(furiosa_lines) or '없음'}
-
-Return a JSON object with this exact schema:
-{{
-  "furiosa_highlights": [{{"text": "팩트 한줄(Korean)", "url": ""}}],
-  "highlights":         [{{"company": "회사명", "text": "팩트 한줄(Korean)", "url": ""}}]
-}}
-
-Rules:
-- furiosa_highlights: 2-3 items. Furiosa 뉴스 팩트만 (Korean). 추천/의견 금지.
-- highlights: 3-4 items. 경쟁사 뉴스 팩트만 (Korean). Furiosa 언급 절대 금지. "Furiosa는" 시작 금지.
-- text 안에는 쌍따옴표(") 를 사용하지 말 것. 필요한 경우 작은따옴표(') 또는 한국식 따옴표(「」, ‘’)로 대체할 것.
-- URL은 입력에서 제공된 것 그대로 복사할 것."""
-
-    print("  Calling AI for highlights...")
-
-    # JSON 모드 시도 (지원하지 않는 모델/엔드포인트면 자동 fallback)
-    try:
-        resp = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=1500,
-            temperature=0.3,
-            response_format={"type": "json_object"},
-        )
-    except Exception as e:
-        print(f"  [warn] response_format unsupported, retrying without it: {e}")
-        resp = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=1500,
-            temperature=0.3,
-        )
-
-    raw = resp.choices[0].message.content or ""
-    hl = safe_json_parse(raw)
-
+    # ── 3. Write report.json ─────────────────────────────────────────────
     report = {
-        "period":             build_period(now),
-        "updated_at":         now.isoformat(),
-        "furiosa_highlights": hl.get("furiosa_highlights", []),
-        "highlights":         hl.get("highlights", []),
-        "companies":          companies_out,
+        "period":         build_period(now),
+        "updated_at":     now.isoformat(),
+        "furiosa_daily":  [to_output(a, kst) for a in furiosa_daily],
+        "furiosa_weekly": [to_output(a, kst) for a in furiosa_weekly],
+        "companies":      companies_out,
     }
 
     with open(REPORT_PATH, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"Done. {len(report['furiosa_highlights'])} Furiosa / {len(report['highlights'])} competitor highlights.")
+    print(f"Done. {len(report['furiosa_daily'])} daily / {len(report['furiosa_weekly'])} weekly.")
 
 
 if __name__ == "__main__":
