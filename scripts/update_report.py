@@ -206,7 +206,12 @@ Rules:
     # Call 2: Korea companies
     print("  Calling AI (korea)...")
     prompt2 = _company_prompt(korea_articles, KOREA_COMPANIES)
-    korea_result = _ai_call(client, prompt2, max_tokens=1500)
+    try:
+        korea_result = _ai_call(client, prompt2, max_tokens=2500)
+    except (ValueError, Exception) as e:
+        print(f"  Korea call failed ({e}), retrying with 1 item limit...")
+        prompt2_short = prompt2.replace("Max 2 items per company.", "Max 1 item per company. Keep summary under 30 Korean characters.")
+        korea_result = _ai_call(client, prompt2_short, max_tokens=1500)
 
     result["companies"] = result.get("companies", []) + korea_result.get("companies", [])
     return result
