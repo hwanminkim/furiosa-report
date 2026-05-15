@@ -416,6 +416,128 @@
   }
 
   .modal-close:hover { border-color: #555; color: var(--text); }
+
+  /* ── Article detail modal ── */
+  .detail-modal {
+    background: #1A1A1A;
+    border: 1px solid #333;
+    border-radius: 8px;
+    width: min(720px, 92vw);
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 32px 64px rgba(0,0,0,0.6);
+  }
+
+  .detail-modal-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #2A2A2A;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .detail-modal-company {
+    font-size: 1rem;
+    font-weight: 700;
+    flex: 1;
+  }
+
+  .detail-modal-links {
+    display: flex;
+    gap: 8px;
+  }
+
+  .detail-modal-link {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid #333;
+    padding: 3px 9px;
+    border-radius: 3px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .detail-modal-link:hover { border-color: #555; color: var(--text); }
+
+  .detail-modal-close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.15s;
+  }
+
+  .detail-modal-close:hover { color: var(--text); }
+
+  .detail-modal-body {
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+
+  .detail-article {
+    padding: 16px 24px;
+    border-bottom: 1px solid #222;
+  }
+
+  .detail-article:last-child { border-bottom: none; }
+
+  .detail-article-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #E8E8E8;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .detail-article-link {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid #333;
+    padding: 2px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .detail-article-link:hover { border-color: var(--red); color: var(--text); }
+
+  .detail-article-summary {
+    font-size: 0.83rem;
+    color: #B8B8B8;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .detail-bd-watch {
+    font-size: 0.8rem;
+    color: #C0C0C0;
+    line-height: 1.55;
+    padding: 8px 12px;
+    background: rgba(226,21,0,0.06);
+    border-left: 2px solid var(--red);
+    border-radius: 2px;
+  }
+
+  .detail-bd-label {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: block;
+    margin-bottom: 3px;
+  }
 </style>
 </head>
 <body>
@@ -451,39 +573,49 @@
   </main>
 </div>
 
-<!-- Modal -->
-<div class="modal-backdrop" id="modal-backdrop">
-  <div class="modal">
-    <div class="modal-title">바로가기</div>
-    <div class="modal-company" id="modal-company-name"></div>
-    <div class="modal-links">
-      <a class="modal-link" id="modal-website" href="#" target="_blank" rel="noopener">
-        <span class="modal-link-icon">🌐</span>
-        <span class="modal-link-label">공식 웹사이트</span>
-        <span class="modal-link-arrow">↗</span>
-      </a>
-      <a class="modal-link" id="modal-blog" href="#" target="_blank" rel="noopener">
-        <span class="modal-link-icon">📝</span>
-        <span class="modal-link-label">블로그</span>
-        <span class="modal-link-arrow">↗</span>
-      </a>
+<!-- Article detail modal -->
+<div class="modal-backdrop" id="detail-backdrop">
+  <div class="detail-modal">
+    <div class="detail-modal-header">
+      <span class="highlight-badge" id="detail-badge"></span>
+      <span class="detail-modal-company" id="detail-company"></span>
+      <div class="detail-modal-links">
+        <a class="detail-modal-link" id="detail-website" href="#" target="_blank" rel="noopener">🌐 웹사이트</a>
+        <a class="detail-modal-link" id="detail-blog" href="#" target="_blank" rel="noopener">📝 블로그</a>
+      </div>
+      <button class="detail-modal-close" id="detail-close">✕</button>
     </div>
-    <button class="modal-close" id="modal-close">닫기</button>
+    <div class="detail-modal-body" id="detail-body"></div>
   </div>
 </div>
 
 <script>
-  // Modal
-  const backdrop = document.getElementById('modal-backdrop');
-  document.getElementById('modal-close').addEventListener('click', () => backdrop.classList.remove('open'));
-  backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') backdrop.classList.remove('open'); });
+  // Detail modal
+  const detailBackdrop = document.getElementById('detail-backdrop');
+  document.getElementById('detail-close').addEventListener('click', () => detailBackdrop.classList.remove('open'));
+  detailBackdrop.addEventListener('click', e => { if (e.target === detailBackdrop) detailBackdrop.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') detailBackdrop.classList.remove('open'); });
 
-  function openModal(name, website, blog) {
-    document.getElementById('modal-company-name').textContent = name;
-    document.getElementById('modal-website').href = website;
-    document.getElementById('modal-blog').href = blog;
-    backdrop.classList.add('open');
+  function openDetailModal(company) {
+    document.getElementById('detail-badge').textContent  = company.name;
+    document.getElementById('detail-company').textContent = company.name;
+    document.getElementById('detail-website').href = company.website || '#';
+    document.getElementById('detail-blog').href    = company.blog    || '#';
+
+    const items = (company.items || []).filter(i => typeof i === 'object');
+    document.getElementById('detail-body').innerHTML = items.length === 0
+      ? '<div style="padding:24px;color:var(--muted);font-size:0.85rem;">최근 기사 없음</div>'
+      : items.map(item => `
+          <div class="detail-article">
+            <div class="detail-article-title">
+              <span>${item.text || ''}</span>
+              ${item.url ? `<a class="detail-article-link" href="${item.url}" target="_blank" rel="noopener">기사 보기 ↗</a>` : ''}
+            </div>
+            ${item.summary ? `<div class="detail-article-summary">${item.summary}</div>` : ''}
+            ${item.bd_watch ? `<div class="detail-bd-watch"><span class="detail-bd-label">BD Watch</span>${item.bd_watch}</div>` : ''}
+          </div>`).join('');
+
+    detailBackdrop.classList.add('open');
   }
 
   // Render
@@ -506,10 +638,12 @@
     renderCards(d.highlights        || [], 'competitor-highlights', '');
 
     // Companies
+    const ALL_COMPANIES_DATA = d.companies;
+
     function renderCompany(c) {
       return `
         <div class="company" id="co-${c.name}">
-          <div class="company-header" data-name="${c.name}" data-website="${c.website||''}" data-blog="${c.blog||''}">
+          <div class="company-header" data-idx="${ALL_COMPANIES_DATA.findIndex(x => x.name === c.name)}">
             <div class="company-dot${c.no_update ? ' no-update' : ''}"></div>
             <span class="company-name">${c.name}</span>
             <span class="header-chevron">⊕</span>
@@ -519,12 +653,8 @@
               ? `<div class="no-update-text">최근 기사 없음</div>`
               : `${(c.items||[]).map(i => {
                   const text = typeof i === 'object' ? i.text : i;
-                  const url  = typeof i === 'object' ? i.url  : '';
-                  return `<div class="item">${url
-                    ? `<a href="${url}" target="_blank" rel="noopener">${text}<span class="item-arrow">↗</span></a>`
-                    : text}</div>`;
-                }).join('')}
-                <div class="watch"><span class="watch-label">BD Watch</span>${c.watch}</div>`
+                  return `<div class="item">${text}</div>`;
+                }).join('')}`
             }
           </div>
         </div>`;
@@ -574,9 +704,12 @@
       });
     });
 
-    // Company header → modal
+    // Company header → detail modal
     document.querySelectorAll('.company-header').forEach(el => {
-      el.addEventListener('click', () => openModal(el.dataset.name, el.dataset.website, el.dataset.blog));
+      el.addEventListener('click', () => {
+        const idx = parseInt(el.dataset.idx);
+        if (!isNaN(idx)) openDetailModal(ALL_COMPANIES_DATA[idx]);
+      });
     });
 
     // IntersectionObserver → active sidebar item

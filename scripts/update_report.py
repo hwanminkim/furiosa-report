@@ -141,8 +141,7 @@ def analyze(articles: list[dict], furiosa_articles: list[dict], now: datetime.da
         [{"name": c["name"], "region": c["region"],
           "website": c["website"], "blog": c["blog"],
           "no_update": True,
-          "items": [{"text": "N. 제목 (MM-DD) — 핵심내용", "url": "기사URL"}],
-          "watch": ""}
+          "items": [{"text": "N. 제목 (MM-DD) — 한줄요약", "url": "기사URL", "summary": "기사 내용 2-3문장 요약 (Korean)", "bd_watch": "이 기사의 Furiosa BD 시사점 한 문장 (Korean)"}]}
          for c in ALL_COMPANIES],
         ensure_ascii=False, indent=2
     )
@@ -177,15 +176,16 @@ Rules:
 - highlights: 2–3 most impactful items from global companies — facts only
 - companies: include ALL companies (global + korea) with their region field preserved
 - For EVERY company: fill items with the most recent articles available (max 3). ALWAYS use actual articles from the data above — do NOT set no_update: true unless there are truly zero articles for that company in the provided data.
-- items MUST be objects: {{"text": "N. 제목 (MM-DD) — 핵심내용 (Korean)", "url": "exact article URL"}}
-- watch: concrete BD intelligence — what specific deals/customers/markets are shifting. No generic advice, no "Furiosa는 주의해야 한다"-style sentences.
+- items MUST be objects with "text", "url", "summary", "bd_watch" fields
+- summary: 2-3 sentence factual summary of the article in Korean
+- bd_watch: one sentence of concrete BD intelligence for Furiosa — what specific deal/customer/market shift this represents. No generic advice.
 - Keep website/blog/region values exactly as in the template above
 """
 
     resp = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=4000,
+        max_tokens=5000,
         temperature=0.3,
     )
     raw = resp.choices[0].message.content
