@@ -13,7 +13,6 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import quote
 from urllib.request import urlopen, Request
-
 import pytz
 from openai import OpenAI
 
@@ -82,6 +81,41 @@ def build_period(now: datetime.datetime) -> str:
             f"~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}")
 
 
+def safe_json_parse(raw: str) -> dict:
+    """
+    Robust JSON parser for LLM output.
+    Tries strict parse first, then a few common-fix fallbacks.
+    Raises ValueError with the raw output if all attempts fail.
+    """
+    # 1) Strict parse on the whole string
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+
+    # 2) Extract the largest {...} block (in case model added prose)
+    match = re.search(r"\{[\s\S]*\}", raw)
+    if not match:
+        raise ValueError(f"No JSON object found in model output:\n{raw[:800]}")
+    candidate = match.group()
+
+    try:
+        return json.loads(candidate)
+    except json.JSONDecodeError:
+        pass
+
+    # 3) Remove trailing commas (",}" or ",]")
+    cleaned = re.sub(r",\s*([}\]])", r"\1", candidate)
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError as e:
+        raise ValueError(
+            f"Failed to parse JSON (last attempt): {e}\n"
+            f"--- raw model output ---\n{raw}\n"
+            f"--- extracted candidate ---\n{candidate}"
+        ) from e
+
+
 def main():
     kst = pytz.timezone("Asia/Seoul")
     now = datetime.datetime.now(kst)
@@ -90,7 +124,6 @@ def main():
     # ── 1. Company news (raw RSS, no AI) ─────────────────────────────────
     companies_out = []
     all_competitor_lines = []
-
     for co in COMPANIES:
         articles = fetch_articles(co["query"], co["lang"], n=3)
         items = [{"title": a["title"], "url": a["url"], "date": a["date"]} for a in articles]
@@ -127,25 +160,40 @@ COMPETITOR ARTICLES:
 FURIOSA ARTICLES:
 {chr(10).join(furiosa_lines) or '없음'}
 
-Return ONLY valid JSON (no markdown):
-{{"furiosa_highlights":[{{"text":"팩트 한줄(Korean)","url":""}}],"highlights":[{{"company":"회사명","text":"팩트 한줄(Korean)","url":""}}]}}
+Return a JSON object with this exact schema:
+{{
+  "furiosa_highlights": [{{"text": "팩트 한줄(Korean)", "url": ""}}],
+  "highlights":         [{{"company": "회사명", "text": "팩트 한줄(Korean)", "url": ""}}]
+}}
 
 Rules:
 - furiosa_highlights: 2-3 items. Furiosa 뉴스 팩트만 (Korean). 추천/의견 금지.
-- highlights: 3-4 items. 경쟁사 뉴스 팩트만 (Korean). Furiosa 언급 절대 금지. "Furiosa는" 시작 금지."""
+- highlights: 3-4 items. 경쟁사 뉴스 팩트만 (Korean). Furiosa 언급 절대 금지. "Furiosa는" 시작 금지.
+- text 안에는 쌍따옴표(") 를 사용하지 말 것. 필요한 경우 작은따옴표(') 또는 한국식 따옴표(「」, ‘’)로 대체할 것.
+- URL은 입력에서 제공된 것 그대로 복사할 것."""
 
     print("  Calling AI for highlights...")
-    resp = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=1000,
-        temperature=0.3,
-    )
-    raw = resp.choices[0].message.content
-    match = re.search(r"\{[\s\S]*\}", raw)
-    if not match:
-        raise ValueError(f"No JSON:\n{raw[:400]}")
-    hl = json.loads(match.group())
+
+    # JSON 모드 시도 (지원하지 않는 모델/엔드포인트면 자동 fallback)
+    try:
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=1500,
+            temperature=0.3,
+            response_format={"type": "json_object"},
+        )
+    except Exception as e:
+        print(f"  [warn] response_format unsupported, retrying without it: {e}")
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=1500,
+            temperature=0.3,
+        )
+
+    raw = resp.choices[0].message.content or ""
+    hl = safe_json_parse(raw)
 
     report = {
         "period":             build_period(now),
