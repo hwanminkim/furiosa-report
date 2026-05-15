@@ -241,6 +241,11 @@
     transition: color 0.15s;
   }
   .news-title:hover { color: #fff; }
+  .news-item.clickable { cursor: pointer; transition: background 0.1s; }
+  .news-item.clickable:hover { background: rgba(255,255,255,0.025); }
+  .news-title.as-text { color: #C8C8C8; text-decoration: none; transition: color 0.15s; }
+  .news-title.as-text:hover { color: #fff; }
+  .news-item-icon { font-size: 0.7rem; color: var(--muted); margin-left: 3px; }
   /* ── Modal ── */
   .modal-backdrop {
     display: none;
@@ -301,6 +306,53 @@
     transition: border-color 0.15s, color 0.15s;
   }
   .modal-close:hover { border-color: #555; color: var(--text); }
+  /* ── Article modal (wider) ── */
+  .modal.article-modal {
+    width: 460px;
+    max-width: calc(100vw - 40px);
+    max-height: 84vh;
+    overflow-y: auto;
+  }
+  .article-modal-company {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .article-modal-date {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.7rem;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .article-modal-title {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.45;
+    margin-bottom: 18px;
+    color: #fff;
+  }
+  .article-section { margin-bottom: 14px; }
+  .article-section-label {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 5px;
+  }
+  .article-section-body {
+    font-size: 0.9rem;
+    color: #D0D0D0;
+    line-height: 1.55;
+    white-space: pre-wrap;
+  }
 </style>
 </head>
 <body>
@@ -350,6 +402,28 @@
     <button class="modal-close" id="modal-close">닫기</button>
   </div>
 </div>
+<!-- Article modal -->
+<div class="modal-backdrop" id="article-backdrop">
+  <div class="modal article-modal">
+    <span class="article-modal-company" id="article-modal-company"></span>
+    <span class="article-modal-date" id="article-modal-date"></span>
+    <div class="article-modal-title" id="article-modal-title"></div>
+    <div class="article-section">
+      <div class="article-section-label">요약</div>
+      <div class="article-section-body" id="article-modal-summary"></div>
+    </div>
+    <div class="article-section">
+      <div class="article-section-label">Furiosa BD 시점</div>
+      <div class="article-section-body" id="article-modal-bd"></div>
+    </div>
+    <a class="modal-link" id="article-modal-link" href="#" target="_blank" rel="noopener">
+      <span class="modal-link-icon">🔗</span>
+      <span class="modal-link-label">원문 보기</span>
+      <span class="modal-link-arrow">↗</span>
+    </a>
+    <button class="modal-close" id="article-modal-close">닫기</button>
+  </div>
+</div>
 <script>
   const COMPANIES = {
     global: [
@@ -367,17 +441,38 @@
     ]
   };
 
-  // Modal
+  // ── Company info modal ────────────────────────────────────────────────
   const backdrop = document.getElementById('modal-backdrop');
   document.getElementById('modal-close').addEventListener('click', () => backdrop.classList.remove('open'));
   backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') backdrop.classList.remove('open'); });
   function openModal(company) {
     document.getElementById('modal-company-name').textContent = company.name;
     document.getElementById('modal-website').href = company.website;
     document.getElementById('modal-blog').href    = company.blog;
     backdrop.classList.add('open');
   }
+
+  // ── Article modal (요약 + BD 시점 + 원문 링크) ────────────────────────
+  const articleBackdrop = document.getElementById('article-backdrop');
+  document.getElementById('article-modal-close').addEventListener('click', () => articleBackdrop.classList.remove('open'));
+  articleBackdrop.addEventListener('click', e => { if (e.target === articleBackdrop) articleBackdrop.classList.remove('open'); });
+  function openArticleModal(item, companyName) {
+    document.getElementById('article-modal-company').textContent = companyName;
+    document.getElementById('article-modal-date').textContent    = item.date || '';
+    document.getElementById('article-modal-title').textContent   = item.title || '';
+    document.getElementById('article-modal-summary').textContent = item.summary || '(요약 없음 — 다음 업데이트에서 생성됩니다)';
+    document.getElementById('article-modal-bd').textContent      = item.bd_perspective || '(BD 시점 없음 — 다음 업데이트에서 생성됩니다)';
+    document.getElementById('article-modal-link').href           = item.url || '#';
+    articleBackdrop.classList.add('open');
+  }
+
+  // Esc → 양쪽 모달 모두 닫기
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      backdrop.classList.remove('open');
+      articleBackdrop.classList.remove('open');
+    }
+  });
 
   function renderCompany(c, newsItems) {
     const body = newsItems && newsItems.length > 0
@@ -426,9 +521,15 @@
       i.classList.toggle('active', i.dataset.target === targetId);
     });
   }
+
+  // 프로그래매틱 스크롤 동안 IntersectionObserver의 active 변경을 잠시 막음.
+  // 이게 없으면 스크롤 애니메이션 도중 지나가는 섹션들이 active를 빼앗아 빨간 박스가 점프함.
+  let scrollLockUntil = 0;
+
   sidebar.querySelectorAll('.sidebar-item').forEach(item => {
     item.addEventListener('click', () => {
       setActiveSidebarItem(item.dataset.target);
+      scrollLockUntil = Date.now() + 900; // ~smooth scroll 시간 동안 잠금
       const target = document.getElementById(item.dataset.target);
       if (!target) return;
       const containerH = mainContent.clientHeight;
@@ -450,12 +551,19 @@
   });
 
   // IntersectionObserver → active sidebar
+  // - "highlights" 컨테이너도 관찰해서 위로 스크롤 시 "Furiosa 동향" 활성화됨
+  // - 클릭으로 스크롤 중인 동안은 active 갱신을 skip (jumping 방지)
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) setActiveSidebarItem(entry.target.id);
-    });
-  }, { root: mainContent, threshold: 0.5 });
+    if (Date.now() < scrollLockUntil) return;
+    // 현재 보이는 것 중 root(main-content)에서 가장 위에 있는 항목으로 선택
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (visible[0]) setActiveSidebarItem(visible[0].target.id);
+  }, { root: mainContent, threshold: 0.35 });
   document.querySelectorAll('.company').forEach(el => observer.observe(el));
+  const highlightsEl = document.getElementById('highlights');
+  if (highlightsEl) observer.observe(highlightsEl);
 
   // ── Render article list (Furiosa daily / weekly) ─────────────────────
   function escapeHtml(s) {
@@ -492,7 +600,7 @@
     renderArticles(d.furiosa_daily,  'furiosa-daily');
     renderArticles(d.furiosa_weekly, 'furiosa-weekly');
 
-    // Inject news items into company cards
+    // Inject news items into company cards (click → article modal)
     if (d.companies) {
       d.companies.forEach(co => {
         const card = document.getElementById('co-' + co.name);
@@ -501,11 +609,20 @@
         if (existing) existing.remove();
         const body = document.createElement('div');
         body.className = 'company-body';
-        body.innerHTML = co.items.map(item =>
-          `<div class="news-item">
-            <span class="news-date">${escapeHtml(item.date || '')}</span>
-            <a class="news-title" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)} ↗</a>
-          </div>`).join('');
+        co.items.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'news-item clickable';
+          row.innerHTML =
+            `<span class="news-date">${escapeHtml(item.date || '')}</span>` +
+            `<a class="news-title as-text" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}<span class="news-item-icon"> ⓘ</span></a>`;
+          row.addEventListener('click', (e) => {
+            // Cmd/Ctrl/Shift+click → 새 탭으로 원문 (브라우저 기본)
+            if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+            e.preventDefault();
+            openArticleModal(item, co.name);
+          });
+          body.appendChild(row);
+        });
         card.appendChild(body);
       });
     }
