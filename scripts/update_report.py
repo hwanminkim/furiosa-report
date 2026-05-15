@@ -41,6 +41,26 @@ def gnews_url(query: str, lang: str) -> str:
     return f"https://news.google.com/rss/search?q={quote(query)}&hl=en-US&gl=US&ceid=US:en"
 
 
+_TITLE_SOURCE_SUFFIX = re.compile(r"\s+[-|–—·]\s+[^-|–—·]+$")
+_TITLE_NON_WORD       = re.compile(r"[^\w가-힣\s]", flags=re.UNICODE)
+_TITLE_WHITESPACE     = re.compile(r"\s+")
+
+
+def normalize_title(title: str) -> str:
+    """
+    Normalize a news title so that minor variations collapse to the same key.
+    - strip trailing source name (" - TechCrunch", " | The Korea Herald", " · Reuters")
+    - lowercase, drop punctuation, collapse whitespace
+    """
+    if not title:
+        return ""
+    t = _TITLE_SOURCE_SUFFIX.sub("", title)
+    t = t.lower()
+    t = _TITLE_NON_WORD.sub(" ", t)
+    t = _TITLE_WHITESPACE.sub(" ", t).strip()
+    return t
+
+
 def parse_pub_datetime(raw: str) -> datetime.datetime | None:
     """Parse RSS pubDate into a timezone-aware UTC datetime, or None on failure."""
     if not raw:
@@ -121,14 +141,23 @@ def main():
         })
         print(f"  {co['name']}: {len(articles)} articles")
 
-    # ── 2. Furiosa daily / weekly (raw RSS, deduped by URL) ──────────────
+    # ── 2. Furiosa daily / weekly (raw RSS, deduped by URL + normalized title) ──
+    DAILY_LIMIT  = 5
+    WEEKLY_LIMIT = 5
+
     all_furiosa: list[dict] = []
-    seen_urls = set()
+    seen_urls   = set()
+    seen_titles = set()
     for query, lang in FURIOSA_QUERIES:
         for a in fetch_articles(query, lang, n=30):
             if a["url"] in seen_urls:
                 continue
+            norm = normalize_title(a["title"])
+            if norm and norm in seen_titles:
+                continue
             seen_urls.add(a["url"])
+            if norm:
+                seen_titles.add(norm)
             all_furiosa.append(a)
 
     # Google News 기본 정렬을 그대로 보존 (인기도/relevance proxy).
@@ -136,8 +165,15 @@ def main():
     def in_window(a: dict, cutoff: datetime.datetime) -> bool:
         return a.get("pub_dt") is not None and a["pub_dt"] >= cutoff
 
-    furiosa_daily  = [a for a in all_furiosa if in_window(a, daily_cutoff)]
-    furiosa_weekly = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
+    # 일간: 최근 24시간 top N
+    furiosa_daily = [a for a in all_furiosa if in_window(a, daily_cutoff)][:DAILY_LIMIT]
+
+    # 주간: 최근 7일 중 일간에 이미 들어간 건 제외하고 top N
+    daily_urls = {a["url"] for a in furiosa_daily}
+    furiosa_weekly = [
+        a for a in all_furiosa
+        if in_window(a, weekly_cutoff) and a["url"] not in daily_urls
+    ][:WEEKLY_LIMIT]
 
     print(f"  Furiosa: total={len(all_furiosa)}, daily(24h)={len(furiosa_daily)}, weekly(7d)={len(furiosa_weekly)}")
 
