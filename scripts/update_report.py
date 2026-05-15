@@ -8,6 +8,7 @@ Daily report updater.
 import datetime
 import email.utils
 import json
+import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import quote
