@@ -5,33 +5,239 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Furiosa BD 경쟁사 동향 리포트</title>
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 860px; margin: 0 auto; padding: 32px 24px; background: #f9f9f9; color: #1a1a1a; }
-  h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
-  .meta { font-size: 0.85rem; color: #666; margin-bottom: 32px; }
-  .company { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 20px 24px; margin-bottom: 16px; }
-  .company h2 { font-size: 1rem; font-weight: 700; margin: 0 0 12px 0; }
-  .item { margin-bottom: 8px; font-size: 0.9rem; }
-  .watch { margin-top: 12px; font-size: 0.85rem; color: #555; border-left: 3px solid #0066cc; padding-left: 10px; }
-  .no-update { color: #999; font-size: 0.9rem; }
-  pre { white-space: pre-wrap; font-family: inherit; margin: 0; }
+  @font-face {
+    font-family: 'ABCFavorit';
+    src: url('assets/fonts/ABCFavorit-Regular.otf') format('opentype');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: 'ABCFavorit';
+    src: url('assets/fonts/ABCFavorit-Medium.otf') format('opentype');
+    font-weight: 500;
+  }
+  @font-face {
+    font-family: 'ABCFavorit';
+    src: url('assets/fonts/ABCFavorit-Bold.otf') format('opentype');
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: 'ABCFavoritHangul';
+    src: url('assets/fonts/ABCFavoritHangul-Regular.otf') format('opentype');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: 'ABCFavoritHangul';
+    src: url('assets/fonts/ABCFavoritHangul-Medium.otf') format('opentype');
+    font-weight: 500;
+  }
+  @font-face {
+    font-family: 'ABCFavoritHangul';
+    src: url('assets/fonts/ABCFavoritHangul-Bold.otf') format('opentype');
+    font-weight: 700;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #E21500;
+    --black: #0D0D0D;
+    --dark: #1A1A1A;
+    --border: #2A2A2A;
+    --text: #F0F0F0;
+    --muted: #888;
+  }
+
+  body {
+    font-family: 'ABCFavoritHangul', 'ABCFavorit', -apple-system, sans-serif;
+    background: var(--black);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  header img {
+    height: 28px;
+    display: block;
+  }
+
+  .header-tag {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+  }
+
+  .page-title {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .meta {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .company {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: var(--dark);
+    transition: border-color 0.15s;
+  }
+
+  .company:hover {
+    border-color: #3A3A3A;
+  }
+
+  .company-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .company-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+  }
+
+  .company-dot.no-update {
+    background: var(--border);
+  }
+
+  .company h2 {
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .company-body {
+    padding: 16px 20px;
+  }
+
+  .item {
+    font-size: 0.88rem;
+    color: #C8C8C8;
+    line-height: 1.6;
+    padding: 5px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 4px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  .watch {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: rgba(226, 21, 0, 0.07);
+    border-left: 2px solid var(--red);
+    border-radius: 2px;
+    font-size: 0.82rem;
+    color: #C8C8C8;
+    line-height: 1.6;
+  }
+
+  .watch-label {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .no-update-text {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
 </style>
 </head>
 <body>
-<h1>Furiosa BD 경쟁사 동향 리포트</h1>
-<div class="meta" id="meta">아직 리포트가 없습니다.</div>
-<div id="content"></div>
+
+<header>
+  <img src="assets/img/Furiosa_AI_h_w.png" alt="Furiosa AI">
+  <span class="header-tag">BD Internal</span>
+</header>
+
+<main>
+  <div class="page-title">Competitive Intelligence</div>
+  <h1>경쟁사 동향 리포트</h1>
+  <div class="meta" id="meta">아직 리포트가 없습니다.</div>
+  <div id="content"></div>
+</main>
+
 <script>
-  fetch("report.json").then(r=>r.json()).then(d=>{
-    document.getElementById("meta").textContent = d.period + " | Furiosa BD 참고용";
-    document.getElementById("content").innerHTML = d.companies.map(c=>`
+  fetch("report.json").then(r => r.json()).then(d => {
+    document.getElementById("meta").textContent = d.period + " · Furiosa BD 참고용";
+    document.getElementById("content").innerHTML = d.companies.map(c => `
       <div class="company">
-        <h2>${c.name}</h2>
-        ${c.no_update ? `<div class="no-update">특이사항 없음</div>` : `
-          <div>${c.items.map(i=>`<div class="item">${i}</div>`).join("")}</div>
-          <div class="watch">BD Watch: ${c.watch}</div>
-        `}
-      </div>`).join("");
-  }).catch(()=>{});
+        <div class="company-header">
+          <div class="company-dot${c.no_update ? ' no-update' : ''}"></div>
+          <h2>${c.name}</h2>
+        </div>
+        <div class="company-body">
+          ${c.no_update
+            ? `<div class="no-update-text">특이사항 없음</div>`
+            : `
+              ${c.items.map(i => `<div class="item">${i}</div>`).join("")}
+              <div class="watch">
+                <span class="watch-label">BD Watch</span>
+                ${c.watch}
+              </div>
+            `
+          }
+        </div>
+      </div>
+    `).join("");
+  }).catch(() => {});
 </script>
 </body>
 </html>
