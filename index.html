@@ -338,6 +338,51 @@
     margin-bottom: 12px;
   }
 
+  /* ── Two-column content grid ── */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .top3-col {
+    position: sticky;
+    top: 0;
+  }
+
+  /* ── Weekly Top 3 ── */
+  .top3-item {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s;
+  }
+
+  .top3-item:hover { border-color: #3A3A3A; }
+  .top3-item.linked:hover { border-color: var(--red); }
+
+  .top3-rank {
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .top3-text {
+    font-size: 0.83rem;
+    color: #C8C8C8;
+    line-height: 1.55;
+    margin-top: 8px;
+  }
+
   /* ── Company cards ── */
   .company {
     border: 1px solid var(--border);
@@ -537,8 +582,16 @@
       </div>
     </div>
 
-    <div class="section-label">회사별 동향</div>
-    <div id="companies"></div>
+    <div class="content-grid">
+      <div class="companies-col">
+        <div class="section-label">회사별 동향</div>
+        <div id="companies"></div>
+      </div>
+      <div class="top3-col">
+        <div class="section-label">이번 주 Top 3</div>
+        <div id="weekly-top3"></div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -687,12 +740,34 @@
         </div>`).join('')}
     `;
 
-    // Sidebar click → scroll
+    // Weekly Top 3 (right column)
+    const top3El = document.getElementById('weekly-top3');
+    top3El.innerHTML = (d.highlights || []).slice(0, 3).map((h, i) => {
+      const tag   = h.url ? 'a' : 'div';
+      const attrs = h.url ? `href="${h.url}" target="_blank" rel="noopener"` : '';
+      return `<${tag} class="top3-item${h.url ? ' linked' : ''}" ${attrs}>
+        <div class="top3-rank">TOP ${i + 1}</div>
+        <span class="highlight-badge">${h.company}</span>
+        <div class="top3-text">${h.text}${h.url ? ' <span class="item-arrow">↗</span>' : ''}</div>
+      </${tag}>`;
+    }).join('');
+
+    // Sidebar click → scroll to center
+    const mainContent = document.getElementById('main-content');
     sidebar.querySelectorAll('.sidebar-item').forEach(item => {
       item.addEventListener('click', () => {
         const target = document.getElementById(item.dataset.target) ||
                        document.getElementById('highlights');
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (!target) return;
+        const containerH = mainContent.clientHeight;
+        const targetH    = target.offsetHeight;
+        const targetTop  = target.getBoundingClientRect().top
+                         - mainContent.getBoundingClientRect().top
+                         + mainContent.scrollTop;
+        mainContent.scrollTo({
+          top: targetTop - (containerH / 2) + (targetH / 2),
+          behavior: 'smooth'
+        });
       });
     });
 
