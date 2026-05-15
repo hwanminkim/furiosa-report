@@ -81,35 +81,53 @@ def fetch_feed(url: str, timeout: int = 10) -> list[dict]:
     return entries
 
 
-def collect_articles(hours: int = 30) -> list[dict]:
-    """Collect recent articles that mention any target company."""
+def collect_articles(hours: int = 30) -> tuple[list[dict], list[dict]]:
+    """Collect recent articles for competitors and Furiosa separately."""
     company_names = [c["name"].lower() for c in COMPANIES]
-    found: list[dict] = []
+    furiosa_terms = {"furiosa", "furiosaai", "furiosa ai"}
+
+    competitor_found: list[dict] = []
+    furiosa_found:    list[dict] = []
 
     print("Fetching RSS feeds...")
     for url in RSS_FEEDS:
         for entry in fetch_feed(url):
             text = (entry["title"] + " " + entry["summary"]).lower()
+            clean_summary = re.sub(r"<[^>]+>", "", entry["summary"])[:300]
+
+            # Check Furiosa first
+            if any(t in text for t in furiosa_terms):
+                furiosa_found.append({
+                    "title":   entry["title"],
+                    "url":     entry["url"],
+                    "summary": clean_summary,
+                })
+                continue
+
+            # Then competitors
             for name in company_names:
                 if name in text:
-                    found.append({
+                    competitor_found.append({
                         "company": name.title() if name != "sambanova" else "SambaNova",
                         "title":   entry["title"],
                         "url":     entry["url"],
-                        "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:300],
+                        "summary": clean_summary,
                     })
-                    break  # only tag once per article
+                    break
 
-    # deduplicate by URL
-    seen: set[str] = set()
-    unique = []
-    for a in found:
-        if a["url"] not in seen:
-            seen.add(a["url"])
-            unique.append(a)
+    def dedup(items):
+        seen: set[str] = set()
+        result = []
+        for a in items:
+            if a["url"] not in seen:
+                seen.add(a["url"])
+                result.append(a)
+        return result
 
-    print(f"  Found {len(unique)} relevant articles")
-    return unique
+    competitor_found = dedup(competitor_found)
+    furiosa_found    = dedup(furiosa_found)
+    print(f"  Competitor articles: {len(competitor_found)}, Furiosa articles: {len(furiosa_found)}")
+    return competitor_found, furiosa_found
 
 
 def build_period(now: datetime.datetime) -> str:
@@ -120,7 +138,7 @@ def build_period(now: datetime.datetime) -> str:
             f"~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}")
 
 
-def analyze(articles: list[dict], now: datetime.datetime) -> dict:
+def analyze(articles: list[dict], furiosa_articles: list[dict], now: datetime.datetime) -> dict:
     token  = os.environ.get("GITHUB_TOKEN")
     if not token:
         raise EnvironmentError("GITHUB_TOKEN is not set")
@@ -135,6 +153,11 @@ def analyze(articles: list[dict], now: datetime.datetime) -> dict:
         for a in articles
     ) or "수집된 기사가 없습니다."
 
+    furiosa_text = "\n\n".join(
+        f"[Furiosa] {a['title']}\nURL: {a['url']}\n{a['summary']}"
+        for a in furiosa_articles
+    ) or "수집된 기사가 없습니다."
+
     companies_template = json.dumps(
         [{"name": c["name"], "website": c["website"], "blog": c["blog"],
           "no_update": True,
@@ -146,10 +169,14 @@ def analyze(articles: list[dict], now: datetime.datetime) -> dict:
 
     prompt = f"""Today is {now.strftime('%Y-%m-%d %H:%M KST')}.
 You are a competitive intelligence analyst for Furiosa AI (Korean AI chip startup).
-Below are recent news articles about competitor companies. Analyze them and return a JSON report.
+Analyze the articles below and return a JSON report.
 
-=== ARTICLES ===
+=== COMPETITOR ARTICLES ===
 {articles_text}
+=== END ===
+
+=== FURIOSA AI ARTICLES ===
+{furiosa_text}
 === END ===
 
 Return ONLY valid JSON — no markdown fences, no explanation:
@@ -157,6 +184,9 @@ Return ONLY valid JSON — no markdown fences, no explanation:
 {{
   "period": "{build_period(now)}",
   "updated_at": "{now.isoformat()}",
+  "furiosa_highlights": [
+    {{"text": "Furiosa AI 관련 뉴스 팩트 요약 (Korean)", "url": "기사URL또는빈문자열"}}
+  ],
   "highlights": [
     {{"company": "회사명", "text": "뉴스 팩트 요약 한 줄 (Korean)", "url": "기사URL또는빈문자열"}}
   ],
@@ -164,11 +194,12 @@ Return ONLY valid JSON — no markdown fences, no explanation:
 }}
 
 Rules:
-- highlights: 2–3 most impactful news items — write ONLY the factual news summary, NO recommendations, NO "Furiosa는..." sentences
+- furiosa_highlights: 1–3 items from FURIOSA AI ARTICLES — factual only, no "Furiosa는..." advice. If no Furiosa articles found, return []
+- highlights: 2–3 most impactful competitor news — factual only, no recommendations
 - For each company with news: set no_update=false, fill items (max 3)
 - items MUST be objects with "text" and "url" — use the exact article URL from ARTICLES above
 - items text format: "N. 제목 (MM-DD) — 핵심내용" in Korean
-- watch: specific, actionable intelligence for Furiosa's BD team — e.g. which customers/deals/markets are shifting, what competitive threat is emerging. Do NOT write generic advice like "Furiosa는 주의 깊게 살펴봐야 한다". Write what is concretely happening and why it matters for BD.
+- watch: specific market intelligence for Furiosa BD — what deals/customers/markets are shifting and why it matters. No generic advice.
 - Keep website/blog URLs exactly as in the template above
 - If no articles for a company → no_update: true, items: [], watch: ""
 """
@@ -192,8 +223,8 @@ def main():
     now = datetime.datetime.now(kst)
     print(f"[{now.strftime('%Y-%m-%d %H:%M KST')}] Starting report update...")
 
-    articles = collect_articles(hours=30)
-    report   = analyze(articles, now)
+    articles, furiosa_articles = collect_articles(hours=30)
+    report = analyze(articles, furiosa_articles, now)
 
     # Always keep correct website/blog metadata
     meta = {c["name"]: c for c in COMPANIES}
