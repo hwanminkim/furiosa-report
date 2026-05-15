@@ -5,10 +5,10 @@ Uses Google News RSS per company + GitHub Models (GPT-4o-mini).
 No external API key required — GITHUB_TOKEN is auto-provided in GitHub Actions.
 """
 import datetime
-import email.utils
 import json
 import os
 import re
+import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import quote
@@ -51,16 +51,6 @@ def gnews_url(query: str, lang: str = "en") -> str:
     return f"https://news.google.com/rss/search?q={quote(query)}&hl=en-US&gl=US&ceid=US:en"
 
 
-def parse_pub_date(raw: str) -> str:
-    try:
-        t = email.utils.parsedate(raw)
-        if t:
-            return datetime.datetime(*t[:6]).strftime("%m-%d")
-    except Exception:
-        pass
-    return ""
-
-
 def fetch_feed(url: str, timeout: int = 10) -> list[dict]:
     try:
         req = Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; FuriosaReport/1.0)"})
@@ -73,24 +63,18 @@ def fetch_feed(url: str, timeout: int = 10) -> list[dict]:
 
     entries = []
     for item in root.findall(".//item"):
-        title   = (item.findtext("title") or "").strip()
-        link    = (item.findtext("link")  or "").strip()
-        desc    = (item.findtext("description") or "").strip()
-        pub     = parse_pub_date(item.findtext("pubDate") or "")
-        entries.append({"title": title, "url": link, "summary": desc[:80], "date": pub})
+        title = (item.findtext("title") or "").strip()
+        link  = (item.findtext("link")  or "").strip()
+        desc  = (item.findtext("description") or "").strip()
+        entries.append({"title": title, "url": link, "summary": desc[:300]})
 
     for entry in root.findall("atom:entry", NS):
         title   = (entry.findtext("atom:title", namespaces=NS) or "").strip()
         link_el = entry.find("atom:link[@rel='alternate']", NS) or entry.find("atom:link", NS)
         link    = link_el.get("href") if link_el is not None else ""
         summary = (entry.findtext("atom:summary", namespaces=NS) or
-                   entry.findtext("atom:content",  namespaces=NS) or "")[:80]
-        pub_raw = (entry.findtext("atom:published", namespaces=NS) or
-                   entry.findtext("atom:updated",   namespaces=NS) or "")
-        pub     = pub_raw[5:10].replace("-", "") if len(pub_raw) >= 10 else ""
-        if pub and len(pub) == 4:
-            pub = pub[:2] + "-" + pub[2:]
-        entries.append({"title": title, "url": link, "summary": summary, "date": pub})
+                   entry.findtext("atom:content",  namespaces=NS) or "")[:300]
+        entries.append({"title": title, "url": link, "summary": summary})
 
     return entries
 
@@ -101,29 +85,27 @@ def collect_articles() -> tuple[list[dict], list[dict]]:
 
     print("Fetching Google News RSS per company...")
     for company in ALL_COMPANIES:
-        entries = fetch_feed(gnews_url(company["query"], company["lang"]))[:3]
+        entries = fetch_feed(gnews_url(company["query"], company["lang"]))[:5]
         for entry in entries:
             competitor_found.append({
                 "company": company["name"],
                 "region":  company["region"],
                 "title":   entry["title"],
                 "url":     entry["url"],
-                "date":    entry["date"],
-                "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:80],
+                "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:300],
             })
         print(f"  {company['name']}: {len(entries)} articles")
 
     print("Fetching Google News RSS for Furiosa AI...")
     seen_urls: set[str] = set()
     for query, lang in FURIOSA_QUERIES:
-        for entry in fetch_feed(gnews_url(query, lang))[:4]:
+        for entry in fetch_feed(gnews_url(query, lang))[:5]:
             if entry["url"] not in seen_urls:
                 seen_urls.add(entry["url"])
                 furiosa_found.append({
                     "title":   entry["title"],
                     "url":     entry["url"],
-                    "date":    entry["date"],
-                    "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:80],
+                    "summary": re.sub(r"<[^>]+>", "", entry["summary"])[:300],
                 })
     print(f"  Furiosa: {len(furiosa_found)} articles")
 
@@ -138,7 +120,7 @@ def build_period(now: datetime.datetime) -> str:
             f"~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}")
 
 
-def _ai_call(client, prompt: str, max_tokens: int = 2000) -> dict:
+def ai_call(client, prompt: str, max_tokens: int = 1500) -> dict:
     resp = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
@@ -146,34 +128,10 @@ def _ai_call(client, prompt: str, max_tokens: int = 2000) -> dict:
         temperature=0.3,
     )
     raw = resp.choices[0].message.content
-    # check for truncation
-    if resp.choices[0].finish_reason == "length":
-        print(f"  [warn] response truncated at {max_tokens} tokens")
     match = re.search(r"\{[\s\S]*\}", raw)
     if not match:
-        raise ValueError(f"No JSON in response:\n{raw[:400]}")
+        raise ValueError(f"No JSON:\n{raw[:400]}")
     return json.loads(match.group())
-
-
-def _fmt_articles(articles: list[dict]) -> str:
-    lines = []
-    for a in articles:
-        date_str = f"({a['date']})" if a.get("date") else ""
-        lines.append(f"[{a['company']}]{date_str} {a['title']} | {a['url']}")
-    return "\n".join(lines) or "없음"
-
-
-def _company_block(companies: list[dict]) -> str:
-    return json.dumps(
-        [{"name": c["name"], "region": c["region"],
-          "website": c["website"], "blog": c["blog"],
-          "no_update": False, "items": []}
-         for c in companies],
-        ensure_ascii=False
-    )
-
-
-ITEM_RULE = 'Each item: {"text":"N. 제목(MM-DD — use actual date from article)","url":"URL","summary":"한국어 1문장 요약","bd_watch":"구체적 BD 시사점 1문장 — 특정 고객/딜/시장변화 언급, 절대 Furiosa는~으로 시작 금지"}. Max 2 items.'
 
 
 def analyze(articles: list[dict], furiosa_articles: list[dict], now: datetime.datetime) -> dict:
@@ -183,51 +141,86 @@ def analyze(articles: list[dict], furiosa_articles: list[dict], now: datetime.da
 
     client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token)
 
-    global_articles = [a for a in articles if a["region"] == "global"]
-    korea_articles  = [a for a in articles if a["region"] == "korea"]
+    # ── Step 1: highlights only (small call) ──────────────────────────────
+    global_titles = "\n".join(
+        f"[{a['company']}] {a['title']} | {a['url']}"
+        for a in articles if a["region"] == "global"
+    )
+    furiosa_titles = "\n".join(
+        f"{a['title']} | {a['url']}" for a in furiosa_articles
+    )
 
-    furiosa_text = "\n".join(
-        f"[Furiosa]({a.get('date','')}) {a['title']} | {a['url']}"
-        for a in furiosa_articles
-    ) or "없음"
+    hl_prompt = f"""Date: {now.strftime('%Y-%m-%d KST')}. Competitive intelligence analyst for Furiosa AI.
 
-    # ── Call 1: highlights + global companies ──────────────────────────────
-    global_text = _fmt_articles(global_articles)
-    global_block = _company_block(GLOBAL_COMPANIES)
+GLOBAL COMPETITOR ARTICLES:
+{global_titles}
 
-    prompt1 = f"""Date:{now.strftime('%Y-%m-%d')}. Competitive intelligence analyst for Furiosa AI.
-GLOBAL ARTICLES:\n{global_text}
-FURIOSA ARTICLES:\n{furiosa_text}
+FURIOSA ARTICLES:
+{furiosa_titles}
+
 Return ONLY valid JSON (no markdown):
-{{"period":"{build_period(now)}","updated_at":"{now.isoformat()}","furiosa_highlights":[{{"text":"팩트 한줄(Korean)","url":""}}],"highlights":[{{"company":"name","text":"팩트 한줄(Korean)","url":""}}],"companies":{global_block}}}
+{{"furiosa_highlights":[{{"text":"팩트 한줄(Korean)","url":""}}],"highlights":[{{"company":"name","text":"팩트 한줄(Korean)","url":""}}]}}
+
 Rules:
-- furiosa_highlights: 1-2 items. Facts only (Korean). No advice.
-- highlights: 2-3 global competitor facts (Korean). Never write about Furiosa. No "Furiosa는" sentences.
-- companies: fill items from global articles. {ITEM_RULE}"""
+- furiosa_highlights: 1-3 items. Furiosa 관련 뉴스 팩트만. 추천/의견 금지.
+- highlights: 2-3 items. 글로벌 경쟁사 뉴스 팩트만 (Korean). Furiosa 언급 절대 금지. "Furiosa는" 시작 금지."""
 
-    print("  Calling AI (global+highlights)...")
-    result = _ai_call(client, prompt1, max_tokens=2500)
+    print("  Getting highlights...")
+    hl = ai_call(client, hl_prompt, max_tokens=800)
+    time.sleep(2)
 
-    # ── Call 2: Korea companies ────────────────────────────────────────────
-    korea_text  = _fmt_articles(korea_articles)
-    korea_block = _company_block(KOREA_COMPANIES)
+    # ── Step 2: per-company items (one call per company) ──────────────────
+    companies_out = []
+    for meta in ALL_COMPANIES:
+        co_articles = [a for a in articles if a["company"] == meta["name"]]
+        if not co_articles:
+            companies_out.append({**meta, "no_update": True, "items": []})
+            continue
 
-    prompt2 = f"""Date:{now.strftime('%Y-%m-%d')}. Competitive intelligence analyst for Furiosa AI.
-KOREA ARTICLES:\n{korea_text}
+        art_text = "\n\n".join(
+            f"기사{i+1}: {a['title']}\nURL: {a['url']}\n{a['summary']}"
+            for i, a in enumerate(co_articles)
+        )
+
+        co_prompt = f"""Date: {now.strftime('%Y-%m-%d KST')}. Competitive intelligence analyst for Furiosa AI.
+
+ARTICLES for {meta['name']}:
+{art_text}
+
 Return ONLY valid JSON (no markdown):
-{{"companies":{korea_block}}}
-Rule: fill items from articles above. {ITEM_RULE}"""
+{{"items":[{{"text":"N. 제목 (MM-DD) — 한줄요약","url":"기사URL","summary":"기사 내용 2-3문장 요약 (Korean)","bd_watch":"Furiosa BD 시사점 1문장 — 구체적 딜/고객/시장변화 언급, 절대 Furiosa는~ 시작 금지"}}]}}
 
-    print("  Calling AI (korea)...")
-    try:
-        korea_result = _ai_call(client, prompt2, max_tokens=2000)
-    except Exception as e:
-        print(f"  Korea call failed ({e}), retrying concise...")
-        prompt2b = prompt2.replace("Max 2 items.", "Max 1 item. Summary max 20 Korean chars.")
-        korea_result = _ai_call(client, prompt2b, max_tokens=1200)
+Rules:
+- items: max 3. Use actual articles above only.
+- text: "N. 제목 (MM-DD) — 한줄요약" 형식
+- summary: 2-3문장 팩트 요약 (Korean)
+- bd_watch: 구체적 BD 시사점 1문장. Generic advice 금지."""
 
-    result["companies"] = result.get("companies", []) + korea_result.get("companies", [])
-    return result
+        print(f"  Getting items for {meta['name']}...")
+        try:
+            co_result = ai_call(client, co_prompt, max_tokens=800)
+            items = co_result.get("items", [])
+        except Exception as e:
+            print(f"  [warn] {meta['name']}: {e}")
+            items = []
+
+        companies_out.append({
+            "name":      meta["name"],
+            "region":    meta["region"],
+            "website":   meta["website"],
+            "blog":      meta["blog"],
+            "no_update": len(items) == 0,
+            "items":     items,
+        })
+        time.sleep(2)
+
+    return {
+        "period":             build_period(now),
+        "updated_at":         now.isoformat(),
+        "furiosa_highlights": hl.get("furiosa_highlights", []),
+        "highlights":         hl.get("highlights", []),
+        "companies":          companies_out,
+    }
 
 
 def main():
@@ -237,14 +230,6 @@ def main():
 
     articles, furiosa_articles = collect_articles()
     report = analyze(articles, furiosa_articles, now)
-
-    meta = {c["name"]: c for c in ALL_COMPANIES}
-    for co in report.get("companies", []):
-        if co["name"] in meta:
-            co["website"] = meta[co["name"]]["website"]
-            co["blog"]    = meta[co["name"]]["blog"]
-            co["region"]  = meta[co["name"]]["region"]
-        co["no_update"] = not bool(co.get("items"))
 
     with open(REPORT_PATH, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
