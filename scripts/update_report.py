@@ -135,10 +135,11 @@ def analyze(articles: list[dict], now: datetime.datetime) -> dict:
         for a in articles
     ) or "수집된 기사가 없습니다."
 
-    companies_meta = {c["name"]: c for c in COMPANIES}
     companies_template = json.dumps(
         [{"name": c["name"], "website": c["website"], "blog": c["blog"],
-          "no_update": True, "items": [], "watch": ""}
+          "no_update": True,
+          "items": [{"text": "N. 제목 (MM-DD) — 핵심내용 (Korean)", "url": "기사URL"}],
+          "watch": ""}
          for c in COMPANIES],
         ensure_ascii=False, indent=2
     )
@@ -164,7 +165,8 @@ Return ONLY valid JSON — no markdown fences, no explanation:
 
 Rules:
 - highlights: 2–3 most impactful items across all companies
-- For each company: fill items (max 3) from the articles above, set no_update=false if news found
+- For each company with news: set no_update=false, fill items (max 3)
+- items MUST be objects with "text" and "url" fields — use the exact article URL from the ARTICLES section above
 - items text format: "N. 제목 (MM-DD) — 핵심내용" in Korean
 - watch: one sentence on business implications for Furiosa AI (Korean)
 - Keep website/blog URLs exactly as in the template above
