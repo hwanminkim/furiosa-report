@@ -140,7 +140,7 @@ def analyze(articles: list[dict], furiosa_articles: list[dict], now: datetime.da
     companies_template = json.dumps(
         [{"name": c["name"], "region": c["region"],
           "website": c["website"], "blog": c["blog"],
-          "no_update": True,
+          "no_update": False,
           "items": [{"text": "N. 제목 (MM-DD) — 한줄요약", "url": "기사URL", "summary": "기사 내용 2-3문장 요약 (Korean)", "bd_watch": "이 기사의 Furiosa BD 시사점 한 문장 (Korean)"}]}
          for c in ALL_COMPANIES],
         ensure_ascii=False, indent=2
@@ -209,6 +209,8 @@ def main():
             co["website"] = meta[co["name"]]["website"]
             co["blog"]    = meta[co["name"]]["blog"]
             co["region"]  = meta[co["name"]]["region"]
+        # no_update is determined by whether items were actually filled, not by the AI
+        co["no_update"] = not bool(co.get("items"))
 
     with open(REPORT_PATH, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
