@@ -1,17 +1,33 @@
 {
   "period": "2026-05-11(월) ~ 2026-05-15(금)",
-  "updated_at": "2026-05-15T15:03:59.727609+09:00",
-  "furiosa_highlights": [],
+  "updated_at": "2026-05-15T15:18:57.867444+09:00",
+  "furiosa_highlights": [
+    {
+      "text": "Furiosa AI, 5억 달러 규모의 자금 조달 계획 발표",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNSkM2eEt3TFgwT3RlbXJHcnJWeGstNlN0OWIxZnRqRmR6WUI0YUpwY29zYVhZT2pWXzgxYjBiZlJnSGwzekVTejI1eElsc1dkUUZzLTBxVGZ4aUJBVXJsRGFFS0xhb3hfU0oxUy03OEVnX0JoYzZRWHprS2ZOY2hPRlNhWlVfM0V5SW1WY19WQlIySWlNeThCaUxTd2JneE1QdWVZcXM1dVhoN0FlZ19CbA?oc=5"
+    }
+  ],
   "highlights": [
     {
-      "company": "Cerebras",
-      "text": "Cerebras가 55억 달러를 모금하고 주가가 108% 상승하며 2026년 첫 대형 IPO를 시작하다.",
-      "url": "https://techcrunch.com/2026/05/14/cerebras-raises-5-5b-kicking-off-2026s-ipo-season-with-a-bang/"
+      "company": "NVIDIA",
+      "text": "NVIDIA, Groq 3 LPU AI 추론 칩 발표",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNZXE3Y1lIZjc0ck1HalVUTWZBSUFKVHZPOGhmUWVZTlNUNmF6VWlWZFJ5bmpnQS1HY0hJZFJpd2VfemxEakJidTFJV2lfNXo5S3kzaksxbXR3eVZmbmpkLW9mcGFaOExELWlVVnk5M1FGSjM0eUZ2UFZMZkl0UjByTE9iUE1oQ2djNXBlVTBlSXh4MWZHS0Nfb3hXVDlFMm5OYTNSYVdCd1pScnVV?oc=5",
+      "summary": "NVIDIA는 GTC 2026에서 Groq 3 LPU AI 추론 칩을 발표하였으며, 이는 에이전틱 AI에 최적화되어 있다. 이 칩은 256-LPU 랙을 계획하고 있으며, AI 추론 성능을 크게 향상시킬 것으로 기대된다.",
+      "bd_watch": "NVIDIA의 새로운 칩 발표는 AI 추론 시장에서의 경쟁 심화를 나타낸다."
     },
     {
       "company": "Cerebras",
-      "text": "Cerebras의 주가가 첫날에 거의 두 배로 증가하며 1000억 달러의 가치를 기록하다.",
-      "url": "https://venturebeat.com/technology/cerebras-stock-nearly-doubles-on-day-one-as-ai-chipmaker-hits-100-billion-what-it-means-for-ai-infrastructure"
+      "text": "Cerebras, AI 반도체 시장에서 NVIDIA와의 경쟁 강조",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPYzFUUVZDSFhIcHhia19PUHozRElDbGhDeWJhbG5pOWppc0tNZWI3NUtlYjNnbndIV3AyRDYzb2poNjMtRkRlS1FIRmtsZFpCVmw2VFhpUHhpdVRQRWNrbWxLX0t0SUpOVTUwYkFjRE9kWHBoRU1qMkVKZlF4TEx2eElXTGQ4ZnlKOWlFT25qN3Z1UHpfbUJsTS1KVFJlVENaQzVQdTNxOTh5Y0o5?oc=5",
+      "summary": "Cerebras는 NVIDIA가 지배하는 AI 반도체 시장에서 독자적인 기술로 차별화를 꾀하고 있다. 이들은 특히 대규모 AI 모델 훈련에 강점을 가지고 있으며, 시장 점유율을 확대할 계획이다.",
+      "bd_watch": "Cerebras의 전략은 Furiosa가 대규모 AI 모델 훈련 시장에서의 경쟁력을 강화하는 데 참고할 수 있는 사례가 된다."
+    },
+    {
+      "company": "SambaNova",
+      "text": "SambaNova, Intel과 협력하여 AI 칩 개발",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVUZSYWlxUGVNYlA0RTdmSHNiMDRwUHdRWDVhTFVFYU14SHlhQ21MWF9xMndxLVYtd2pDeFRoWGlDOVUtZHlTTDBhaG9KMTJyNURjNUw4VGs1bHVvaFBiREdTM043djZDQTRfdHFzaXA1NHZPdFNfX2xjci1VSzJXSjZqMzhUajNmMldVYnBsVkRmQQ?oc=5",
+      "summary": "SambaNova는 Intel과 협력하여 AI 칩 개발을 진행하며, 3억 5천만 달러 이상의 자금을 조달하였다. 이들은 AI 추론 성능을 개선하기 위한 혁신적인 솔루션을 제공할 예정이다.",
+      "bd_watch": "SambaNova의 자금 조달과 Intel과의 협력은 AI 칩 시장에서의 경쟁 구도를 변화시킬 수 있는 중요한 요소이다."
     }
   ],
   "companies": [
@@ -23,16 +39,10 @@
       "no_update": false,
       "items": [
         {
-          "text": "1. NVIDIA-Ineffable Intelligence 강화학습 인프라 협력 발표 (05-14)",
-          "url": "https://blogs.nvidia.com/blog/ineffable-intelligence-reinforcement-learning-infrastructure/",
-          "summary": "",
-          "bd_watch": ""
-        },
-        {
-          "text": "2. NVIDIA-ServiceNow 기업용 자율 AI 에이전트 파트너십 체결 (05-15)",
-          "url": "https://blogs.nvidia.com/blog/servicenow-autonomous-ai-agents-enterprises/",
-          "summary": "",
-          "bd_watch": ""
+          "text": "N. 제목 (05-15) — 한줄요약",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNZXE3Y1lIZjc0ck1HalVUTWZBSUFKVHZPOGhmUWVZTlNUNmF6VWlWZFJ5bmpnQS1HY0hJZFJpd2VfemxEakJidTFJV2lfNXo5S3kzaksxbXR3eVZmbmpkLW9mcGFaOExELWlVVnk5M1FGSjM0eUZ2UFZMZkl0UjByTE9iUE1oQ2djNXBlVTBlSXh4MWZHS0Nfb3hXVDlFMm5OYTNSYVdCd1pScnVV?oc=5",
+          "summary": "NVIDIA는 GTC 2026에서 Groq 3 LPU AI 추론 칩을 발표하였으며, 이는 에이전틱 AI에 최적화되어 있다. 이 칩은 256-LPU 랙을 계획하고 있으며, AI 추론 성능을 크게 향상시킬 것으로 기대된다.",
+          "bd_watch": "NVIDIA의 새로운 칩 발표는 AI 추론 시장에서의 경쟁 심화를 나타낸다."
         }
       ]
     },
@@ -52,16 +62,10 @@
       "no_update": false,
       "items": [
         {
-          "text": "1. IPO 공모가 $185 확정, 주가 첫날 108% 급등 — 기업가치 $66B (05-15)",
-          "url": "https://www.theregister.com/ai-ml/2026/05/15/cerebras-wafer-scale-ai-bet-delivers-blockbuster-ipo/5240821",
-          "summary": "",
-          "bd_watch": ""
-        },
-        {
-          "text": "2. Cerebras IPO로 Benchmark VC 수십억 달러 수익 실현 (05-14)",
-          "url": "https://techcrunch.com/2026/05/14/cerebras-ipo-makes-billions-for-benchmark-but-vc-eric-vishria-almost-didnt-take-the-meeting/",
-          "summary": "",
-          "bd_watch": ""
+          "text": "Cerebras, AI 반도체 시장에서 NVIDIA와의 경쟁 강조",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPYzFUUVZDSFhIcHhia19PUHozRElDbGhDeWJhbG5pOWppc0tNZWI3NUtlYjNnbndIV3AyRDYzb2poNjMtRkRlS1FIRmtsZFpCVmw2VFhpUHhpdVRQRWNrbWxLX0t0SUpOVTUwYkFjRE9kWHBoRU1qMkVKZlF4TEx2eElXTGQ4ZnlKOWlFT25qN3Z1UHpfbUJsTS1KVFJlVENaQzVQdTNxOTh5Y0o5?oc=5",
+          "summary": "Cerebras는 NVIDIA가 지배하는 AI 반도체 시장에서 독자적인 기술로 차별화를 꾀하고 있다. 이들은 특히 대규모 AI 모델 훈련에 강점을 가지고 있으며, 시장 점유율을 확대할 계획이다.",
+          "bd_watch": "Cerebras의 전략은 Furiosa가 대규모 AI 모델 훈련 시장에서의 경쟁력을 강화하는 데 참고할 수 있는 사례가 된다."
         }
       ]
     },
@@ -70,8 +74,15 @@
       "region": "global",
       "website": "https://sambanova.ai",
       "blog": "https://sambanova.ai/blog",
-      "no_update": true,
-      "items": []
+      "no_update": false,
+      "items": [
+        {
+          "text": "SambaNova, Intel과 협력하여 AI 칩 개발",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVUZSYWlxUGVNYlA0RTdmSHNiMDRwUHdRWDVhTFVFYU14SHlhQ21MWF9xMndxLVYtd2pDeFRoWGlDOVUtZHlTTDBhaG9KMTJyNURjNUw4VGs1bHVvaFBiREdTM043djZDQTRfdHFzaXA1NHZPdFNfX2xjci1VSzJXSjZqMzhUajNmMldVYnBsVkRmQQ?oc=5",
+          "summary": "SambaNova는 Intel과 협력하여 AI 칩 개발을 진행하며, 3억 5천만 달러 이상의 자금을 조달하였다. 이들은 AI 추론 성능을 개선하기 위한 혁신적인 솔루션을 제공할 예정이다.",
+          "bd_watch": "SambaNova의 자금 조달과 Intel과의 협력은 AI 칩 시장에서의 경쟁 구도를 변화시킬 수 있는 중요한 요소이다."
+        }
+      ]
     },
     {
       "name": "Tenstorrent",
