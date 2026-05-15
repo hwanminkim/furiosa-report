@@ -1,40 +1,188 @@
 {
   "period": "2026-05-11(월) ~ 2026-05-15(금)",
-  "updated_at": "2026-05-15T16:26:10.164524+09:00",
-  "furiosa_highlights": [
+  "updated_at": "2026-05-15T16:36:43.480832+09:00",
+  "furiosa_daily": [
     {
-      "text": "AI 반도체 스타트업 퓨리오사AI가 IPO 이전에 5억 달러 규모의 자금을 계획하고 있다",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNSkM2eEt3TFgwT3RlbXJHcnJWeGstNlN0OWIxZnRqRmR6WUI0YUpwY29zYVhZT2pWXzgxYjBiZlJnSGwzekVTejI1eElsc1dkUUZzLTBxVGZ4aUJBVXJsRGFFS0xhb3hfU0oxUy03OEVnX0JoYzZRWHprS2ZOY2hPRlNhWlVfM0V5SW1WY19WQlIySWlNeThCaUxTd2JneE1QdWVZcXM1dVhoN0FlZ19CbA?oc=5"
+      "title": "[단독] 1兆 투입하려던 ‘K-온디바이스 AI 반도체 사업’ 총사업비 최대 3000억 감액 전망 - 조선비즈 - Chosunbiz",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPeXdRVUJGUVVUWW5RampycHMwSlhucnBmaE93dFczYWNwemUtSm5ZNGJrOXlfcTlGSmZ3ZGVla1p0OFZVRVpyd1pnS3VmemppUVlzbHkxZlZxcTRkN1g5NmxHa2dtZjFOUVd1dTFQR3R6dFc3Y0tqMUR0SE9BUG5lNkx5eVFOQdIBmgFBVV95cUxPTkVTa2FjejR4QkduQ2htUVlLTW9ONXlDSmFBRVZ6ei05a19DVjVZcjRTVVJoUE9YTGE2YnNDZ1IwWGtEbXBxZnlyZ3lzR2gtSV9UdU5ZaGJuN3Q4U2FjRy1reWM1SERlUmNPdUFKU1Vnb0h2QkU4Y094QVZXcnJCSzVNOVUtQVVldVo0cjFRQ2FPSWFBT3pWSzFR?oc=5",
+      "date": "05-15"
     },
     {
-      "text": "퓨리오사AI가 Nvidia에 도전하기 위해 새로운 AI 칩을 공개했다",
-      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE10WDJQal9oUW54XzZwb0hqR0RfUUt6R19BcTBZaDhtcnZZZXNHT0NHZnFBa3B1d0d3Sy05NDlDdXUzQzgtLTZ1ckNBSWJma2dIdmtoekZZOA?oc=5"
+      "title": "[정책포커스] 금융위, 인공지능 분야 2조원 자금지원 완료...초격차 인공지능으로 첨단산업의 미래 설계한다 - 시사캐스트",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1YOW9jNDlVbmlPWk00SGQ3T0JoOUcxZ3JWcEl3OTlEMVJFUHdrZXRtY0RZOTc1SUt6OUliNlhtM3NuVHV1dV9hNFFiNzNzZEhrUUtkSWI4cWdfaWRkUExhQjJVSmlEanM?oc=5",
+      "date": "05-15"
     },
     {
-      "text": "퓨리오사AI의 CEO가 Nvidia에 도전하는 혁신적인 칩을 소개했다",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOUEFOdE9DYTBqT3ZyNVdVQnpxdEFCaThLUHJfOVdaa0F5N1lySXJlYWY4Nmc2S1AtZEJBR0FMRUlob1Y1UTZRbXdpT1A5QnpNWHR5UFlmZFZBR1hYc3NmaDVQUW1wblJYU1E2SHpnbXJldU9zVGxXMnZCS2JqcDRxUU13?oc=5"
+      "title": "메가존클라우드, 사우디 아람코 대상 국산 AI반도체 현장 실증 - 전자신문",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE00SGMxdW5WaGJmRVBRb05DaGNVUTBLMlZINFNDcXpqVW0zNHU4OFNmSEdlZVlUc2lEczRVUUNtMGRmVUlvcXgwclJENTBhZw?oc=5",
+      "date": "05-15"
+    },
+    {
+      "title": "메가존클라우드, 정부 ‘AI-반도체 해외실증 지원 사업’ 주관사업자 선정 - 디지털투데이",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBPc2FkbzVfaHdqNzBSRV95VnJ1UThadG9BSXlsUkpnb0ZTTnJTTzJ3dHhHY0xfTjZKdDI2dUhXTDc4UEZMOXJreU4wblZ6MGxySnBiXzg2OGhBYjFuZEUtVlBfbUp6QzJsZGVidFJNWUN5VlE?oc=5",
+      "date": "05-15"
+    },
+    {
+      "title": "메가존클라우드, 사우디 아람코 대상 국산 AI반도체 해외 실증 추진 - 데이터넷",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5yQjFXamhwVTRKVGp4ZjFPY3pMMjZJcVFTNFZZUUkyeTZRVHZqOEJTZXdsX0tLd05Ha2FnRFo0bDl5VEFVdm5IcDRyMVJ6VW90bDVUWVk1Rlo3cmQzQXBXVEh0Mkt2N3F4ek1MaA?oc=5",
+      "date": "05-15"
+    },
+    {
+      "title": "메가존클라우드, 사우디 아람코서 국산 AI반도체 실증 - 이데일리",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOdm1aS0VobDB6OEtoVHprZ3FsT0hScGdxZTFDbXRVb1VLSWtzMWcxb3F2QnY1OE14MW9reG9zUmhUb1JxZ0J0TXhiaVd2bjdjb1JIdkRZZ1lFZjMyNUcta3MzaVQ2SVlPekQyMXpZYU1paFB6YkdLNUhkYkZIUG1xWg?oc=5",
+      "date": "05-15"
+    },
+    {
+      "title": "국내 첫 'NPU 데이터센터' 건설…AI칩 스타트업 실험실 된다 - 한국경제",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5mTEhuRXZaZzRMTFZOM3lUYU5CeWMzY1NnVWtmdExyY09JM1kyNXlLNHZJODd1MTdVYkJJUkh6X0dhTDQ4YmZ4V2gyQmxkeHgzZ0EwendZWktIQdIBVEFVX3lxTE1IdVlscmpDbExFYko4NHlZSU1ycDlOMWZZNlpXWFdmSG1IMEZ0LTRyX1d4TUUzZ2R6ZXNIMnd0ajFObzdKQW14THQ2TXlYcnBrNzg3Tw?oc=5",
+      "date": "05-14"
     }
   ],
-  "highlights": [
+  "furiosa_weekly": [
     {
-      "company": "NVIDIA",
-      "text": "Intel의 AI 칩 전략이 수년간의 고난 끝에 구체화되고 있다",
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPTDNRUlBxLXQ2Z1ZjOTlwdkdna2pTV25ydkxxekpqNHlJYUdEMGNzQmhfZk1SWXFTNXhieHlVMXg2VGlwSV80RWd3cG0wVlg3TWd2RC1CMzVSNGZ5V0Y3bDU3Q3pxbFk0dUl1c2pwdWtZYjZkTjM5MEl2VlB6VTM4WFFGUElRa1F2UXRnOU9lOHRnWnFFX3F2N2tORDZzTlVNQW8zYXZ0bmdGTkpUYkY4WjkyRHAzVFk2QzBqN2tjMGtHOXVMVWc?oc=5"
+      "title": "[단독] 1兆 투입하려던 ‘K-온디바이스 AI 반도체 사업’ 총사업비 최대 3000억 감액 전망 - 조선비즈 - Chosunbiz",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPeXdRVUJGUVVUWW5RampycHMwSlhucnBmaE93dFczYWNwemUtSm5ZNGJrOXlfcTlGSmZ3ZGVla1p0OFZVRVpyd1pnS3VmemppUVlzbHkxZlZxcTRkN1g5NmxHa2dtZjFOUVd1dTFQR3R6dFc3Y0tqMUR0SE9BUG5lNkx5eVFOQdIBmgFBVV95cUxPTkVTa2FjejR4QkduQ2htUVlLTW9ONXlDSmFBRVZ6ei05a19DVjVZcjRTVVJoUE9YTGE2YnNDZ1IwWGtEbXBxZnlyZ3lzR2gtSV9UdU5ZaGJuN3Q4U2FjRy1reWM1SERlUmNPdUFKU1Vnb0h2QkU4Y094QVZXcnJCSzVNOVUtQVVldVo0cjFRQ2FPSWFBT3pWSzFR?oc=5",
+      "date": "05-15"
     },
     {
-      "company": "Tenstorrent",
-      "text": "Tenstorrent가 RISC-V 기반의 AI 워크스테이션 TT-QuietBox(TM) 2를 공개했다",
-      "url": "https://news.google.com/rss/articles/CBMimAJBVV95cUxPVTNDLXZZaUxNUjZzX0Q1ME5nUkp2Q3U0b1pTVEgzdy1oS1NuQ2xmdUU2T2NISS03cWNrS3cweTVzQzF3LXhtQ2g5SWJCbjdBQnpQRG1WbTNSbzU5WUd6NklNN1FwVHk3d0R0X2dPTFZsZlhUenF4TnZ3a2RZVE93N0hkTXViNEVOUnNKWEprNE51OXlmSE9XOWhuN2NuaHlRVXFmZlNZb3lvUnJaeENJcUJmbm5helo0MEpGVGxINmo5SE5RaEk4YUNlR19QQ1Z3c2JjamNxMVRjWE93bVFxYmVNeXNLQUVQTVV6RGRCZ3NwalZwU1hZMW96TWxFOFV3UG9wNUFCMFRac294RWRqVzc0RlZrM09P?oc=5"
+      "title": "[정책포커스] 금융위, 인공지능 분야 2조원 자금지원 완료...초격차 인공지능으로 첨단산업의 미래 설계한다 - 시사캐스트",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1YOW9jNDlVbmlPWk00SGQ3T0JoOUcxZ3JWcEl3OTlEMVJFUHdrZXRtY0RZOTc1SUt6OUliNlhtM3NuVHV1dV9hNFFiNzNzZEhrUUtkSWI4cWdfaWRkUExhQjJVSmlEanM?oc=5",
+      "date": "05-15"
     },
     {
-      "company": "SambaNova",
-      "text": "인텔이 AI 칩 개발 스타트업 SambaNova 인수 계획을 세우고 있다",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNeHNsaC1fdWdyRG9GUzJFVExtU0UtR2FiUVVOaEdyQ0FfY0JzNS03MDZMVG9yLUg1LThLa2VKSDNVd0hGelVXWm1pQnNLdlBkQUFjZTFsM3JBQXljYW1YNkY4Vmp0NVlHbVZ3M3VMaFVGalpsbkhrcDBNYjBwa2FtempRMy1vSTBpMkctOURydFFGVEZsU1NUNEs5VjItY01QNkE?oc=5"
+      "title": "'퓨리오사AI' 방문한 이억원 \"국민성장펀드, 5년간 AI분야 50조 지원\" - v.daum.net",
+      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1sbEVrRzNrY0lMNjJxaFQwOVBYNUFKZlZkcHZpanhnVm9RMXJsMVFHWkJnLWlvWGVqcmlCNHFBdzRmZHpMbWJyWDRNVWNHeUk?oc=5",
+      "date": "05-12"
     },
     {
-      "company": "Cerebras",
-      "text": "Cerebras AI 칩이 Nvidia가 지배하는 시장에서 두드러진다",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPYzFUUVZDSFhIcHhia19PUHozRElDbGhDeWJhbG5pOWppc0tNZWI3NUtlYjNnbndIV3AyRDYzb2poNjMtRkRlS1FIRmtsZFpCVmw2VFhpUHhpdVRQRWNrbWxLX0t0SUpOVTUwYkFjRE9kWHBoRU1qMkVKZlF4TEx2eElXTGQ4ZnlKOWlFT25qN3Z1UHpfbUJsTS1KVFJlVENaQzVQdTNxOTh5Y0o5?oc=5"
+      "title": "퓨리오사AI, 메타 1조원 인수 거절 후 프리IPO 추진 - 중기이코노미",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE43V25qY2x1RlFiSXFTSWFyRS11Qi1GXzhPZDk0VXZPQmQ2a0xMMmlPUGozMENObDZiZXpjVFZBelI2eXpuaWVILXNmUW90NnQzekx3QjVqVl9JS1JRclMxRzY1eE9adGRPTmc?oc=5",
+      "date": "05-11"
+    },
+    {
+      "title": "메가존클라우드, 사우디 아람코 대상 국산 AI반도체 현장 실증 - 전자신문",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE00SGMxdW5WaGJmRVBRb05DaGNVUTBLMlZINFNDcXpqVW0zNHU4OFNmSEdlZVlUc2lEczRVUUNtMGRmVUlvcXgwclJENTBhZw?oc=5",
+      "date": "05-15"
+    },
+    {
+      "title": "금융위, 퓨리오사AI 방문…“소버린 AI·국산 AI반도체 집중 지원” - 테크데일리",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFA1VVprdmVtS2htWlZMYWI2Mzg0MGdWalVfUzBPMFZKeXBDZWdGQ0tMajV3RmhLVHJUOGFZTDFnZzgwQ3plTnFVRFM2ajU4Y0o4R0JDc0tUV0lYamY1cm1XRTlhOFRobEdULVRlc2pB0gFyQVVfeXFMT2l1Q09peG1nQlNxcmVwaGpyRmV0d01uS0FwNVVydS15SWJRempJVndYTVAwZ2FOZGpzR2l1WTc4ZG42SS1sUkdyS3VuclN2U3VDVmJ0SmtXT0FyazhXZjFtbWVMeGZCODRIM3Y5c0ZPZHJ3?oc=5",
+      "date": "05-13"
+    },
+    {
+      "title": "이억원 “AI는 국가 인프라”…퓨리오사AI 찾아 첨단산업 지원 논의 - 조세일보",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFA5MGdsRGk2am1zYmhIUVA4cGZwUXpqVVZCLUZIdUUweEtTel95VWl3eVNKelNYcHhIMDZqVHZmbEo1R1Z1QXVJdGUtVTdXVkM3RGpFZTNRczhUTG1iV25qT053YjhzaUQ3djZkZTctbw?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "퓨리오사 찾은 이억원 금융위원장 \"AI·반도체 5년간 50조 이상 투자\" - 뉴스1",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5HX1A4WkUtdldDcGFxNXBaN0RCOC1zSG9yUVZYeW0tdnBDVHhmb3o4WWdUU0FYVHI4M0hqb2ZmX0tfY1BvQ0MtbzdmMHNkeUx0T0tqQ0RRTkxlLUwxNGNaOVRB?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "퓨리오사·업스테이지 등 만난 이억원 금융위원장…\"AI주권 확보는 국가 전략 과제\" - 매일신문",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBkanE5NEcxVTdaUmJIbmQ0Si1QZl9YODFBQWhhOTZ3MnJpMk94cGVpdkZFaTZRdVZpT1hlQjVPSFliZ2RqVzFmNDJ2VmlXdU04TGJnZWJKMlpudVRZUDZ5XzVn?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "메가존클라우드, 정부 ‘AI-반도체 해외실증 지원 사업’ 주관사업자 선정 - 디지털투데이",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBPc2FkbzVfaHdqNzBSRV95VnJ1UThadG9BSXlsUkpnb0ZTTnJTTzJ3dHhHY0xfTjZKdDI2dUhXTDc4UEZMOXJreU4wblZ6MGxySnBiXzg2OGhBYjFuZEUtVlBfbUp6QzJsZGVidFJNWUN5VlE?oc=5",
+      "date": "05-15"
+    },
+    {
+      "title": "인사하는 백준호 퓨리오사 AI 대표 - 뉴시스",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1fT0hWa3FSbzFVeGJhNFA0c1ptbGI5cnZDbVN2VEFNTWFsaWdrV01aVFN6UzFCYXF0eFdSRC00OUFqeHRteHJISEhYWHBrUUZST19UMWMxaFo1d2hCVmFHQg?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "[포토] 퓨리오사 레니게이드 서버 소개하는 백종현 대표...\"AI 성능 극대화\" - 디지털포스트(PC사랑)",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFAwUUFXZGpWR1RRVDBJSXBHZTl5cFZkblQ0WVBjbHF2S3dPcGx1RzUyblJzUmRxWUNkbFBfNnduaWRoaDllcFJyblloYmtwQ1Y1SjY2Z3R2UVVGMGYzUURaX1VkZzZMQUljQi13?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "[포토] \"3세대 반도체 출시 목표\"...사업 현황과 향후 추진계획 발표하는 백준호 퓨리오사 대표 - meconomynews.com",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBLUF9WanVMSDJnbVlHLXRyRzhiMzNZQ2Y0aktaazlqSi0xek5obEpsUVpkblNrOWdaZ2JnM1VNVnNaZnFMWU5KZUFmV0VBd1RjekpFUS1vQVlDdmJmSGU3SmIzWWhkRGNmNE12QTBBalM?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "퓨리오사AI社 간 금융위원장 \"K-엔비디아 육성\" - 조선일보",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQZVBkNU5rV3RvLUp1ZTVNdzRMUFVOd3pPVUM0cXdBbzItalBBZXhCdVBRZ0w4U1pycnVzekswUVgwazFZRmxFbVBvclI0b2gxbWdYOUNMRVloQnVLQnJsLVowa0FfTHFQa2dacGhLeHJzSE9vVElCLVFpTFBKY2JyZzlyNEdYYzVualdn?oc=5",
+      "date": "05-13"
+    },
+    {
+      "title": "[포토] 기업 소개하는 백준호 퓨리오사AI 대표 - 전자신문",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBfSlI3cG9hQTRCZjY5VnB1SUs0UU1ReE1KUUZOcG15X0lDbkdRR0ktV1JCTFBWYVJBN1ZfQ0tpbHpyS1JJeTcyNDltd21kdw?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "이억원 금융위원장, 퓨리오사AI 현장 방문…\"AI 주권, 산업 안보의 핵심\" - 뉴시스",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBvdUFOWC0wWTBPdWZzSTJzQjNmZlNSNEZXMVhieHFZSXBWVFdyT0xnS1UxWGlkbExfNzBWbHlONG5tNGpvZXd5SUVMQnZlMW5GeElnRTVXRzJmR2gzRHdVb9IBeEFVX3lxTE5jcFVrbW5Bc1ctRWpfaEROdS0tTnR0TmVWQkY4NHdoanBOTkhwaERkOTBfNE5pWEVqWHA0MkhPNF9IWDgyQUl0RWduMDRTVGd6dEJaWWM2dk4yR3JhR2RqMjQtM1kzejFWOW1mQnp3RUVmU0Q3aXZEeQ?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "퓨리오사AI 방문한 이억원 위원장 “국가 미래 결정할 AI에 50조원 투자” - 조선비즈 - Chosunbiz",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOakdiSjk0cUEta2pSWjV1U0RqeHBjRG5NTnRTX1RzVDFiMk5JOTdVNy1BWjUxTUd0Sld1aFBhNFl2SlhOcEQ0bEV1alJLQlVhb2FnTktMV0U5enFWdlJwWWk1SS16VGhXSGNub25heWFMd3Y2UnBJMVFESVltUEptVtIBlAFBVV95cUxPM0hlY0xCUWZoVkJfenFTSzRaTno2WTJYdFhKVjMyOFF6ajVTamFjTzRfanJxU3MyWlNyNmNnNjRnNjhyM05PWGQ4REQzajBwejlUNlRKY1NHM29IT1FlN3FaRDRoaXozZDZNbENiak5BOVBJTUptWVRFVGlwMjBkSE1yakZwNlpQV05fc2FucWFZMEs0?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "정부, 국산 반도체·모델 묶어 소버린 AI 키운다 - 전자신문",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9oeXY5eDY4djJFOG5vbVBhVWVYVHd4WDVwSWI2UC1mQXNVSmpPVmZGcjBreWtNdlJLcUUtRGdBQmpZTWxMUk12VXdINUh6UQ?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "이억원 금융위원장 \"AI 반도체에 5년간 50조 정책금융 공급\" - v.daum.net",
+      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1Nd0k2U0RVaWtPVFRoTGpWTlpqRE9wc09qSnZ4YmEzcThIRzdMdVNIbHZSZVRmUHZ1a1NUY25DVTNUTFhaSTNQQWFzVTMyVFE?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "메가존클라우드, 사우디 아람코 대상 국산 AI반도체 해외 실증 추진 - 데이터넷",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5yQjFXamhwVTRKVGp4ZjFPY3pMMjZJcVFTNFZZUUkyeTZRVHZqOEJTZXdsX0tLd05Ha2FnRFo0bDl5VEFVdm5IcDRyMVJ6VW90bDVUWVk1Rlo3cmQzQXBXVEh0Mkt2N3F4ek1MaA?oc=5",
+      "date": "05-15"
+    },
+    {
+      "title": "메가존클라우드, 사우디 아람코서 국산 AI반도체 실증 - 이데일리",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOdm1aS0VobDB6OEtoVHprZ3FsT0hScGdxZTFDbXRVb1VLSWtzMWcxb3F2QnY1OE14MW9reG9zUmhUb1JxZ0J0TXhiaVd2bjdjb1JIdkRZZ1lFZjMyNUcta3MzaVQ2SVlPekQyMXpZYU1paFB6YkdLNUhkYkZIUG1xWg?oc=5",
+      "date": "05-15"
+    },
+    {
+      "title": "[포토] 금융위원회 국내 대표 AI 반도체(NPU) 기업 현장방문 및 간담회 - 전자신문",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1CQ1FkVG54czJKMFBrMWtTeEwxU2FwN0ZJdU9KbVNvQlZmaHk1TkgtOUFTSjQycWg1WXBSQWhrd245VmplSEFFVmlyTnlwUQ?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "\"금융이 기술 읽는다\"…금융위, 퓨리오사AI 찾아 'K-AI 총력 지원' 선언 - 뉴스웍스",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5DNkZweWlrUkZ2TUhsYzdIaXJQbm82VTRpcmRiOWdlaGZ5T1RpalJxcnQwVnNlQ3RWSXhUeTJVakxMZWNGLWRYcU1OU1RQUzUzeGdoR1pSSFRINW14UTJxR1pDNHMzTW9qN05yV3hRWQ?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "리벨리온 이기려는 퓨리오사…프리IPO 3조 고수 - 딜사이트",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5lV1pjc2NVSE1YcTBlOVFaT3Q1TmV1WHY3bDIwbHYtVEVBX0loWGxvS1pvVThxS29rdlJZWWJTZEs0dGJxNjVDdEFLRHZ0NnhjRzUyUmlmNDQ?oc=5",
+      "date": "05-14"
+    },
+    {
+      "title": "이억원, 퓨리오사AI 방문…\"AI 주권 확보 위해 금융이 역할 해야\" - 미디어펜",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5aSkctWktGMlJvVjdZa09MT2dfNmRJUjFJWGhsdzlqcFEtdGxOZnIzSHZHTi1iaEhuREJiUDdCV1QzR21lR2Rhc2VqM0NuNTE5aTlYMNIBWEFVX3lxTE9SOGFuMXlhNUZyV3lva3kwOG9GQVdqZmpWQU1DR1IteF9fVWdiSlhvQ1FoZEJuV3ZqWC1jTWZ4el91enU1Wm9fZC0xM29pbDIwV3JXUHBBaVc?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "[포토] 이억원 금융위원장, AI 반도체 기업 방문...성장기업 발굴 협의체 가동 - 시장경제 - Market Economy News - meconomynews.com",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5DVEVYLWx3OVBHOHZhUldvbmlabjlFYmxvdGx5dHkxcHpWQ0FvV0NfZ0cwQ0gwcEM5Y2xpWU9kYXR0MzM0V3Nrc2QxMUR2a3JlblVERklyNS1ySHc4WkZnemdtX3Q3Slg1ZV9zVFdOUlU?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "국내 첫 'NPU 데이터센터' 건설…AI칩 스타트업 실험실 된다 - 한국경제",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5mTEhuRXZaZzRMTFZOM3lUYU5CeWMzY1NnVWtmdExyY09JM1kyNXlLNHZJODd1MTdVYkJJUkh6X0dhTDQ4YmZ4V2gyQmxkeHgzZ0EwendZWktIQdIBVEFVX3lxTE1IdVlscmpDbExFYko4NHlZSU1ycDlOMWZZNlpXWFdmSG1IMEZ0LTRyX1d4TUUzZ2R6ZXNIMnd0ajFObzdKQW14THQ2TXlYcnBrNzg3Tw?oc=5",
+      "date": "05-14"
+    },
+    {
+      "title": "금융위원장 \"국민성장펀드, 5년간 AI·반도체에 50조원 지원 ... '토털 솔루션' 체계 구축\" - 파이낸셜신문",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5ZUjFjd25acTBWdmNWc2p3eXV1dGdvenpqc1k1a1VqWFE4RWpmSDItYUdMa0NZLWM3YmM0NWRIbFh3aWJUeERjbWpXelRCM3l5dnEzQjlKUVk1QVptak5LQ25kSGViQnl6eUpr?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "금융위원장 이억원 국내 AI반도체 기업과 간담회, \"반도체 경쟁력 강화 위한 금융 역할 중요\" - 비즈니스포스트",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFB5eXNxMURoQW0zZGoyT0poZVNEeDN6akVYZ0dUdkVuZXZzUXFLQ1Q2MFdheFZJNEYyN3prWk83RUxNY1NzYlU1bldMY1hXVTdNTVhUTGMxNEtDeE1jeG4xallKNE5qNW45TzhOdkZHRUtvdTg?oc=5",
+      "date": "05-12"
     }
   ],
   "companies": [
@@ -45,7 +193,7 @@
         {
           "title": "How Intel’s AI Chip Strategy Is Coming Into Shape After Years Of Struggles - crn.com",
           "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPTDNRUlBxLXQ2Z1ZjOTlwdkdna2pTV25ydkxxekpqNHlJYUdEMGNzQmhfZk1SWXFTNXhieHlVMXg2VGlwSV80RWd3cG0wVlg3TWd2RC1CMzVSNGZ5V0Y3bDU3Q3pxbFk0dUl1c2pwdWtZYjZkTjM5MEl2VlB6VTM4WFFGUElRa1F2UXRnOU9lOHRnWnFFX3F2N2tORDZzTlVNQW8zYXZ0bmdGTkpUYkY4WjkyRHAzVFk2QzBqN2tjMGtHOXVMVWc?oc=5",
-          "date": "05-11"
+          "date": "05-12"
         },
         {
           "title": "$200 'socketed' Nvidia AI GPU for servers hacked into a PCIe card with custom PCB and 3D-printed cooling — modded Tesla V100 SMX data center GPU runs AI LLMs and is more efficient than many modern midrange offerings in AI inference - Tom's Hardware",
@@ -55,7 +203,7 @@
         {
           "title": "NVIDIA Groq 3 LPX: Inference Accelerator for Agentic AI - NVIDIA",
           "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE16ZklPT3k4WU9mQ0JTekJiZXVOUXo4YlpUTGFpdHZsMlNUN1IzbUVJcUJKUDFSTXVWczM0ZlEybjhiQ0JtRnRHa3BKaURBcC1PdXJINjZYZTQ?oc=5",
-          "date": "03-16"
+          "date": "03-17"
         }
       ]
     },
@@ -64,9 +212,9 @@
       "region": "global",
       "items": [
         {
-          "title": "Tenstorrent Unveils TT-QuietBox(TM) 2, the First RISC-V AI Workstation With a Fully Open-Source Stack to Deliver Teraflop-Class Inference - Savannah Morning News",
-          "url": "https://news.google.com/rss/articles/CBMimAJBVV95cUxPVTNDLXZZaUxNUjZzX0Q1ME5nUkp2Q3U0b1pTVEgzdy1oS1NuQ2xmdUU2T2NISS03cWNrS3cweTVsQzF3LXhtQ2g5SWJCbjdBQnpQRG1WbTNSbzU5WUd6NklNN1FwVHk3d0R0X2dPTFZsZlhUenF4TnZ3a2RZVE93N0hkTXViNEVOUnNKWEprNE51OXlmSE9XOWhuN2NuaHlRVXFmZlNZb3lvUnJaeENJcUJmbm5helo0MEpGVGxINmo5SE5RaEk4YUNlR19QQ1Z3c2JjamNxMVRjWE93bVFxYmVNeXNLQUVQTVV6RGRCZ3NwalZwU1hZMW96TWxFOFV3UG9wNUFCMFRac294RWRqVzc0RlZrM09P?oc=5",
-          "date": "05-13"
+          "title": "Tenstorrent Unveils TT-QuietBox(TM) 2, the First RISC-V AI Workstation With a Fully Open-Source Stack to Deliver Teraflop-Class Inference - Journal & Courier",
+          "url": "https://news.google.com/rss/articles/CBMilAJBVV95cUxORnphSU1xOHpfZl9jVFM2ZWY4QWcwbHdOTDVoVnd0V1BjeVV6VFhGVV9IWC1nSHZpOXVWdDFydGU5b3pUUU9DcjFXODZVSmNoQkhWdEN6ZTJUN00xTlJELXZQY1BUVFFxaEVvOVNQcXBBM0FQY0ZVbnBiSWFOUHdNeUpYcWdRNk5hb3dtOEI2YmV5NHl1VXFzdExjVVpqVU9zY1BGZWpKa2l2Qms3V3Q5UVJkekl1SVVRa3NscHBIcktCcExsWlZsa2s1Z1oxck1OYTVGVjYyMG80OWFTTGZha1RCZDdMWk53VElySk8zRE9Pc212MVczakVRa0djTVBXTzB1V0ZQR0dVNnhsbTl2d2g1Q2g?oc=5",
+          "date": "05-15"
         },
         {
           "title": "Tenstorrent’s Galaxy Blackhole: Can RISC-V Processors Expand Fast Inference Globally? - The Futurum Group",
@@ -92,7 +240,7 @@
         {
           "title": "NVIDIA Groq 3 LPX: Inference Accelerator for Agentic AI - NVIDIA",
           "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE16ZklPT3k4WU9mQ0JTekJiZXVOUXo4YlpUTGFpdHZsMlNUN1IzbUVJcUJKUDFSTXVWczM0ZlEybjhiQ0JtRnRHa3BKaURBcC1PdXJINjZYZTQ?oc=5",
-          "date": "03-16"
+          "date": "03-17"
         },
         {
           "title": "Nvidia announces Groq 3 LPU AI inference chip, plans 256-LPU rack - Data Center Dynamics",
@@ -108,12 +256,12 @@
         {
           "title": "Intel Looking To Acquire Startup AI Chip Developer SambaNova: Report - crn.com",
           "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNeHNsaC1fdWdyRG9GUzJFVExtU0UtR2FiUVVOaEdyQ0FfY0JzNS03MDZMVG9yLUg1LThLa2VKSDNVd0hGelVXWm1pQnNLdlBkQUFjZTFsM3JBQXljYW1YNkY4Vmp0NVlHbVZ3M3VMaFVGalpsbkhrcDBNYjBwa2FtempRMy1vSTBpMkctOURydFFGVEZsU1NUNEs5VjItY01QNkE?oc=5",
-          "date": "10-30"
+          "date": "10-31"
         },
         {
           "title": "What is Intel's Strategic Deal with SambaNova Systems - Kavout",
           "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVUZSYWlxUGVNYlA0RTdmSHNiMDRwUHdRWDVhTFVFYU14SHlhQ21MWF9xMndxLVYtd2pDeFRoWGlDOVUtZHlTTDBhaG9KMTJyNURjNUw4VGs1bHVvaFBiREdTM043djZDQTRfdHFzaXA1NHZPdFNfX2xjci1VSzJXSjZqMzhUajNmMldVYnBsVkRmQQ?oc=5",
-          "date": "02-24"
+          "date": "02-25"
         },
         {
           "title": "SambaNova Unveils Fastest Chip for Agentic AI, Collaborates with Intel, and Raises $350M+ - Business Wire",
@@ -129,7 +277,7 @@
         {
           "title": "Why Cerebras AI chips stand out in the Nvidia-dominated market - Yahoo Finance",
           "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPYzFUUVZDSFhIcHhia19PUHozRElDbGhDeWJhbG5pOWppc0tNZWI3NUtlYjNnbndIV3AyRDYzb2poNjMtRkRlS1FIRmtsZFpCVmw2VFhpUHhpdVRQRWNrbWxLX0t0SUpOVTUwYkFjRE9kWHBoRU1qMkVKZlF4TEx2eElXTGQ4ZnlKOWlFT25qN3Z1UHpfbUJsTS1KVFJlVENaQzVQdTNxOTh5Y0o5?oc=5",
-          "date": "05-14"
+          "date": "05-15"
         },
         {
           "title": "Cerebras vs Nvidia: Wafer Scale Engine vs GPU for AI Training - Gotrade",
@@ -148,6 +296,11 @@
       "region": "korea",
       "items": [
         {
+          "title": "리벨리온, 국민성장펀드 6000억 수령 완료...차세대 AI칩 양산 본격화 - 아주경제",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9rUnY5SzF1N0xpZlNxNG5LSEJidjFWX0VVUFFaVlpud0Q4NEFZaDBjSnlzbGlHQWt0SVdzQUJRMGRUNy01UXpQUHpnSnotRUQ3RVY5WFV6eTbSAVhBVV95cUxPa1J2OUsxdTdMaWZTcTRuS0hCYnYxVl9FVVBRWlZabndEODRBWWgwY0p5c2xpR0FrdElXc0FCUTBkVDctNVF6UFB6Z0p6LUVEN0VWOVhVenk2?oc=5",
+          "date": "05-12"
+        },
+        {
           "title": "SKT, 리벨리온과 국산 NPU 실증…‘K-AI 반도체’ 상용화 앞장선다 - 한국금융신문",
           "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBwS0VKY1dkQnlpUmpnZk82eUhhRHMyZFl1eWhUdU03bXVIN1RlQWVEdHVfN0MxZjdleHlqMjNWSjBmVVFIODB6Q1NMakpCejBSQ3JaUGtRUGdPSlEyUXp6d050Y0NIbXZ3ZG1CekRucDNUQ1BDUHNuVm92WVU?oc=5",
           "date": "04-29"
@@ -156,11 +309,6 @@
           "title": "GPU 잡는 NPU 한국에 있다…AI반도체 2세대 승부사들 ① - 중앙일보",
           "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5uSnRqUkNOeDhZaUcyeDRCV3Rwa3VwM19vWVdsaW90b3pXOEI3ZHY5N3Q3bGZHcUZRbHJpVkNndF9hdV9ob09IOWFWN3o0VzVwdGI4QXpB?oc=5",
           "date": "03-17"
-        },
-        {
-          "title": "'AI 추론칩' 강자 리벨리온, 글로벌 실전 테스트 돌입 - 지디넷코리아",
-          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9ZUEU2N0tHX0FWTnpfNUpQbnVRUGVPY0VpcTNXaXlTNlRJV1lKX1JWa1NmWk5Oc0dsLVNtMkw1cmpkcExfUlR6b29KYXU5a0l4X2RCTzlB?oc=5",
-          "date": "02-20"
         }
       ]
     },
