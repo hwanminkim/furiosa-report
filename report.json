@@ -1,22 +1,17 @@
 {
   "period": "2026-05-11(월) ~ 2026-05-15(금)",
-  "updated_at": "2026-05-15T15:03:00.366884+09:00",
+  "updated_at": "2026-05-15T15:03:59.727609+09:00",
   "furiosa_highlights": [],
   "highlights": [
     {
       "company": "Cerebras",
-      "text": "Cerebras가 55억 달러를 모금하고 주가가 108% 상승하며 2026년 첫 대규모 IPO를 시작하다.",
+      "text": "Cerebras가 55억 달러를 모금하고 주가가 108% 상승하며 2026년 첫 대형 IPO를 시작하다.",
       "url": "https://techcrunch.com/2026/05/14/cerebras-raises-5-5b-kicking-off-2026s-ipo-season-with-a-bang/"
     },
     {
       "company": "Cerebras",
-      "text": "Cerebras의 주가는 첫날에 거의 두 배로 증가하여 1000억 달러의 가치에 도달하다.",
+      "text": "Cerebras의 주가가 첫날에 거의 두 배로 증가하며 1000억 달러의 가치를 기록하다.",
       "url": "https://venturebeat.com/technology/cerebras-stock-nearly-doubles-on-day-one-as-ai-chipmaker-hits-100-billion-what-it-means-for-ai-infrastructure"
-    },
-    {
-      "company": "Cerebras",
-      "text": "Cerebras가 10년 전의 대담한 베팅으로 660억 달러의 가치를 달성하다.",
-      "url": "https://www.theregister.com/ai-ml/2026/05/15/cerebras-wafer-scale-ai-bet-delivers-blockbuster-ipo/5240821"
     }
   ],
   "companies": [
@@ -27,19 +22,19 @@
       "no_update": false,
       "items": [
         {
-          "text": "N. 제목 (05-12) — NVIDIA와 Ineffable Intelligence가 강화 학습 인프라를 구축하기 위해 협력하다.",
+          "text": "N. 제목 (05-14) — NVIDIA와 Ineffable Intelligence가 강화 학습 인프라 구축을 위한 협력 발표.",
           "url": "https://blogs.nvidia.com/blog/ineffable-intelligence-reinforcement-learning-infrastructure/"
         },
         {
-          "text": "N. 제목 (05-12) — NVIDIA가 SAP와 협력하여 전문 에이전트의 신뢰성을 높이다.",
+          "text": "N. 제목 (05-14) — NVIDIA가 SAP와 협력하여 전문 에이전트에 대한 보안 및 거버넌스 제어를 제공하다.",
           "url": "https://blogs.nvidia.com/blog/sap-specialized-agents/"
         },
         {
-          "text": "N. 제목 (05-12) — NVIDIA가 자율 AI 에이전트를 위한 새로운 파트너십을 발표하다.",
+          "text": "N. 제목 (05-14) — NVIDIA가 새로운 자율 AI 에이전트를 기업에 제공하기 위해 ServiceNow와 파트너십 체결.",
           "url": "https://blogs.nvidia.com/blog/servicenow-autonomous-ai-agents-enterprises/"
         }
       ],
-      "watch": "NVIDIA는 다양한 산업 분야에서 AI 솔루션을 확장하고 있으며, 특히 자율 에이전트와 강화 학습 인프라에 대한 집중이 두드러진다. 이는 Furiosa AI가 시장에서의 경쟁력을 유지하기 위해 주목해야 할 중요한 변화이다."
+      "watch": "NVIDIA는 강화 학습과 자율 AI 에이전트의 발전을 통해 기업 시장에서의 입지를 더욱 강화하고 있으며, 이는 Furiosa AI의 시장 경쟁력에 직접적인 영향을 미칠 수 있다."
     },
     {
       "name": "Cerebras",
@@ -48,19 +43,15 @@
       "no_update": false,
       "items": [
         {
-          "text": "N. 제목 (05-14) — Cerebras IPO가 Benchmark에 수십억 달러를 안기다.",
+          "text": "N. 제목 (05-15) — Cerebras가 10년 전의 대담한 베팅으로 660억 달러의 가치를 달성하다.",
+          "url": "https://www.theregister.com/ai-ml/2026/05/15/cerebras-wafer-scale-ai-bet-delivers-blockbuster-ipo/5240821"
+        },
+        {
+          "text": "N. 제목 (05-14) — Cerebras의 IPO가 벤치마크에 수십억 달러를 안겨주다.",
           "url": "https://techcrunch.com/2026/05/14/cerebras-ipo-makes-billions-for-benchmark-but-vc-eric-vishria-almost-didnt-take-the-meeting/"
-        },
-        {
-          "text": "N. 제목 (05-14) — Cerebras가 55억 달러를 모금하고 주가가 108% 상승하다.",
-          "url": "https://techcrunch.com/2026/05/14/cerebras-raises-5-5b-kicking-off-2026s-ipo-season-with-a-bang/"
-        },
-        {
-          "text": "N. 제목 (05-15) — Cerebras의 IPO가 AI 인프라에 미치는 영향 분석.",
-          "url": "https://venturebeat.com/technology/cerebras-stock-nearly-doubles-on-day-one-as-ai-chipmaker-hits-100-billion-what-it-means-for-ai-infrastructure"
         }
       ],
-      "watch": "Cerebras의 IPO 성공은 AI 칩 시장에서의 경쟁 구도를 변화시킬 수 있으며, Furiosa AI는 이와 같은 대규모 자본 유입이 자사의 성장 전략에 미치는 영향을 분석해야 한다."
+      "watch": "Cerebras의 성공적인 IPO는 AI 칩 시장의 투자자 관심을 높이고 있으며, Furiosa AI는 자본 조달 및 시장 확장 전략을 재검토할 필요가 있다."
     }
   ]
 }
