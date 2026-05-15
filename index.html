@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Furiosa BD 경쟁사 동향 리포트</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 860px; margin: 0 auto; padding: 32px 24px; background: #f9f9f9; color: #1a1a1a; }
+  h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+  .meta { font-size: 0.85rem; color: #666; margin-bottom: 32px; }
+  .company { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 20px 24px; margin-bottom: 16px; }
+  .company h2 { font-size: 1rem; font-weight: 700; margin: 0 0 12px 0; }
+  .item { margin-bottom: 8px; font-size: 0.9rem; }
+  .watch { margin-top: 12px; font-size: 0.85rem; color: #555; border-left: 3px solid #0066cc; padding-left: 10px; }
+  .no-update { color: #999; font-size: 0.9rem; }
+  pre { white-space: pre-wrap; font-family: inherit; margin: 0; }
+</style>
+</head>
+<body>
+<h1>Furiosa BD 경쟁사 동향 리포트</h1>
+<div class="meta" id="meta">아직 리포트가 없습니다.</div>
+<div id="content"></div>
+<script>
+  fetch("report.json").then(r=>r.json()).then(d=>{
+    document.getElementById("meta").textContent = d.period + " | Furiosa BD 참고용";
+    document.getElementById("content").innerHTML = d.companies.map(c=>`
+      <div class="company">
+        <h2>${c.name}</h2>
+        ${c.no_update ? `<div class="no-update">특이사항 없음</div>` : `
+          <div>${c.items.map(i=>`<div class="item">${i}</div>`).join("")}</div>
+          <div class="watch">BD Watch: ${c.watch}</div>
+        `}
+      </div>`).join("");
+  }).catch(()=>{});
+</script>
+</body>
+</html>
