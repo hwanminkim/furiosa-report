@@ -120,6 +120,46 @@ def build_period(now: datetime.datetime) -> str:
             f"~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}")
 
 
+def _ai_call(client, prompt: str, max_tokens: int = 2000) -> dict:
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=max_tokens,
+        temperature=0.3,
+    )
+    raw = resp.choices[0].message.content
+    match = re.search(r"\{[\s\S]*\}", raw)
+    if not match:
+        raise ValueError(f"No JSON in response:\n{raw[:400]}")
+    return json.loads(match.group())
+
+
+def _articles_text(articles: list[dict]) -> str:
+    return "\n".join(
+        f"[{a['company']}] {a['title']} | {a['url']}"
+        for a in articles
+    ) or "없음"
+
+
+def _company_prompt(company_articles: list[dict], company_meta: list[dict]) -> str:
+    companies_list = json.dumps(
+        [{"name": c["name"], "region": c["region"],
+          "website": c["website"], "blog": c["blog"],
+          "no_update": False, "items": []}
+         for c in company_meta],
+        ensure_ascii=False
+    )
+    art_text = _articles_text(company_articles)
+    return f"""Competitive intelligence analyst for Furiosa AI.
+ARTICLES:
+{art_text}
+
+Return ONLY valid JSON (no markdown):
+{{"companies":{companies_list}}}
+
+Rule: fill items for each company from articles above. Each item: {{"text":"N. 제목(MM-DD)","url":"URL","summary":"한국어 1문장","bd_watch":"BD 시사점 한 문장"}}. Max 2 items per company."""
+
+
 def analyze(articles: list[dict], furiosa_articles: list[dict], now: datetime.datetime) -> dict:
     token = os.environ.get("GITHUB_TOKEN")
     if not token:
@@ -127,52 +167,49 @@ def analyze(articles: list[dict], furiosa_articles: list[dict], now: datetime.da
 
     client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token)
 
-    articles_text = "\n\n".join(
-        f"[{a['company']} / {a['region']}] {a['title']}\nURL: {a['url']}\n{a['summary']}"
-        for a in articles
-    ) or "수집된 기사가 없습니다."
+    global_articles = [a for a in articles if a["region"] == "global"]
+    korea_articles  = [a for a in articles if a["region"] == "korea"]
 
-    furiosa_text = "\n\n".join(
-        f"[Furiosa] {a['title']}\nURL: {a['url']}\n{a['summary']}"
-        for a in furiosa_articles
-    ) or "수집된 기사가 없습니다."
+    furiosa_text = "\n".join(
+        f"[Furiosa] {a['title']} | {a['url']}" for a in furiosa_articles
+    ) or "없음"
+    global_text = _articles_text(global_articles)
 
-    companies_list = json.dumps(
+    # Call 1: highlights + global companies
+    global_meta = GLOBAL_COMPANIES
+    global_companies_list = json.dumps(
         [{"name": c["name"], "region": c["region"],
           "website": c["website"], "blog": c["blog"],
           "no_update": False, "items": []}
-         for c in ALL_COMPANIES],
+         for c in global_meta],
         ensure_ascii=False
     )
+    prompt1 = f"""Date: {now.strftime('%Y-%m-%d KST')}. Competitive intelligence analyst for Furiosa AI.
 
-    prompt = f"""Date: {now.strftime('%Y-%m-%d KST')}. You are a competitive intelligence analyst for Furiosa AI (Korean AI chip startup).
-
-COMPETITOR ARTICLES:
-{articles_text}
+GLOBAL ARTICLES:
+{global_text}
 
 FURIOSA ARTICLES:
 {furiosa_text}
 
 Return ONLY valid JSON (no markdown):
-{{"period":"{build_period(now)}","updated_at":"{now.isoformat()}","furiosa_highlights":[{{"text":"팩트 한줄(Korean)","url":""}}],"highlights":[{{"company":"name","text":"팩트 한줄(Korean)","url":""}}],"companies":{companies_list}}}
+{{"period":"{build_period(now)}","updated_at":"{now.isoformat()}","furiosa_highlights":[{{"text":"팩트 한줄","url":""}}],"highlights":[{{"company":"name","text":"팩트 한줄","url":""}}],"companies":{global_companies_list}}}
 
 Rules:
 - furiosa_highlights: 1-2 Furiosa news facts only (Korean). No advice.
-- highlights: 2-3 competitor news facts only (Korean). Never mention Furiosa. No "Furiosa는" sentences.
-- companies: fill items for EVERY company using articles above. Each item: {{"text":"N. 제목(MM-DD)","url":"URL","summary":"한국어 1문장 요약","bd_watch":"BD 시사점 15자 이내"}}. Max 2 items per company. no_update stays false if any articles exist.
-- Keep website/blog/region exactly as given."""
+- highlights: 2-3 global competitor facts only (Korean). Never mention Furiosa. No "Furiosa는".
+- companies: fill items from global articles. Each item: {{"text":"N. 제목(MM-DD)","url":"URL","summary":"한국어 1문장","bd_watch":"BD 시사점 한 문장"}}. Max 2 items."""
 
-    resp = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=3500,
-        temperature=0.3,
-    )
-    raw = resp.choices[0].message.content
-    match = re.search(r"\{[\s\S]*\}", raw)
-    if not match:
-        raise ValueError(f"No JSON in response:\n{raw[:600]}")
-    return json.loads(match.group())
+    print("  Calling AI (global)...")
+    result = _ai_call(client, prompt1, max_tokens=2500)
+
+    # Call 2: Korea companies
+    print("  Calling AI (korea)...")
+    prompt2 = _company_prompt(korea_articles, KOREA_COMPANIES)
+    korea_result = _ai_call(client, prompt2, max_tokens=1500)
+
+    result["companies"] = result.get("companies", []) + korea_result.get("companies", [])
+    return result
 
 
 def main():
