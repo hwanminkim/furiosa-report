@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """
 Daily report updater.
-- Furiosa daily / weekly: raw RSS, deduped (URL + normalized title + LLM clustering)
-- Company news (competitors): raw RSS titles + URLs
-- LLM clustering uses GitHub Models gpt-4o-mini with JSON mode.
-  Falls back to non-LLM dedup if the call fails or GITHUB_TOKEN is missing.
+
+News sources:
+- Korean queries (lang="ko") → Naver News API (requires NAVER_CLIENT_ID/SECRET).
+  Falls back to Google News RSS when Naver credentials are missing.
+- English queries (lang="en") → Google News RSS.
+
+Furiosa daily / weekly: deduped (URL + normalized title + LLM clustering).
+LLM clustering uses GitHub Models gpt-4o-mini with JSON mode.
 """
 import datetime
 import email.utils
+import html
 import json
 import os
 import re
@@ -86,15 +91,27 @@ def format_date_kst(dt: datetime.datetime | None, kst: pytz.BaseTzInfo) -> str:
     return dt.astimezone(kst).strftime("%m-%d")
 
 
-def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
-    """Fetch RSS items. Returns up to n items with title/url/pub_dt."""
+_HTML_TAG_RE = re.compile(r"<[^>]+>")
+
+
+def _strip_html(s: str) -> str:
+    """Naver returns titles like 'FuriosaAI &quot;<b>RNGD</b>&quot; ...'. Clean it."""
+    if not s:
+        return ""
+    s = _HTML_TAG_RE.sub("", s)
+    s = html.unescape(s)
+    return s.strip()
+
+
+def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
+    """Google News RSS fetcher."""
     try:
         req = Request(gnews_url(query, lang),
                       headers={"User-Agent": "Mozilla/5.0 (compatible; FuriosaReport/1.0)"})
         with urlopen(req, timeout=10) as resp:
             root = ET.fromstring(resp.read())
     except Exception as e:
-        print(f"  [skip] {query}: {e}")
+        print(f"  [google-skip] {query}: {e}")
         return []
 
     results = []
@@ -105,6 +122,61 @@ def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
         if title and link:
             results.append({"title": title, "url": link, "pub_dt": pub_dt})
     return results
+
+
+def _fetch_naver(query: str, n: int) -> list[dict]:
+    """
+    Naver News API fetcher. Requires NAVER_CLIENT_ID / NAVER_CLIENT_SECRET env vars.
+    Returns [] if creds are missing — caller should fall back to Google.
+
+    Naver query syntax differs slightly from Google ("OR" → "|"), so we translate.
+    Sort: "sim" (relevance) — closest to a popularity proxy. Use "date" if newest-first.
+    """
+    cid  = os.environ.get("NAVER_CLIENT_ID")
+    csec = os.environ.get("NAVER_CLIENT_SECRET")
+    if not cid or not csec:
+        return []
+
+    naver_q = query.replace(" OR ", " | ")
+    url = (f"https://openapi.naver.com/v1/search/news.json"
+           f"?query={quote(naver_q)}&display={min(max(n, 10), 100)}&sort=sim")
+    req = Request(url, headers={
+        "X-Naver-Client-Id": cid,
+        "X-Naver-Client-Secret": csec,
+        "User-Agent": "Mozilla/5.0 (compatible; FuriosaReport/1.0)",
+    })
+    try:
+        with urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except Exception as e:
+        print(f"  [naver-skip] {query}: {e}")
+        return []
+
+    results = []
+    for item in data.get("items", [])[:n]:
+        title = _strip_html(item.get("title", ""))
+        # originallink: 원 매체 URL (선호) / link: 네이버 뉴스 URL
+        link = (item.get("originallink") or item.get("link") or "").strip()
+        pub_dt = parse_pub_datetime(item.get("pubDate") or "")
+        if title and link:
+            results.append({"title": title, "url": link, "pub_dt": pub_dt})
+    return results
+
+
+def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
+    """
+    Dispatch to Naver (Korean) or Google (English).
+    Korean queries fall back to Google if Naver creds are missing.
+    """
+    if lang == "ko":
+        items = _fetch_naver(query, n)
+        if items:
+            return items
+        # fallback
+        if not os.environ.get("NAVER_CLIENT_ID"):
+            print(f"  [info] NAVER creds missing, using Google for: {query}")
+        return _fetch_google(query, lang, n)
+    return _fetch_google(query, lang, n)
 
 
 def build_period(now: datetime.datetime) -> str:
