@@ -1,7 +1,12 @@
 {
   "period": "2026-05-11(월) ~ 2026-05-15(금)",
-  "updated_at": "2026-05-15T16:42:18.850827+09:00",
+  "updated_at": "2026-05-15T16:50:59.070501+09:00",
   "furiosa_daily": [
+    {
+      "title": "메가존클라우드, 사우디 아람코 국산AI반도체 실증사업 컨소시엄 참여 - 디일렉",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBXMEFsZGJ0LTIzZ2h1ODI4RTlmVnNiUWUwMDRlTGlpbXZwU21vNjlsRTdtTVh0TkYtM0FaRUJpelJYUUp6b1ZkbndZNU1BQ2N0LXNxbHMxRmlsY1BlZ2FMLWt4VHpCUQ?oc=5",
+      "date": "05-15"
+    },
     {
       "title": "[단독] 1兆 투입하려던 ‘K-온디바이스 AI 반도체 사업’ 총사업비 최대 3000억 감액 전망 - 조선비즈 - Chosunbiz",
       "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPeXdRVUJGUVVUWW5RampycHMwSlhucnBmaE93dFczYWNwemUtSm5ZNGJrOXlfcTlGSmZ3ZGVla1p0OFZVRVpyd1pnS3VmemppUVlzbHkxZlZxcTRkN1g5NmxHa2dtZjFOUVd1dTFQR3R6dFc3Y0tqMUR0SE9BUG5lNkx5eVFOQdIBmgFBVV95cUxPTkVTa2FjejR4QkduQ2htUVlLTW9ONXlDSmFBRVZ6ei05a19DVjVZcjRTVVJoUE9YTGE2YnNDZ1IwWGtEbXBxZnlyZ3lzR2gtSV9UdU5ZaGJuN3Q4U2FjRy1reWM1SERlUmNPdUFKU1Vnb0h2QkU4Y094QVZXcnJCSzVNOVUtQVVldVo0cjFRQ2FPSWFBT3pWSzFR?oc=5",
@@ -13,45 +18,35 @@
       "date": "05-15"
     },
     {
-      "title": "메가존클라우드, 사우디 아람코 대상 국산 AI반도체 현장 실증 - 전자신문",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE00SGMxdW5WaGJmRVBRb05DaGNVUTBLMlZINFNDcXpqVW0zNHU4OFNmSEdlZVlUc2lEczRVUUNtMGRmVUlvcXgwclJENTBhZw?oc=5",
-      "date": "05-15"
-    },
-    {
-      "title": "메가존클라우드, 정부 ‘AI-반도체 해외실증 지원 사업’ 주관사업자 선정 - 디지털투데이",
-      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBPc2FkbzVfaHdqNzBSRV95VnJ1UThadG9BSXlsUkpnb0ZTTnJTTzJ3dHhHY0xfTjZKdDI2dUhXTDc4UEZMOXJreU4wblZ6MGxySnBiXzg2OGhBYjFuZEUtVlBfbUp6QzJsZGVidFJNWUN5VlE?oc=5",
-      "date": "05-15"
-    },
-    {
-      "title": "메가존클라우드, 사우디 아람코 대상 국산 AI반도체 해외 실증 추진 - 데이터넷",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5yQjFXamhwVTRKVGp4ZjFPY3pMMjZJcVFTNFZZUUkyeTZRVHZqOEJTZXdsX0tLd05Ha2FnRFo0bDl5VEFVdm5IcDRyMVJ6VW90bDVUWVk1Rlo3cmQzQXBXVEh0Mkt2N3F4ek1MaA?oc=5",
-      "date": "05-15"
+      "title": "국내 첫 'NPU 데이터센터' 건설…AI칩 스타트업 실험실 된다 - 한국경제",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5mTEhuRXZaZzRMTFZOM3lUYU5CeWMzY1NnVWtmdExyY09JM1kyNXlLNHZJODd1MTdVYkJJUkh6X0dhTDQ4YmZ4V2gyQmxkeHgzZ0EwendZWktIQdIBVEFVX3lxTE1IdVlscmpDbExFYko4NHlZSU1ycDlOMWZZNlpXWFdmSG1IMEZ0LTRyX1d4TUUzZ2R6ZXNIMnd0ajFObzdKQW14THQ2TXlYcnBrNzg3Tw?oc=5",
+      "date": "05-14"
     }
   ],
   "furiosa_weekly": [
-    {
-      "title": "'퓨리오사AI' 방문한 이억원 \"국민성장펀드, 5년간 AI분야 50조 지원\" - v.daum.net",
-      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1sbEVrRzNrY0lMNjJxaFQwOVBYNUFKZlZkcHZpanhnVm9RMXJsMVFHWkJnLWlvWGVqcmlCNHFBdzRmZHpMbWJyWDRNVWNHeUk?oc=5",
-      "date": "05-12"
-    },
     {
       "title": "퓨리오사AI, 메타 1조원 인수 거절 후 프리IPO 추진 - 중기이코노미",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE43V25qY2x1RlFiSXFTSWFyRS11Qi1GXzhPZDk0VXZPQmQ2a0xMMmlPUGozMENObDZiZXpjVFZBelI2eXpuaWVILXNmUW90NnQzekx3QjVqVl9JS1JRclMxRzY1eE9adGRPTmc?oc=5",
       "date": "05-11"
     },
     {
-      "title": "금융위, 퓨리오사AI 방문…“소버린 AI·국산 AI반도체 집중 지원” - 테크데일리",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFA1VVprdmVtS2htWlZMYWI2Mzg0MGdWalVfUzBPMFZKeXBDZWdGQ0tMajV3RmhLVHJUOGFZTDFnZzgwQ3plTnFVRFM2ajU4Y0o4R0JDc0tUV0lYamY1cm1XRTlhOFRobEdULVRlc2pB0gFyQVVfeXFMT2l1Q09peG1nQlNxcmVwaGpyRmV0d01uS0FwNVVydS15SWJRempJVndYTVAwZ2FOZGpzR2l1WTc4ZG42SS1sUkdyS3VuclN2U3VDVmJ0SmtXT0FyazhXZjFtbWVMeGZCODRIM3Y5c0ZPZHJ3?oc=5",
-      "date": "05-13"
-    },
-    {
-      "title": "이억원 “AI는 국가 인프라”…퓨리오사AI 찾아 첨단산업 지원 논의 - 조세일보",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFA5MGdsRGk2am1zYmhIUVA4cGZwUXpqVVZCLUZIdUUweEtTel95VWl3eVNKelNYcHhIMDZqVHZmbEo1R1Z1QXVJdGUtVTdXVkM3RGpFZTNRczhUTG1iV25qT053YjhzaUQ3djZkZTctbw?oc=5",
+      "title": "퓨리오사·업스테이지 등 만난 이억원 금융위원장…\"AI주권 확보는 국가 전략 과제\" - 매일신문",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBkanE5NEcxVTdaUmJIbmQ0Si1QZl9YODFBQWhhOTZ3MnJpMk94cGVpdkZFaTZRdVZpT1hlQjVPSFliZ2RqVzFmNDJ2VmlXdU04TGJnZWJKMlpudVRZUDZ5XzVn?oc=5",
       "date": "05-12"
     },
     {
-      "title": "퓨리오사 찾은 이억원 금융위원장 \"AI·반도체 5년간 50조 이상 투자\" - 뉴스1",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5HX1A4WkUtdldDcGFxNXBaN0RCOC1zSG9yUVZYeW0tdnBDVHhmb3o4WWdUU0FYVHI4M0hqb2ZmX0tfY1BvQ0MtbzdmMHNkeUx0T0tqQ0RRTkxlLUwxNGNaOVRB?oc=5",
+      "title": "[포토] 퓨리오사 레니게이드 서버 소개하는 백종현 대표...\"AI 성능 극대화\" - 디지털포스트(PC사랑)",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFAwUUFXZGpWR1RRVDBJSXBHZTl5cFZkblQ0WVBjbHF2S3dPcGx1RzUyblJzUmRxWUNkbFBfNnduaWRoaDllcFJyblloYmtwQ1Y1SjY2Z3R2UVVGMGYzUURaX1VkZzZMQUljQi13?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "[포토] \"3세대 반도체 출시 목표\"...사업 현황과 향후 추진계획 발표하는 백준호 퓨리오사 대표 - meconomynews.com",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBLUF9WanVMSDJnbVlHLXRyRzhiMzNZQ2Y0aktaazlqSi0xek5obEpsUVpkblNrOWdaZ2JnM1VNVnNaZnFMWU5KZUFmV0VBd1RjekpFUS1vQVlDdmJmSGU3SmIzWWhkRGNmNE12QTBBalM?oc=5",
+      "date": "05-12"
+    },
+    {
+      "title": "[포토] 기업 소개하는 백준호 퓨리오사AI 대표 - 전자신문",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBfSlI3cG9hQTRCZjY5VnB1SUs0UU1ReE1KUUZOcG15X0lDbkdRR0ktV1JCTFBWYVJBN1ZfQ0tpbHpyS1JJeTcyNDltd21kdw?oc=5",
       "date": "05-12"
     }
   ],
@@ -166,11 +161,6 @@
       "region": "korea",
       "items": [
         {
-          "title": "리벨리온, 국민성장펀드 6000억 수령 완료...차세대 AI칩 양산 본격화 - 아주경제",
-          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9rUnY5SzF1N0xpZlNxNG5LSEJidjFWX0VVUFFaVlpud0Q4NEFZaDBjSnlzbGlHQWt0SVdzQUJRMGRUNy01UXpQUHpnSnotRUQ3RVY5WFV6eTbSAVhBVV95cUxPa1J2OUsxdTdMaWZTcTRuS0hCYnYxVl9FVVBRWlZabndEODRBWWgwY0p5c2xpR0FrdElXc0FCUTBkVDctNVF6UFB6Z0p6LUVEN0VWOVhVenk2?oc=5",
-          "date": "05-12"
-        },
-        {
           "title": "SKT, 리벨리온과 국산 NPU 실증…‘K-AI 반도체’ 상용화 앞장선다 - 한국금융신문",
           "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBwS0VKY1dkQnlpUmpnZk82eUhhRHMyZFl1eWhUdU03bXVIN1RlQWVEdHVfN0MxZjdleHlqMjNWSjBmVVFIODB6Q1NMakpCejBSQ3JaUGtRUGdPSlEyUXp6d050Y0NIbXZ3ZG1CekRucDNUQ1BDUHNuVm92WVU?oc=5",
           "date": "04-29"
@@ -179,6 +169,11 @@
           "title": "GPU 잡는 NPU 한국에 있다…AI반도체 2세대 승부사들 ① - 중앙일보",
           "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5uSnRqUkNOeDhZaUcyeDRCV3Rwa3VwM19vWVdsaW90b3pXOEI3ZHY5N3Q3bGZHcUZRbHJpVkNndF9hdV9ob09IOWFWN3o0VzVwdGI4QXpB?oc=5",
           "date": "03-17"
+        },
+        {
+          "title": "'AI 추론칩' 강자 리벨리온, 글로벌 실전 테스트 돌입 - 지디넷코리아",
+          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9ZUEU2N0tHX0FWTnpfNUpQbnVRUGVPY0VpcTNXaXlTNlRJV1lKX1JWa1NmWk5Oc0dsLVNtMkw1cmpkcExfUlR6b29KYXU5a0l4X2RCTzlB?oc=5",
+          "date": "02-20"
         }
       ]
     },
@@ -187,13 +182,13 @@
       "region": "korea",
       "items": [
         {
-          "title": "폴라리스AI, 국산 AI 반도체 간담회 수요기업 참석 - 뉴시스",
-          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE80dXk0aWZFMmlNZzA3UnZYZ3pKc01JT2pyQnVGLWJmc0xaSjdId29fT2JjdVF0N1c2cGhxMlZfWm1rMkFpdThsRkdPZ090Zi1jQU5LUWJqZ2VxN2gwb0lzZWRfMEVWS0l2MlFDUUlhN09OZ0xUSVNKZ9IBeEFVX3lxTE80dXk0aWZFMmlNZzA3UnZYZ3pKc01JT2pyQnVGLWJmc0xaSjdId29fT2JjdVF0N1c2cGhxMlZfWm1rMkFpdThsRkdPZ090Zi1jQU5LUWJqZ2VxN2gwb0lzZWRfMEVWS0l2MlFDUUlhN09OZ0xUSVNKZw?oc=5",
+          "title": "폴라리스AI, 국산 NPU 기반 ‘피지컬 AI’ 확대…유비테크 로봇과 결합 - v.daum.net",
+          "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE9CeHIxUUFmRVZYcEJXMDBQdFI1RXBCU0ZvWTZoN3JGRHFFaFJNeFU2MmpCcnZpR3BfLTlIWXNRQ1pqVjVVMEE?oc=5",
           "date": "05-14"
         },
         {
-          "title": "폴라리스AI, 국산 NPU 기반 ‘피지컬 AI’ 확대…유비테크 로봇과 결합 - v.daum.net",
-          "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE9CeHIxUUFmRVZYcEJXMDBQdFI1RXBCU0ZvWTZoN3JGRHFFaFJNeFU2MmpCcnZpR3BfLTlIWXNRQ1pqVjVVMEE?oc=5",
+          "title": "폴라리스AI, 국산 AI 반도체 간담회 수요기업 참석 - 뉴시스",
+          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE80dXk0aWZFMmlNZzA3UnZYZ3pKc01JT2pyQnVGLWJmc0xaSjdId29fT2JjdVF0N1c2cGhxMlZfWm1rMkFpdThsRkdPZ090Zi1jQU5LUWJqZ2VxN2gwb0lzZWRfMEVWS0l2MlFDUUlhN09OZ0xUSVNKZ9IBeEFVX3lxTE80dXk0aWZFMmlNZzA3UnZYZ3pKc01JT2pyQnVGLWJmc0xaSjdId29fT2JjdVF0N1c2cGhxMlZfWm1rMkFpdThsRkdPZ090Zi1jQU5LUWJqZ2VxN2gwb0lzZWRfMEVWS0l2MlFDUUlhN09OZ0xUSVNKZw?oc=5",
           "date": "05-14"
         },
         {
