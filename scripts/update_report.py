@@ -119,9 +119,15 @@ def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
     for item in root.findall(".//item")[:n]:
         title = (item.findtext("title") or "").strip()
         link  = (item.findtext("link")  or "").strip()
+        desc  = _strip_html(item.findtext("description") or "")
         pub_dt = parse_pub_datetime(item.findtext("pubDate") or "")
         if title and link:
-            results.append({"title": title, "url": link, "pub_dt": pub_dt})
+            results.append({
+                "title":  title,
+                "url":    link,
+                "pub_dt": pub_dt,
+                "description": desc,
+            })
     return results
 
 
@@ -160,9 +166,15 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
         title = _strip_html(item.get("title", ""))
         # originallink: 원 매체 URL (선호) / link: 네이버 뉴스 URL
         link = (item.get("originallink") or item.get("link") or "").strip()
+        desc = _strip_html(item.get("description", ""))
         pub_dt = parse_pub_datetime(item.get("pubDate") or "")
         if title and link:
-            results.append({"title": title, "url": link, "pub_dt": pub_dt})
+            results.append({
+                "title": title,
+                "url": link,
+                "pub_dt": pub_dt,
+                "description": desc,
+            })
     return results
 
 
@@ -269,13 +281,97 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
         return articles
 
 
-def to_output(a: dict, kst: pytz.BaseTzInfo) -> dict:
-    """Strip non-JSON-serializable fields and format date for display."""
-    return {
+def to_output(a: dict, kst: pytz.BaseTzInfo, include_brief: bool = False) -> dict:
+    """Strip non-JSON-serializable fields and format date for display.
+    include_brief=True 면 summary / bd_perspective 도 함께 포함 (회사 기사용)."""
+    out = {
         "title": a["title"],
         "url":   a["url"],
         "date":  format_date_kst(a.get("pub_dt"), kst),
     }
+    if include_brief:
+        out["summary"]        = a.get("summary", "")
+        out["bd_perspective"] = a.get("bd_perspective", "")
+    return out
+
+
+def generate_briefs(articles_with_company: list[tuple], client: "OpenAI | None") -> dict:
+    """
+    경쟁사 기사 목록에 대해 1회 batch LLM 호출로
+    {(company, url): {"summary": ..., "bd_perspective": ...}} 딕셔너리 반환.
+    실패 시 빈 dict (호출자에서 빈 값으로 fallback).
+    """
+    if client is None or not articles_with_company:
+        return {}
+
+    items_in = []
+    for i, (company, a) in enumerate(articles_with_company):
+        items_in.append({
+            "id": i,
+            "company": company,
+            "title": a.get("title", ""),
+            "snippet": (a.get("description") or "")[:240],
+        })
+
+    prompt = f"""You are a BD (business development) analyst at Furiosa AI, a Korean AI inference chip startup.
+Furiosa's competitors include NVIDIA, Groq, Cerebras, SambaNova, Tenstorrent (global)
+and Rebellions, DeepX, HyperAccel, Mobilint (Korea).
+
+For each competitor news article below, produce two short Korean sentences:
+- "summary": 1문장, 사실 위주, 최대 80자.
+- "bd_perspective": 1문장, Furiosa BD 관점에서 이 뉴스가 갖는 의미(기회/위협/시장 시그널), 최대 100자.
+  진부한 일반론 금지. 구체적인 함의 위주.
+
+Input articles:
+{json.dumps(items_in, ensure_ascii=False)}
+
+Return JSON ONLY:
+{{"items": [{{"id": 0, "summary": "...", "bd_perspective": "..."}}, ...]}}
+
+Rules:
+- 모든 id가 정확히 한 번씩 포함되어야 함.
+- 한국어만.
+- 정보가 부족하면 추측하지 말고 "추가 정보 필요" 같이 명시."""
+
+    try:
+        try:
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=2500,
+                temperature=0.3,
+                response_format={"type": "json_object"},
+            )
+        except Exception as e:
+            print(f"  [warn] response_format unsupported for briefs, retrying: {e}")
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=2500,
+                temperature=0.3,
+            )
+
+        raw = resp.choices[0].message.content or ""
+        m = re.search(r"\{[\s\S]*\}", raw)
+        data = json.loads(m.group() if m else raw)
+
+        out: dict = {}
+        for entry in data.get("items", []):
+            idx = entry.get("id")
+            if not isinstance(idx, int) or not (0 <= idx < len(articles_with_company)):
+                continue
+            company, a = articles_with_company[idx]
+            out[(company, a["url"])] = {
+                "summary":        (entry.get("summary") or "").strip(),
+                "bd_perspective": (entry.get("bd_perspective") or "").strip(),
+            }
+
+        print(f"  Briefs generated for {len(out)}/{len(articles_with_company)} articles")
+        return out
+
+    except Exception as e:
+        print(f"  [warn] brief generation failed, falling back to empty: {e}")
+        return {}
 
 
 def main():
@@ -287,17 +383,43 @@ def main():
 
     print(f"[{now.strftime('%Y-%m-%d %H:%M KST')}] Starting report update...")
 
-    # ── 1. Competitor news (raw RSS) ─────────────────────────────────────
-    companies_out = []
+    # OpenAI client (GitHub Models gpt-4o-mini). 없으면 None → AI 단계 skip.
+    token = os.environ.get("GITHUB_TOKEN")
+    client: "OpenAI | None" = None
+    if token:
+        client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token)
+    else:
+        print("  [warn] GITHUB_TOKEN not set: skipping AI clustering & briefs")
+
+    # ── 1. Competitor news (raw) ─────────────────────────────────────────
+    companies_raw = []
     for co in COMPANIES:
         articles = fetch_articles(co["query"], co["lang"], n=3)
-        items = [to_output(a, kst) for a in articles]
-        companies_out.append({
-            "name":   co["name"],
-            "region": co["region"],
-            "items":  items,
+        companies_raw.append({
+            "name":     co["name"],
+            "region":   co["region"],
+            "articles": articles,
         })
         print(f"  {co['name']}: {len(articles)} articles")
+
+    # ── 1.5 LLM 요약 + Furiosa BD 시점 생성 (1회 batch 호출) ──────────────
+    all_pairs = [(c["name"], a) for c in companies_raw for a in c["articles"]]
+    briefs = generate_briefs(all_pairs, client)
+    for c in companies_raw:
+        for a in c["articles"]:
+            key = (c["name"], a["url"])
+            if key in briefs:
+                a["summary"]        = briefs[key]["summary"]
+                a["bd_perspective"] = briefs[key]["bd_perspective"]
+
+    companies_out = [
+        {
+            "name":   c["name"],
+            "region": c["region"],
+            "items":  [to_output(a, kst, include_brief=True) for a in c["articles"]],
+        }
+        for c in companies_raw
+    ]
 
     # ── 2. Furiosa daily / weekly (raw RSS, deduped by URL + normalized title) ──
     DAILY_LIMIT  = 5
@@ -326,15 +448,11 @@ def main():
     # ── 2.5 LLM 기반 의미 단위 클러스터링 (같은 사건 dedup) ───────────────
     # 7일 안의 기사들만 클러스터링 대상으로 (오래된 기사 토큰 낭비 방지)
     in_weekly_window = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
-    token = os.environ.get("GITHUB_TOKEN")
-    if token:
-        client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token)
+    if client:
         deduped = cluster_articles_by_event(in_weekly_window, client)
         deduped_urls = {a["url"] for a in deduped}
         all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls
                        or not in_window(a, weekly_cutoff)]
-    else:
-        print("  [warn] GITHUB_TOKEN not set, skipping LLM clustering")
 
     # 일간: 최근 24시간 top N
     furiosa_daily = [a for a in all_furiosa if in_window(a, daily_cutoff)][:DAILY_LIMIT]
