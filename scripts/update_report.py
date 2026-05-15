@@ -32,15 +32,16 @@ COMPANIES = [
     {"name": "Groq",        "region": "global", "query": "Groq AI inference chip LPU",    "lang": "en"},
     {"name": "SambaNova",   "region": "global", "query": "SambaNova AI chip RDU",         "lang": "en"},
     {"name": "Cerebras",    "region": "global", "query": "Cerebras AI chip wafer",        "lang": "en"},
-    {"name": "Rebellions",  "region": "korea",  "query": "리벨리온 AI 반도체 NPU",         "lang": "ko"},
-    {"name": "DeepX",       "region": "korea",  "query": "딥엑스 DeepX AI NPU 반도체",     "lang": "ko"},
-    {"name": "HyperAccel",  "region": "korea",  "query": "하이퍼엑셀 HyperAccel AI",       "lang": "ko"},
-    {"name": "Mobilint",    "region": "korea",  "query": "모빌린트 Mobilint AI NPU",       "lang": "ko"},
+    # 한국 회사: Naver는 띄어쓴 키워드를 AND로 처리 → 회사명만 단순하게 (OR로 한/영 표기 합침)
+    {"name": "Rebellions",  "region": "korea",  "query": "리벨리온",                       "lang": "ko"},
+    {"name": "DeepX",       "region": "korea",  "query": "딥엑스 OR DeepX",                "lang": "ko"},
+    {"name": "HyperAccel",  "region": "korea",  "query": "하이퍼엑셀 OR HyperAccel",        "lang": "ko"},
+    {"name": "Mobilint",    "region": "korea",  "query": "모빌린트 OR Mobilint",            "lang": "ko"},
 ]
 
 FURIOSA_QUERIES = [
     ('FuriosaAI OR "Furiosa AI" chip', "en"),
-    ('퓨리오사 OR 퓨리오사AI AI 반도체', "ko"),
+    ('퓨리오사 OR 퓨리오사AI OR FuriosaAI', "ko"),
 ]
 
 
@@ -138,8 +139,10 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
         return []
 
     naver_q = query.replace(" OR ", " | ")
+    # sort=date: 최신순 (BD 용도에는 최신성이 우선)
+    # sort=sim: 정확도순 (관련성이 우선이면 이쪽)
     url = (f"https://openapi.naver.com/v1/search/news.json"
-           f"?query={quote(naver_q)}&display={min(max(n, 10), 100)}&sort=sim")
+           f"?query={quote(naver_q)}&display={min(max(n, 10), 100)}&sort=date")
     req = Request(url, headers={
         "X-Naver-Client-Id": cid,
         "X-Naver-Client-Secret": csec,
