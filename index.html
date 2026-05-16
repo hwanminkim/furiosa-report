@@ -90,11 +90,11 @@ padding: 28px 0 40px;
 }
 .sidebar-label {
 font-family: 'ABCFavorit', sans-serif;
-font-size: 0.7rem;
+font-size: 0.9rem;
 font-weight: 600;
 letter-spacing: 0.12em;
 text-transform: uppercase;
-color: var(--muted);
+color: #aaa;
 padding: 0 20px 8px;
 }
 .sidebar-divider {
@@ -151,11 +151,11 @@ border-bottom: 1px solid var(--border);
 }
 .section-label {
 font-family: 'ABCFavorit', sans-serif;
-font-size: 0.7rem;
+font-size: 0.9rem;
 font-weight: 600;
 letter-spacing: 0.12em;
 text-transform: uppercase;
-color: var(--muted);
+color: #aaa;
 margin-bottom: 12px;
 }
 /* ── Furiosa news grid ── */
@@ -355,13 +355,68 @@ color: #D0D0D0;
 line-height: 1.6;
 white-space: pre-wrap;
 }
+/* ── Hamburger button & drawer (mobile only) ── */
+.header-left { display: flex; align-items: center; gap: 14px; }
+.hamburger {
+display: none;
+background: none;
+border: none;
+color: var(--text);
+font-size: 1.4rem;
+line-height: 1;
+cursor: pointer;
+padding: 4px 2px;
+font-family: inherit;
+}
+.drawer-backdrop {
+display: none;
+position: fixed;
+inset: var(--header-h) 0 0 0;
+background: rgba(0,0,0,0.6);
+z-index: 50;
+}
+.drawer-backdrop.open { display: block; }
+
+@media (max-width: 640px) {
+header { padding: 0 16px; }
+.hamburger { display: block; }
+header img { height: 22px; }
+
+/* sidebar → drawer */
+aside {
+position: fixed;
+top: var(--header-h);
+left: 0;
+bottom: 0;
+width: 240px;
+background: var(--black);
+z-index: 100;
+transform: translateX(-100%);
+transition: transform 0.25s ease;
+}
+aside.open { transform: translateX(0); }
+
+main { padding: 24px 18px 60px; }
+h1 { font-size: 1.7rem; }
+
+/* Furiosa 일간/주간 → 1컬럼 */
+.top-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
+
+/* 모달 너비 화면 꽉 차게 */
+.modal.article-modal { width: calc(100vw - 32px); padding: 22px 20px; }
+.modal { width: calc(100vw - 80px); max-width: 320px; }
+}
 </style>
 </head>
 <body>
 <header>
+<div class="header-left">
+<button id="hamburger" class="hamburger" aria-label="메뉴 열기">☰</button>
 <a href="index.html"><img src="assets/img/Furiosa_AI_h_w.png" alt="Furiosa AI"></a>
+</div>
 <span class="header-tag">BD & Sales</span>
 </header>
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
 <div class="layout">
 <aside id="sidebar"></aside>
 <main id="main-content">
@@ -466,11 +521,15 @@ document.getElementById('article-modal-bd-section').style.display = hideBd ? 'no
 document.getElementById('article-modal-link').href = item.url || '#';
 articleBackdrop.classList.add('open');
 }
-// Esc → 양쪽 모달 모두 닫기
+// Esc → 양쪽 모달 모두 닫기 + drawer 닫기
 document.addEventListener('keydown', e => {
 if (e.key === 'Escape') {
 backdrop.classList.remove('open');
 articleBackdrop.classList.remove('open');
+const sb = document.getElementById('sidebar');
+const db = document.getElementById('drawer-backdrop');
+if (sb) sb.classList.remove('open');
+if (db) db.classList.remove('open');
 }
 });
 function renderCompany(c, newsItems) {
@@ -533,8 +592,22 @@ const targetTop = target.getBoundingClientRect().top
 - mainContent.getBoundingClientRect().top
 + mainContent.scrollTop;
 mainContent.scrollTo({ top: targetTop - (containerH / 2) + (targetH / 2), behavior: 'smooth' });
+closeDrawer();
 });
 });
+// ── Mobile drawer ────────────────────────────────────────────────────
+const drawerBackdrop = document.getElementById('drawer-backdrop');
+const hamburger = document.getElementById('hamburger');
+function openDrawer() {
+sidebar.classList.add('open');
+drawerBackdrop.classList.add('open');
+}
+function closeDrawer() {
+sidebar.classList.remove('open');
+drawerBackdrop.classList.remove('open');
+}
+hamburger.addEventListener('click', openDrawer);
+drawerBackdrop.addEventListener('click', closeDrawer);
 // Company header click → modal
 const allCompanies = [...COMPANIES.global, ...COMPANIES.korea];
 document.querySelectorAll('.company-header').forEach(el => {
