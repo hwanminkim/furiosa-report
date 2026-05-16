@@ -174,6 +174,7 @@ padding: 14px 16px;
 margin-bottom: 10px;
 text-decoration: none;
 color: inherit;
+cursor: pointer;
 transition: border-color 0.15s;
 }
 .hl-card.linked:hover { border-color: var(--red); }
@@ -308,14 +309,15 @@ transition: border-color 0.15s, color 0.15s;
 .modal-close:hover { border-color: #555; color: var(--text); }
 /* ── Article modal (wider) ── */
 .modal.article-modal {
-width: 460px;
+width: 600px;
 max-width: calc(100vw - 40px);
 max-height: 84vh;
 overflow-y: auto;
+padding: 28px 32px;
 }
 .article-modal-company {
 font-family: 'ABCFavorit', sans-serif;
-font-size: 0.62rem;
+font-size: 0.78rem;
 font-weight: 700;
 letter-spacing: 0.1em;
 text-transform: uppercase;
@@ -325,13 +327,13 @@ margin-bottom: 4px;
 }
 .article-modal-date {
 font-family: 'ABCFavorit', sans-serif;
-font-size: 0.7rem;
+font-size: 0.82rem;
 color: var(--muted);
 display: block;
 margin-bottom: 10px;
 }
 .article-modal-title {
-font-size: 1rem;
+font-size: 1.15rem;
 font-weight: 600;
 line-height: 1.45;
 margin-bottom: 18px;
@@ -340,7 +342,7 @@ color: #fff;
 .article-section { margin-bottom: 14px; }
 .article-section-label {
 font-family: 'ABCFavorit', sans-serif;
-font-size: 0.6rem;
+font-size: 0.78rem;
 font-weight: 700;
 letter-spacing: 0.1em;
 text-transform: uppercase;
@@ -348,9 +350,9 @@ color: var(--red);
 margin-bottom: 5px;
 }
 .article-section-body {
-font-size: 0.9rem;
+font-size: 1rem;
 color: #D0D0D0;
-line-height: 1.55;
+line-height: 1.6;
 white-space: pre-wrap;
 }
 </style>
@@ -412,7 +414,7 @@ white-space: pre-wrap;
 <div class="article-section-label">요약</div>
 <div class="article-section-body" id="article-modal-summary"></div>
 </div>
-<div class="article-section">
+<div class="article-section" id="article-modal-bd-section">
 <div class="article-section-label">Furiosa BD 시점</div>
 <div class="article-section-body" id="article-modal-bd"></div>
 </div>
@@ -454,12 +456,13 @@ backdrop.classList.add('open');
 const articleBackdrop = document.getElementById('article-backdrop');
 document.getElementById('article-modal-close').addEventListener('click', () => articleBackdrop.classList.remove('open'));
 articleBackdrop.addEventListener('click', e => { if (e.target === articleBackdrop) articleBackdrop.classList.remove('open'); });
-function openArticleModal(item, companyName) {
+function openArticleModal(item, companyName, hideBd = false) {
 document.getElementById('article-modal-company').textContent = companyName;
 document.getElementById('article-modal-date').textContent = item.date || '';
 document.getElementById('article-modal-title').textContent = item.title || '';
 document.getElementById('article-modal-summary').textContent = item.summary || '(요약 없음 — 다음 업데이트에서 생성됩니다)';
 document.getElementById('article-modal-bd').textContent = item.bd_perspective || '(BD 시점 없음 — 다음 업데이트에서 생성됩니다)';
+document.getElementById('article-modal-bd-section').style.display = hideBd ? 'none' : '';
 document.getElementById('article-modal-link').href = item.url || '#';
 articleBackdrop.classList.add('open');
 }
@@ -570,16 +573,23 @@ if (!items || items.length === 0) {
 el.innerHTML = '<div class="empty-note">No Update</div>';
 return;
 }
-el.innerHTML = items.map(a => {
+el.innerHTML = items.map((a, i) => {
 const title = escapeHtml(a.title);
-const url = escapeHtml(a.url);
 const date = escapeHtml(a.date || '');
 return `
-<a class="hl-card linked furiosa-card" href="${url}" target="_blank" rel="noopener">
+<div class="hl-card linked furiosa-card" data-idx="${i}">
 ${date ? `<span class="hl-card-date">${date}</span>` : ''}
-<span class="hl-card-text">${title} <span class="item-arrow">↗</span></span>
-</a>`;
+<span class="hl-card-text">${title} <span class="item-arrow">ⓘ</span></span>
+</div>`;
 }).join('');
+// 클릭 시 모달 (BD 시점 숨김)
+el.querySelectorAll('.hl-card').forEach(card => {
+card.addEventListener('click', () => {
+const idx = Number(card.dataset.idx);
+const item = items[idx];
+if (item) openArticleModal(item, 'FURIOSA', true);
+});
+});
 }
 // Load report.json
 fetch('report.json').then(r => r.json()).then(d => {
