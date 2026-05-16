@@ -28,11 +28,11 @@ REPO_ROOT = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
 
 COMPANIES = [
-    {"name": "NVIDIA", "region": "global", "query": "NVIDIA AI chip GPU inference", "lang": "en"},
-    {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent AI chip RISC-V", "lang": "en"},
-    {"name": "Groq", "region": "global", "query": "Groq AI inference chip LPU", "lang": "en"},
-    {"name": "SambaNova", "region": "global", "query": "SambaNova AI chip RDU", "lang": "en"},
-    {"name": "Cerebras", "region": "global", "query": "Cerebras AI chip wafer", "lang": "en"},
+    {"name": "NVIDIA", "region": "global", "query": "NVIDIA", "lang": "en"},
+    {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent", "lang": "en"},
+    {"name": "Groq", "region": "global", "query": "Groq", "lang": "en"},
+    {"name": "SambaNova", "region": "global", "query": "SambaNova", "lang": "en"},
+    {"name": "Cerebras", "region": "global", "query": "Cerebras", "lang": "en"},
     # 한국 회사: Naver는 띄어쓴 키워드를 AND로 처리 → 회사명만 단순하게 (OR로 한/영 표기 합침)
     {"name": "Rebellions", "region": "korea", "query": "리벨리온", "lang": "ko"},
     {"name": "DeepX", "region": "korea", "query": "딥엑스 OR DeepX", "lang": "ko"},
