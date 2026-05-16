@@ -430,10 +430,30 @@ z-index: 30;
 padding: 0;
 }
 .theme-toggle:hover { border-color: var(--muted); }
+.theme-toggle-mobile { display: none; }
 
 @media (max-width: 640px) {
 header { padding: 0 16px; }
 .hamburger { display: block; }
+
+/* 데스크탑용 fixed 토글은 모바일에서 숨김 */
+#theme-toggle { display: none; }
+
+/* 모바일용 토글: drawer 바닥에 고정, drawer 열린 상태에서만 보임 */
+.theme-toggle-mobile {
+display: flex;
+position: fixed;
+bottom: 18px;
+left: 18px;
+z-index: 101;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.2s ease;
+}
+.theme-toggle-mobile.visible {
+opacity: 1;
+pointer-events: auto;
+}
 
 /* sidebar → drawer */
 aside {
@@ -538,6 +558,7 @@ h1 { font-size: 1.7rem; }
 </div>
 </div>
 <button class="theme-toggle" id="theme-toggle" aria-label="테마 전환"></button>
+<button class="theme-toggle theme-toggle-mobile" id="theme-toggle-mobile" aria-label="테마 전환"></button>
 <script>
 const COMPANIES = {
 global: [
@@ -585,8 +606,10 @@ backdrop.classList.remove('open');
 articleBackdrop.classList.remove('open');
 const sb = document.getElementById('sidebar');
 const db = document.getElementById('drawer-backdrop');
+const tm = document.getElementById('theme-toggle-mobile');
 if (sb) sb.classList.remove('open');
 if (db) db.classList.remove('open');
+if (tm) tm.classList.remove('visible');
 }
 });
 function renderCompany(c, newsItems) {
@@ -655,13 +678,16 @@ closeDrawer();
 // ── Mobile drawer ────────────────────────────────────────────────────
 const drawerBackdrop = document.getElementById('drawer-backdrop');
 const hamburger = document.getElementById('hamburger');
+const themeToggleMobile = document.getElementById('theme-toggle-mobile');
 function openDrawer() {
 sidebar.classList.add('open');
 drawerBackdrop.classList.add('open');
+themeToggleMobile.classList.add('visible');
 }
 function closeDrawer() {
 sidebar.classList.remove('open');
 drawerBackdrop.classList.remove('open');
+themeToggleMobile.classList.remove('visible');
 }
 hamburger.addEventListener('click', () => {
 if (sidebar.classList.contains('open')) {
@@ -673,12 +699,15 @@ openDrawer();
 drawerBackdrop.addEventListener('click', closeDrawer);
 // ── Theme toggle ─────────────────────────────────────────────────────
 const themeToggle = document.getElementById('theme-toggle');
+const themeToggleM = document.getElementById('theme-toggle-mobile');
 function getTheme() {
 return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
 }
 function updateThemeToggleIcon() {
 // 다크일 땐 ☼ (라이트로 전환 hint), 라이트일 땐 ☽
-themeToggle.textContent = getTheme() === 'dark' ? '☼' : '☽';
+const icon = getTheme() === 'dark' ? '☼' : '☽';
+themeToggle.textContent = icon;
+themeToggleM.textContent = icon;
 }
 function setTheme(theme) {
 if (theme === 'light') {
@@ -689,9 +718,11 @@ document.documentElement.removeAttribute('data-theme');
 try { localStorage.setItem('theme', theme); } catch(e) {}
 updateThemeToggleIcon();
 }
-themeToggle.addEventListener('click', () => {
+function toggleTheme() {
 setTheme(getTheme() === 'dark' ? 'light' : 'dark');
-});
+}
+themeToggle.addEventListener('click', toggleTheme);
+themeToggleM.addEventListener('click', toggleTheme);
 updateThemeToggleIcon();
 // Company header click → modal
 const allCompanies = [...COMPANIES.global, ...COMPANIES.korea];
