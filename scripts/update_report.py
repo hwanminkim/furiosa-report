@@ -132,6 +132,59 @@ def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
     return results
 
 
+def _parse_gdelt_seendate(raw: str) -> datetime.datetime | None:
+    """GDELT seendate 형식: YYYYMMDDTHHMMSSZ → UTC datetime."""
+    if not raw or len(raw) < 15:
+        return None
+    try:
+        dt = datetime.datetime.strptime(raw, "%Y%m%dT%H%M%SZ")
+        return dt.replace(tzinfo=pytz.utc)
+    except Exception:
+        return None
+
+
+def _fetch_gdelt(query: str, n: int) -> list[dict]:
+    """
+    GDELT 2.0 DOC API fetcher (English news).
+    Endpoint: https://api.gdeltproject.org/api/v2/doc/doc
+    No API key required.
+    Sort by latest date (DateDesc), timespan 30d, English only.
+    """
+    full_query = f"{query} sourcelang:eng"
+    url = (
+        "https://api.gdeltproject.org/api/v2/doc/doc"
+        f"?query={quote(full_query)}"
+        f"&mode=ArtList"
+        f"&maxrecords={n}"
+        f"&format=json"
+        f"&sort=DateDesc"
+        f"&timespan=30d"
+    )
+    req = Request(url, headers={
+        "User-Agent": "Mozilla/5.0 (compatible; FuriosaReport/1.0)",
+    })
+    try:
+        with urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except Exception as e:
+        print(f"  [gdelt-skip] {query}: {e}")
+        return []
+
+    results = []
+    for item in (data.get("articles") or [])[:n]:
+        title = (item.get("title") or "").strip()
+        link = (item.get("url") or "").strip()
+        pub_dt = _parse_gdelt_seendate(item.get("seendate") or "")
+        if title and link:
+            results.append({
+                "title": title,
+                "url": link,
+                "pub_dt": pub_dt,
+                "description": "",  # GDELT doesn't provide article snippet in ArtList mode
+            })
+    return results
+
+
 def _fetch_naver(query: str, n: int) -> list[dict]:
     """
     Naver News API fetcher. Requires NAVER_CLIENT_ID / NAVER_CLIENT_SECRET env vars.
@@ -181,7 +234,7 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
 
 def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
     """
-    Dispatch to Naver (Korean) or Google (English).
+    Dispatch to Naver (Korean) or GDELT (English, with Google fallback).
     Korean queries fall back to Google if Naver creds are missing.
     """
     if lang == "ko":
@@ -192,6 +245,11 @@ def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
         if not os.environ.get("NAVER_CLIENT_ID"):
             print(f"  [info] NAVER creds missing, using Google for: {query}")
         return _fetch_google(query, lang, n)
+    # English: GDELT (date-sorted, latest news) → Google fallback if empty
+    items = _fetch_gdelt(query, n)
+    if items:
+        return items
+    print(f"  [info] GDELT empty for: {query}, falling back to Google")
     return _fetch_google(query, lang, n)
 
 
