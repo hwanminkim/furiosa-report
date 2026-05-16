@@ -20,28 +20,29 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import quote
 from urllib.request import urlopen, Request
+
 import pytz
 from openai import OpenAI
 
-REPO_ROOT   = Path(__file__).parent.parent
+REPO_ROOT = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
 
 COMPANIES = [
-    {"name": "NVIDIA",      "region": "global", "query": "NVIDIA AI chip GPU inference",  "lang": "en"},
-    {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent AI chip RISC-V",    "lang": "en"},
-    {"name": "Groq",        "region": "global", "query": "Groq AI inference chip LPU",    "lang": "en"},
-    {"name": "SambaNova",   "region": "global", "query": "SambaNova AI chip RDU",         "lang": "en"},
-    {"name": "Cerebras",    "region": "global", "query": "Cerebras AI chip wafer",        "lang": "en"},
+    {"name": "NVIDIA", "region": "global", "query": "NVIDIA AI chip GPU inference", "lang": "en"},
+    {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent AI chip RISC-V", "lang": "en"},
+    {"name": "Groq", "region": "global", "query": "Groq AI inference chip LPU", "lang": "en"},
+    {"name": "SambaNova", "region": "global", "query": "SambaNova AI chip RDU", "lang": "en"},
+    {"name": "Cerebras", "region": "global", "query": "Cerebras AI chip wafer", "lang": "en"},
     # 한국 회사: Naver는 띄어쓴 키워드를 AND로 처리 → 회사명만 단순하게 (OR로 한/영 표기 합침)
-    {"name": "Rebellions",  "region": "korea",  "query": "리벨리온",                       "lang": "ko"},
-    {"name": "DeepX",       "region": "korea",  "query": "딥엑스 OR DeepX",                "lang": "ko"},
-    {"name": "HyperAccel",  "region": "korea",  "query": "하이퍼엑셀 OR HyperAccel",        "lang": "ko"},
-    {"name": "Mobilint",    "region": "korea",  "query": "모빌린트 OR Mobilint",            "lang": "ko"},
+    {"name": "Rebellions", "region": "korea", "query": "리벨리온", "lang": "ko"},
+    {"name": "DeepX", "region": "korea", "query": "딥엑스 OR DeepX", "lang": "ko"},
+    {"name": "HyperAccel", "region": "korea", "query": "하이퍼엑셀 OR HyperAccel", "lang": "ko"},
+    {"name": "Mobilint", "region": "korea", "query": "모빌린트 OR Mobilint", "lang": "ko"},
 ]
 
 FURIOSA_QUERIES = [
-    ('FuriosaAI OR furiosa ai OR furiosa AI OR "Furiosa AI" chip', "en"),
-    ('퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
+    ('FuriosaAI OR "Furiosa AI" chip', "en"),
+    ('퓨리오사 OR 퓨리오사AI OR FuriosaAI', "ko"),
 ]
 
 
@@ -52,8 +53,8 @@ def gnews_url(query: str, lang: str) -> str:
 
 
 _TITLE_SOURCE_SUFFIX = re.compile(r"\s+[-|–—·]\s+[^-|–—·]+$")
-_TITLE_NON_WORD       = re.compile(r"[^\w가-힣\s]", flags=re.UNICODE)
-_TITLE_WHITESPACE     = re.compile(r"\s+")
+_TITLE_NON_WORD = re.compile(r"[^\w가-힣\s]", flags=re.UNICODE)
+_TITLE_WHITESPACE = re.compile(r"\s+")
 
 
 def normalize_title(title: str) -> str:
@@ -118,13 +119,13 @@ def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
     results = []
     for item in root.findall(".//item")[:n]:
         title = (item.findtext("title") or "").strip()
-        link  = (item.findtext("link")  or "").strip()
-        desc  = _strip_html(item.findtext("description") or "")
+        link = (item.findtext("link") or "").strip()
+        desc = _strip_html(item.findtext("description") or "")
         pub_dt = parse_pub_datetime(item.findtext("pubDate") or "")
         if title and link:
             results.append({
-                "title":  title,
-                "url":    link,
+                "title": title,
+                "url": link,
                 "pub_dt": pub_dt,
                 "description": desc,
             })
@@ -139,7 +140,7 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
     Naver query syntax differs slightly from Google ("OR" → "|"), so we translate.
     Sort: "sim" (relevance) — closest to a popularity proxy. Use "date" if newest-first.
     """
-    cid  = os.environ.get("NAVER_CLIENT_ID")
+    cid = os.environ.get("NAVER_CLIENT_ID")
     csec = os.environ.get("NAVER_CLIENT_SECRET")
     if not cid or not csec:
         return []
@@ -195,9 +196,9 @@ def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
 
 
 def build_period(now: datetime.datetime) -> str:
-    today      = now.date()
+    today = now.date()
     week_start = today - datetime.timedelta(days=today.weekday())
-    days_ko    = ["(월)", "(화)", "(수)", "(목)", "(금)", "(토)", "(일)"]
+    days_ko = ["(월)", "(화)", "(수)", "(목)", "(금)", "(토)", "(일)"]
     return (f"{week_start.strftime('%Y-%m-%d')}{days_ko[week_start.weekday()]} "
             f"~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}")
 
@@ -206,7 +207,6 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
     """
     Group articles that report the same news event and return one representative
     per group (preserving the original Google News order).
-
     Falls back to the original list on any failure (network, parse, model error).
     """
     if client is None or len(articles) < 2:
@@ -214,6 +214,7 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
 
     numbered = "\n".join(f"[{i}] {a['title']}" for i, a in enumerate(articles))
     prompt = f"""다음은 Furiosa AI 관련 뉴스 제목 목록입니다. 각 줄은 [번호] 제목 형식.
+
 같은 사건(같은 발표, 같은 인사이동, 같은 정책 등)을 다룬 제목들을 같은 클러스터로 묶어주세요.
 표현이 달라도 핵심 사실이 같으면 같은 클러스터입니다.
 다른 사건이면 각각 별도 클러스터입니다.
@@ -245,7 +246,6 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
                 max_tokens=600,
                 temperature=0.1,
             )
-
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
@@ -263,19 +263,15 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
                 kept_indices.append(rep)
             for i in valid:
                 used.add(i)
-
         # 클러스터에 포함되지 않은 항목은 별도 클러스터로 살림
         for i in range(len(articles)):
             if i not in used:
                 kept_indices.append(i)
-
         kept_indices.sort()
         deduped = [articles[i] for i in kept_indices]
-
         print(f"  LLM clustering: {len(articles)} → {len(deduped)} articles "
               f"({len(articles) - len(deduped)} merged)")
         return deduped
-
     except Exception as e:
         print(f"  [warn] LLM clustering failed, falling back to raw dedup: {e}")
         return articles
@@ -286,11 +282,11 @@ def to_output(a: dict, kst: pytz.BaseTzInfo, include_brief: bool = False) -> dic
     include_brief=True 면 summary / bd_perspective 도 함께 포함 (회사 기사용)."""
     out = {
         "title": a["title"],
-        "url":   a["url"],
-        "date":  format_date_kst(a.get("pub_dt"), kst),
+        "url": a["url"],
+        "date": format_date_kst(a.get("pub_dt"), kst),
     }
     if include_brief:
-        out["summary"]        = a.get("summary", "")
+        out["summary"] = a.get("summary", "")
         out["bd_perspective"] = a.get("bd_perspective", "")
     return out
 
@@ -317,10 +313,11 @@ def generate_briefs(articles_with_company: list[tuple], client: "OpenAI | None")
 Furiosa's competitors include NVIDIA, Groq, Cerebras, SambaNova, Tenstorrent (global)
 and Rebellions, DeepX, HyperAccel, Mobilint (Korea).
 
-For each competitor news article below, produce two short Korean sentences:
-- "summary": 1문장, 사실 위주, 최대 80자.
+For each competitor news article below, produce two Korean fields:
+- "summary": 3문장, 사실 위주로 핵심 내용을 충분히 풀어쓰기. 총 약 300자 (250~350자). 무엇이/언제/어떻게/왜 중요한지 포함.
 - "bd_perspective": 1문장, Furiosa BD 관점에서 이 뉴스가 갖는 의미(기회/위협/시장 시그널), 최대 100자.
-  진부한 일반론 금지. 구체적인 함의 위주.
+
+진부한 일반론 금지. 구체적인 함의 위주.
 
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
@@ -338,7 +335,7 @@ Rules:
             resp = client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=2500,
+                max_tokens=6000,
                 temperature=0.3,
                 response_format={"type": "json_object"},
             )
@@ -347,10 +344,9 @@ Rules:
             resp = client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=2500,
+                max_tokens=6000,
                 temperature=0.3,
             )
-
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
@@ -362,13 +358,11 @@ Rules:
                 continue
             company, a = articles_with_company[idx]
             out[(company, a["url"])] = {
-                "summary":        (entry.get("summary") or "").strip(),
+                "summary": (entry.get("summary") or "").strip(),
                 "bd_perspective": (entry.get("bd_perspective") or "").strip(),
             }
-
         print(f"  Briefs generated for {len(out)}/{len(articles_with_company)} articles")
         return out
-
     except Exception as e:
         print(f"  [warn] brief generation failed, falling back to empty: {e}")
         return {}
@@ -378,9 +372,8 @@ def main():
     kst = pytz.timezone("Asia/Seoul")
     now = datetime.datetime.now(kst)
     now_utc = now.astimezone(pytz.utc)
-    daily_cutoff  = now_utc - datetime.timedelta(hours=24)
+    daily_cutoff = now_utc - datetime.timedelta(hours=24)
     weekly_cutoff = now_utc - datetime.timedelta(days=7)
-
     print(f"[{now.strftime('%Y-%m-%d %H:%M KST')}] Starting report update...")
 
     # OpenAI client (GitHub Models gpt-4o-mini). 없으면 None → AI 단계 skip.
@@ -392,15 +385,24 @@ def main():
         print("  [warn] GITHUB_TOKEN not set: skipping AI clustering & briefs")
 
     # ── 1. Competitor news (raw) ─────────────────────────────────────────
+    # 30일 필터링 후에도 최대 3개를 확보하기 위해 더 많이 받아온다.
+    COMPETITOR_CUTOFF_DAYS = 30
+    COMPETITOR_MAX_ITEMS = 3
+    competitor_cutoff = now_utc - datetime.timedelta(days=COMPETITOR_CUTOFF_DAYS)
+
     companies_raw = []
     for co in COMPANIES:
-        articles = fetch_articles(co["query"], co["lang"], n=3)
+        fetched = fetch_articles(co["query"], co["lang"], n=20)
+        # 최근 N일 내 기사만 유지. pub_dt 없는 기사는 제외 (Furiosa 필터링과 동일 방식).
+        recent = [a for a in fetched
+                  if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
+        articles = recent[:COMPETITOR_MAX_ITEMS]
         companies_raw.append({
-            "name":     co["name"],
-            "region":   co["region"],
+            "name": co["name"],
+            "region": co["region"],
             "articles": articles,
         })
-        print(f"  {co['name']}: {len(articles)} articles")
+        print(f"  {co['name']}: {len(articles)} articles (fetched={len(fetched)}, in {COMPETITOR_CUTOFF_DAYS}d={len(recent)})")
 
     # ── 1.5 LLM 요약 + Furiosa BD 시점 생성 (1회 batch 호출) ──────────────
     all_pairs = [(c["name"], a) for c in companies_raw for a in c["articles"]]
@@ -409,24 +411,23 @@ def main():
         for a in c["articles"]:
             key = (c["name"], a["url"])
             if key in briefs:
-                a["summary"]        = briefs[key]["summary"]
+                a["summary"] = briefs[key]["summary"]
                 a["bd_perspective"] = briefs[key]["bd_perspective"]
 
     companies_out = [
         {
-            "name":   c["name"],
+            "name": c["name"],
             "region": c["region"],
-            "items":  [to_output(a, kst, include_brief=True) for a in c["articles"]],
+            "items": [to_output(a, kst, include_brief=True) for a in c["articles"]],
         }
         for c in companies_raw
     ]
 
     # ── 2. Furiosa daily / weekly (raw RSS, deduped by URL + normalized title) ──
-    DAILY_LIMIT  = 5
+    DAILY_LIMIT = 5
     WEEKLY_LIMIT = 5
-
     all_furiosa: list[dict] = []
-    seen_urls   = set()
+    seen_urls = set()
     seen_titles = set()
     for query, lang in FURIOSA_QUERIES:
         for a in fetch_articles(query, lang, n=30):
@@ -456,7 +457,6 @@ def main():
 
     # 일간: 최근 24시간 top N
     furiosa_daily = [a for a in all_furiosa if in_window(a, daily_cutoff)][:DAILY_LIMIT]
-
     # 주간: 최근 7일 중 일간에 이미 들어간 건 제외하고 top N
     daily_urls = {a["url"] for a in furiosa_daily}
     furiosa_weekly = [
@@ -468,16 +468,15 @@ def main():
 
     # ── 3. Write report.json ─────────────────────────────────────────────
     report = {
-        "period":         build_period(now),
-        "updated_at":     now.isoformat(),
-        "furiosa_daily":  [to_output(a, kst) for a in furiosa_daily],
+        "period": build_period(now),
+        "updated_at": now.isoformat(),
+        "furiosa_daily": [to_output(a, kst) for a in furiosa_daily],
         "furiosa_weekly": [to_output(a, kst) for a in furiosa_weekly],
-        "companies":      companies_out,
+        "companies": companies_out,
     }
 
     with open(REPORT_PATH, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
-
     print(f"Done. {len(report['furiosa_daily'])} daily / {len(report['furiosa_weekly'])} weekly.")
 
 
