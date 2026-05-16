@@ -277,9 +277,11 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
         return articles
 
 
-def to_output(a: dict, kst: pytz.BaseTzInfo, include_brief: bool = False) -> dict:
+def to_output(a: dict, kst: pytz.BaseTzInfo, include_brief: bool = False,
+              include_summary_only: bool = False) -> dict:
     """Strip non-JSON-serializable fields and format date for display.
-    include_brief=True 면 summary / bd_perspective 도 함께 포함 (회사 기사용)."""
+    include_brief=True 면 summary / bd_perspective 도 함께 포함 (회사 기사용).
+    include_summary_only=True 면 summary 만 포함 (Furiosa 기사용)."""
     out = {
         "title": a["title"],
         "url": a["url"],
@@ -288,6 +290,8 @@ def to_output(a: dict, kst: pytz.BaseTzInfo, include_brief: bool = False) -> dic
     if include_brief:
         out["summary"] = a.get("summary", "")
         out["bd_perspective"] = a.get("bd_perspective", "")
+    elif include_summary_only:
+        out["summary"] = a.get("summary", "")
     return out
 
 
@@ -365,6 +369,76 @@ Rules:
         return out
     except Exception as e:
         print(f"  [warn] brief generation failed, falling back to empty: {e}")
+        return {}
+
+
+def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") -> dict:
+    """
+    Furiosa 자체 뉴스에 대해 1회 batch LLM 호출로 요약만 생성.
+    BD 시점은 안 만든다 (Furiosa 본인 뉴스이므로 무의미, 토큰 절약).
+    반환: {url: summary} 딕셔너리. 실패 시 빈 dict.
+    """
+    if client is None or not articles:
+        return {}
+
+    items_in = []
+    for i, a in enumerate(articles):
+        items_in.append({
+            "id": i,
+            "title": a.get("title", ""),
+            "snippet": (a.get("description") or "")[:240],
+        })
+
+    prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
+
+각 기사에 대해 한국어 요약을 만들어 주세요:
+- "summary": 3문장, 사실 위주로 핵심 내용을 충분히 풀어쓰기. 총 약 300자 (250~350자). 무엇이/언제/어떻게/왜 중요한지 포함.
+
+진부한 일반론 금지. 구체적인 함의 위주.
+
+Input articles:
+{json.dumps(items_in, ensure_ascii=False)}
+
+Return JSON ONLY:
+{{"items": [{{"id": 0, "summary": "..."}}, ...]}}
+
+Rules:
+- 모든 id가 정확히 한 번씩 포함되어야 함.
+- 한국어만.
+- 정보가 부족하면 추측하지 말고 "추가 정보 필요" 같이 명시."""
+
+    try:
+        try:
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=6000,
+                temperature=0.3,
+                response_format={"type": "json_object"},
+            )
+        except Exception as e:
+            print(f"  [warn] response_format unsupported for furiosa summaries, retrying: {e}")
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=6000,
+                temperature=0.3,
+            )
+        raw = resp.choices[0].message.content or ""
+        m = re.search(r"\{[\s\S]*\}", raw)
+        data = json.loads(m.group() if m else raw)
+
+        out: dict = {}
+        for entry in data.get("items", []):
+            idx = entry.get("id")
+            if not isinstance(idx, int) or not (0 <= idx < len(articles)):
+                continue
+            a = articles[idx]
+            out[a["url"]] = (entry.get("summary") or "").strip()
+        print(f"  Furiosa summaries generated for {len(out)}/{len(articles)} articles")
+        return out
+    except Exception as e:
+        print(f"  [warn] furiosa summary generation failed, falling back to empty: {e}")
         return {}
 
 
@@ -466,12 +540,19 @@ def main():
 
     print(f"  Furiosa: total={len(all_furiosa)}, daily(24h)={len(furiosa_daily)}, weekly(7d)={len(furiosa_weekly)}")
 
+    # ── 2.6 Furiosa 기사 요약 생성 (1회 batch 호출, BD 시점은 안 만듦) ────
+    furiosa_articles = furiosa_daily + furiosa_weekly
+    furiosa_summaries = generate_furiosa_summaries(furiosa_articles, client)
+    for a in furiosa_articles:
+        if a["url"] in furiosa_summaries:
+            a["summary"] = furiosa_summaries[a["url"]]
+
     # ── 3. Write report.json ─────────────────────────────────────────────
     report = {
         "period": build_period(now),
         "updated_at": now.isoformat(),
-        "furiosa_daily": [to_output(a, kst) for a in furiosa_daily],
-        "furiosa_weekly": [to_output(a, kst) for a in furiosa_weekly],
+        "furiosa_daily": [to_output(a, kst, include_summary_only=True) for a in furiosa_daily],
+        "furiosa_weekly": [to_output(a, kst, include_summary_only=True) for a in furiosa_weekly],
         "companies": companies_out,
     }
 
