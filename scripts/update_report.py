@@ -528,6 +528,8 @@ def main():
         # 최근 N일 내 기사만 유지. pub_dt 없는 기사는 제외 (Furiosa 필터링과 동일 방식).
         recent = [a for a in fetched
                   if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
+        # 최신순 정렬 (각 소스의 기본 정렬을 신뢰하지 않고 명시적으로 내림차순).
+        recent.sort(key=lambda a: a["pub_dt"], reverse=True)
         articles = recent[:COMPETITOR_MAX_ITEMS]
         companies_raw.append({
             "name": co["name"],
@@ -587,14 +589,25 @@ def main():
         all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls
                        or not in_window(a, weekly_cutoff)]
 
-    # 일간: 최근 24시간 top N
-    furiosa_daily = [a for a in all_furiosa if in_window(a, daily_cutoff)][:DAILY_LIMIT]
-    # 주간: 최근 7일 중 일간에 이미 들어간 건 제외하고 top N
+    # 일간/주간: pub_dt 내림차순 (최신순) 정렬 후 top N
+    # pub_dt가 None인 기사는 in_window에서 이미 걸러지므로 안전.
+    def sort_key(a: dict):
+        return a["pub_dt"]
+
+    # 일간: 최근 24시간 top N (최신순)
+    furiosa_daily = sorted(
+        [a for a in all_furiosa if in_window(a, daily_cutoff)],
+        key=sort_key,
+        reverse=True,
+    )[:DAILY_LIMIT]
+    # 주간: 최근 7일 중 일간에 이미 들어간 건 제외하고 top N (최신순)
     daily_urls = {a["url"] for a in furiosa_daily}
-    furiosa_weekly = [
-        a for a in all_furiosa
-        if in_window(a, weekly_cutoff) and a["url"] not in daily_urls
-    ][:WEEKLY_LIMIT]
+    furiosa_weekly = sorted(
+        [a for a in all_furiosa
+         if in_window(a, weekly_cutoff) and a["url"] not in daily_urls],
+        key=sort_key,
+        reverse=True,
+    )[:WEEKLY_LIMIT]
 
     print(f"  Furiosa: total={len(all_furiosa)}, daily(24h)={len(furiosa_daily)}, weekly(7d)={len(furiosa_weekly)}")
 
