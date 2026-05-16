@@ -5,628 +5,622 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Furiosa BD 경쟁사 동향 리포트</title>
 <style>
-  @font-face {
-    font-family: 'ABCFavorit';
-    src: url('assets/fonts/ABCFavorit-Regular.otf') format('opentype');
-    font-weight: 400;
-  }
-  @font-face {
-    font-family: 'ABCFavorit';
-    src: url('assets/fonts/ABCFavorit-Medium.otf') format('opentype');
-    font-weight: 500;
-  }
-  @font-face {
-    font-family: 'ABCFavorit';
-    src: url('assets/fonts/ABCFavorit-Bold.otf') format('opentype');
-    font-weight: 700;
-  }
-  @font-face {
-    font-family: 'ABCFavoritHangul';
-    src: url('assets/fonts/ABCFavoritHangul-Regular.otf') format('opentype');
-    font-weight: 400;
-  }
-  @font-face {
-    font-family: 'ABCFavoritHangul';
-    src: url('assets/fonts/ABCFavoritHangul-Medium.otf') format('opentype');
-    font-weight: 500;
-  }
-  @font-face {
-    font-family: 'ABCFavoritHangul';
-    src: url('assets/fonts/ABCFavoritHangul-Bold.otf') format('opentype');
-    font-weight: 700;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --red: #E21500;
-    --black: #0D0D0D;
-    --card: #1A1A1A;
-    --border: #2A2A2A;
-    --text: #F0F0F0;
-    --muted: #777;
-    --header-h: 64px;
-  }
-  html, body { height: 100%; overflow: hidden; }
-  body {
-    font-family: 'ABCFavoritHangul', 'ABCFavorit', -apple-system, sans-serif;
-    background: var(--black);
-    color: var(--text);
-    display: flex;
-    flex-direction: column;
-  }
-  /* ── Header ── */
-  header {
-    height: var(--header-h);
-    flex-shrink: 0;
-    border-bottom: 1px solid var(--border);
-    padding: 0 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--black);
-    z-index: 10;
-  }
-  header a { display: block; line-height: 0; }
-  header img { height: 26px; }
-  .header-tag {
-    font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 2px;
-  }
-  /* ── Layout ── */
-  .layout { flex: 1; display: flex; overflow: hidden; }
-  /* ── Sidebar ── */
-  aside {
-    width: 188px;
-    flex-shrink: 0;
-    border-right: 1px solid var(--border);
-    overflow-y: auto;
-    padding: 28px 0 40px;
-  }
-  .sidebar-label {
-    font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    padding: 0 20px 8px;
-  }
-  .sidebar-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 16px 20px;
-  }
-  .sidebar-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 20px;
-    font-size: 0.92rem;
-    color: #999;
-    cursor: pointer;
-    transition: color 0.15s, background 0.1s;
-    border-left: 2px solid transparent;
-  }
-  .sidebar-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
-  .sidebar-item.active {
-    color: var(--text);
-    border-left-color: var(--red);
-    background: rgba(226,21,0,0.06);
-  }
-  .sidebar-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--red);
-    flex-shrink: 0;
-  }
-  /* ── Main ── */
-  main {
-    flex: 1;
-    overflow-y: auto;
-    padding: 36px 40px 80px;
-  }
-  .page-eyebrow {
-    font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 10px;
-  }
-  h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; }
-  .meta {
-    font-size: 0.88rem;
-    color: var(--muted);
-    margin-bottom: 36px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--border);
-  }
-  .section-label {
-    font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 12px;
-  }
-  /* ── Furiosa news grid ── */
-  .top-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 36px;
-  }
-  .hl-card {
-    display: block;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.15s;
-  }
-  .hl-card.linked:hover { border-color: var(--red); }
-  .hl-card.furiosa-card { border-left: 2px solid var(--red); }
-  .hl-card-date {
-    font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    display: block;
-    margin-bottom: 5px;
-  }
-  .hl-card-text { font-size: 0.92rem; color: #C8C8C8; line-height: 1.55; }
-  .item-arrow { font-size: 0.72rem; color: var(--muted); margin-left: 3px; }
-  .empty-note { font-size: 0.9rem; color: var(--muted); padding: 6px 2px; }
-  /* ── Company cards ── */
-  .company {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    margin-bottom: 10px;
-    background: var(--card);
-    transition: border-color 0.15s;
-    scroll-margin-top: 20px;
-  }
-  .company-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 18px;
-    cursor: pointer;
-    user-select: none;
-  }
-  .company-header:hover .company-name { color: #fff; }
-  .company-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--red);
-    flex-shrink: 0;
-  }
-  .company-name { font-size: 1rem; font-weight: 600; transition: color 0.15s; }
-  .header-chevron { margin-left: auto; font-size: 0.72rem; color: var(--muted); }
-  .company-body { padding: 4px 18px 14px; border-top: 1px solid var(--border); }
-  .news-item {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    padding: 7px 0;
-    border-bottom: 1px solid #222;
-  }
-  .news-item:last-child { border-bottom: none; }
-  .news-date {
-    font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.7rem;
-    color: var(--muted);
-    flex-shrink: 0;
-    min-width: 32px;
-  }
-  .news-title {
-    font-size: 0.88rem;
-    color: #C8C8C8;
-    line-height: 1.5;
-    text-decoration: none;
-    transition: color 0.15s;
-  }
-  .news-title:hover { color: #fff; }
-  .news-item.clickable { cursor: pointer; transition: background 0.1s; }
-  .news-item.clickable:hover { background: rgba(255,255,255,0.025); }
-  .news-title.as-text { color: #C8C8C8; text-decoration: none; transition: color 0.15s; }
-  .news-title.as-text:hover { color: #fff; }
-  .news-item-icon { font-size: 0.7rem; color: var(--muted); margin-left: 3px; }
-  /* ── Modal ── */
-  .modal-backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-  }
-  .modal-backdrop.open { display: flex; }
-  .modal {
-    background: #1E1E1E;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 24px;
-    width: 300px;
-    box-shadow: 0 24px 48px rgba(0,0,0,0.5);
-  }
-  .modal-title {
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 5px;
-  }
-  .modal-company { font-size: 1.1rem; font-weight: 700; margin-bottom: 18px; }
-  .modal-links { display: flex; flex-direction: column; gap: 8px; }
-  .modal-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 11px 14px;
-    border: 1px solid #333;
-    border-radius: 4px;
-    text-decoration: none;
-    color: var(--text);
-    font-size: 0.94rem;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .modal-link:hover { border-color: var(--red); background: rgba(226,21,0,0.06); }
-  .modal-link-icon { font-size: 1rem; width: 20px; text-align: center; }
-  .modal-link-label { flex: 1; }
-  .modal-link-arrow { font-size: 0.68rem; color: var(--muted); }
-  .modal-close {
-    display: block;
-    margin-top: 14px;
-    width: 100%;
-    padding: 8px;
-    background: none;
-    border: 1px solid #333;
-    border-radius: 4px;
-    color: var(--muted);
-    font-size: 0.78rem;
-    cursor: pointer;
-    font-family: inherit;
-    transition: border-color 0.15s, color 0.15s;
-  }
-  .modal-close:hover { border-color: #555; color: var(--text); }
-  /* ── Article modal (wider) ── */
-  .modal.article-modal {
-    width: 460px;
-    max-width: calc(100vw - 40px);
-    max-height: 84vh;
-    overflow-y: auto;
-  }
-  .article-modal-company {
-    font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--red);
-    display: block;
-    margin-bottom: 4px;
-  }
-  .article-modal-date {
-    font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.7rem;
-    color: var(--muted);
-    display: block;
-    margin-bottom: 10px;
-  }
-  .article-modal-title {
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.45;
-    margin-bottom: 18px;
-    color: #fff;
-  }
-  .article-section { margin-bottom: 14px; }
-  .article-section-label {
-    font-family: 'ABCFavorit', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 5px;
-  }
-  .article-section-body {
-    font-size: 0.9rem;
-    color: #D0D0D0;
-    line-height: 1.55;
-    white-space: pre-wrap;
-  }
+@font-face {
+font-family: 'ABCFavorit';
+src: url('assets/fonts/ABCFavorit-Regular.otf') format('opentype');
+font-weight: 400;
+}
+@font-face {
+font-family: 'ABCFavorit';
+src: url('assets/fonts/ABCFavorit-Medium.otf') format('opentype');
+font-weight: 500;
+}
+@font-face {
+font-family: 'ABCFavorit';
+src: url('assets/fonts/ABCFavorit-Bold.otf') format('opentype');
+font-weight: 700;
+}
+@font-face {
+font-family: 'ABCFavoritHangul';
+src: url('assets/fonts/ABCFavoritHangul-Regular.otf') format('opentype');
+font-weight: 400;
+}
+@font-face {
+font-family: 'ABCFavoritHangul';
+src: url('assets/fonts/ABCFavoritHangul-Medium.otf') format('opentype');
+font-weight: 500;
+}
+@font-face {
+font-family: 'ABCFavoritHangul';
+src: url('assets/fonts/ABCFavoritHangul-Bold.otf') format('opentype');
+font-weight: 700;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+--red: #E21500;
+--black: #0D0D0D;
+--card: #1A1A1A;
+--border: #2A2A2A;
+--text: #F0F0F0;
+--muted: #777;
+--header-h: 64px;
+}
+html, body { height: 100%; overflow: hidden; }
+body {
+font-family: 'ABCFavoritHangul', 'ABCFavorit', -apple-system, sans-serif;
+background: var(--black);
+color: var(--text);
+display: flex;
+flex-direction: column;
+}
+/* ── Header ── */
+header {
+height: var(--header-h);
+flex-shrink: 0;
+border-bottom: 1px solid var(--border);
+padding: 0 32px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: var(--black);
+z-index: 10;
+}
+header a { display: block; line-height: 0; }
+header img { height: 26px; }
+.header-tag {
+font-family: 'ABCFavorit', sans-serif;
+font-size: 0.68rem;
+font-weight: 500;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--muted);
+border: 1px solid var(--border);
+padding: 4px 10px;
+border-radius: 2px;
+}
+/* ── Layout ── */
+.layout { flex: 1; display: flex; overflow: hidden; }
+/* ── Sidebar ── */
+aside {
+width: 188px;
+flex-shrink: 0;
+border-right: 1px solid var(--border);
+overflow-y: auto;
+padding: 28px 0 40px;
+}
+.sidebar-label {
+font-family: 'ABCFavorit', sans-serif;
+font-size: 0.7rem;
+font-weight: 600;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--muted);
+padding: 0 20px 8px;
+}
+.sidebar-divider {
+border: none;
+border-top: 1px solid var(--border);
+margin: 16px 20px;
+}
+.sidebar-item {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 8px 20px;
+font-size: 0.92rem;
+color: #999;
+cursor: pointer;
+transition: color 0.15s, background 0.1s;
+border-left: 2px solid transparent;
+}
+.sidebar-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+.sidebar-item.active {
+color: var(--text);
+border-left-color: var(--red);
+background: rgba(226,21,0,0.06);
+}
+.sidebar-dot {
+width: 5px;
+height: 5px;
+border-radius: 50%;
+background: var(--red);
+flex-shrink: 0;
+}
+/* ── Main ── */
+main {
+flex: 1;
+overflow-y: auto;
+padding: 36px 40px 80px;
+}
+.page-eyebrow {
+font-family: 'ABCFavorit', sans-serif;
+font-size: 0.75rem;
+font-weight: 500;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--red);
+margin-bottom: 10px;
+}
+h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; }
+.meta {
+font-size: 0.88rem;
+color: var(--muted);
+margin-bottom: 36px;
+padding-bottom: 28px;
+border-bottom: 1px solid var(--border);
+}
+.section-label {
+font-family: 'ABCFavorit', sans-serif;
+font-size: 0.7rem;
+font-weight: 600;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--muted);
+margin-bottom: 12px;
+}
+/* ── Furiosa news grid ── */
+.top-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+margin-bottom: 36px;
+}
+.hl-card {
+display: block;
+background: var(--card);
+border: 1px solid var(--border);
+border-radius: 4px;
+padding: 14px 16px;
+margin-bottom: 10px;
+text-decoration: none;
+color: inherit;
+transition: border-color 0.15s;
+}
+.hl-card.linked:hover { border-color: var(--red); }
+.hl-card.furiosa-card { border-left: 2px solid var(--red); }
+.hl-card-date {
+font-family: 'ABCFavorit', sans-serif;
+font-size: 0.68rem;
+font-weight: 600;
+letter-spacing: 0.06em;
+color: var(--muted);
+display: block;
+margin-bottom: 5px;
+}
+.hl-card-text { font-size: 0.92rem; color: #C8C8C8; line-height: 1.55; }
+.item-arrow { font-size: 0.72rem; color: var(--muted); margin-left: 3px; }
+.empty-note { font-size: 0.9rem; color: var(--muted); padding: 6px 2px; }
+/* ── Company cards ── */
+.company {
+border: 1px solid var(--border);
+border-radius: 4px;
+margin-bottom: 10px;
+background: var(--card);
+transition: border-color 0.15s;
+scroll-margin-top: 20px;
+}
+.company-header {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 14px 18px;
+cursor: pointer;
+user-select: none;
+}
+.company-header:hover .company-name { color: #fff; }
+.company-dot {
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: var(--red);
+flex-shrink: 0;
+}
+.company-name { font-size: 1rem; font-weight: 600; transition: color 0.15s; }
+.header-chevron { margin-left: auto; font-size: 0.72rem; color: var(--muted); }
+.company-body { padding: 4px 18px 14px; border-top: 1px solid var(--border); }
+.news-item {
+display: flex;
+align-items: baseline;
+gap: 8px;
+padding: 7px 0;
+border-bottom: 1px solid #222;
+}
+.news-item:last-child { border-bottom: none; }
+.news-date {
+font-family: 'ABCFavorit', sans-serif;
+font-size: 0.7rem;
+color: var(--muted);
+flex-shrink: 0;
+min-width: 32px;
+}
+.news-title {
+font-size: 0.88rem;
+color: #C8C8C8;
+line-height: 1.5;
+text-decoration: none;
+transition: color 0.15s;
+}
+.news-title:hover { color: #fff; }
+.news-item.clickable { cursor: pointer; transition: background 0.1s; }
+.news-item.clickable:hover { background: rgba(255,255,255,0.025); }
+.news-title.as-text { color: #C8C8C8; text-decoration: none; transition: color 0.15s; }
+.news-title.as-text:hover { color: #fff; }
+.news-item-icon { font-size: 0.7rem; color: var(--muted); margin-left: 3px; }
+/* ── Modal ── */
+.modal-backdrop {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(0,0,0,0.6);
+z-index: 200;
+align-items: center;
+justify-content: center;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+background: #1E1E1E;
+border: 1px solid #333;
+border-radius: 8px;
+padding: 24px;
+width: 300px;
+box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+}
+.modal-title {
+font-size: 0.68rem;
+font-weight: 600;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--muted);
+margin-bottom: 5px;
+}
+.modal-company { font-size: 1.1rem; font-weight: 700; margin-bottom: 18px; }
+.modal-links { display: flex; flex-direction: column; gap: 8px; }
+.modal-link {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 11px 14px;
+border: 1px solid #333;
+border-radius: 4px;
+text-decoration: none;
+color: var(--text);
+font-size: 0.94rem;
+transition: border-color 0.15s, background 0.15s;
+}
+.modal-link:hover { border-color: var(--red); background: rgba(226,21,0,0.06); }
+.modal-link-icon { font-size: 1rem; width: 20px; text-align: center; }
+.modal-link-label { flex: 1; }
+.modal-link-arrow { font-size: 0.68rem; color: var(--muted); }
+.modal-close {
+display: block;
+margin-top: 14px;
+width: 100%;
+padding: 8px;
+background: none;
+border: 1px solid #333;
+border-radius: 4px;
+color: var(--muted);
+font-size: 0.78rem;
+cursor: pointer;
+font-family: inherit;
+transition: border-color 0.15s, color 0.15s;
+}
+.modal-close:hover { border-color: #555; color: var(--text); }
+/* ── Article modal (wider) ── */
+.modal.article-modal {
+width: 460px;
+max-width: calc(100vw - 40px);
+max-height: 84vh;
+overflow-y: auto;
+}
+.article-modal-company {
+font-family: 'ABCFavorit', sans-serif;
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--red);
+display: block;
+margin-bottom: 4px;
+}
+.article-modal-date {
+font-family: 'ABCFavorit', sans-serif;
+font-size: 0.7rem;
+color: var(--muted);
+display: block;
+margin-bottom: 10px;
+}
+.article-modal-title {
+font-size: 1rem;
+font-weight: 600;
+line-height: 1.45;
+margin-bottom: 18px;
+color: #fff;
+}
+.article-section { margin-bottom: 14px; }
+.article-section-label {
+font-family: 'ABCFavorit', sans-serif;
+font-size: 0.6rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--red);
+margin-bottom: 5px;
+}
+.article-section-body {
+font-size: 0.9rem;
+color: #D0D0D0;
+line-height: 1.55;
+white-space: pre-wrap;
+}
 </style>
 </head>
 <body>
 <header>
-  <a href="index.html"><img src="assets/img/Furiosa_AI_h_w.png" alt="Furiosa AI"></a>
-  <span class="header-tag">BD & Sales</span>
+<a href="index.html"><img src="assets/img/Furiosa_AI_h_w.png" alt="Furiosa AI"></a>
+<span class="header-tag">BD & Sales</span>
 </header>
 <div class="layout">
-  <aside id="sidebar"></aside>
-  <main id="main-content">
-    <div class="page-eyebrow">Competitive Intelligence</div>
-    <h1>경쟁사 동향 리포트</h1>
-    <div class="meta" id="meta">Furiosa BD 참고용</div>
-    <div class="top-grid" id="highlights">
-      <div>
-        <div class="section-label">Furiosa 일간 (최근 24시간)</div>
-        <div id="furiosa-daily"></div>
-      </div>
-      <div>
-        <div class="section-label">Furiosa 주간 (최근 7일)</div>
-        <div id="furiosa-weekly"></div>
-      </div>
-    </div>
-    <div class="section-label">회사별 동향 — Global</div>
-    <div id="companies-global"></div>
-    <div class="section-label" style="margin-top:28px;">회사별 동향 — Korea</div>
-    <div id="companies-korea"></div>
-  </main>
+<aside id="sidebar"></aside>
+<main id="main-content">
+<div class="page-eyebrow">Competitive Intelligence</div>
+<h1>경쟁사 동향 리포트</h1>
+<div class="meta" id="meta">Furiosa BD 참고용</div>
+<div class="top-grid" id="highlights">
+<div>
+<div class="section-label">Furiosa 일간 (최근 24시간)</div>
+<div id="furiosa-daily"></div>
+</div>
+<div>
+<div class="section-label">Furiosa 주간 (최근 7일)</div>
+<div id="furiosa-weekly"></div>
+</div>
+</div>
+<div class="section-label">회사별 동향 — Global</div>
+<div id="companies-global"></div>
+<div class="section-label" style="margin-top:28px;">회사별 동향 — Korea</div>
+<div id="companies-korea"></div>
+</main>
 </div>
 <!-- Company link modal -->
 <div class="modal-backdrop" id="modal-backdrop">
-  <div class="modal">
-    <div class="modal-title">Company</div>
-    <div class="modal-company" id="modal-company-name"></div>
-    <div class="modal-links">
-      <a class="modal-link" id="modal-website" href="#" target="_blank" rel="noopener">
-        <span class="modal-link-icon">🌎</span>
-        <span class="modal-link-label">Web Site</span>
-        <span class="modal-link-arrow">↗</span>
-      </a>
-      <a class="modal-link" id="modal-blog" href="#" target="_blank" rel="noopener">
-        <span class="modal-link-icon">🗂️</span>
-        <span class="modal-link-label">Tech Blog</span>
-        <span class="modal-link-arrow">↗</span>
-      </a>
-    </div>
-    <button class="modal-close" id="modal-close">닫기</button>
-  </div>
+<div class="modal">
+<div class="modal-title">Company</div>
+<div class="modal-company" id="modal-company-name"></div>
+<div class="modal-links">
+<a class="modal-link" id="modal-website" href="#" target="_blank" rel="noopener">
+<span class="modal-link-icon">🌎</span>
+<span class="modal-link-label">Web Site</span>
+<span class="modal-link-arrow">↗</span>
+</a>
+<a class="modal-link" id="modal-blog" href="#" target="_blank" rel="noopener">
+<span class="modal-link-icon">🗂️</span>
+<span class="modal-link-label">Tech Blog</span>
+<span class="modal-link-arrow">↗</span>
+</a>
+</div>
+<button class="modal-close" id="modal-close">닫기</button>
+</div>
 </div>
 <!-- Article modal -->
 <div class="modal-backdrop" id="article-backdrop">
-  <div class="modal article-modal">
-    <span class="article-modal-company" id="article-modal-company"></span>
-    <span class="article-modal-date" id="article-modal-date"></span>
-    <div class="article-modal-title" id="article-modal-title"></div>
-    <div class="article-section">
-      <div class="article-section-label">요약</div>
-      <div class="article-section-body" id="article-modal-summary"></div>
-    </div>
-    <div class="article-section">
-      <div class="article-section-label">Furiosa BD 시점</div>
-      <div class="article-section-body" id="article-modal-bd"></div>
-    </div>
-    <a class="modal-link" id="article-modal-link" href="#" target="_blank" rel="noopener">
-      <span class="modal-link-icon">🔗</span>
-      <span class="modal-link-label">원문 보기</span>
-      <span class="modal-link-arrow">↗</span>
-    </a>
-    <button class="modal-close" id="article-modal-close">닫기</button>
-  </div>
+<div class="modal article-modal">
+<span class="article-modal-company" id="article-modal-company"></span>
+<span class="article-modal-date" id="article-modal-date"></span>
+<div class="article-modal-title" id="article-modal-title"></div>
+<div class="article-section">
+<div class="article-section-label">요약</div>
+<div class="article-section-body" id="article-modal-summary"></div>
+</div>
+<div class="article-section">
+<div class="article-section-label">Furiosa BD 시점</div>
+<div class="article-section-body" id="article-modal-bd"></div>
+</div>
+<a class="modal-link" id="article-modal-link" href="#" target="_blank" rel="noopener">
+<span class="modal-link-icon">🔗</span>
+<span class="modal-link-label">원문 보기</span>
+<span class="modal-link-arrow">↗</span>
+</a>
+<button class="modal-close" id="article-modal-close">닫기</button>
+</div>
 </div>
 <script>
-  const COMPANIES = {
-    global: [
-      { name: "NVIDIA",      website: "https://www.nvidia.com",    blog: "https://blogs.nvidia.com" },
-      { name: "Tenstorrent", website: "https://tenstorrent.com",    blog: "https://tenstorrent.com/developers" },
-      { name: "Groq",        website: "https://groq.com",           blog: "https://groq.com/blog" },
-      { name: "SambaNova",   website: "https://sambanova.ai",       blog: "https://sambanova.ai/blog" },
-      { name: "Cerebras",    website: "https://cerebras.net",       blog: "https://cerebras.net/blog" },
-    ],
-    korea: [
-      { name: "Rebellions", website: "https://rebellions.ai",  blog: "https://kr.rebellions.ai/category/blogs/" },
-      { name: "DeepX",      website: "https://deepx.ai",        blog: "https://developer.deepx.ai/" },
-      { name: "HyperAccel", website: "https://hyperaccel.ai",   blog: "https://hyper-accel.github.io/" },
-      { name: "Mobilint",   website: "https://mobilint.com",    blog: "https://mobilint.com/blog" },
-    ]
-  };
-
-  // ── Company info modal ────────────────────────────────────────────────
-  const backdrop = document.getElementById('modal-backdrop');
-  document.getElementById('modal-close').addEventListener('click', () => backdrop.classList.remove('open'));
-  backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
-  function openModal(company) {
-    document.getElementById('modal-company-name').textContent = company.name;
-    document.getElementById('modal-website').href = company.website;
-    document.getElementById('modal-blog').href    = company.blog;
-    backdrop.classList.add('open');
-  }
-
-  // ── Article modal (요약 + BD 시점 + 원문 링크) ────────────────────────
-  const articleBackdrop = document.getElementById('article-backdrop');
-  document.getElementById('article-modal-close').addEventListener('click', () => articleBackdrop.classList.remove('open'));
-  articleBackdrop.addEventListener('click', e => { if (e.target === articleBackdrop) articleBackdrop.classList.remove('open'); });
-  function openArticleModal(item, companyName) {
-    document.getElementById('article-modal-company').textContent = companyName;
-    document.getElementById('article-modal-date').textContent    = item.date || '';
-    document.getElementById('article-modal-title').textContent   = item.title || '';
-    document.getElementById('article-modal-summary').textContent = item.summary || '(요약 없음 — 다음 업데이트에서 생성됩니다)';
-    document.getElementById('article-modal-bd').textContent      = item.bd_perspective || '(BD 시점 없음 — 다음 업데이트에서 생성됩니다)';
-    document.getElementById('article-modal-link').href           = item.url || '#';
-    articleBackdrop.classList.add('open');
-  }
-
-  // Esc → 양쪽 모달 모두 닫기
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      backdrop.classList.remove('open');
-      articleBackdrop.classList.remove('open');
-    }
-  });
-
-  function renderCompany(c, newsItems) {
-    const body = newsItems && newsItems.length > 0
-      ? `<div class="company-body">${newsItems.map(item =>
-          `<div class="news-item">
-            <span class="news-date">${item.date || ''}</span>
-            <a class="news-title" href="${item.url}" target="_blank" rel="noopener">${item.title} ↗</a>
-          </div>`).join('')}</div>`
-      : '';
-    return `<div class="company" id="co-${c.name}">
-      <div class="company-header" data-name="${c.name}">
-        <div class="company-dot"></div>
-        <span class="company-name">${c.name}</span>
-        <span class="header-chevron">⊕</span>
-      </div>
-      ${body}
-    </div>`;
-  }
-  document.getElementById('companies-global').innerHTML = COMPANIES.global.map(c => renderCompany(c, [])).join('');
-  document.getElementById('companies-korea').innerHTML  = COMPANIES.korea.map(c => renderCompany(c, [])).join('');
-
-  // Sidebar
-  const sidebar = document.getElementById('sidebar');
-  sidebar.innerHTML = `
-    <div class="sidebar-item" data-target="highlights" style="margin-bottom:4px;">
-      <span class="sidebar-dot"></span>Furiosa 동향
-    </div>
-    <hr class="sidebar-divider">
-    <div class="sidebar-label">Global</div>
-    ${COMPANIES.global.map(c => `
-      <div class="sidebar-item" data-target="co-${c.name}">
-        <span class="sidebar-dot"></span>${c.name}
-      </div>`).join('')}
-    <hr class="sidebar-divider">
-    <div class="sidebar-label">Korea</div>
-    ${COMPANIES.korea.map(c => `
-      <div class="sidebar-item" data-target="co-${c.name}">
-        <span class="sidebar-dot"></span>${c.name}
-      </div>`).join('')}
-  `;
-
-  // Sidebar click → scroll to center
-  const mainContent = document.getElementById('main-content');
-  function setActiveSidebarItem(targetId) {
-    sidebar.querySelectorAll('.sidebar-item').forEach(i => {
-      i.classList.toggle('active', i.dataset.target === targetId);
-    });
-  }
-
-  // 프로그래매틱 스크롤 동안 IntersectionObserver의 active 변경을 잠시 막음.
-  // 이게 없으면 스크롤 애니메이션 도중 지나가는 섹션들이 active를 빼앗아 빨간 박스가 점프함.
-  let scrollLockUntil = 0;
-
-  sidebar.querySelectorAll('.sidebar-item').forEach(item => {
-    item.addEventListener('click', () => {
-      setActiveSidebarItem(item.dataset.target);
-      scrollLockUntil = Date.now() + 900; // ~smooth scroll 시간 동안 잠금
-      const target = document.getElementById(item.dataset.target);
-      if (!target) return;
-      const containerH = mainContent.clientHeight;
-      const targetH    = target.offsetHeight;
-      const targetTop  = target.getBoundingClientRect().top
-                       - mainContent.getBoundingClientRect().top
-                       + mainContent.scrollTop;
-      mainContent.scrollTo({ top: targetTop - (containerH / 2) + (targetH / 2), behavior: 'smooth' });
-    });
-  });
-
-  // Company header click → modal
-  const allCompanies = [...COMPANIES.global, ...COMPANIES.korea];
-  document.querySelectorAll('.company-header').forEach(el => {
-    el.addEventListener('click', () => {
-      const co = allCompanies.find(c => c.name === el.dataset.name);
-      if (co) openModal(co);
-    });
-  });
-
-  // IntersectionObserver → active sidebar
-  // - "highlights" 컨테이너도 관찰해서 위로 스크롤 시 "Furiosa 동향" 활성화됨
-  // - 클릭으로 스크롤 중인 동안은 active 갱신을 skip (jumping 방지)
-  const observer = new IntersectionObserver(entries => {
-    if (Date.now() < scrollLockUntil) return;
-    // 현재 보이는 것 중 root(main-content)에서 가장 위에 있는 항목으로 선택
-    const visible = entries
-      .filter(e => e.isIntersecting)
-      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-    if (visible[0]) setActiveSidebarItem(visible[0].target.id);
-  }, { root: mainContent, threshold: 0.35 });
-  document.querySelectorAll('.company').forEach(el => observer.observe(el));
-  const highlightsEl = document.getElementById('highlights');
-  if (highlightsEl) observer.observe(highlightsEl);
-
-  // ── Render article list (Furiosa daily / weekly) ─────────────────────
-  function escapeHtml(s) {
-    return String(s ?? '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-  function renderArticles(items, containerId) {
-    const el = document.getElementById(containerId);
-    if (!el) return;
-    if (!items || items.length === 0) {
-      el.innerHTML = '<div class="empty-note">No Update</div>';
-      return;
-    }
-    el.innerHTML = items.map(a => {
-      const title = escapeHtml(a.title);
-      const url   = escapeHtml(a.url);
-      const date  = escapeHtml(a.date || '');
-      return `
-        <a class="hl-card linked furiosa-card" href="${url}" target="_blank" rel="noopener">
-          ${date ? `<span class="hl-card-date">${date}</span>` : ''}
-          <span class="hl-card-text">${title} <span class="item-arrow">↗</span></span>
-        </a>`;
-    }).join('');
-  }
-
-  // Load report.json
-  fetch('report.json').then(r => r.json()).then(d => {
-    if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
-
-    renderArticles(d.furiosa_daily,  'furiosa-daily');
-    renderArticles(d.furiosa_weekly, 'furiosa-weekly');
-
-    // Inject news items into company cards (click → article modal)
-    if (d.companies) {
-      d.companies.forEach(co => {
-        const card = document.getElementById('co-' + co.name);
-        if (!card || !co.items || co.items.length === 0) return;
-        const existing = card.querySelector('.company-body');
-        if (existing) existing.remove();
-        const body = document.createElement('div');
-        body.className = 'company-body';
-        co.items.forEach(item => {
-          const row = document.createElement('div');
-          row.className = 'news-item clickable';
-          row.innerHTML =
-            `<span class="news-date">${escapeHtml(item.date || '')}</span>` +
-            `<a class="news-title as-text" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}<span class="news-item-icon"> ⓘ</span></a>`;
-          row.addEventListener('click', (e) => {
-            // Cmd/Ctrl/Shift+click → 새 탭으로 원문 (브라우저 기본)
-            if (e.metaKey || e.ctrlKey || e.shiftKey) return;
-            e.preventDefault();
-            openArticleModal(item, co.name);
-          });
-          body.appendChild(row);
-        });
-        card.appendChild(body);
-      });
-    }
-  }).catch(() => {});
+const COMPANIES = {
+global: [
+{ name: "NVIDIA", website: "https://www.nvidia.com", blog: "https://blogs.nvidia.com" },
+{ name: "Tenstorrent", website: "https://tenstorrent.com", blog: "https://tenstorrent.com/developers" },
+{ name: "Groq", website: "https://groq.com", blog: "https://groq.com/blog" },
+{ name: "SambaNova", website: "https://sambanova.ai", blog: "https://sambanova.ai/blog" },
+{ name: "Cerebras", website: "https://cerebras.net", blog: "https://cerebras.net/blog" },
+],
+korea: [
+{ name: "Rebellions", website: "https://rebellions.ai", blog: "https://kr.rebellions.ai/category/blogs/" },
+{ name: "DeepX", website: "https://deepx.ai", blog: "https://developer.deepx.ai/" },
+{ name: "HyperAccel", website: "https://hyperaccel.ai", blog: "https://hyper-accel.github.io/" },
+{ name: "Mobilint", website: "https://mobilint.com", blog: "https://mobilint.com/blog" },
+]
+};
+// ── Company info modal ────────────────────────────────────────────────
+const backdrop = document.getElementById('modal-backdrop');
+document.getElementById('modal-close').addEventListener('click', () => backdrop.classList.remove('open'));
+backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
+function openModal(company) {
+document.getElementById('modal-company-name').textContent = company.name;
+document.getElementById('modal-website').href = company.website;
+document.getElementById('modal-blog').href = company.blog;
+backdrop.classList.add('open');
+}
+// ── Article modal (요약 + BD 시점 + 원문 링크) ────────────────────────
+const articleBackdrop = document.getElementById('article-backdrop');
+document.getElementById('article-modal-close').addEventListener('click', () => articleBackdrop.classList.remove('open'));
+articleBackdrop.addEventListener('click', e => { if (e.target === articleBackdrop) articleBackdrop.classList.remove('open'); });
+function openArticleModal(item, companyName) {
+document.getElementById('article-modal-company').textContent = companyName;
+document.getElementById('article-modal-date').textContent = item.date || '';
+document.getElementById('article-modal-title').textContent = item.title || '';
+document.getElementById('article-modal-summary').textContent = item.summary || '(요약 없음 — 다음 업데이트에서 생성됩니다)';
+document.getElementById('article-modal-bd').textContent = item.bd_perspective || '(BD 시점 없음 — 다음 업데이트에서 생성됩니다)';
+document.getElementById('article-modal-link').href = item.url || '#';
+articleBackdrop.classList.add('open');
+}
+// Esc → 양쪽 모달 모두 닫기
+document.addEventListener('keydown', e => {
+if (e.key === 'Escape') {
+backdrop.classList.remove('open');
+articleBackdrop.classList.remove('open');
+}
+});
+function renderCompany(c, newsItems) {
+const body = newsItems && newsItems.length > 0
+? `<div class="company-body">${newsItems.map(item =>
+`<div class="news-item">
+<span class="news-date">${item.date || ''}</span>
+<a class="news-title" href="${item.url}" target="_blank" rel="noopener">${item.title} ↗</a>
+</div>`).join('')}</div>`
+: '';
+return `<div class="company" id="co-${c.name}">
+<div class="company-header" data-name="${c.name}">
+<div class="company-dot"></div>
+<span class="company-name">${c.name}</span>
+<span class="header-chevron">⊕</span>
+</div>
+${body}
+</div>`;
+}
+document.getElementById('companies-global').innerHTML = COMPANIES.global.map(c => renderCompany(c, [])).join('');
+document.getElementById('companies-korea').innerHTML = COMPANIES.korea.map(c => renderCompany(c, [])).join('');
+// Sidebar
+const sidebar = document.getElementById('sidebar');
+sidebar.innerHTML = `
+<div class="sidebar-item" data-target="highlights" style="margin-bottom:4px;">
+<span class="sidebar-dot"></span>Furiosa 동향
+</div>
+<hr class="sidebar-divider">
+<div class="sidebar-label">Global</div>
+${COMPANIES.global.map(c => `
+<div class="sidebar-item" data-target="co-${c.name}">
+<span class="sidebar-dot"></span>${c.name}
+</div>`).join('')}
+<hr class="sidebar-divider">
+<div class="sidebar-label">Korea</div>
+${COMPANIES.korea.map(c => `
+<div class="sidebar-item" data-target="co-${c.name}">
+<span class="sidebar-dot"></span>${c.name}
+</div>`).join('')}
+`;
+// Sidebar click → scroll to center
+const mainContent = document.getElementById('main-content');
+function setActiveSidebarItem(targetId) {
+sidebar.querySelectorAll('.sidebar-item').forEach(i => {
+i.classList.toggle('active', i.dataset.target === targetId);
+});
+}
+// 프로그래매틱 스크롤 동안 IntersectionObserver의 active 변경을 잠시 막음.
+// 이게 없으면 스크롤 애니메이션 도중 지나가는 섹션들이 active를 빼앗아 빨간 박스가 점프함.
+let scrollLockUntil = 0;
+sidebar.querySelectorAll('.sidebar-item').forEach(item => {
+item.addEventListener('click', () => {
+setActiveSidebarItem(item.dataset.target);
+scrollLockUntil = Date.now() + 900; // ~smooth scroll 시간 동안 잠금
+const target = document.getElementById(item.dataset.target);
+if (!target) return;
+const containerH = mainContent.clientHeight;
+const targetH = target.offsetHeight;
+const targetTop = target.getBoundingClientRect().top
+- mainContent.getBoundingClientRect().top
++ mainContent.scrollTop;
+mainContent.scrollTo({ top: targetTop - (containerH / 2) + (targetH / 2), behavior: 'smooth' });
+});
+});
+// Company header click → modal
+const allCompanies = [...COMPANIES.global, ...COMPANIES.korea];
+document.querySelectorAll('.company-header').forEach(el => {
+el.addEventListener('click', () => {
+const co = allCompanies.find(c => c.name === el.dataset.name);
+if (co) openModal(co);
+});
+});
+// IntersectionObserver → active sidebar
+// - "highlights" 컨테이너도 관찰해서 위로 스크롤 시 "Furiosa 동향" 활성화됨
+// - 클릭으로 스크롤 중인 동안은 active 갱신을 skip (jumping 방지)
+const observer = new IntersectionObserver(entries => {
+if (Date.now() < scrollLockUntil) return;
+// 현재 보이는 것 중 root(main-content)에서 가장 위에 있는 항목으로 선택
+const visible = entries
+.filter(e => e.isIntersecting)
+.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+if (visible[0]) setActiveSidebarItem(visible[0].target.id);
+}, { root: mainContent, threshold: 0.35 });
+document.querySelectorAll('.company').forEach(el => observer.observe(el));
+const highlightsEl = document.getElementById('highlights');
+if (highlightsEl) observer.observe(highlightsEl);
+// ── Render article list (Furiosa daily / weekly) ─────────────────────
+function escapeHtml(s) {
+return String(s ?? '')
+.replace(/&/g, '&amp;')
+.replace(/</g, '&lt;')
+.replace(/>/g, '&gt;')
+.replace(/"/g, '&quot;')
+.replace(/'/g, '&#039;');
+}
+function renderArticles(items, containerId) {
+const el = document.getElementById(containerId);
+if (!el) return;
+if (!items || items.length === 0) {
+el.innerHTML = '<div class="empty-note">No Update</div>';
+return;
+}
+el.innerHTML = items.map(a => {
+const title = escapeHtml(a.title);
+const url = escapeHtml(a.url);
+const date = escapeHtml(a.date || '');
+return `
+<a class="hl-card linked furiosa-card" href="${url}" target="_blank" rel="noopener">
+${date ? `<span class="hl-card-date">${date}</span>` : ''}
+<span class="hl-card-text">${title} <span class="item-arrow">↗</span></span>
+</a>`;
+}).join('');
+}
+// Load report.json
+fetch('report.json').then(r => r.json()).then(d => {
+if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
+renderArticles(d.furiosa_daily, 'furiosa-daily');
+renderArticles(d.furiosa_weekly, 'furiosa-weekly');
+// Inject news items into company cards (click → article modal)
+if (d.companies) {
+d.companies.forEach(co => {
+const card = document.getElementById('co-' + co.name);
+if (!card) return;
+const existing = card.querySelector('.company-body');
+if (existing) existing.remove();
+const body = document.createElement('div');
+body.className = 'company-body';
+if (!co.items || co.items.length === 0) {
+const empty = document.createElement('div');
+empty.className = 'empty-note';
+empty.textContent = '최근 30일 내 뉴스 없음';
+body.appendChild(empty);
+card.appendChild(body);
+return;
+}
+co.items.forEach(item => {
+const row = document.createElement('div');
+row.className = 'news-item clickable';
+row.innerHTML =
+`<span class="news-date">${escapeHtml(item.date || '')}</span>` +
+`<a class="news-title as-text" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}<span class="news-item-icon"> ⓘ</span></a>`;
+row.addEventListener('click', (e) => {
+// Cmd/Ctrl/Shift+click → 새 탭으로 원문 (브라우저 기본)
+if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+e.preventDefault();
+openArticleModal(item, co.name);
+});
+body.appendChild(row);
+});
+card.appendChild(body);
+});
+}
+}).catch(() => {});
 </script>
 </body>
 </html>
