@@ -28,11 +28,12 @@ REPO_ROOT = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
 
 COMPANIES = [
-    {"name": "NVIDIA", "region": "global", "query": "NVIDIA", "lang": "en"},
-    {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent", "lang": "en"},
-    {"name": "Groq", "region": "global", "query": "Groq", "lang": "en"},
-    {"name": "SambaNova", "region": "global", "query": "SambaNova", "lang": "en"},
-    {"name": "Cerebras", "region": "global", "query": "Cerebras", "lang": "en"},
+    # 글로벌 회사: 회사명 + (반도체 도메인 키워드 OR 그룹). 무관 기사 (주식/시장/회계 등) 배제.
+    {"name": "NVIDIA", "region": "global", "query": "NVIDIA (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
+    {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
+    {"name": "Groq", "region": "global", "query": "Groq (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
+    {"name": "SambaNova", "region": "global", "query": "SambaNova (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
+    {"name": "Cerebras", "region": "global", "query": "Cerebras (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     # 한국 회사: Naver는 띄어쓴 키워드를 AND로 처리 → 회사명만 단순하게 (OR로 한/영 표기 합침)
     {"name": "Rebellions", "region": "korea", "query": "리벨리온", "lang": "ko"},
     {"name": "DeepX", "region": "korea", "query": "딥엑스 OR DeepX", "lang": "ko"},
@@ -528,15 +529,18 @@ def main():
         # 최근 N일 내 기사만 유지. pub_dt 없는 기사는 제외 (Furiosa 필터링과 동일 방식).
         recent = [a for a in fetched
                   if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
+        # LLM 클러스터링: 같은 사건/syndicated 중복 제거 (회사별로 호출).
+        # client가 None이거나 기사 1개 이하면 그대로 반환됨.
+        deduped = cluster_articles_by_event(recent, client)
         # 최신순 정렬 (각 소스의 기본 정렬을 신뢰하지 않고 명시적으로 내림차순).
-        recent.sort(key=lambda a: a["pub_dt"], reverse=True)
-        articles = recent[:COMPETITOR_MAX_ITEMS]
+        deduped.sort(key=lambda a: a["pub_dt"], reverse=True)
+        articles = deduped[:COMPETITOR_MAX_ITEMS]
         companies_raw.append({
             "name": co["name"],
             "region": co["region"],
             "articles": articles,
         })
-        print(f"  {co['name']}: {len(articles)} articles (fetched={len(fetched)}, in {COMPETITOR_CUTOFF_DAYS}d={len(recent)})")
+        print(f"  {co['name']}: {len(articles)} articles (fetched={len(fetched)}, in {COMPETITOR_CUTOFF_DAYS}d={len(recent)}, deduped={len(deduped)})")
 
     # ── 1.5 LLM 요약 + Furiosa BD 시점 생성 (1회 batch 호출) ──────────────
     all_pairs = [(c["name"], a) for c in companies_raw for a in c["articles"]]
