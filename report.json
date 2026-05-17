@@ -1,288 +1,44 @@
 {
-  "period": "2026-05-11(월) ~ 2026-05-17(일)",
-  "updated_at": "2026-05-17T08:37:30.927615+09:00",
-  "furiosa_daily": [
-    {
-      "title": "'매드맥스 여신', 언더웨어 룩 아슬아슬… 숨 막히는 '50대 관능미'",
-      "url": "https://www.mydaily.co.kr/page/view/2026051705405041292",
-      "date": "05-17",
-      "summary": "영화 '매드맥스: 분노의 질주'에서 퓨리오사 역으로 유명한 배우가 최근 넷플릭스의 서바이벌 스릴러 영화 '에이펙스(APEX)'에서 대역 없이 극한의 액션을 선보이며 여전히 강력한 존재감을 과시하고 있다. 그녀는 50대에도 불구하고 관능미를 잃지 않고 있으며, 이는 그녀의 경력과 이미지에 긍정적인 영향을 미치고 있다. 이러한 모습은 그녀의 팬들과 대중에게 큰 화제를 모으고 있으며, 앞으로의 활동에 대한 기대감을 높이고 있다."
-    },
-    {
-      "title": "더 크게보다 더 가볍게…AI 인프라 경량화 시대 부상",
-      "url": "https://zdnet.co.kr/view/?no=20260516093702",
-      "date": "05-16",
-      "summary": "퓨리오사AI와 모빌린트, 리벨리온 등은 신경망처리장치(NPU) 기반의 AI 반도체를 통해 전력 효율 중심의 추론 시장을 공략하고 있다. 이들은 AI 인프라의 경량화 시대를 맞아 더욱 효율적인 기술 개발에 집중하고 있으며, 이는 AI 기술의 발전과 상용화에 중요한 역할을 할 것으로 기대된다. 이러한 변화는 기업들이 AI 솔루션을 보다 경제적으로 활용할 수 있게 하여 시장 경쟁력을 높이는 데 기여할 것이다."
-    }
-  ],
-  "furiosa_weekly": [
-    {
-      "title": "코팬글로벌의 아이돌 응원봉, 가치 알아본 케이스톤 '잭팟' [넘버스]",
-      "url": "https://www.bloter.net/news/articleView.html?idxno=662592",
-      "date": "05-15",
-      "summary": "코팬글로벌은 퓨리오사AI, 라프텔, 역전에프앤씨 등과 함께 주요 포트폴리오를 구성하고 있으며, 글로벌 우량 기업으로 성장하고 있다. 2024년 말에는 주력 공장을 확장할 계획을 세우고 있으며, 이는 회사의 지속적인 성장을 위한 중요한 전략으로 평가된다. 이러한 성장은 대내외 악재를 극복하고 기업의 경쟁력을 강화하는 데 기여할 것으로 보인다."
-    },
-    {
-      "title": "메가존클라우드, 사우디 아람코서 국산 AI 반도체 실증…중동 AI 인프라...",
-      "url": "https://www.epnc.co.kr/news/articleView.html?idxno=401851",
-      "date": "05-15",
-      "summary": "메가존클라우드는 퓨리오사AI, NC AI, 업스테이지, 유라클과 함께 KRFSAI(Korea Full Stack AI) 컨소시엄을 구성하여 사우디 아람코에서 국산 AI 반도체 실증 사업을 추진하고 있다. 이 프로젝트는 AI 기술의 실증 환경 설계와 구축, 운영을 포함하며, 중동 지역의 AI 인프라 확장에 기여할 것으로 예상된다. 이는 한국의 AI 기술이 국제 시장에서 경쟁력을 갖추는 데 중요한 이정표가 될 것이다."
-    },
-    {
-      "title": "메가존클라우드, 사우디 아람코서 국산 NPU 인프라 실증 나선다",
-      "url": "https://www.aitimes.com/news/articleView.html?idxno=210552",
-      "date": "05-15",
-      "summary": "메가존클라우드는 퓨리오사AI, NC AI, 업스테이지, 유라클과 함께 '코리아 풀스택 AI 컨소시엄(KRFSAI)'을 구성하여 사우디 아람코의 디지털 전담 법인에서 국산 NPU 인프라 실증을 실시할 예정이다. 이 사업은 한국의 AI 반도체 기술을 해외에 알리고, 중동 시장에서의 입지를 다지는 데 중요한 역할을 할 것으로 보인다. 실증 결과는 향후 AI 기술의 상용화에 큰 영향을 미칠 수 있다."
-    },
-    {
-      "title": "메가존클라우드, 2026년 AI-반도체 해외실증 지원 사업 서버형 부문 주관...",
-      "url": "https://www.dailysecu.com/news/articleView.html?idxno=206749",
-      "date": "05-15",
-      "summary": "메가존클라우드는 2026년 AI-반도체 해외실증 지원 사업의 서버형 부문을 주관하며, 퓨리오사AI, NC AI, 업스테이지, 유라클과 함께 KRFSAI(Korea Full Stack AI) 컨소시엄을 구성했다. 이들은 사우디 아람코의 디지털 전담 법인에서 국산 AI 반도체 기반의 실증 환경을 구축하고 운영할 예정이다. 이는 한국의 AI 기술을 국제적으로 확산시키고, 글로벌 시장에서의 경쟁력을 높이는 데 기여할 것으로 기대된다."
-    },
-    {
-      "title": "메가존클라우드, '국산 AI반도체 현장 실증' 주관사업자 선정",
-      "url": "http://www.itdaily.kr/news/articleView.html?idxno=239342",
-      "date": "05-15",
-      "summary": "메가존클라우드는 퓨리오사AI, NC AI, 업스테이지, 유라클과 함께 KRFSAI(Korea Full Stack AI) 컨소시엄을 구성하여 국산 AI 반도체 현장 실증 사업의 주관사업자로 선정되었다. 이 사업은 해외 서버 실증 환경의 설계, 구축, 운영을 포함하며, 한국의 AI 기술을 국제적으로 검증하는 중요한 기회를 제공할 것이다. 이러한 실증은 향후 AI 기술의 상용화와 글로벌 시장 진출에 긍정적인 영향을 미칠 것으로 예상된다."
-    }
-  ],
+  "period": "2026-05-14(목) ~ 2026-05-17(일)",
+  "updated_at": "2026-05-17T09:00:00+09:00",
   "companies": [
     {
       "name": "NVIDIA",
-      "region": "global",
+      "no_update": false,
       "items": [
-        {
-          "title": "13 years later, the GTX Titan is still the most important GPU Nvidia ever made - XDA",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQTHBSTG90WGtxU1VrTzhkaml2MWZYZWxvdnlpOFo3U1lJVlN3QmlrVkhyWktOOHhzelY1cTh0T1BuUlFLc1RtS0g2M1Rfb3NzaC1JaGlleXVBd2tVUEw4Z0RBRG1xUEhObXZDVk41U0dFMjRhMEdLM0V1S3dRUDl4VDhRYUktYnVrT19UWDhfanQwN2RLVzhyZFJn?oc=5",
-          "date": "05-17",
-          "summary": "NVIDIA의 GTX Titan은 출시된 지 13년이 지난 지금도 여전히 가장 중요한 GPU로 평가받고 있다. 이 제품은 고성능 컴퓨팅과 게임 그래픽 분야에서 혁신을 가져왔으며, NVIDIA의 브랜드 가치를 높이는 데 기여했다. GTX Titan의 성공은 NVIDIA가 AI 및 머신러닝 분야에서도 강력한 입지를 구축하는 데 중요한 역할을 하고 있다.",
-          "bd_perspective": "Furiosa는 NVIDIA의 지속적인 시장 지배력에 대응하기 위해 차별화된 기술 개발이 필요하다."
-        },
-        {
-          "title": "Nvidia or Micron: Billionaire Ken Fisher Bets Big on One Top AI Stock - TipRanks",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQNno3MUJLd0hRU3BzdFFQVGhKZFJleWhvbjVjMGRuTVBNR1ptRmx5azFxSlFSNDdxU0otTlBScE5odDQ0eG9kVF9WTlY1YmEySURwMnY2cWt1VkFsaGdSQ0NrNkVGcGdnMXlwbnBMWGZnSGVEV2xvR0VDdDE4Qm1vWHNra0gyejdKX19uYm5QVnVoOGJMam01OWZvTFJCWFE?oc=5",
-          "date": "05-17",
-          "summary": "억만장자 켄 피셔가 NVIDIA와 마이크론 중 하나에 큰 베팅을 하고 있다는 소식이 전해졌다. 그는 AI 주식에 대한 높은 기대감을 가지고 있으며, NVIDIA의 주가 상승 가능성을 높게 평가하고 있다. 이는 AI 시장의 성장과 NVIDIA의 기술력이 투자자들에게 긍정적인 신호로 작용하고 있음을 보여준다.",
-          "bd_perspective": "Furiosa는 AI 시장의 성장 가능성을 활용하여 투자자들의 관심을 끌어야 한다."
-        },
-        {
-          "title": "NVIDIA Earnings Preview: Wall Street Pros Boost Stock Targets Amid AI Boom - Benzinga",
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPTWF0U1Z3ODZPWUR2YXlzRUg4aFQ3V1hUbDQ3ZnVXenE3cDBxOWVZNWw0WlNNcUN1UjhrT09mOFh0OHd2VHJNcmxibFVBOXJ0SjNnM2hGRU9oaU54UkxhaHVGZUxPcEZhTzRqV3dUZ3FHMktkbWJ2ZFlWOFhlZ0JJMXNDT1dTdm5oLUhzZU0walFLZmZyS2FvS2pWYzVSMWFLeXBLV3JYUUNHZTVOS3Y5NGNWR2J5ZlRTOElFaGNfSEt6dWxnVDZ6NERR?oc=5",
-          "date": "05-17",
-          "summary": "NVIDIA의 실적 발표를 앞두고 월가 전문가들이 AI 붐을 반영하여 주가 목표치를 상향 조정하고 있다. AI 기술의 발전이 NVIDIA의 매출 증가에 기여할 것으로 예상되며, 이는 전체 반도체 시장에도 긍정적인 영향을 미칠 것으로 보인다. NVIDIA의 성장은 AI 반도체 시장의 경쟁을 더욱 치열하게 만들 전망이다.",
-          "bd_perspective": "Furiosa는 NVIDIA의 성장을 주의 깊게 살펴보며, 시장에서의 경쟁력을 강화해야 한다."
-        }
-      ]
-    },
-    {
-      "name": "Tenstorrent",
-      "region": "global",
-      "items": [
-        {
-          "title": "Smallest . ai and Tenstorrent Partnership Democratises Voice AI - 4x reduction in cost through hardware acceleration",
-          "url": "https://www.thehindubusinessline.com/brandhub/pr-release/smallestai-and-tenstorrent-partnership-democratises-voice-ai-4x-reduction-in-cost-through-hardware-acceleration/article70969762.ece",
-          "date": "05-13",
-          "summary": "Smallest.ai와 Tenstorrent의 파트너십이 발표되었으며, 이 협력을 통해 음성 AI의 비용이 4배 절감될 것으로 기대된다. 하드웨어 가속을 통해 AI 기술의 접근성이 높아지고, 더 많은 기업들이 음성 AI 솔루션을 채택할 수 있는 기회를 제공할 예정이다. 이는 AI 시장의 민주화를 촉진하는 중요한 이정표가 될 수 있다.",
-          "bd_perspective": "Furiosa는 Tenstorrent의 파트너십을 통해 협력 기회를 모색할 수 있다."
-        },
-        {
-          "title": "Nuclear Edge Deeptech Systems ULC : Revenue , Owners , Directors",
-          "url": "http://www.brazilsun.com/news/279029994/nuclear-edge-deeptech-systems-ulc-revenue-owners-directors",
-          "date": "05-05",
-          "summary": "Nuclear Edge Deeptech Systems ULC에 대한 정보가 공개되었으나, 구체적인 내용은 부족하다. 이 회사는 AI 및 반도체 분야에서 활동하고 있으며, 향후 성장 가능성이 기대된다. 그러나 추가적인 세부 사항이 필요하다.",
-          "bd_perspective": "추가 정보 필요"
-        }
-      ]
+        "1. [H200 대중 수출 승인] (May 14) — 미 정부, 중국 일부 기업에 NVIDIA H200 구매 허용하며 AI 칩 수출 제재 일부 완화",
+        "2. [Jensen Huang 베이징 방문] (May 14) — CEO Jensen Huang, 트럼프 대통령 경제 사절단으로 베이징 방문하여 미·중 AI 협력 협의",
+        "3. [Suzanne Nora Johnson 이사회 선임] (May 14주) — 전 Goldman Sachs 부회장 이사 선임, 7월 13일 효력 발생"
+      ],
+      "watch": "H200 대중 수출 재개로 중국 AI 고객들의 NVIDIA 복귀 가속화 시 Furiosa의 아시아 시장 공략에 직접적 경쟁 압력 증가."
     },
     {
       "name": "Groq",
-      "region": "global",
-      "items": [
-        {
-          "title": "Cerebras Raises $5 . 55 Billion in AI Chip IPO , But 86 % Revenue Dependence on UAE Entities Unresolved",
-          "url": "https://www.techtimes.com/articles/316698/20260515/cerebras-raises-555-billion-ai-chip-ipo-86-revenue-dependence-uae-entities-unresolved.htm",
-          "date": "05-16",
-          "summary": "Cerebras가 55억 달러 규모의 AI 칩 IPO를 진행했지만, UAE 기업에 대한 86%의 수익 의존도가 해결되지 않았다는 보고가 있다. 이는 Cerebras의 재무 구조에 대한 우려를 불러일으키며, 투자자들에게 신뢰를 줄 수 있는 요소가 필요하다. AI 칩 시장에서의 지속 가능한 성장을 위해서는 다양한 고객 기반이 필요하다.",
-          "bd_perspective": "Furiosa는 Cerebras의 재무 구조 문제를 기회로 삼아 다양한 시장을 타겟팅할 수 있다."
-        },
-        {
-          "title": "Nvidia Isnt Just Breaking Out It Entering a New Altitude Zone the Market Still Hasnt Modeled",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-isn-t-just-breaking-161521349.html",
-          "date": "05-16",
-          "summary": "NVIDIA가 새로운 고도에 진입하고 있으며, 시장은 이를 아직 모델링하지 못하고 있다는 분석이 제기되었다. NVIDIA의 기술 혁신이 AI 시장에서의 경쟁력을 더욱 강화할 것으로 예상된다. 이는 Furiosa와 같은 신생 기업들에게는 도전 과제가 될 수 있다.",
-          "bd_perspective": "Furiosa는 NVIDIA의 기술 혁신에 대응하기 위한 전략을 마련해야 한다."
-        },
-        {
-          "title": "2 Growth Stocks Are the Smarter Plays in the AI Supercycle Than Nvidia Right Now",
-          "url": "https://www.fool.com/investing/2026/05/15/growth-stocks-smart-play-ai-supercycle-nvidia/?source=iedfolrf0000001",
-          "date": "05-15",
-          "summary": "현재 AI 슈퍼사이클에서 NVIDIA보다 더 스마트한 투자처로 두 개의 성장주가 주목받고 있다. 이들은 AI 기술의 발전과 함께 시장에서의 성장을 기대하고 있으며, NVIDIA의 시장 지배력에 도전할 가능성을 내포하고 있다. 이는 AI 반도체 시장의 경쟁 구도를 변화시킬 수 있는 신호로 해석된다.",
-          "bd_perspective": "Furiosa는 새로운 성장주를 분석하여 시장에서의 포지셔닝을 강화해야 한다."
-        }
-      ]
-    },
-    {
-      "name": "SambaNova",
-      "region": "global",
-      "items": [
-        {
-          "title": "SambaNova Challenges Cerebras Strategy",
-          "url": "https://www.marketscreener.com/news/sambanova-challenges-cerebras-strategy-ce7f5bd2d081f22c",
-          "date": "05-15",
-          "summary": "SambaNova가 Cerebras의 전략에 도전하고 있다는 소식이 전해졌다. SambaNova는 AI 칩 시장에서의 경쟁력을 높이기 위해 새로운 접근 방식을 모색하고 있으며, 이는 Cerebras의 시장 점유율에 영향을 미칠 수 있다. AI 반도체 시장의 경쟁이 심화되고 있는 상황이다.",
-          "bd_perspective": "Furiosa는 SambaNova의 전략을 분석하여 차별화된 기술 개발에 집중해야 한다."
-        },
-        {
-          "title": "Intel - AMD veteran Agrani Labs scouts for $100 million to build AI chip",
-          "url": "https://economictimes.indiatimes.com/tech/technology/intel-amd-veterans-agrani-labs-scouts-for-100-million-to-build-ai-chip/articleshow/131102225.cms",
-          "date": "05-15",
-          "summary": "Intel과 AMD의 베테랑들이 AI 칩을 구축하기 위해 1억 달러의 자금을 모으고 있다는 소식이 전해졌다. Agrani Labs는 AI 칩 개발에 필요한 자금을 확보하기 위해 적극적으로 투자자를 찾고 있으며, 이는 AI 반도체 시장의 성장 가능성을 보여준다. 이러한 투자 활동은 AI 기술의 발전에 긍정적인 영향을 미칠 것으로 예상된다.",
-          "bd_perspective": "Furiosa는 AI 칩 개발을 위한 투자 유치 전략을 강화해야 한다."
-        },
-        {
-          "title": "Cerebra wafer - scale AI bet delivers blockbuster IPO",
-          "url": "https://www.theregister.com/ai-ml/2026/05/15/cerebras-wafer-scale-ai-bet-delivers-blockbuster-ipo/5240821",
-          "date": "05-15",
-          "summary": "Cerebras의 웨이퍼 스케일 AI 베팅이 블록버스터 IPO로 이어졌다는 소식이다. 이는 AI 칩 시장에서의 혁신적인 접근 방식이 투자자들에게 긍정적인 반응을 얻고 있음을 보여준다. Cerebras의 성공은 다른 AI 칩 스타트업들에게도 영향을 미칠 수 있다.",
-          "bd_perspective": "Furiosa는 Cerebras의 성공 사례를 참고하여 시장 진입 전략을 재검토해야 한다."
-        }
-      ]
+      "no_update": true,
+      "items": [],
+      "watch": ""
     },
     {
       "name": "Cerebras",
-      "region": "global",
+      "no_update": false,
       "items": [
-        {
-          "title": "Cerebras swings IPO focus to tech and AI. But healthcare and industrials still lead - MSN",
-          "url": "https://news.google.com/rss/articles/CBMiiwNBVV95cUxPNGxYNVZrS0FkSWhTSTNMY2d6LVFUWEUtbzhFbmw2UnBKeUF3WE5hR0R1UW9vWTg2S09xWXNjVDJ2aHJKc3VnQi1PY29WSlNhZ2dWbGpaTGVpbnhyeFNhVnNNOEVNMHA5NDZJS0FqbXhZZEY5andoQlJ1UGQxelZuaTZiVFFuZEE2MTJjb3NGQ0FsZEtjOFhxcl9IVm1mVWViVGM2RFZIV084bDk2dFltTm1yM294Wk5fZlktQWhtdzZSVk9SeHVuNzIzR0U2cEE3a0xqQVp2akRYV1V5a2QtN0VJVUVGclMzbDVFbWVUS0dYN1ZmMjR5QURJTDZKWmNoc19tOXF4SU9NbWJoc3R0OTVRM0w4VDk3UlJNWnU5NlZVTmluZzdxSUJmYWRFZmgzazlPYTgxZTIyQ01uQlFkRXpESzZTSmNwZWRXWjFrV1p1X0dOb1NINVAwZ3AxUU5fSTBPOVJ6MzZPamMzTmVqUjRUNkFsRzM1SlY1MGU3TFNNa0EwZFZRd3BNYw?oc=5",
-          "date": "05-17",
-          "summary": "Cerebras가 IPO 초점을 기술 및 AI로 전환했지만, 여전히 헬스케어 및 산업 분야가 주도하고 있다는 분석이 있다. 이는 AI 기술이 다양한 산업에 걸쳐 적용될 수 있는 가능성을 보여준다. Cerebras의 전략 변화는 AI 시장의 방향성을 제시하는 중요한 사례로 작용할 수 있다.",
-          "bd_perspective": "Furiosa는 다양한 산업에 대한 AI 적용 가능성을 탐색해야 한다."
-        },
-        {
-          "title": "$60B AI chip darling Cerebras almost died early on, burning $8M a month - Yahoo Finance",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPWGE4V3Bvbk1qVHowY3pTdEtXTVJiYmRCUEpDVlUxei1PTHl4TWx6QWswa2pYOU5fZGdSNVR2alItQUtkUEEwZGRrcVZkWGI3T3pOcTZQRy1GNmJOemVTdjFpM0lGTFd0MmRpVk81bU93amx5LWNlQmtMTUQxYnFvenUyZExPNzR3dV9CSHM4M3dmZWpPS3l0ejhaZ1N0QQ?oc=5",
-          "date": "05-17",
-          "summary": "Cerebras는 초기 단계에서 매달 800만 달러를 소모하며 거의 파산할 뻔한 경험이 있었다. 그러나 현재는 600억 달러의 가치로 성장하며 AI 칩 시장에서 중요한 위치를 차지하고 있다. 이는 AI 스타트업들이 초기 어려움을 극복하고 성장할 수 있는 가능성을 보여준다.",
-          "bd_perspective": "Furiosa는 초기 투자 유치 및 지속 가능한 성장 전략을 마련해야 한다."
-        },
-        {
-          "title": "Cerebras: Don't Buy The IPO Hype, Wait For A Drop - Seeking Alpha",
-          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNRV9Ra0JOXzZiS21yYVZrcmhxcEZrcVF4UkpadFNUN250SzI3RXRiaGN4ODlKbE04dlcwcjZaRW9KYjRZOTNPYlpzdWdVVS1OSUY5aUwwNFZMMmpPUFpVUHZiSldoQndQLUllMXlKQXRvLUJXUnhUd0xIWWkycmtIZ3VBMW9WekV0alFWTWdwTGc?oc=5",
-          "date": "05-16",
-          "summary": "Cerebras의 IPO 과대광고를 피하고 가격 하락을 기다리라는 조언이 제시되었다. 이는 시장에서의 과도한 기대감이 위험할 수 있음을 경고하는 내용이다. 투자자들은 신중한 접근이 필요하다는 메시지를 전달하고 있다.",
-          "bd_perspective": "Furiosa는 시장의 과도한 기대에 휘둘리지 않고 안정적인 성장 전략을 유지해야 한다."
-        }
-      ]
+        "1. [NASDAQ IPO 첫날 68% 급등] (May 14) — $185 공모가 상장, 시총 약 $95B 달성으로 AI 인프라 투자 붐 재확인",
+        "2. [상장 첫 정규 거래일 10% 하락] (May 15) — 차익 실현 매물로 조정, 단기 변동성 노출",
+        "3. [OpenAI $20B 멀티년 컴퓨팅 계약] (배경) — IPO 신뢰도 핵심 레퍼런스, OpenAI와 장기 공급 계약으로 수익 가시성 확보"
+      ],
+      "watch": "Cerebras의 $95B 상장 성공은 AI 추론 전용 칩 시장 유효성을 공개 검증, Furiosa의 투자 유치 환경 개선 및 차세대 칩 마케팅에 긍정적 선례."
     },
     {
-      "name": "Rebellions",
-      "region": "korea",
-      "items": [
-        {
-          "title": "AI 인프라 주도권 쥔 K반도체… 투자 시계 앞당긴 메모리⋅파운드리 반...",
-          "url": "https://www.ddaily.co.kr/page/view/2026051513525178810",
-          "date": "05-16",
-          "summary": "리벨리온이 AI 인프라 주도권을 쥐고 있으며, 삼성전자의 4nm 공정을 활용할 계획이다. 이들은 AI 반도체 설계 기업으로서의 입지를 강화하고 있으며, 글로벌 경쟁에서 우위를 점할 가능성이 있다. 이는 한국 AI 반도체 시장의 성장 가능성을 보여준다.",
-          "bd_perspective": "Furiosa는 리벨리온의 전략을 분석하여 경쟁력을 높여야 한다."
-        },
-        {
-          "title": "더 크게보다 더 가볍게…AI 인프라 경량화 시대 부상",
-          "url": "https://zdnet.co.kr/view/?no=20260516093702",
-          "date": "05-16",
-          "summary": "AI 인프라 경량화 시대가 부상하고 있으며, 퓨리오사AI와 모빌린트, 리벨리온 등이 NPU 기반 AI 반도체를 통해 전력 효율 중심의 시장 공략을 강화하고 있다. 이는 AI 기술의 발전과 함께 효율성을 중시하는 시장의 요구를 반영하고 있다. AI 인프라의 경량화는 향후 시장에서 중요한 요소가 될 것이다.",
-          "bd_perspective": "Furiosa는 AI 인프라 경량화 트렌드에 맞춰 기술 개발에 집중해야 한다."
-        },
-        {
-          "title": "\"돈만 푸는 시대 끝\"…5대 금융지주, 생산적금융에 '각자 색깔'",
-          "url": "https://view.asiae.co.kr/article/2026051507122668522",
-          "date": "05-16",
-          "summary": "5대 금융지주가 생산적 금융에 각자의 색깔을 입히고 있으며, 리벨리온에 대한 투자가 포함되어 있다. 이는 AI 반도체 기업에 대한 금융 지원이 강화되고 있음을 나타내며, 첨단 산업 생태계의 발전에 기여할 것으로 예상된다. 이러한 투자 흐름은 AI 반도체 시장의 성장을 촉진할 수 있다.",
-          "bd_perspective": "Furiosa는 금융 지원을 확보하기 위한 전략을 강화해야 한다."
-        }
-      ]
+      "name": "SambaNova",
+      "no_update": true,
+      "items": [],
+      "watch": ""
     },
     {
-      "name": "DeepX",
-      "region": "korea",
-      "items": [
-        {
-          "title": "딥엑스, 울트라리틱스와 맞손…K-NPU 글로벌 디폴트 칩 도전",
-          "url": "https://www.econovill.com/news/articleView.html?idxno=740226",
-          "date": "05-16",
-          "summary": "딥엑스가 울트라리틱스와 협력하여 K-NPU 글로벌 디폴트 칩에 도전하고 있다. 개발자는 단 한 줄의 명령어로 AI 모델을 딥엑스 칩에 최적화할 수 있어, 하드웨어 통합 작업이 크게 단축된다. 이는 AI 기술의 접근성을 높이는 중요한 발전으로 평가된다.",
-          "bd_perspective": "Furiosa는 딥엑스의 기술 혁신을 참고하여 자사의 기술 개발에 반영해야 한다."
-        },
-        {
-          "title": "\"이제는 AI 효율전쟁…한국 기업들에 기회 충분하다\"",
-          "url": "https://www.hankyung.com/article/2026051599421",
-          "date": "05-15",
-          "summary": "딥엑스와 모빌린트는 AI가 데이터센터를 넘어 일상 기기에 스며드는 시대에 대비해야 한다고 강조하고 있다. 이들은 AI 반도체 시장에서의 경쟁력을 높이기 위해 다양한 전략을 모색하고 있으며, 이는 한국 기업들에게 기회가 될 수 있다. AI 기술의 확산은 새로운 시장을 창출할 수 있는 가능성을 내포하고 있다.",
-          "bd_perspective": "Furiosa는 AI 기술의 확산에 맞춰 시장 진입 전략을 재조정해야 한다."
-        },
-        {
-          "title": "딥엑스 NPU, 비전AI 플랫폼 'YOLO' 디폴트 HW 옵션 중 하나로",
-          "url": "https://www.mt.co.kr/future/2026/05/15/2026051515240463618",
-          "date": "05-15",
-          "summary": "딥엑스의 NPU가 비전AI 플랫폼 'YOLO'의 디폴트 하드웨어 옵션 중 하나로 채택되었다. 개발자들은 간단한 명령어로 AI 모델을 최적화하여 배포할 수 있어, 효율성이 크게 향상된다. 이는 한국 AI 반도체 기업의 기술력이 세계적으로 인정받고 있음을 보여준다.",
-          "bd_perspective": "Furiosa는 YOLO와 같은 플랫폼과의 협력을 통해 시장 점유율을 확대할 수 있다."
-        }
-      ]
-    },
-    {
-      "name": "HyperAccel",
-      "region": "korea",
-      "items": [
-        {
-          "title": "AI 인프라 주도권 쥔 K반도체… 투자 시계 앞당긴 메모리⋅파운드리 반...",
-          "url": "https://www.ddaily.co.kr/page/view/2026051513525178810",
-          "date": "05-16",
-          "summary": "K반도체 기업들이 AI 인프라 주도권을 쥐고 있으며, 삼성전자의 4nm 공정을 활용할 예정이다. 이들은 차세대 메모리 패키지와 함께 AI 반도체 시장에서의 경쟁력을 강화하고 있다. 이는 한국 AI 반도체 산업의 성장 가능성을 높이는 중요한 신호로 해석된다.",
-          "bd_perspective": "Furiosa는 K반도체 기업들과의 협력을 통해 시장에서의 입지를 강화해야 한다."
-        },
-        {
-          "title": "[더벨][산은 넥스트라운드 IN 실리콘밸리] 글로벌 무대 오른 K-스타트업...",
-          "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202605131546327960104586",
-          "date": "05-15",
-          "summary": "하이퍼엑셀, 엑시나 등 9개 기업이 실리콘밸리 무대에 올라 후속 투자 성과를 노리고 있다. 이들은 글로벌 시장에서의 성장을 위해 적극적으로 투자 유치를 추진하고 있으며, 이는 한국 스타트업의 국제적 입지를 강화하는 데 기여할 것으로 기대된다. 실리콘밸리에서의 성장은 한국 AI 반도체 기업들에게도 기회가 될 수 있다.",
-          "bd_perspective": "Furiosa는 실리콘밸리 진출을 통해 글로벌 시장에서의 입지를 강화해야 한다."
-        },
-        {
-          "title": "리벨리온 이기려는 퓨리오사…프리IPO 3조 고수",
-          "url": "https://dealsite.co.kr/articles/161657",
-          "date": "05-14",
-          "summary": "퓨리오사가 리벨리온과의 경쟁에서 프리IPO 3조 원을 고수하고 있다는 소식이다. 이는 Furiosa가 국내 유망 반도체 스타트업으로 자리 잡고 있음을 보여주며, 리벨리온과의 경쟁에서 우위를 점하기 위한 전략을 모색하고 있다는 의미이다. 향후 자금 조달과 기술 개발이 중요한 과제가 될 것이다.",
-          "bd_perspective": "Furiosa는 자금 조달과 기술 개발을 통해 리벨리온과의 경쟁에서 우위를 점해야 한다."
-        }
-      ]
-    },
-    {
-      "name": "Mobilint",
-      "region": "korea",
-      "items": [
-        {
-          "title": "더 크게보다 더 가볍게…AI 인프라 경량화 시대 부상",
-          "url": "https://zdnet.co.kr/view/?no=20260516093702",
-          "date": "05-16",
-          "summary": "모빌린트와 퓨리오사AI, 리벨리온 등이 NPU 기반 AI 반도체를 통해 전력 효율 중심의 추론 시장 공략을 강화하고 있다. 이들은 AI 인프라 경량화 시대에 발맞추어 기술 개발에 집중하고 있으며, 이는 시장에서의 경쟁력을 높이는 데 기여할 것으로 예상된다. AI 반도체의 전력 효율성은 향후 중요한 시장 요소가 될 것이다.",
-          "bd_perspective": "Furiosa는 전력 효율성을 강조하여 시장에서의 경쟁력을 강화해야 한다."
-        },
-        {
-          "title": "[150조 국민성장펀드] [간접투자 1차] 두 곳에 1200억 주는데…AI·반도체...",
-          "url": "https://dealsite.co.kr/articles/161803",
-          "date": "05-15",
-          "summary": "모빌린트와 업스테이지 등 AI 인프라 산업에 지속적으로 투자하고 있다는 소식이 전해졌다. 이들은 AI 및 반도체 분야에서의 성장을 위해 적극적으로 자금을 유치하고 있으며, 이는 시장의 지속 가능한 발전에 기여할 것으로 보인다. AI 인프라에 대한 투자는 향후 큰 성과를 가져올 가능성이 있다.",
-          "bd_perspective": "Furiosa는 AI 인프라에 대한 지속적인 투자 유치 전략을 강화해야 한다."
-        },
-        {
-          "title": "국내 첫 'NPU 데이터센터' 건설…AI칩 스타트업 실험실 된다",
-          "url": "https://www.hankyung.com/article/2026051472091",
-          "date": "05-14",
-          "summary": "국내 최초의 NPU 데이터센터가 건설될 예정이며, AI 칩 스타트업들이 실험실로 활용될 예정이다. 이 데이터센터는 산업용, 엣지, 데이터센터 추론 시장을 겨냥하고 있으며, AI 반도체 기업들에게 큰 기회를 제공할 것으로 예상된다. 이는 한국 AI 반도체 산업의 발전에 중요한 이정표가 될 수 있다.",
-          "bd_perspective": "Furiosa는 NPU 데이터센터를 활용하여 기술 개발과 시장 진입 전략을 강화해야 한다."
-        }
-      ]
+      "name": "Tenstorrent",
+      "no_update": true,
+      "items": [],
+      "watch": ""
     }
   ]
 }
