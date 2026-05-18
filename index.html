@@ -704,10 +704,13 @@ function getTheme() {
 return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
 }
 function updateThemeToggleIcon() {
-// 다크일 땐 ☼ (라이트로 전환 hint), 라이트일 땐 ☽
-const icon = getTheme() === 'dark' ? '☼' : '☽';
-themeToggle.textContent = icon;
-themeToggleM.textContent = icon;
+// 반반 원 SVG: 오른쪽 반 채워짐. currentColor로 다크/라이트 자동 대응.
+const svg = `<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+<path d="M12 3 A9 9 0 0 1 12 21 Z" fill="currentColor"/>
+</svg>`;
+themeToggle.innerHTML = svg;
+themeToggleM.innerHTML = svg;
 }
 function setTheme(theme) {
 if (theme === 'light') {
