@@ -44,8 +44,8 @@ COMPANIES = [
 ]
 
 FURIOSA_QUERIES = [
-    ('furiosa ai OR furiosaAI OR furiosaai OR FuriosaAI OR "Furiosa AI" chip', "en"),
-    ('퓨리오사에이아이 OR 퓨리오사AI OR FuriosaAI', "ko"),
+    ('FuriosaAI OR "Furiosa AI" chip', "en"),
+    ('퓨리오사 OR 퓨리오사AI OR FuriosaAI', "ko"),
 ]
 
 
@@ -360,6 +360,66 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
         return articles
 
 
+def filter_relevant_by_company(company: str, articles: list[dict], client: "OpenAI | None") -> list[dict]:
+    """
+    한 회사의 기사 목록을 받아 그 회사가 실제로 핵심 주제인 기사만 남긴다.
+    회사명이 본문에 잠깐 언급된 무관 기사 제거.
+
+    실패 시(LLM 호출 실패 등) 원본 그대로 반환 (안전).
+    """
+    if client is None or not articles:
+        return articles
+
+    numbered = "\n".join(f"[{i}] {a.get('title', '')}" for i, a in enumerate(articles))
+    prompt = f"""다음은 '{company}' 회사 관련 뉴스 검색 결과입니다.
+각 제목을 보고 그 회사가 실제로 기사의 **핵심 주제**인지 판단하세요.
+회사명이 본문에 잠깐 언급되거나 비교 대상으로만 나오는 무관 기사는 제외합니다.
+
+제목 목록:
+{numbered}
+
+응답 형식 (오직 JSON):
+{{"keep": [0, 2, 5]}}
+
+규칙:
+- '{company}'가 기사의 주요 대상/주체이면 keep.
+- 회사 발표, 제품, 인사, 투자, 실적, 기술, 인터뷰 등이면 keep.
+- 회사명이 다른 회사 비교 글에서 잠깐 언급되거나(예: "X vs {company}" 형식의 비교 기사가 다른 회사 중심), 시장 일반 분석에서 나열만 된 거면 제외.
+- 확신이 없으면 keep (보수적으로)."""
+
+    try:
+        try:
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=400,
+                temperature=0.1,
+                response_format={"type": "json_object"},
+            )
+        except Exception:
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=400,
+                temperature=0.1,
+            )
+        raw = resp.choices[0].message.content or ""
+        m = re.search(r"\{[\s\S]*\}", raw)
+        data = json.loads(m.group() if m else raw)
+        keep = data.get("keep", [])
+        valid = [i for i in keep if isinstance(i, int) and 0 <= i < len(articles)]
+        if not valid:
+            # LLM이 0개 keep이라고 답해도, 안전망으로 원본 유지
+            print(f"  [info] {company}: relevance filter returned empty, keeping all")
+            return articles
+        filtered = [articles[i] for i in valid]
+        print(f"  Relevance filter for {company}: {len(articles)} → {len(filtered)}")
+        return filtered
+    except Exception as e:
+        print(f"  [warn] Relevance filter failed for {company}, keeping all: {e}")
+        return articles
+
+
 def to_output(a: dict, kst: pytz.BaseTzInfo, include_brief: bool = False,
               include_summary_only: bool = False) -> dict:
     """Strip non-JSON-serializable fields and format date for display.
@@ -553,9 +613,11 @@ def main():
         # 최근 N일 내 기사만 유지. pub_dt 없는 기사는 제외 (Furiosa 필터링과 동일 방식).
         recent = [a for a in fetched
                   if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
+        # 관련성 LLM 필터: 회사명만 잠깐 언급된 무관 기사 제거 (클러스터링/요약 토큰 절약).
+        relevant = filter_relevant_by_company(co["name"], recent, client)
         # LLM 클러스터링: 같은 사건/syndicated 중복 제거 (회사별로 호출).
         # client가 None이거나 기사 1개 이하면 그대로 반환됨.
-        deduped = cluster_articles_by_event(recent, client)
+        deduped = cluster_articles_by_event(relevant, client)
         # 최신순 정렬 (각 소스의 기본 정렬을 신뢰하지 않고 명시적으로 내림차순).
         deduped.sort(key=lambda a: a["pub_dt"], reverse=True)
         articles = deduped[:COMPETITOR_MAX_ITEMS]
@@ -564,7 +626,7 @@ def main():
             "region": co["region"],
             "articles": articles,
         })
-        print(f"  {co['name']}: {len(articles)} articles (fetched={len(fetched)}, in {COMPETITOR_CUTOFF_DAYS}d={len(recent)}, deduped={len(deduped)})")
+        print(f"  {co['name']}: {len(articles)} articles (fetched={len(fetched)}, in {COMPETITOR_CUTOFF_DAYS}d={len(recent)}, relevant={len(relevant)}, deduped={len(deduped)})")
 
     # ── 1.5 LLM 요약 + Furiosa BD 시점 생성 (1회 batch 호출) ──────────────
     all_pairs = [(c["name"], a) for c in companies_raw for a in c["articles"]]
