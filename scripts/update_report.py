@@ -280,7 +280,7 @@ def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
 
 def build_period(now: datetime.datetime) -> str:
     today = now.date()
-    week_start = today - datetime.timedelta(days=today.weekday())
+    week_start = today - datetime.timedelta(days=6)  # 오늘 포함 최근 7일
     days_ko = ["(월)", "(화)", "(수)", "(목)", "(금)", "(토)", "(일)"]
     return (f"{week_start.strftime('%Y-%m-%d')}{days_ko[week_start.weekday()]} "
             f"~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}")
