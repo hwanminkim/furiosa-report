@@ -31,8 +31,8 @@ REPORT_PATH = REPO_ROOT / "report.json"
 
 COMPANIES = [
     # 글로벌 회사: 회사명 + (반도체 도메인 키워드 OR 그룹). 무관 기사 (주식/시장/회계 등) 배제.
-    {"name": "NVIDIA", "region": "global", "query": "NVIDIA (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
-    {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
+    {"name": "NVIDIA", "region": "global", "query": "NVIDIA (chip OR AI OR inference OR NPU OR accelerator OR GPU OR groq)", "lang": "en"},
+    {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent (chip OR wormhole OR galaxy OR blackhole OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     {"name": "Groq", "region": "global", "query": "Groq (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     {"name": "SambaNova", "region": "global", "query": "SambaNova (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     {"name": "Cerebras", "region": "global", "query": "Cerebras (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
