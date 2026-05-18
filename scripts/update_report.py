@@ -45,7 +45,7 @@ COMPANIES = [
 
 FURIOSA_QUERIES = [
     ('furiosa ai OR furiosaai OR "Furiosa AI" chip', "en"),
-    ('퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
+    ('퓨리오사 ai OR 퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
 ]
 
 
