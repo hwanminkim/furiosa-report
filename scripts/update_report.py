@@ -16,8 +16,10 @@ import html
 import json
 import os
 import re
+import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.parse import quote
 from urllib.request import urlopen, Request
 
@@ -42,8 +44,8 @@ COMPANIES = [
 ]
 
 FURIOSA_QUERIES = [
-    ('FuriosaAI OR "Furiosa AI" chip', "en"),
-    ('퓨리오사 OR 퓨리오사AI OR FuriosaAI', "ko"),
+    ('furiosa ai OR furiosaAI OR furiosaai OR FuriosaAI OR "Furiosa AI" chip', "en"),
+    ('퓨리오사에이아이 OR 퓨리오사AI OR FuriosaAI', "ko"),
 ]
 
 
@@ -150,6 +152,9 @@ def _fetch_gdelt(query: str, n: int) -> list[dict]:
     Endpoint: https://api.gdeltproject.org/api/v2/doc/doc
     No API key required.
     Sort by latest date (DateDesc), timespan 30d, English only.
+
+    Rate limit 대응: HTTP 429 받으면 2초/5초 대기 후 재시도 (최대 2회).
+    매 호출 후 2초 sleep (다음 호출 전 간격 확보).
     """
     full_query = f"{query} sourcelang:eng"
     url = (
@@ -164,11 +169,30 @@ def _fetch_gdelt(query: str, n: int) -> list[dict]:
     req = Request(url, headers={
         "User-Agent": "Mozilla/5.0 (compatible; FuriosaReport/1.0)",
     })
-    try:
-        with urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except Exception as e:
-        print(f"  [gdelt-skip] {query}: {e}")
+
+    data = None
+    retry_delays = [2, 5]  # 429 시 대기 시간 (초)
+    for attempt in range(len(retry_delays) + 1):
+        try:
+            with urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            break  # 성공
+        except HTTPError as e:
+            if e.code == 429 and attempt < len(retry_delays):
+                wait = retry_delays[attempt]
+                print(f"  [gdelt-429] {query}: rate limited, retrying in {wait}s ({attempt+1}/{len(retry_delays)})")
+                time.sleep(wait)
+                continue
+            print(f"  [gdelt-skip] {query}: HTTP {e.code}")
+            break
+        except Exception as e:
+            print(f"  [gdelt-skip] {query}: {e}")
+            break
+
+    # 호출 후 항상 sleep — 다음 GDELT 호출과 간격 확보 (성공/실패 무관).
+    time.sleep(2)
+
+    if data is None:
         return []
 
     results = []
