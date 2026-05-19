@@ -2,8 +2,9 @@ name: Update Highlights
 
 on:
   schedule:
-    - cron: '30 21 * * *' # 21:30 UTC = 06:30 KST
-    - cron: '5 9 * * *'   # 09:05 UTC = 18:05 KST
+    - cron: '20 19 * * *' # 19:20 UTC = 04:20 KST
+    - cron: '20 1 * * *'  # 01:20 UTC = 10:20 KST
+    - cron: '20 7 * * *'  # 07:20 UTC = 16:20 KST
   workflow_dispatch:
 
 permissions:
