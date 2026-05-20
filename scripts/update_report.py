@@ -31,7 +31,7 @@ REPORT_PATH = REPO_ROOT / "report.json"
 
 COMPANIES = [
     # 글로벌 회사: 회사명 + (반도체 도메인 키워드 OR 그룹). 무관 기사 (주식/시장/회계 등) 배제.
-    {"name": "NVIDIA", "region": "global", "query": "NVIDIA (chip OR AI OR inference OR NPU OR accelerator OR GPU OR groq)", "lang": "en"},
+    {"name": "NVIDIA", "region": "global", "query": "NVIDIA (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     {"name": "Groq", "region": "global", "query": "Groq (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     {"name": "SambaNova", "region": "global", "query": "SambaNova (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
@@ -45,7 +45,7 @@ COMPANIES = [
 
 FURIOSA_QUERIES = [
     ('furiosa ai OR furiosaai OR "Furiosa AI" chip', "en"),
-    ('퓨리오사 ai OR 퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
+    ('퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
 ]
 
 
@@ -456,15 +456,39 @@ def generate_briefs(articles_with_company: list[tuple], client: "OpenAI | None")
             "snippet": (a.get("description") or "")[:240],
         })
 
-    prompt = f"""You are a BD (business development) analyst at Furiosa AI, a Korean AI inference chip startup.
-Furiosa's competitors include NVIDIA, Groq, Cerebras, SambaNova, Tenstorrent (global)
-and Rebellions, DeepX, HyperAccel, Mobilint (Korea).
+    prompt = f"""You are a BD (business development) analyst at Furiosa AI.
 
-For each competitor news article below, produce two Korean fields:
-- "summary": 3문장, 사실 위주로 핵심 내용을 충분히 풀어쓰기. 총 약 300자 (250~350자). 무엇이/언제/어떻게/왜 중요한지 포함.
-- "bd_perspective": 1문장, Furiosa BD 관점에서 이 뉴스가 갖는 의미(기회/위협/시장 시그널), 최대 100자.
+## Furiosa AI 핵심 컨텍스트
+- 한국 AI 추론(inference) 전용 칩 스타트업
+- 주력 제품: RNGD (현재 주력 NPU) — 데이터센터 LLM 추론용
+- 강점: 전력 효율 (W당 성능), 추론 전용 최적화, MLPerf 벤치마크 실적
+- 타겟 시장: 데이터센터 LLM 추론 서비스, 엔터프라이즈 AI, sovereign AI 인프라
+- 경쟁 포지셔닝:
+  - 글로벌: NVIDIA H100/H200, RTX Pro 6000 같은 GPU 라인업이 직접 경쟁
+  - 추론 특화 그룹: Tenstorrent Wormhole/Blackhole, Groq, Cerebras, SambaNova
+  - 국내: Rebellions가 가장 유사한 포지셔닝
+- 사업 단계: 대규모 투자 라운드 진행 중 (후기 단계 스타트업)
 
-진부한 일반론 금지. 구체적인 함의 위주.
+## 경쟁사 그룹
+- 글로벌: NVIDIA (시장 지배), Tenstorrent (RISC-V 기반, Wormhole/Blackhole), Groq/Cerebras/SambaNova (추론 특화)
+- 한국: Rebellions (유사 포지셔닝), DeepX/Mobilint (엣지 NPU), HyperAccel (LPU)
+
+## 작업
+각 경쟁사 뉴스에 대해 두 한국어 필드 생성:
+
+- **"summary"**: 3문장, 사실 위주, 250~350자. 무엇/언제/어떻게/왜 중요한지 포함.
+
+- **"bd_perspective"**: 1~2문장, 100~200자. Furiosa BD 입장에서 **구체적인** 함의.
+  반드시 다음 중 하나를 포함:
+  (a) 어떤 고객/시장/지역에서 Furiosa 영업에 영향
+  (b) Furiosa의 어떤 강점(전력 효율, 추론 특화, RNGD 등)과 비교/대조되는 지점
+  (c) Furiosa가 즉시 취해야 할 구체적 액션 (영업 자료 업데이트, 특정 고객 접촉 등)
+  (d) 시장 시그널의 구체적 의미 (가격, 공급, 수요, 정책 등)
+
+  **금지 표현**: "차별화된 기술 개발이 필요하다", "주의가 필요하다",
+  "경쟁이 치열해진다", "긍정/부정적 신호", "기회가 될 수 있다" 같은 알맹이 없는 일반론.
+
+  **정보가 제목만으로 부족하면** 추측하지 말고 "원문 확인 필요 — [어떤 디테일이 필요한지]" 형식으로 솔직히 적기.
 
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
@@ -475,7 +499,7 @@ Return JSON ONLY:
 Rules:
 - 모든 id가 정확히 한 번씩 포함되어야 함.
 - 한국어만.
-- 정보가 부족하면 추측하지 말고 "추가 정보 필요" 같이 명시."""
+- 진부한 일반론 절대 금지. 차라리 "원문 확인 필요"가 낫다."""
 
     try:
         try:
