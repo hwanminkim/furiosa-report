@@ -1,28 +1,8 @@
 {
   "period": "2026-05-14(목) ~ 2026-05-20(수)",
-  "updated_at": "2026-05-20T15:57:14+09:00",
-  "furiosa_daily": [
-    {
-      "date": "05-19",
-      "title": "시스원, RNGD·NXT RNGD 서버 공공기관 전용 총판 계약 체결",
-      "url": "https://koreatechdesk.com/furiosaai-rngd-production-ai-inference-commercialization-korea",
-      "summary": "IT 인프라 기업 시스원(SysOne)이 퓨리오사AI와 RNGD 카드 및 NXT RNGD 서버를 한국 정부 기관에 공급하기 위한 공공 부문 전용 총판 계약을 체결했다. RNGD는 180W TDP PCIe 카드 형태로 기존 서버에 직접 탑재 가능하며, 4U 랙마운트 NXT RNGD 서버에는 RNGD 8장이 내장된다. 현재 월 1,000대 수준인 RNGD 생산량은 연말까지 2,000~3,000대로 확대되며 2026년 총 2만 대 공급이 목표다."
-    }
-  ],
-  "furiosa_weekly": [
-    {
-      "date": "05-15",
-      "title": "퓨리오사AI, 오픈AI 코리아 출범 행사서 RNGD 기반 gpt-oss 120B 챗봇 시연",
-      "url": "https://www.cio.com/article/4056254/%ED%93%A8%EB%A6%AC%EC%98%A4%EC%82%ACai-%EC%98%A4%ED%94%88ai-%EC%BD%94%EB%A6%AC%EC%95%84-%EC%B6%9C%EB%B2%94-%ED%96%89%EC%82%AC%EC%84%9C-rngd-%EA%B8%B0%EB%B0%98-gpt-oss-120b-%EC%B1%97.html",
-      "summary": "퓨리오사AI가 오픈AI 코리아 공식 출범 행사에서 RNGD 기반으로 gpt-oss 120B 모델을 구동한 챗봇을 시연했다. RNGD의 120B 파라미터 모델 실시간 추론 능력을 공개 행사를 통해 입증하며 글로벌 소프트웨어 파트너와의 협력 가시성을 높였다."
-    },
-    {
-      "date": "05-13",
-      "title": "퓨리오사AI, 4,000억원 규모 시리즈D 투자 추진…미래에셋·모건스탠리 주관사 선정",
-      "url": "https://momensinsight.kr/posts/news/10557",
-      "summary": "퓨리오사AI가 미래에셋증권·모건스탠리를 공동 주관사로 선정하고 4,000억원(약 3억 달러) 규모 시리즈D 투자 유치를 추진하고 있다. 기업가치는 최소 2조원에서 3조원 안팎이 거론되며, 확보 자금은 글로벌 시장 공략 가속화와 엔터프라이즈 고객 대응에 집중 투입할 예정이다. 미래에셋·모건스탠리 참여는 향후 나스닥 또는 코스닥 상장(2027~2028년 예상)을 염두에 둔 투자자 기반 구축으로 풀이된다."
-    }
-  ],
+  "updated_at": "2026-05-20T16:25:54.063929+09:00",
+  "furiosa_daily": [],
+  "furiosa_weekly": [],
   "companies": [
     {
       "name": "NVIDIA",
@@ -32,22 +12,7 @@
     {
       "name": "Tenstorrent",
       "region": "global",
-      "items": [
-        {
-          "date": "05-18",
-          "title": "Tenstorrent, Intel·Qualcomm 인수 협상 중…기업가치 50억 달러 이상 거론",
-          "url": "https://www.bloomberg.com/news/articles/2026-05-18/ai-chip-startup-tenstorrent-draws-takeover-interest-from-intel-qualcomm",
-          "summary": "Bloomberg 보도에 따르면 Tenstorrent가 Intel 및 Qualcomm과 인수 협상을 진행 중이며, 거래 성사 시 기업가치는 50억 달러(약 7조 원) 이상이 될 것으로 관측된다. Tenstorrent는 동시에 신규 투자 유치도 병행하는 이중 전략(매각 또는 투자)을 구사하고 있으며, Intel·Qualcomm은 RISC-V 기반 AI 추론 칩 역량 확보 목적으로 풀이된다. 아직 초기 협상 단계로 거래 구조(완전 인수 또는 전략적 지분 투자)는 미확정이다.",
-          "bd_perspective": "Tenstorrent가 Intel 또는 Qualcomm에 인수될 경우 글로벌 반도체 대기업의 유통망·영업력이 결합되어 데이터센터 LLM 추론 시장에서 RNGD와 경쟁하는 체급이 크게 강화된다. 인수 완료 전 공백기를 활용한 Tenstorrent 기존 고객사 대상 RNGD 전환 영업 검토가 필요하다."
-        },
-        {
-          "date": "05-01",
-          "title": "Tenstorrent Galaxy Blackhole 정식 출시…DeepSeek-R1 671B에서 350+ t/s/u 달성",
-          "url": "https://www.hpcwire.com/aiwire/2026/05/01/tenstorrent-announces-general-availability-of-galaxy-blackhole-ai-system/",
-          "summary": "Tenstorrent가 Galaxy Blackhole AI 시스템 정식 출시(GA)를 발표했다. RISC-V CPU·텐서 프로세서·근접 컴퓨트 메모리·400G 네트워킹이 단일 박스에 통합되며, DeepSeek-R1 671B 모델에서 사용자당 350+ 토큰/초, 첫 토큰 지연 4초 미만을 달성했다. Prodia와 협력한 720p 81프레임 영상 생성에서는 2.4초로 비교 GPU 대비 10배 속도를 주장한다.",
-          "bd_perspective": "DeepSeek-R1 671B 기준 350+ t/s/u가 공개 벤치마크로 제시됐다. 고객 제안 시 RNGD의 동일 모델 대비 토큰/초 및 W당 처리량 비교 수치를 준비해 Blackhole 수치를 직접 반박할 수 있어야 한다."
-        }
-      ]
+      "items": []
     },
     {
       "name": "Groq",
@@ -62,54 +27,22 @@
     {
       "name": "Cerebras",
       "region": "global",
-      "items": [
-        {
-          "date": "05-14",
-          "title": "Cerebras, 나스닥 IPO 첫날 68% 급등…시가총액 660억 달러, 55억 달러 조달",
-          "url": "https://www.cnbc.com/2026/05/14/cerebras-ipo-mints-two-billionaires-sets-stage-for-potential-ai-wave.html",
-          "summary": "Cerebras가 주당 185달러(예상 범위 상단 초과)로 나스닥 IPO를 완료하고 첫날 68% 급등해 시가총액 약 660억 달러에 마감, 55억 5,000만 달러를 조달했다. IPO 신뢰의 핵심 근거는 OpenAI와의 750MW 컴퓨팅 용량 20억 달러 계약과 AWS 데이터센터 칩 탑재 계약이다. Cerebras WSE-3(TSMC 5nm, 46,225mm², 125 PetaFLOPS)는 GPT-OSS 120B 기준 2,200+ 토큰/초를 달성한다.",
-          "bd_perspective": "Cerebras의 WSE 포지셔닝(초고속 단일 워크로드)과 RNGD의 전력 효율 포지셔닝은 타깃 고객군이 다르다. 다만 OpenAI·AWS 계약이 공개되면서 대형 클라우드가 GPU 외 대안을 실제 도입하는 선례가 형성됐고, RNGD 세일즈 시 이를 레퍼런스로 활용할 수 있다."
-        }
-      ]
+      "items": []
     },
     {
       "name": "Rebellions",
       "region": "korea",
-      "items": [
-        {
-          "date": "05-07",
-          "title": "리벨리온 Rebel100, 최신 추론 모델 벤치마크 공개…H200 동급 성능 600W 달성 주장",
-          "url": "https://en.sedaily.com/news/2026/05/07/rebellions-targets-nvidia-dominance-with-inference-focused",
-          "summary": "리벨리온이 데이터센터 전용 추론 칩 Rebel100의 최신 리즈닝 모델 벤치마크 결과를 발표했다. Rebel100은 삼성 SF4X 공정 기반 쿼드 칩렛 구조에 HBM3E 144GB를 탑재해 FP16 1 PFLOPS 성능을 600W에서 달성, NVIDIA H200의 700W 대비 전력 효율 우위를 주장한다. RebelRack(32개 Rebel100, FP8 64 PFLOPS)과 랙 스케일 플랫폼 RebelPOD도 함께 공개됐다.",
-          "bd_perspective": "리벨리온이 H200 대비 전력 효율을 전면에 내세우며 국내 추론 칩 전력 효율 포지셔닝을 선점하려 한다. RNGD의 W당 성능 비교 수치를 Rebel100 대비로도 정리해 고객사 공동 검토 상황에서 명확한 차별화 데이터를 갖춰야 한다."
-        }
-      ]
+      "items": []
     },
     {
       "name": "DeepX",
       "region": "korea",
-      "items": [
-        {
-          "date": "04-14",
-          "title": "딥엑스, 양산 7개월 만에 8개국 30개사 발주 확보…2026년 매출 목표 300억원 이상",
-          "url": "https://www.unicornfactory.co.kr/article/2026041414545622771",
-          "summary": "딥엑스가 DX-M1 엣지 AI 반도체 양산 착수 7개월 만에 8개국 30개 기업으로부터 구매 발주를 확보했다. 2026년 고객사를 100개로 확대하고 연 매출 300억원 이상을 달성한다는 목표를 제시했으며, 차세대 제품 DX-M2는 삼성 2nm 공정으로 5W 미만·최대 80TOPS를 목표로 로드맵을 공개했다. 롯데이노베이트와는 NPU 기술 적용을 위한 MOU를 체결했다.",
-          "bd_perspective": "딥엑스의 30개 고객사는 로봇·가전·스마트모빌리티 엣지 시장 중심으로 RNGD가 타깃하는 데이터센터 LLM 추론 시장과 겹치지 않는다. BD 액션 사항 없음."
-        }
-      ]
+      "items": []
     },
     {
       "name": "HyperAccel",
       "region": "korea",
-      "items": [
-        {
-          "date": "04-22",
-          "title": "하이퍼엑셀 대표, 2026 정보통신 유공 포장 수상…삼성 4nm ASIC 2026년 양산 계획",
-          "url": "https://www.aitimes.kr/news/articleView.html?idxno=39687",
-          "summary": "하이퍼엑셀 김주영 대표가 LLM 추론 전용 AI 반도체 기술 혁신 공로로 '2026년 정보통신 유공 포장'을 수상했다. 하이퍼엑셀은 LPDDR5X 기반 저전력 메모리와 '스트림라인드 데이터플로우' 아키텍처의 LPU를 개발 중이며 2026년 삼성 4nm ASIC 양산을 계획하고 있다. 대만 어드밴텍(Advantech)과도 AI 인프라 기술 협력 MOU를 체결해 글로벌 유통망 확보를 모색 중이다.",
-          "bd_perspective": "하이퍼엑셀 4nm ASIC이 2026년 양산되면 국내 공공·엔터프라이즈 LLM 추론 칩 시장에서 직접 경쟁이 형성된다. 퓨리오사AI가 시스원 공공 총판을 선점한 상황에서 하이퍼엑셀의 실제 양산 시점과 고객사 확보 동향을 분기별로 모니터링할 필요가 있다."
-        }
-      ]
+      "items": []
     },
     {
       "name": "Mobilint",
