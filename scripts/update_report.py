@@ -31,14 +31,14 @@ REPORT_PATH = REPO_ROOT / "report.json"
 
 COMPANIES = [
     # 글로벌 회사: 회사명 + (반도체 도메인 키워드 OR 그룹). 무관 기사 (주식/시장/회계 등) 배제.
-    {"name": "NVIDIA", "region": "global", "queries": [("NVIDIA (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "en")]},
-    {"name": "Tenstorrent", "region": "global", "queries": [("Tenstorrent (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "en")]},
-    {"name": "SambaNova", "region": "global", "queries": [("SambaNova (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "en")]},
-    {"name": "Cerebras", "region": "global", "queries": [("Cerebras (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "en")]},
-    {"name": "Rebellions", "region": "korea", "queries": [("리벨리온", "ko"), ("Rebellions (chip OR AI OR NPU OR inference)", "en")]},
-    {"name": "DeepX", "region": "korea", "queries": [("딥엑스 OR DeepX", "ko")]},
-    {"name": "HyperAccel", "region": "korea", "queries": [("하이퍼엑셀 OR HyperAccel", "ko")]},
-    {"name": "Mobilint", "region": "korea", "queries": [("모빌린트 OR Mobilint", "ko")]},
+    {"name": "NVIDIA", "region": "global", "queries": [("NVIDIA", "en")]},
+    {"name": "Tenstorrent", "region": "global", "queries": [("Tenstorrent", "en")]},
+    {"name": "SambaNova", "region": "global", "queries": [("SambaNova", "en")]},
+    {"name": "Cerebras", "region": "global", "queries": [("Cerebras", "en")]},
+    {"name": "Rebellions", "region": "korea", "queries": [("리벨리온", "ko"), ("Rebellions", "en")]},
+    {"name": "DeepX", "region": "korea", "queries": [("딥엑스", "ko"), ("DeepX", "en")]},
+    {"name": "HyperAccel", "region": "korea", "queries": [("하이퍼엑셀", "ko"), ("HyperAccel", "en")]},
+    {"name": "Mobilint", "region": "korea", "queries": [("모빌린트", "ko"), ("Mobilint", "en")]},
 ]
 
 FURIOSA_QUERIES = [
