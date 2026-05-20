@@ -1,8 +1,9 @@
 name: Update Highlights
 
 on:
-  # schedule disabled — replaced by Claude Routine (trig_01Qo9LF6g2qMDvZaqeyhjkr1)
-  workflow_dispatch:
+    schedule:
+      - cron: '20 1,7,19 * * *'  # 매일 04:20, 10:20, 16:20 KST
+    workflow_dispatch:
 
 permissions:
   contents: write
