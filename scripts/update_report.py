@@ -31,15 +31,14 @@ REPORT_PATH = REPO_ROOT / "report.json"
 
 COMPANIES = [
     # 글로벌 회사: 회사명 + (반도체 도메인 키워드 OR 그룹). 무관 기사 (주식/시장/회계 등) 배제.
-    {"name": "NVIDIA", "region": "global", "query": "NVIDIA (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
-    {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
-    {"name": "SambaNova", "region": "global", "query": "SambaNova (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
-    {"name": "Cerebras", "region": "global", "query": "Cerebras (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
-    # 한국 회사: Naver는 띄어쓴 키워드를 AND로 처리 → 회사명만 단순하게 (OR로 한/영 표기 합침)
-    {"name": "Rebellions", "region": "korea", "query": "리벨리온", "lang": "ko"},
-    {"name": "DeepX", "region": "korea", "query": "딥엑스 OR DeepX", "lang": "ko"},
-    {"name": "HyperAccel", "region": "korea", "query": "하이퍼엑셀 OR HyperAccel", "lang": "ko"},
-    {"name": "Mobilint", "region": "korea", "query": "모빌린트 OR Mobilint", "lang": "ko"},
+    {"name": "NVIDIA", "region": "global", "queries": [("NVIDIA (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "en")]},
+    {"name": "Tenstorrent", "region": "global", "queries": [("Tenstorrent (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "en")]},
+    {"name": "SambaNova", "region": "global", "queries": [("SambaNova (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "en")]},
+    {"name": "Cerebras", "region": "global", "queries": [("Cerebras (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "en")]},
+    {"name": "Rebellions", "region": "korea", "queries": [("리벨리온", "ko"), ("Rebellions (chip OR AI OR NPU OR inference)", "en")]},
+    {"name": "DeepX", "region": "korea", "queries": [("딥엑스 OR DeepX", "ko")]},
+    {"name": "HyperAccel", "region": "korea", "queries": [("하이퍼엑셀 OR HyperAccel", "ko")]},
+    {"name": "Mobilint", "region": "korea", "queries": [("모빌린트 OR Mobilint", "ko")]},
 ]
 
 FURIOSA_QUERIES = [
@@ -661,7 +660,13 @@ def main():
 
     companies_raw = []
     for co in COMPANIES:
-        fetched = fetch_articles(co["query"], co["lang"], n=20)
+        fetched = []
+        seen_urls: set[str] = set()
+        for query, lang in co["queries"]:
+            for a in fetch_articles(query, lang, n=20):
+                if a["url"] not in seen_urls:
+                    seen_urls.add(a["url"])
+                    fetched.append(a)
         # 최근 N일 내 기사만 유지. pub_dt 없는 기사는 제외 (Furiosa 필터링과 동일 방식).
         recent = [a for a in fetched
                   if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
