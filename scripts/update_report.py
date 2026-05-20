@@ -33,7 +33,6 @@ COMPANIES = [
     # 글로벌 회사: 회사명 + (반도체 도메인 키워드 OR 그룹). 무관 기사 (주식/시장/회계 등) 배제.
     {"name": "NVIDIA", "region": "global", "query": "NVIDIA (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     {"name": "Tenstorrent", "region": "global", "query": "Tenstorrent (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
-    {"name": "Groq", "region": "global", "query": "Groq (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     {"name": "SambaNova", "region": "global", "query": "SambaNova (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     {"name": "Cerebras", "region": "global", "query": "Cerebras (chip OR AI OR inference OR NPU OR accelerator OR GPU)", "lang": "en"},
     # 한국 회사: Naver는 띄어쓴 키워드를 AND로 처리 → 회사명만 단순하게 (OR로 한/영 표기 합침)
