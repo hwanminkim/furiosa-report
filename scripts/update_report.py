@@ -372,20 +372,27 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
 
     numbered = "\n".join(f"[{i}] {a.get('title', '')}" for i, a in enumerate(articles))
     prompt = f"""다음은 '{company}' 회사 관련 뉴스 검색 결과입니다.
-각 제목을 보고 그 회사가 실제로 기사의 **핵심 주제**인지 판단하세요.
-회사명이 본문에 잠깐 언급되거나 비교 대상으로만 나오는 무관 기사는 제외합니다.
+각 제목을 보고 이 기사가 '{company}'에 대해 **새로운 정보를 주는지** 엄격하게 판단하세요.
 
 제목 목록:
 {numbered}
+
+## keep 기준 (둘 중 하나면 keep)
+1. '{company}'가 기사의 주어로 뭔가를 했을 때 — 제품 발표, 투자 유치, 계약 체결, 인사, 기술 공개, 인터뷰
+2. '{company}'가 파트너십/계약의 한 축일 때 — 양사가 동등하게 다뤄지는 협력 발표
+
+## 제외 기준 (하나라도 해당하면 제외)
+- 다른 회사가 주인공인 기사에서 '{company}'는 파트너/고객으로 잠깐 언급만 됨
+- 여러 회사를 나열하는 리스트/분석 기사에 포함된 것
+- '{company}' 없이도 기사 내용이 완결되는 경우
+- 행사/컨퍼런스 패널 참석 정도의 언급
 
 응답 형식 (오직 JSON):
 {{"keep": [0, 2, 5]}}
 
 규칙:
-- '{company}'가 기사의 주요 대상/주체이면 keep.
-- 회사 발표, 제품, 인사, 투자, 실적, 기술, 인터뷰 등이면 keep.
-- 회사명이 다른 회사 비교 글에서 잠깐 언급되거나(예: "X vs {company}" 형식의 비교 기사가 다른 회사 중심), 시장 일반 분석에서 나열만 된 거면 제외.
-- 확신이 없으면 keep (보수적으로)."""
+- 확신이 없으면 제외 (엄격하게).
+- 해당 기사 없으면 {{"keep": []}} 반환."""
 
     try:
         try:
@@ -408,10 +415,6 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
         data = json.loads(m.group() if m else raw)
         keep = data.get("keep", [])
         valid = [i for i in keep if isinstance(i, int) and 0 <= i < len(articles)]
-        if not valid:
-            # LLM이 0개 keep이라고 답해도, 안전망으로 원본 유지
-            print(f"  [info] {company}: relevance filter returned empty, keeping all")
-            return articles
         filtered = [articles[i] for i in valid]
         print(f"  Relevance filter for {company}: {len(articles)} → {len(filtered)}")
         return filtered
