@@ -104,8 +104,9 @@ h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; 
     z-index: 5;
 }
 
-.hl-card { display: block; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; }
+.hl-card { display: block; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; outline: none; }
 .hl-card:hover { border-color: var(--red); }
+.hl-card:active, .hl-card:focus { background: var(--card); border-color: var(--red); }
 .hl-card.furiosa-card { border-left: 2px solid var(--red); }
 .hl-card-text { font-size: 0.92rem; color: var(--text-news); line-height: 1.55; }
 .item-arrow { font-size: 0.72rem; color: var(--dim); margin-left: 3px; }
@@ -192,7 +193,7 @@ h1 { font-size: 1.7rem; }
 <img class="logo-light" src="assets/img/Furiosa_AI_h_rgb_k.png" alt="Furiosa AI">
 </a>
 </div>
-<span class="header-tag">BD &amp; Sales | HwanminKim</span>
+<span class="header-tag">BD &amp; Sales | Hwanmin Kim</span>
 </header>
 <div class="drawer-backdrop" id="drawer-backdrop"></div>
 <div class="layout">
