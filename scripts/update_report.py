@@ -343,7 +343,12 @@ def main():
     now_utc = now.astimezone(pytz.utc)
     
     daily_cutoff = now_utc - datetime.timedelta(hours=24)
-    weekly_cutoff = now_utc - datetime.timedelta(days=7)
+    # 주간: 오늘 - 6일의 KST 자정 0시 기준 (예: 5/21 실행 → 5/15 00:00 KST 이후 기사만 포함)
+    weekly_start_kst = kst.localize(datetime.datetime.combine(
+        now.date() - datetime.timedelta(days=6),
+        datetime.time(0, 0)
+    ))
+    weekly_cutoff = weekly_start_kst.astimezone(pytz.utc)
     
     print(f"[{now.strftime('%Y-%m-%d %H:%M KST')}] Starting report update...")
 
