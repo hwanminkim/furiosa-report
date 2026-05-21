@@ -112,6 +112,7 @@ h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; 
 .hl-card-text { font-size: 0.92rem; color: var(--text-news); line-height: 1.55; }
 .item-arrow { font-size: 0.72rem; color: var(--dim); margin-left: 3px; }
 .empty-note { font-size: 0.9rem; color: var(--muted); padding: 6px 2px; }
+.daily-footer { text-align: center; font-size: 0.75rem; color: var(--dim); padding: 16px 0 8px; }
 
 /* Company cards */
 .company { border: 1px solid var(--border); border-radius: 4px; margin-bottom: 10px; background: var(--card); scroll-margin-top: 20px; }
@@ -210,6 +211,7 @@ h1 { font-size: 1.7rem; }
 <div>
 <div class="section-label">Furiosa 일간 (00시 기준)</div>
 <div id="furiosa-daily" class="trend-scroll-box"></div>
+<div id="daily-footer" class="daily-footer"></div>
 </div>
 <div>
 <div class="section-label weekly-toggle" id="weekly-toggle">
@@ -440,6 +442,25 @@ if (d.period) document.getElementById('meta').textContent = d.period + ' · Furi
 
 renderGroupedArticles(d.furiosa_daily, 'furiosa-daily', todayKstHeader());
 renderGroupedArticles(d.furiosa_weekly, 'furiosa-weekly');
+
+// 일간 footer: 건수 + 업데이트 시각
+const footerEl = document.getElementById('daily-footer');
+if (footerEl) {
+    const dailyCount = d.furiosa_daily ? Object.values(d.furiosa_daily).reduce((s, arr) => s + arr.length, 0) : 0;
+    let timeStr = '';
+    if (d.updated_at) {
+        const dt = new Date(d.updated_at);
+        // updated_at은 KST(+09:00) 포함 ISO. 그대로 변환해서 KST 시각 추출
+        const kstMs = dt.getTime() + (dt.getTimezoneOffset() * 60000) + (9 * 60 * 60000);
+        const kst = new Date(kstMs);
+        const hh = String(kst.getHours()).padStart(2, '0');
+        const mm = String(kst.getMinutes()).padStart(2, '0');
+        timeStr = `${hh}:${mm} KST 기준`;
+    }
+    const parts = [`일간 ${dailyCount}건`];
+    if (timeStr) parts.push(timeStr);
+    footerEl.textContent = `— ${parts.join(' · ')} —`;
+}
 
 if (d.companies) {
 d.companies.forEach(co => {
