@@ -73,9 +73,10 @@ h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; 
     flex-direction: column;
 }
 
-/* 좌우 박스 모두 스크롤 가능. 일간 높이는 콘텐츠 자연 높이로,
-   주간 max-height는 JS가 일간 높이에 맞춰 동적으로 설정 */
+/* 좌우 박스 모두 카드 5개 들어가는 고정 높이 + 스크롤 */
 .trend-scroll-box { 
+    height: 360px;
+    max-height: 360px;
     overflow-y: auto; 
     padding-right: 4px; 
 }
@@ -174,6 +175,8 @@ h1 { font-size: 1.7rem; }
 .top-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
 .modal.article-modal { width: calc(100vw - 32px); padding: 22px 20px; }
 .modal { width: calc(100vw - 80px); max-width: 320px; }
+/* 모바일: 일간/주간 고정 높이 해제 (작은 화면이라 자연 높이가 적절) */
+.trend-scroll-box { height: auto !important; max-height: none !important; }
 /* 모바일: 주간 토글 활성화 */
 .weekly-toggle { cursor: pointer; user-select: none; }
 .weekly-toggle-arrow { display: inline; }
@@ -431,29 +434,12 @@ function todayKstHeader() {
     return `${mm}-${dd} ${daysKo[kst.getDay()]}`;
 }
 
-// 일간 높이에 맞춰 주간 max-height 설정 (데스크탑만)
-function syncFuriosaHeights() {
-    const daily = document.getElementById('furiosa-daily');
-    const weekly = document.getElementById('furiosa-weekly');
-    if (!daily || !weekly) return;
-    if (window.innerWidth <= 640) {
-        weekly.style.maxHeight = '';
-        return;
-    }
-    const h = daily.offsetHeight;
-    if (h > 0) weekly.style.maxHeight = h + 'px';
-}
-window.addEventListener('resize', syncFuriosaHeights);
-
 // Data Fetching
 fetch('report.json').then(r => r.json()).then(d => {
 if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
 
 renderGroupedArticles(d.furiosa_daily, 'furiosa-daily', todayKstHeader());
 renderGroupedArticles(d.furiosa_weekly, 'furiosa-weekly');
-// 렌더 직후 + 다음 프레임에서 한 번 더 (폰트 로드 등 늦은 레이아웃 반영)
-syncFuriosaHeights();
-requestAnimationFrame(syncFuriosaHeights);
 
 if (d.companies) {
 d.companies.forEach(co => {
