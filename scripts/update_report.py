@@ -746,7 +746,8 @@ def main():
     daily_urls = {a["url"] for a in furiosa_daily}
     furiosa_weekly = sorted(
         [a for a in all_furiosa
-         if in_window(a, weekly_cutoff) and a["url"] not in daily_urls],
+         # 💡 핵심 수정: weekly_cutoff(7일 전) 이후이면서 daily_cutoff(24시간 전) 이전인 기사만!
+         if in_window(a, weekly_cutoff) and not in_window(a, daily_cutoff)],
         key=sort_key,
         reverse=True,
     )[:WEEKLY_LIMIT]
