@@ -58,7 +58,11 @@ h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; 
 .top-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 36px; }
 
 /* 🚨 통일된 양쪽 스크롤 박스 및 타임라인 디자인 */
-.trend-scroll-box { max-height: 440px; overflow-y: auto; padding-right: 8px; }
+.trend-scroll-box { 
+    height: 360px; /* 대략 카드 5개, 혹은 주간 2일치가 딱 들어가는 높이 */
+    overflow-y: auto; 
+    padding-right: 8px; 
+}
 .trend-scroll-box::-webkit-scrollbar { width: 4px; }
 .trend-scroll-box::-webkit-scrollbar-track { background: transparent; }
 .trend-scroll-box::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 4px; }
