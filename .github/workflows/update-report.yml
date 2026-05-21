@@ -7,6 +7,7 @@ on:
     - cron: '20 2 * * *'  # 02:20 UTC = 11:20 KST
     - cron: '20 4 * * *'  # 04:20 UTC = 13:20 KST
     - cron: '20 7 * * *'  # 07:20 UTC = 16:20 KST
+    - cron: '20 11 * * *'  # 11:20 UTC = 20:20 KST
   workflow_dispatch:
 
 permissions:
