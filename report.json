@@ -1,88 +1,33 @@
 {
   "period": "2026-05-15(금) ~ 2026-05-21(목)",
-  "updated_at": "2026-05-21T08:46:01.730370+09:00",
-  "furiosa_daily": [
-    {
-      "title": "동서발전, 국산 AI 반도체 실증 나선다",
-      "url": "https://www.wikitree.co.kr/articles/1137594",
-      "date": "05-20",
-      "summary": "동서발전은 최근 울산 본사에서 AI 반도체 기업 퓨리오사AI와 AI 소프트웨어 기업 코난테크놀로지와 협력 체계를 구축했다. 이 협력은 국산 신경망처리장치(NPU)와 대규모 언어모델(LLM)을 발전 산업 현장에 적용하기 위한 것으로, 외산 GPU 의존도를 줄이고 국산 AI 생태계를 조성하는 데 중요한 의미를 갖는다. 이를 통해 동서발전은 AI 운영 환경을 국산 기술 중심으로 전환하고, 발전 산업의 효율성을 높일 계획이다."
-    },
-    {
-      "title": "유라클 AI자원관리 플랫폼 ‘오르다’, 퓨리오사AI NPU 연동",
-      "url": "https://www.dt.co.kr/article/12063580?ref=naver",
-      "date": "05-20",
-      "summary": "유라클은 자사의 AI 자원·워크로드 관리 플랫폼 ‘오르다’가 퓨리오사AI의 2세대 신경망처리장치(NPU) ‘레니게이드’와 성공적으로 연동되었다고 발표했다. 이 연동을 통해 고객들은 AI 서비스를 보다 효율적으로 운영할 수 있게 되며, 이는 AI 기술의 활용 범위를 넓히는 데 기여할 것으로 기대된다. 특히, 퓨리오사AI의 NPU와의 통합은 AI 자원 관리의 혁신을 가져올 것으로 보인다."
-    },
-    {
-      "title": "앤트로픽 점접 넓힌 한투파·한투AC… 6월 빌딩 행사 개최[마켓인]",
-      "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=04713366645450888",
-      "date": "05-20",
-      "summary": "앤트로픽은 한투파와 한투AC의 주최로 6월에 빌딩 행사를 개최하며, 퓨리오사AI, 트웰브랩스, 사이오닉AI 등 주요 AI 포트폴리오사들과 협력 방안을 논의했다. 이 행사에는 오픈AI 아시아태평양 스타트업 총괄인 토마스 정이 참석하여 AI 생태계의 협력과 발전 방향에 대해 심도 있는 대화를 나누었다. 이러한 논의는 AI 산업의 발전과 혁신을 위한 중요한 기초가 될 것으로 기대된다."
-    },
-    {
-      "title": "[게시판] 코난, 동서발전·퓨리오사와 국산 AI 인프라 협력 등 단신",
-      "url": "https://www.aitimes.com/news/articleView.html?idxno=210733",
-      "date": "05-20",
-      "summary": "코난테크놀로지는 한국동서발전과 퓨리오사AI와 함께 '국산 AI 기반시설 구축 및 실증을 위한 업무협약'을 체결했다. 이 협약은 국산 신경망처리장치(NPU)와 대형 언어모델(LLM) 기반의 AI 환경을 구축하기 위한 것으로, 한국의 AI 기술 발전에 기여할 것으로 예상된다. 각 기관은 협력을 통해 AI 인프라의 실증을 진행하며, 국산 기술의 경쟁력을 높이는 데 주력할 예정이다."
-    },
-    {
-      "title": "한국동서발전, 퓨리오사AI·코난테크놀로지와 업무협약",
-      "url": "https://www.joongang.co.kr/article/25429924",
-      "date": "05-20",
-      "summary": "한국동서발전은 5월 18일 울산 본사에서 퓨리오사AI와 코난테크놀로지와의 업무협약을 체결했다. 이 협약은 국산 인공지능(AI) 기반시설 구축 및 실증을 목표로 하며, 각 기관은 AI 기술의 발전을 위해 협력할 예정이다. 특히, 이 협력은 외산 AI 기술 의존도를 줄이고, 국산 기술의 활용을 확대하는 데 중요한 역할을 할 것으로 기대된다."
-    }
-  ],
-  "furiosa_weekly": [
-    {
-      "title": "[Tech & Now] 두산로보틱스, 독일 프랑크푸르트로 유럽지사 확장 이전 등",
-      "url": "https://www.ebn.co.kr/news/articleView.html?idxno=1709510",
-      "date": "05-20",
-      "summary": "코난테크놀로지, 한국동서발전, 퓨리오사AI는 '국산 인공지능 기반시설 구축 및 실증을 위한 업무협약'을 체결했다. 이 협약은 AI 기술의 국산화를 촉진하고, 발전 산업에 적합한 AI 운영 환경을 구축하기 위한 것으로, 각 기관의 협력이 중요한 의미를 갖는다. 이를 통해 한국의 AI 생태계가 더욱 강화될 것으로 보인다."
-    },
-    {
-      "title": "동서발전, 외산 GPU 의존 탈피…국산 AI 생태계 조성 박차",
-      "url": "https://www.cnbnews.com/news/articleView.html?idxno=1002221",
-      "date": "05-20",
-      "summary": "한국동서발전은 퓨리오사AI의 반도체 기술과 코난테크놀로지의 LLM 기술을 융합하여 실증 기반을 마련할 계획이다. 이 협력은 외산 GPU 의존도를 줄이고, 국산 AI 생태계를 조성하는 데 중점을 두고 있다. 권명호 동서발전 사장은 이번 협약이 AI 운영 환경을 국산 기술 중심으로 전환하는 데 기여할 것이라고 강조했다."
-    },
-    {
-      "title": "외산 GPU 의존 줄인다…한국동서발전, 국산 AI 반도체·LLM 실증 나선 배...",
-      "url": "https://www.e-science.co.kr/news/articleView.html?idxno=129909",
-      "date": "05-20",
-      "summary": "한국동서발전은 퓨리오사AI와 코난테크놀로지와 협력하여 국산 AI 반도체와 LLM의 실증을 추진하고 있다. 이번 협력은 발전 산업에 적합한 AI 운영 환경을 구축하기 위한 것으로, 외산 기술 의존도를 줄이는 데 중요한 역할을 할 것으로 보인다. 이를 통해 한국의 AI 기술이 발전하고, 산업 전반에 긍정적인 영향을 미칠 것으로 기대된다."
-    },
-    {
-      "title": "사우디 왕세자가 이끄는 AI기업 '휴메인', 데이터센터 사업비 8조 조달 ...",
-      "url": "https://www.theguru.co.kr/news/article.html?no=101984",
-      "date": "05-20",
-      "summary": "사우디의 AI 기업 '휴메인'은 반도체 수급 다변화를 위해 퓨리오사AI와 협력할 계획이다. 이는 사우디가 석유 중심 경제에서 벗어나기 위한 '비전 2030'의 일환으로, AI 산업을 육성하려는 전략의 일환이다. 퓨리오사AI와의 협력은 고성능 AI 반도체 기술을 확보하는 데 중요한 의미를 갖는다."
-    },
-    {
-      "title": "누구나 AI 에이전트를 만들고 수익 창출하는 시대...솔트룩스, AI 서비스...",
-      "url": "https://www.aitimes.kr/news/articleView.html?idxno=40111",
-      "date": "05-20",
-      "summary": "솔트룩스는 AI 서비스와 관련하여 다양한 기업들과 패널 토론을 진행했다. 이 자리에는 퓨리오사AI와 같은 주요 AI 반도체 기업들이 참여하여 산업별 AI 경쟁력과 생태계 전략에 대해 논의했다. 이러한 논의는 AI 산업의 발전 방향을 제시하고, 기업 간 협력의 중요성을 강조하는 계기가 될 것으로 보인다."
-    }
-  ],
+  "updated_at": "2026-05-21T09:38:15.699634+09:00",
+  "furiosa_daily": [],
+  "furiosa_weekly": [],
   "companies": [
     {
       "name": "NVIDIA",
       "region": "global",
       "items": [
         {
-          "title": "Nvidia beats on revenue and guidance, adds $80 billion to buyback plan: Live updates - CNBC",
-          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1CUUVrUjdLbmR3YWtQZTEwZUt6Z1AyaEx3TGlUdG5hNl9uSFpwZFN2a21mcUFVcnZnQnRMbXV1dlhtUFhfNEdjQ1FzZEg0M1drc1NtMDZ3Rl9obHVzOVlYLWEwTUtZdVRzNEtWam9WNUVjWmE4aG5JSjN5UVrSAYIBQVVfeXFMTU5FY1pRQmVJTFR4Tlk3OFYwdGxfazhmZ1pyV1djakpUR0FfRjIySUFya280eVREVkYzU1BHd3kwMzJVSEYwZURsYXNFdzc3NTZpY0RuN2pwUHFoV1ZBWi1rdnJtaXFZVm5nS1NienNyamplSTktamlpVzBZUTBWa19PQQ?oc=5",
+          "title": "The Morning Catch - Up : ASX set to rebound as Iran hopes cool oil and Nvidia lifts tech sentiment",
+          "url": "https://www.proactiveinvestors.com.au/companies/news/1092642/the-morning-catch-up-asx-set-to-rebound-as-iran-hopes-cool-oil-and-nvidia-lifts-tech-sentiment-1092642.html",
           "date": "05-21",
-          "summary": "NVIDIA는 최근 실적 발표에서 예상보다 높은 매출을 기록했으며, 주가가 하락하는 상황이 발생했습니다. 이 회사는 주주 가치를 높이기 위해 800억 달러 규모의 자사주 매입 계획을 추가했습니다. 이러한 결정은 시장에서의 경쟁력을 유지하기 위한 전략으로, AI 반도체 시장에서의 지속적인 성장을 목표로 하고 있습니다.",
-          "bd_perspective": "NVIDIA의 자사주 매입 계획은 시장에서의 신뢰를 강화할 수 있으며, Furiosa AI는 이와 같은 대규모 투자 전략을 분석하여 자사의 투자 유치 전략에 반영할 필요가 있습니다."
+          "summary": "NVIDIA의 주식은 최근 실적 발표에도 불구하고 큰 변동 없이 유지되고 있다. 이 회사는 강력한 실적을 기록했으며, 향후 전망도 긍정적이라는 평가를 받고 있다. 이러한 안정적인 주가는 기술 주식 시장에 긍정적인 영향을 미치고 있다.",
+          "bd_perspective": "NVIDIA의 안정적인 주가는 경쟁사들에게도 영향을 미칠 수 있으며, Furiosa는 시장 변동성을 주의 깊게 살펴야 한다."
         },
         {
-          "title": "China banned Nvidia’s gaming chip during Jensen Huang’s visit - Financial Times",
-          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPSUlSWms3SWdwUnZ2MmlpY3R4Ny0xX0ZRS2hIalJPV0pWa3BGeFZSbHZwY00ySEV4cHJFSUVlN2tud0hwWFJFck5MbF9JcF8ySnlxNjcyY2ZUWW9US2pSNW51Y0tzWGszWGtWZmJFWGhVUmNKVkMtTUx0NnJCemhUYWwtVXA?oc=5",
-          "date": "05-20",
-          "summary": "중국은 젠슨 황 NVIDIA CEO의 방문 중에 NVIDIA의 게임용 칩 사용을 금지하는 조치를 발표했습니다. 이는 미국과 중국 간의 기술 및 무역 갈등이 심화되고 있음을 나타내며, NVIDIA의 중국 시장에서의 입지에 큰 영향을 미칠 수 있습니다. 이러한 규제는 AI 반도체 산업 전반에 걸쳐 불확실성을 증가시키고 있습니다.",
-          "bd_perspective": "중국의 규제 조치는 Furiosa AI의 글로벌 시장 진출 전략에 영향을 미칠 수 있으며, 특히 아시아 시장에서의 경쟁력을 강화하기 위한 방안을 모색해야 합니다."
+          "title": "Nvidia Unchanged Despite Big Earnings Beat And Solid Guidance",
+          "url": "https://www.zerohedge.com/markets/nvidia-unchanged-despite-big-earnings-beat-and-solid-guidance",
+          "date": "05-21",
+          "summary": "NVIDIA는 최근 발표한 실적에서 예상치를 크게 웃도는 성과를 기록했지만, 주가는 큰 변화를 보이지 않았다. 이 회사는 앞으로의 성장 가능성에 대한 긍정적인 지침을 제공하며 투자자들에게 신뢰를 주고 있다. 이러한 상황은 기술 분야의 투자 심리를 강화하는 데 기여하고 있다.",
+          "bd_perspective": "NVIDIA의 긍정적인 실적 전망은 Furiosa가 경쟁력을 유지하기 위한 전략을 재검토할 필요성을 시사한다."
+        },
+        {
+          "title": "Nvidia Gets Tepid Reaction to Forecast , Ups Investor Rewards",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-gets-tepid-reaction-forecast-210054064.html",
+          "date": "05-21",
+          "summary": "NVIDIA는 최근 예측에 대한 반응이 미온적이었으나, 주주들에게 보상안을 제시하며 투자자들의 신뢰를 유지하고 있다. 이 회사는 향후 성장에 대한 기대감을 높이고 있으며, 이를 통해 시장에서의 입지를 강화하고 있다. 이러한 상황은 기술 주식에 대한 투자 심리를 자극할 수 있다.",
+          "bd_perspective": "NVIDIA의 투자자 보상 전략은 Furiosa가 자본 유치 및 투자자 관계를 강화하는 데 참고할 수 있는 사례가 될 수 있다."
         }
       ]
     },
@@ -91,18 +36,11 @@
       "region": "global",
       "items": [
         {
-          "title": "Tenstorrent Launches Next-Gen AI Servers, No Disaggregation - EE Times",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNVFZCX1ZUcGhMSHdGLTNYY19adkRVMjJVbnhISDBBMDM0U013ZVo2bzdyTkl5NmFoQWgxMEJBVzFTVGlwM1NZeENFMS1EUzBrSkd2Sjh4cERINXg0SHg0eXQ4R0tZeUw2eUpVcndGZW9obzllcFFQNmNUSmFtN1RnVVBLYXY1YlZnWndFUGs2RlhGS2hGc0RLV2RyNmwxb0tqQWNFSA?oc=5",
-          "date": "04-28",
-          "summary": "Tenstorrent는 최신 AI 서버를 출시하며, 이 서버는 분산 구조 없이 설계되었습니다. 이 새로운 서버는 고성능 AI 작업을 지원하며, 고객의 요구에 맞춘 최적화된 솔루션을 제공할 것으로 기대됩니다. Tenstorrent의 이러한 혁신은 AI 인프라 시장에서의 경쟁력을 높이는 데 기여할 것입니다.",
-          "bd_perspective": "Tenstorrent의 서버 출시 소식은 Furiosa AI의 제품 개발 방향에 참고가 될 수 있으며, 고객 맞춤형 솔루션 개발을 강화해야 할 필요성을 시사합니다."
-        },
-        {
-          "title": "Tenstorrent Previews Large Compute Cluster, Generates Video Faster Than Real Time - EE Times",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQbEpVWUhQRnlIMHNRa0o0ZTBxME5OWlRnVVNCV1RJVnVZMDNOR2dGbVQyb09ZYXNtMkFLMUMxSVlteU9yNk80bVFWQkdocVpOTUpyaTBTbFRhemxwUnlNdFRtWnAxOEo4NXZmNUdkZXhkQ0FMczdYQnYwN2ctVUJTbnI3UmMxUjE2SFhhYmlxdS1oMXczbVZHMFFQX2tJUUs2aFZtMlpEMnI?oc=5",
-          "date": "04-21",
-          "summary": "Tenstorrent는 대규모 컴퓨팅 클러스터를 미리 공개하며, 이 클러스터가 실제 시간보다 빠르게 비디오를 생성할 수 있음을 보여주었습니다. 이는 AI 연산의 효율성을 극대화하는 기술로, 특히 대규모 데이터 처리에 강점을 보일 것으로 예상됩니다. 이러한 기술은 AI 추론 시장에서의 경쟁력을 더욱 높일 수 있습니다.",
-          "bd_perspective": "Tenstorrent의 비디오 생성 기술은 Furiosa AI의 추론 성능 개선에 대한 인사이트를 제공하며, 자사의 기술적 우위를 강화하기 위한 연구 개발에 집중해야 합니다."
+          "title": "Smallest . ai and Tenstorrent Partnership Democratises Voice AI - 4x reduction in cost through hardware acceleration",
+          "url": "https://www.design-reuse.com/news/202530526-smallest-ai-and-tenstorrent-partnership-democratises-voice-ai-4x-reduction-in-cost-through-hardware-acceleration/",
+          "date": "05-18",
+          "summary": "Tenstorrent는 Smallest.ai와 파트너십을 체결하여 음성 AI의 비용을 4배 절감할 수 있는 하드웨어 가속 기술을 개발했다. 이 협력은 음성 AI 기술의 민주화를 목표로 하며, 더 많은 기업들이 이 기술을 활용할 수 있도록 한다. 이는 AI 기술의 접근성을 높이는 중요한 진전을 의미한다.",
+          "bd_perspective": "Tenstorrent의 하드웨어 가속 기술은 Furiosa의 추론 최적화 전략에 대한 인사이트를 제공할 수 있다."
         }
       ]
     },
@@ -111,25 +49,18 @@
       "region": "global",
       "items": [
         {
-          "title": "SambaNova and Intel’s heterogeneous x86 AI architecture - Cloud Computing News",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPSnFZSnpuMmJDeFE1Nzl2bXIwcWl3QjBid3ZGU0ZaTDNKQmt5R0N2akpGN2MtQmE1TWE0Q09QWm13azhHZ3FieG8xV3A4eWd3Z0pWSU41OEpFSDN3RnBwbzgxQ0RPTHZSTnV2QzZ3aWE2YUFhdWdGTXpidmluZk5CMmx0Wk5qS2xLTVpHRzRuYmZnaFlnUUpCUXZFWW9aSVZ5SFE?oc=5",
-          "date": "05-19",
-          "summary": "SambaNova는 인텔과 협력하여 이종 x86 AI 아키텍처를 개발하고 있습니다. 이 협력은 AI 반도체의 성능을 극대화하고, 다양한 AI 애플리케이션에 대한 지원을 확대하는 데 중점을 두고 있습니다. SambaNova의 접근 방식은 AI 반도체 시장에서의 차별화를 목표로 하고 있습니다.",
-          "bd_perspective": "SambaNova의 이종 아키텍처 개발은 Furiosa AI가 기술적 차별화를 위해 어떤 방향으로 나아가야 할지를 고민하게 만들며, 협력 가능성을 탐색할 필요가 있습니다."
+          "title": "SambaNova Challenges Cerebras Strategy",
+          "url": "https://www.marketscreener.com/news/sambanova-challenges-cerebras-strategy-ce7f5bd2d081f22c",
+          "date": "05-15",
+          "summary": "SambaNova는 Cerebras의 전략에 도전하는 새로운 접근 방식을 제시하고 있다. 이들은 AI 추론 분야에서의 경쟁력을 높이기 위해 독창적인 기술 개발에 집중하고 있다. 이러한 변화는 AI 반도체 시장의 경쟁 구도를 더욱 복잡하게 만들고 있다.",
+          "bd_perspective": "SambaNova의 전략 변화는 Furiosa가 경쟁 우위를 확보하기 위한 기술 혁신의 필요성을 강조한다."
         },
         {
-          "title": "Intel's Sambanova deal gets U.S. antitrust clearance - Reuters",
-          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPa25uWU40U1d3S3Z1RElRVjBuQzVXbHVMQzRlelJWdVhPQmlNRzVKaDhfWTdLYjNqcnUySWdWblRZdFdjQzVKVFdwYnFKSnNIMk11dmhBdnpwZlZpLTlyRTlOdkRYUWl6N3Q1TEVrRVBjMkg5Nm5uTW5zM2Q0V3l5bVVEUnZFMkZ6S0lBLUlMd3lQOXRETURZU3VWU3BuNjBoc016Mi1pNzNCRmYzQ0I2b0M0MFE2LXBtbXBFMTRIdUF5Tk0?oc=5",
-          "date": "05-01",
-          "summary": "인텔은 SambaNova와의 인수 거래에 대해 미국 반독점 당국의 승인을 받았습니다. 이 거래는 인텔의 AI 반도체 시장에서의 입지를 더욱 강화할 것으로 기대되며, SambaNova의 기술을 활용한 새로운 제품 개발이 가능해질 것입니다. 이는 AI 반도체 시장의 경쟁 구도를 변화시킬 수 있습니다.",
-          "bd_perspective": "인텔의 SambaNova 인수는 AI 반도체 시장의 경쟁 환경에 큰 영향을 미칠 수 있으며, Furiosa AI는 이러한 변화에 대응하기 위한 전략을 마련해야 합니다."
-        },
-        {
-          "title": "Intel to boost stake in SambaNova, chip startup chaired by Intel CEO Lip-Bu Tan - report - MSN",
-          "url": "https://news.google.com/rss/articles/CBMiigNBVV95cUxObHRTNWRoZnZ1MFJLRDhEMjlidTYxQUwxZWdJQ3pMQUlGTkpOaWs5QWl1UWtlRWlSTW5yRlJWRmhJa1Y1aFp1bTNrN1hqZ3JNTjZFYWhqTnJwQmhoeW9ZbDVyaHdYNDhrU0Y4ZGhkYmhzZVVGUnB2Z1oyd0xoT2lPTl91YlZpY0VfQTlCcnh4Mmx2bW9tWFdVT1Q2SkJpSkh5ckJXUXJQV21KSDNoNGNVa2hYSE04REJIZHExV24zTHZudklPdzJ0aWVLRTZkcklZMEF0VzIxRDhvV3NSQ01zTl9tbG9RTWlYbXRlZjVvUW95bUtGa2xiWDYwd3Q2ZWtQeFRMSUVWdVBWSEVYbFVnVG9jcGduU1g4S1dfRVduVmdWRXNlOUVUR1pVN1FyeEg1MHZXY0ViX1RJaDFIbW02TUpWbkxHSGozel9sMUE2X0Y3OVV1V3A3RHFBaGVvQVJkd2MtLW12RkdfVnFjY083SFlrcXVNRHpiQWpIek1VRG1rMWFNVzg0cFFB?oc=5",
-          "date": "04-26",
-          "summary": "인텔은 SambaNova의 지분을 확대할 계획을 세우고 있으며, 이는 인텔 CEO가 의장을 맡고 있는 스타트업입니다. 이 거래는 인텔의 AI 반도체 기술을 강화하고, SambaNova의 혁신적인 솔루션을 통해 시장에서의 경쟁력을 높이는 데 기여할 것입니다. 이러한 협력은 AI 반도체 생태계에 긍정적인 영향을 미칠 것으로 예상됩니다.",
-          "bd_perspective": "SambaNova와 인텔의 협력 강화는 Furiosa AI에게도 경쟁 압박을 가할 수 있으며, 자사의 기술적 우위를 더욱 강화하기 위한 노력이 필요합니다."
+          "title": "Intel Sambanova deal gets U . S . antitrust clearance",
+          "url": "https://news.az/news/int-el-s-sambanova-deal-gets-us-antitrust-clearance",
+          "date": "05-02",
+          "summary": "SambaNova는 Intel과의 협력이 미국 반독점 당국의 승인을 받았다. 이 협력은 SambaNova의 기술을 더욱 확장하고, 시장에서의 입지를 강화하는 데 기여할 것으로 예상된다. 이는 AI 반도체 시장에서의 경쟁력을 높이는 중요한 단계로 평가된다.",
+          "bd_perspective": "SambaNova의 Intel과의 협력은 Furiosa가 글로벌 파트너십을 모색하는 데 있어 중요한 참고 사례가 될 수 있다."
         }
       ]
     },
@@ -138,43 +69,79 @@
       "region": "global",
       "items": [
         {
-          "title": "Cerebras IPO Euphoria Sends CBRS Stock Into Rare Air",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/cerebras-ipo-euphoria-sends-cbrs-113002735.html",
+          "title": "Cerebras jumps as S&P confirms it qualifies for 'Fast Track' IPO entry for indices - Seeking Alpha",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNaUUtMzV6YkRwWUhqa0ozVHpVZGo0UnpJdWQwZnphaDUyc0x3WC1rTUI0dkUyUnVxdGs3NnloOFQwb3hYMlF5OG8wRlQtMGhRc2VjRzBNLWVtRnZ2VzAxZDI5Y0o2Unh0ZV9ZQW9sRm1oeUpUYUUzaERtTV9SQmRUclBUX2FzclRTcEIya2J1dURsc01zQzhkLVJBQUVwRG5JU183eDZNTEJiTXZXNFU5QTV4U3FaNlVz?oc=5",
           "date": "05-20",
-          "summary": "Cerebras는 최근 IPO를 통해 주가가 급등하며 주목받고 있습니다. 이 회사의 주식은 시장에서 높은 평가를 받고 있으며, 이는 Cerebras의 기술력과 시장 잠재력을 반영합니다. IPO 성공은 AI 반도체 시장의 투자자들에게 긍정적인 신호로 작용할 수 있습니다.",
-          "bd_perspective": "Cerebras의 IPO 성공은 Furiosa AI에게도 자금 조달 및 시장 인지도 향상에 대한 새로운 전략을 고민하게 만드는 요소가 될 수 있습니다."
+          "summary": "Cerebras는 S&P가 자사의 '패스트 트랙' IPO 진입 자격을 확인했다고 발표했다. 이로 인해 Cerebras의 주가는 상승하며, 기술 IPO 시장에 대한 기대감을 높이고 있다. 이는 향후 기술 기업들의 IPO에 긍정적인 영향을 미칠 것으로 보인다.",
+          "bd_perspective": "Cerebras의 IPO 진입은 Furiosa가 자본 조달 전략을 재검토하는 계기가 될 수 있다."
+        },
+        {
+          "title": "Cerebras Brings Trillion Parameter Inference to Enterprises with Kimi K2.6 - Cerebras",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8zLUxPOHhnY0V6ajM0cXFWT0Y1cnlBQXJ4YkR2bHd2TEF5UkRxUmNRd0tyNmYybzk4SGVqOFpTRXpsazVqci00V3BnLU1ZeXBRT09ReTRuNXZSNk1rbXZoRzk5c2NiRjQ?oc=5",
+          "date": "05-20",
+          "summary": "Cerebras는 Kimi K2.6을 통해 기업에 트릴리언 파라미터 추론을 제공한다고 발표했다. 이 기술은 기업들이 대규모 AI 모델을 활용할 수 있도록 지원하며, AI 추론의 새로운 가능성을 열어준다. 이는 기업 AI 솔루션의 발전에 중요한 기여를 할 것으로 기대된다.",
+          "bd_perspective": "Cerebras의 트릴리언 파라미터 추론 기술은 Furiosa의 제품 개발 방향에 대한 인사이트를 제공할 수 있다."
+        },
+        {
+          "title": "For Eclipse, the $2.5B Cerebras win is just the start of realizing its physical-world thesis - TechCrunch",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxORzVzUE1pWTJ1b2lhb2FwSGM1RDQxMUpvTHZTZURIQktJZUcydEdTRkFEeDl0VmppQ29LV1FBRW5kX01mR3pNakVGOVlDNDE3OGNUZVZkRWdhQ190cEJyampSQ29GSnR5d3g0M0JXMjNSS1h0VHNWa1Mtb3l2SEpiekJPTnpZQ0VSWUdFMDlpaDVmXzktOG5Zd0VKZmNjMy11anhUSDVfb05EQy1HNjNHa3djdThDcG8wbjRPcGl5N0ItYkU?oc=5",
+          "date": "05-18",
+          "summary": "Eclipse는 Cerebras의 25억 달러 규모의 계약이 물리적 세계에서의 비전을 실현하는 시작점이라고 밝혔다. 이 계약은 AI 기술의 상용화에 중요한 이정표로 작용할 것으로 보인다. 이는 AI 반도체 시장의 성장 가능성을 더욱 부각시키고 있다.",
+          "bd_perspective": "Cerebras의 대규모 계약은 Furiosa가 시장 진입 전략을 재조정하는 데 참고할 수 있는 사례가 될 수 있다."
         }
       ]
     },
     {
       "name": "Rebellions",
       "region": "korea",
-      "items": []
+      "items": [
+        {
+          "title": "[창간기획-AI 대전환] SKT·KT·LGU+, 통신 넘어 AI 시대로",
+          "url": "https://daily.hankooki.com/news/articleView.html?idxno=1369141",
+          "date": "05-21",
+          "summary": "리벨리온은 SKT, KT, LGU+와의 전략적 파트너십을 통해 차세대 AI 인프라 혁신을 위한 기술 개발에 나섰다. 이 협력은 Arm의 데이터센터용 프로세서와 리벨리온의 NPU를 통합하여 성능을 극대화하는 것을 목표로 한다. 이는 국내 AI 반도체 시장의 경쟁력을 높이는 데 기여할 것으로 기대된다.",
+          "bd_perspective": "리벨리온의 파트너십은 Furiosa가 국내 시장에서의 협력 기회를 모색하는 데 있어 중요한 참고가 될 수 있다."
+        },
+        {
+          "title": "\"메모리 무한 확장 고속도로 뚫는다\"…엑시나, '제2의 리벨리온' 될까 [...",
+          "url": "https://www.bloter.net/news/articleView.html?idxno=662813",
+          "date": "05-19",
+          "summary": "리벨리온은 엑시나의 성장세가 국내 AI 반도체 기업의 성공 궤적을 잇고 있다고 평가받고 있다. VC 업계에서는 엑시나의 성장이 리벨리온의 성공을 기반으로 하고 있다고 분석하고 있다. 이는 국내 AI 반도체 시장의 긍정적인 전망을 시사한다.",
+          "bd_perspective": "리벨리온과 엑시나의 성공 사례는 Furiosa가 국내 시장에서의 입지를 강화하는 데 도움이 될 수 있다."
+        },
+        {
+          "title": "리벨리온 글로벌 IR 마무리…IPO 전 해외투심 ‘가늠자’ [시그널]",
+          "url": "https://www.sedaily.com/article/20044100?ref=naver",
+          "date": "05-15",
+          "summary": "리벨리온은 글로벌 투자자 대상 논딜로드쇼(NDR)를 마무리하며 기업공개(IPO) 준비를 진행하고 있다. 이 과정은 기존 투자자들의 공격적인 IR 주문에 의해 뒷받침되고 있으며, 향후 투자 유치에 긍정적인 영향을 미칠 것으로 보인다. 이는 리벨리온의 시장 신뢰도를 높이는 데 기여할 것이다.",
+          "bd_perspective": "리벨리온의 IPO 준비는 Furiosa가 자본 조달 전략을 강화하는 데 있어 중요한 참고 사례가 될 수 있다."
+        }
+      ]
     },
     {
       "name": "DeepX",
       "region": "korea",
       "items": [
         {
-          "title": "[TECH한주] '몸값 1조' 품은 딥엑스, 해외 수주 잭팟…'첫 월별 BEP' 뚫었...",
-          "url": "https://www.epnc.co.kr/news/articleView.html?idxno=402013",
+          "title": "\"4월 수주액이 전년치 육박\"…성장궤도 탄 딥엑스",
+          "url": "https://dealsite.co.kr/articles/162172",
           "date": "05-21",
-          "summary": "딥엑스는 최근 해외 수주에 성공하며 유니콘 기업 진입을 목전에 두고 있습니다. 이 회사는 AI 반도체 분야에서의 성장을 통해 시장에서의 입지를 강화하고 있으며, 첫 월별 손익 분기점을 돌파한 것으로 알려졌습니다. 이러한 성장은 국내 AI 반도체 시장의 경쟁력을 높이는 데 기여할 것입니다.",
-          "bd_perspective": "딥엑스의 해외 수주 성공은 Furiosa AI에게도 글로벌 시장 진출의 필요성을 강조하며, 자사의 해외 고객 확보 전략을 재검토할 기회를 제공합니다."
+          "summary": "딥엑스는 글로벌 고객사를 대상으로 피지컬 AI 반도체 상업화를 본격화하고 있으며, 반복 주문과 수출 비중 증가로 하반기 실적 성장에 대한 기대감이 커지고 있다. 이 회사는 양산 체제를 구축하며 성장을 가속화하고 있다. 이는 국내 AI 반도체 시장의 활성화를 나타낸다.",
+          "bd_perspective": "딥엑스의 성장세는 Furiosa가 글로벌 시장 진출 전략을 재검토하는 데 도움이 될 수 있다."
         },
         {
-          "title": "한국거래소 민경욱 부이사장, 비상장 AI 반도체 기업 ‘딥엑스’ 방문",
-          "url": "https://biz.chosun.com/it-science/ict/2026/05/18/ZZEBW4YLOBDDXH6BCCZGFMP4CU/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-          "date": "05-18",
-          "summary": "딥엑스는 한국거래소 부이사장의 방문을 받으며 글로벌 AI 산업 동향에 대한 의견을 나누었습니다. 이 방문은 딥엑스의 기술력과 시장 경쟁력을 강조하는 계기가 되었으며, 국내 자본시장과의 연계를 강화하는 방향으로 진행되었습니다. 이러한 소통은 기업의 성장에 긍정적인 영향을 미칠 것입니다.",
-          "bd_perspective": "딥엑스의 방문은 Furiosa AI에게도 자본시장과의 관계를 강화할 필요성을 시사하며, 투자 유치 전략을 재조정할 기회를 제공합니다."
+          "title": "딥엑스, 글로벌 비전 개발 플랫폼에 NPU 탑재",
+          "url": "https://www.yna.co.kr/view/AKR20260515120700017?input=1195m",
+          "date": "05-15",
+          "summary": "딥엑스는 자사의 NPU를 울트라리틱스 플랫폼에 네이티브 형태로 통합하여 모델 최적화와 배포를 간소화하는 협력을 발표했다. 이는 AI 개발자들에게 더 나은 솔루션을 제공할 것으로 기대된다. 이러한 통합은 AI 생태계의 발전에 기여할 것이다.",
+          "bd_perspective": "딥엑스의 플랫폼 통합은 Furiosa가 제품 최적화 전략을 강화하는 데 참고할 수 있는 사례가 될 수 있다."
         },
         {
-          "title": "딥엑스-울트라리틱스, AI 반도체 플랫폼 통합",
-          "url": "http://www.hansbiz.co.kr/news/articleView.html?idxno=839241",
-          "date": "05-17",
-          "summary": "딥엑스는 울트라리틱스와 전략적 파트너십을 체결하고, 자사의 NPU가 울트라리틱스의 AI 모델에 통합될 예정입니다. 이 협력은 딥엑스의 기술력을 더욱 강화하고, 고객에게 더 나은 솔루션을 제공하는 데 기여할 것입니다. 이러한 통합은 AI 반도체 시장에서의 경쟁력을 높이는 데 중요한 역할을 할 것입니다.",
-          "bd_perspective": "딥엑스와 울트라리틱스의 파트너십은 Furiosa AI에게도 기술적 협력의 중요성을 일깨워 주며, 자사의 파트너십 전략을 강화할 필요가 있습니다."
+          "title": "딥엑스-울트라리틱스 맞손…K-AI 반도체, 글로벌 생태계 정조준",
+          "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=03808086645449248",
+          "date": "05-15",
+          "summary": "딥엑스는 울트라리틱스와 협력하여 K-AI 반도체의 글로벌 생태계를 정조준하고 있다. 이 협력은 AI 반도체의 국제적 경쟁력을 높이는 데 기여할 것으로 예상된다. 이는 국내 AI 반도체 기업들의 글로벌 진출에 긍정적인 신호로 작용할 수 있다.",
+          "bd_perspective": "딥엑스의 글로벌 생태계 구축 노력은 Furiosa가 해외 시장 진출 전략을 강화하는 데 도움이 될 수 있다."
         }
       ]
     },
@@ -186,15 +153,22 @@
           "title": "[기획]이진원 하이퍼엑셀 CTO “단기 과제·실패 용인, AI 반도체 성공 ...",
           "url": "https://www.etnews.com/20260515000265",
           "date": "05-17",
-          "summary": "하이퍼엑셀의 CTO는 한국이 AI 반도체 시장에서 주도할 기회가 충분하다고 강조했습니다. 그는 단기 과제와 실패를 용인하는 자세가 필요하다고 언급하며, AI 반도체의 성공을 위한 지속적인 노력을 강조했습니다. 이러한 발언은 한국 AI 반도체 산업의 발전 가능성을 시사합니다.",
-          "bd_perspective": "하이퍼엑셀의 발언은 Furiosa AI에게도 한국 시장에서의 기술적 우위를 강화하고, 지속적인 연구 개발에 대한 투자의 필요성을 일깨워 줍니다."
+          "summary": "하이퍼엑셀의 CTO는 한국이 AI 반도체 시장에서 주도할 기회가 충분하다고 강조했다. 이진원 CTO는 단기 과제와 실패를 용인하는 접근이 필요하다고 언급하며, AI 반도체의 성공 가능성을 높이고 있다. 이는 한국의 기술력에 대한 신뢰를 높이는 발언이다.",
+          "bd_perspective": "하이퍼엑셀의 비전은 Furiosa가 한국 시장에서의 경쟁력을 강화하는 데 도움이 될 수 있다."
         },
         {
-          "title": "[더벨]하이퍼엑셀, 차세대 AI 반도체 '카르멘' 개발 착수",
-          "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202605111357123800101884",
-          "date": "05-13",
-          "summary": "하이퍼엑셀은 차세대 AI 반도체 '카르멘' 개발에 착수했다고 발표했습니다. 이 회사는 AI 발전 속도에 맞춰 2년 주기로 신제품을 출시할 계획을 세우고 있으며, 이는 시장에서의 경쟁력을 높이는 데 기여할 것입니다. 이러한 개발은 AI 반도체 기술의 진화를 이끌 것으로 기대됩니다.",
-          "bd_perspective": "하이퍼엑셀의 신제품 개발 계획은 Furiosa AI에게도 기술 혁신의 필요성을 상기시키며, 자사의 제품 개발 로드맵을 재검토할 기회를 제공합니다."
+          "title": "\"NPU보다 효율 높은 LPU\"…하이퍼엑셀, 1세대 보드 제품 공개",
+          "url": "https://www.mt.co.kr/future/2026/05/08/2026050715494031442",
+          "date": "05-07",
+          "summary": "하이퍼엑셀은 데이터센터향 LPU 반도체 '베르다' 보드를 공개했다. 이 제품은 고대역폭메모리 대신 저전력 D램을 사용하여 효율성을 높이고 있다. 이는 AI 반도체 시장에서의 경쟁력을 강화하는 데 기여할 것으로 보인다.",
+          "bd_perspective": "하이퍼엑셀의 LPU 제품은 Furiosa가 전력 효율성을 강조하는 제품 개발에 참고할 수 있는 사례가 될 수 있다."
+        },
+        {
+          "title": "“실리콘밸리서 손잡은 K-반도체”…큐알티·하이퍼엑셀 MOU 체결",
+          "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=03053686645421368",
+          "date": "04-30",
+          "summary": "하이퍼엑셀은 큐알티와 MOU를 체결하고 글로벌 시장 공략에 나선다. 이 협력은 반도체 신뢰성 평가 및 종합 분석을 통해 AI 반도체의 품질을 높이는 데 기여할 것으로 기대된다. 이는 글로벌 시장에서의 경쟁력을 강화하는 데 중요한 단계로 평가된다.",
+          "bd_perspective": "하이퍼엑셀의 MOU 체결은 Furiosa가 품질 관리 및 신뢰성 강화를 위한 협력 기회를 모색하는 데 도움이 될 수 있다."
         }
       ]
     },
@@ -203,11 +177,18 @@
       "region": "korea",
       "items": [
         {
-          "title": "Nota AI Signs AI Optimization Technology Supply and Strategic Partnership Agreement with Mobilint Accelerating Commercialization of On-Device AI on Domestic NPU Infrastructure - PR Newswire",
-          "url": "https://news.google.com/rss/articles/CBMi0AJBVV95cUxQdzJXbG1IdEIxWlYzXzZOc0NralF4cjJ6cWNSeUNBNzJsNy01LTgtUDRVbjQ2WVVGTktVS1R3b1NtSk04Z0VNYTJ0cmxhREFUOTFZT0dhY2JIdURPX0RMOWxxSUJObHc0cWxLSnhOWG9fWkItd1hjSHE1bEotNGlaUHFRRE1TekswTHM3YlR5MXVSMTZtTjhKQ0hMOWp6NkVrRVhKTVJFWDFhZWd4aDVNMk9HMGRnVXQ5aWkyRzRDd3NOdkF3RzgyNHFfVTR6V3M1cTZYbXdkMG5oSlFDNEFmZ3hQd0pFZUNyS2dlazNqN0paRWNPMTdxUmg1NXg0SUw1Z0doTnExX09qaDZmYUZBV1V6STNOU254bEItUkRFc21MSVl1MUFRdm0tQV9ZTUNQZFAyODRVUDVNTU1MN1FySzEwU2NsUGFXa3BzV2NzbkQ?oc=5",
+          "title": "국산 소프트웨어·하드웨어 뭉쳤다…노타·모빌린트 '맞손'",
+          "url": "https://zdnet.co.kr/view/?no=20260507123736",
           "date": "05-07",
-          "summary": "Nota AI는 Mobilint와 전략적 파트너십을 체결하고, 국내 NPU 인프라에서의 AI 최적화 기술 공급 계약을 체결했습니다. 이 협력은 Mobilint의 상용화를 가속화하고, 국내 AI 시장에서의 경쟁력을 높이는 데 기여할 것입니다. 이는 AI 반도체 산업의 발전에 긍정적인 영향을 미칠 것으로 예상됩니다.",
-          "bd_perspective": "Nota AI와 Mobilint의 파트너십은 Furiosa AI에게도 국내 시장에서의 협력 가능성을 탐색할 기회를 제공하며, 자사의 기술적 우위를 강화하는 방향으로 나아가야 합니다."
+          "summary": "노타는 모빌린트와 협력하여 온디바이스 AI 상용화 생태계를 확장하기 위한 전략적 파트너십 계약을 체결했다. 이 협력은 AI 최적화 기술 공급을 목표로 하며, 두 회사의 기술력을 결합하여 시장 경쟁력을 높일 것으로 기대된다. 이는 AI 반도체 시장의 발전에 기여할 것이다.",
+          "bd_perspective": "모빌린트의 파트너십은 Furiosa가 AI 최적화 기술 개발에 있어 협력 기회를 모색하는 데 참고가 될 수 있다."
+        },
+        {
+          "title": "인텔리빅스, 모빌린트 NPU 기반 ‘안전 AI 딥테크’ 고도화",
+          "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=06097526645421368",
+          "date": "04-30",
+          "summary": "인텔리빅스는 모빌린트와 MOU를 체결하고 국산 NPU 기반의 영상분석 AI 에이전트를 개발하여 국방 및 공공 안전 시장에 진출할 계획이다. 이 협력은 AI 기술의 상용화를 가속화하고, 시장에서의 경쟁력을 높이는 데 기여할 것으로 보인다.",
+          "bd_perspective": "모빌린트의 국방 및 공공 안전 시장 진출은 Furiosa가 새로운 시장 기회를 탐색하는 데 도움이 될 수 있다."
         }
       ]
     }
