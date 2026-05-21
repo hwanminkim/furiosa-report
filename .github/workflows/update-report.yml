@@ -7,7 +7,7 @@ on:
     - cron: '20 2 * * *'  # 02:20 UTC = 11:20 KST
     - cron: '20 4 * * *'  # 04:20 UTC = 13:20 KST
     - cron: '20 7 * * *'  # 07:20 UTC = 16:20 KST
-    - cron: '20 11 * * *'  # 11:20 UTC = 20:20 KST
+    - cron: '20 11 * * *' # 11:20 UTC = 20:20 KST
   workflow_dispatch:
 
 permissions:
@@ -29,6 +29,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          NEWSDATA_API_KEY: ${{ secrets.NEWSDATA_API_KEY }}
         run: python scripts/update_report.py
       - name: Commit and push if changed
         run: |
