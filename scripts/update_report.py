@@ -174,13 +174,67 @@ def build_period(now: datetime.datetime) -> str:
     days_ko = ["(월)", "(화)", "(수)", "(목)", "(금)", "(토)", "(일)"]
     return f"{week_start.strftime('%Y-%m-%d')}{days_ko[week_start.weekday()]} ~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}"
 
+def _extract_keywords(title: str) -> set:
+    """제목에서 의미 있는 키워드 추출 (2글자 이상 한글/영문 단어, 흔한 단어 제외)."""
+    if not title:
+        return set()
+    # 한글 2글자+ / 영문 3글자+ 단어 추출
+    words = re.findall(r"[가-힣]{2,}|[a-zA-Z]{3,}", title)
+    # 흔한 단어/조사 제외 (의미 없는 매칭 방지)
+    stopwords = {
+        "있다", "한다", "위한", "위해", "통해", "통한", "관련", "대한", "대해",
+        "지난", "오는", "올해", "내년", "최근", "이번", "그리고", "또는", "하는",
+        "the", "and", "for", "with", "from", "into", "this", "that", "have",
+    }
+    return {w.lower() for w in words if w.lower() not in stopwords}
+
+
+def dedup_by_keyword_overlap(articles: list[dict], min_overlap: int = 3) -> list[dict]:
+    """
+    키워드 오버랩으로 같은 사건 dedup. 발행일 빠른 기사를 우선 남김.
+    articles는 pub_dt 오름차순 정렬되어 있다고 가정(아니면 정렬).
+    min_overlap개 이상 키워드 겹치면 같은 사건으로 간주.
+    """
+    if len(articles) < 2:
+        return articles
+    # 발행일 오름차순 (오래된 게 먼저 = 첫 보도 우선)
+    sorted_arts = sorted(articles, key=lambda a: a.get("pub_dt") or datetime.datetime.min.replace(tzinfo=pytz.utc))
+    kept = []
+    kept_keywords = []
+    for a in sorted_arts:
+        kw = _extract_keywords(a.get("title", ""))
+        is_dup = False
+        for prev_kw in kept_keywords:
+            if len(kw & prev_kw) >= min_overlap:
+                is_dup = True
+                break
+        if not is_dup:
+            kept.append(a)
+            kept_keywords.append(kw)
+    return kept
+
+
 def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> list[dict]:
     if client is None or len(articles) < 2: return articles
     numbered = "\n".join(f"[{i}] {a['title']}" for i, a in enumerate(articles))
     prompt = f"""다음은 뉴스 제목 목록입니다. 각 줄은 [번호] 제목 형식.
+
 같은 사건을 다룬 제목들을 같은 클러스터로 묶어주세요.
+
+## 같은 사건 판단 기준 (중요)
+1. **표현이 달라도 같은 주체 + 같은 액션이면 같은 사건**
+   예: "동서발전, 외산 GPU 의존 탈피...국산 AI 생태계 조성 박차"
+       "동서발전, 국산 인공지능 성장 생태계 조성 '박차'"
+       → 같은 사건 (동서발전이 국산 AI 추진)
+2. **다른 매체에서 같은 발표/사건을 다룬 경우** = 같은 클러스터
+3. **시점이 며칠 차이나도** 같은 사건이면 묶기 (후속 보도 포함)
+4. **핵심 단어 (회사명, 제품명, 액션) 3개 이상 겹치면** 같은 사건일 가능성 매우 높음
+
+다른 사건이면 각각 별도 클러스터.
+
 제목 목록:
 {numbered}
+
 응답 형식 (오직 JSON):
 {{"clusters": [[0, 2], [1], [3, 4, 5]]}}"""
     try:
@@ -245,40 +299,36 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
     except Exception:
         return articles
 
-def to_output(a: dict, kst: pytz.BaseTzInfo, include_brief: bool = False, include_summary_only: bool = False) -> dict:
+def to_output(a: dict, kst: pytz.BaseTzInfo, include_summary: bool = False) -> dict:
     out = {
         "title": a["title"],
         "url": a["url"],
         "date": format_date_kst(a.get("pub_dt"), kst),
     }
-    if include_brief:
-        out["summary"] = a.get("summary", "")
-        out["bd_perspective"] = a.get("bd_perspective", "")
-    elif include_summary_only:
+    if include_summary:
         out["summary"] = a.get("summary", "")
     return out
 
-def generate_briefs(articles_with_company: list[tuple], client: "OpenAI | None") -> dict:
+def generate_competitor_summaries(articles_with_company: list[tuple], client: "OpenAI | None") -> dict:
+    """경쟁사 기사에 대해 요약만 생성. BD 시점은 생성 안 함."""
     if client is None or not articles_with_company: return {}
     items_in = []
     for i, (company, a) in enumerate(articles_with_company):
         items_in.append({
             "id": i, "company": company, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]
         })
-    prompt = f"""You are a BD (business development) analyst at Furiosa AI.
-## 경쟁사 그룹
-글로벌: NVIDIA, Tenstorrent, Groq, Cerebras, SambaNova
-한국: Rebellions, DeepX, Mobilint, HyperAccel
-## 작업
-각 경쟁사 뉴스에 대해 두 한국어 필드 생성:
-- "summary": 3문장, 사실 위주, 250~350자.
-- "bd_perspective": 1~2문장, 100~200자. Furiosa BD 입장에서 구체적인 함의.
-## 작성 원칙
-본문 정보가 약하면 "원문 확인 필요" 작성. 추측 금지. 일반론 절대 금지.
+    prompt = f"""다음은 AI 반도체 경쟁사 뉴스 기사 목록입니다.
+
+각 기사에 대해 한국어 요약을 만들어 주세요:
+- "summary": 3문장, 사실 위주, 250~350자. 무엇/언제/어떻게/왜 중요한지 포함.
+
+진부한 일반론 금지. 정보가 부족하면 추측하지 말고 "추가 정보 필요" 같이 명시.
+
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
+
 Return JSON ONLY:
-{{"items": [{{"id": 0, "summary": "...", "bd_perspective": "..."}}, ...]}}"""
+{{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
     try:
         resp = client.chat.completions.create(
             model="gpt-4o-mini",
@@ -295,10 +345,7 @@ Return JSON ONLY:
             idx = entry.get("id")
             if not isinstance(idx, int) or not (0 <= idx < len(articles_with_company)): continue
             company, a = articles_with_company[idx]
-            out[(company, a["url"])] = {
-                "summary": (entry.get("summary") or "").strip(),
-                "bd_perspective": (entry.get("bd_perspective") or "").strip(),
-            }
+            out[(company, a["url"])] = (entry.get("summary") or "").strip()
         return out
     except Exception:
         return {}
@@ -342,7 +389,12 @@ def main():
     now = datetime.datetime.now(kst)
     now_utc = now.astimezone(pytz.utc)
     
-    daily_cutoff = now_utc - datetime.timedelta(hours=24)
+    # 일간: 오늘 KST 00시 기준 (예: 5/21 실행 → 5/21 00:00 KST 이후 기사만 포함)
+    daily_start_kst = kst.localize(datetime.datetime.combine(
+        now.date(),
+        datetime.time(0, 0)
+    ))
+    daily_cutoff = daily_start_kst.astimezone(pytz.utc)
     # 주간: 오늘 - 6일의 KST 자정 0시 기준 (예: 5/21 실행 → 5/15 00:00 KST 이후 기사만 포함)
     weekly_start_kst = kst.localize(datetime.datetime.combine(
         now.date() - datetime.timedelta(days=6),
@@ -376,15 +428,14 @@ def main():
         companies_raw.append({"name": co["name"], "region": co["region"], "articles": deduped[:COMPETITOR_MAX_ITEMS]})
 
     all_pairs = [(c["name"], a) for c in companies_raw for a in c["articles"]]
-    briefs = generate_briefs(all_pairs, client)
+    summaries = generate_competitor_summaries(all_pairs, client)
     for c in companies_raw:
         for a in c["articles"]:
             key = (c["name"], a["url"])
-            if key in briefs:
-                a["summary"] = briefs[key]["summary"]
-                a["bd_perspective"] = briefs[key]["bd_perspective"]
+            if key in summaries:
+                a["summary"] = summaries[key]
 
-    companies_out = [{"name": c["name"], "region": c["region"], "items": [to_output(a, kst, include_brief=True) for a in c["articles"]]} for c in companies_raw]
+    companies_out = [{"name": c["name"], "region": c["region"], "items": [to_output(a, kst, include_summary=True) for a in c["articles"]]} for c in companies_raw]
 
     # ── 2. Furiosa 뉴스 ──
     all_furiosa = []
@@ -407,6 +458,12 @@ def main():
         deduped_urls = {a["url"] for a in deduped}
         all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls or not in_window(a, weekly_cutoff)]
 
+    # 키워드 오버랩 dedup (LLM 클러스터링 보완): 표현 달라도 같은 사건 잡아냄
+    in_weekly_window_2 = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
+    kept = dedup_by_keyword_overlap(in_weekly_window_2, min_overlap=3)
+    kept_urls = {a["url"] for a in kept}
+    all_furiosa = [a for a in all_furiosa if a["url"] in kept_urls or not in_window(a, weekly_cutoff)]
+
     # ── 2.5 일간/주간 분리 ──
     furiosa_daily_raw = sorted([a for a in all_furiosa if in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)[:5]
     furiosa_weekly_raw = sorted([a for a in all_furiosa if in_window(a, weekly_cutoff) and not in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)
@@ -423,24 +480,24 @@ def main():
         date_key = format_date_with_weekday(a.get("pub_dt"), kst)
         if date_key not in furiosa_daily_group:
             furiosa_daily_group[date_key] = []
-        furiosa_daily_group[date_key].append(to_output(a, kst, include_summary_only=True))
+        furiosa_daily_group[date_key].append(to_output(a, kst, include_summary=True))
 
-    # 🚨 4. 주간 그룹핑 (하루 최대 2개 제한)
+    # 🚨 4. 주간 그룹핑 (하루 최대 3개 제한)
     furiosa_weekly_group = {}
     daily_count = {}
     for a in furiosa_weekly_raw:
         date_key = format_date_with_weekday(a.get("pub_dt"), kst)
-        if daily_count.get(date_key, 0) < 2:
+        if daily_count.get(date_key, 0) < 3:
             if date_key not in furiosa_weekly_group:
                 furiosa_weekly_group[date_key] = []
-            furiosa_weekly_group[date_key].append(to_output(a, kst, include_summary_only=True))
+            furiosa_weekly_group[date_key].append(to_output(a, kst, include_summary=True))
             daily_count[date_key] = daily_count.get(date_key, 0) + 1
 
     report = {
         "period": build_period(now),
         "updated_at": now.isoformat(),
-        "furiosa_daily": furiosa_daily_group, # 딕셔너리로 정상 출력!
-        "furiosa_weekly": furiosa_weekly_group, # 딕셔너리로 정상 출력!
+        "furiosa_daily": furiosa_daily_group,
+        "furiosa_weekly": furiosa_weekly_group,
         "companies": companies_out,
     }
 
