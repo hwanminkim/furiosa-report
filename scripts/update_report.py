@@ -212,9 +212,6 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
     """
     Naver News API fetcher. Requires NAVER_CLIENT_ID / NAVER_CLIENT_SECRET env vars.
     Returns [] if creds are missing — caller should fall back to Google.
-
-    Naver query syntax differs slightly from Google ("OR" → "|"), so we translate.
-    Sort: "sim" (relevance) — closest to a popularity proxy. Use "date" if newest-first.
     """
     cid = os.environ.get("NAVER_CLIENT_ID")
     csec = os.environ.get("NAVER_CLIENT_SECRET")
@@ -222,10 +219,12 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
         return []
 
     naver_q = query.replace(" OR ", " | ")
-    # sort=date: 최신순 (BD 용도에는 최신성이 우선)
-    # sort=sim: 정확도순 (관련성이 우선이면 이쪽)
+    
+    # [수정됨] sort=date 대신 sort=sim(정확도순)으로 변경하여 양질의 기사가 먼저 오게 함
+    # 최소 display 개수도 조금 늘려 더 넓은 범위에서 유의미한 기사를 탐색
     url = (f"https://openapi.naver.com/v1/search/news.json"
-           f"?query={quote(naver_q)}&display={min(max(n, 10), 100)}&sort=date")
+           f"?query={quote(naver_q)}&display={min(max(n, 30), 100)}&sort=sim")
+    
     req = Request(url, headers={
         "X-Naver-Client-Id": cid,
         "X-Naver-Client-Secret": csec,
@@ -241,7 +240,6 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
     results = []
     for item in data.get("items", [])[:n]:
         title = _strip_html(item.get("title", ""))
-        # originallink: 원 매체 URL (선호) / link: 네이버 뉴스 URL
         link = (item.get("originallink") or item.get("link") or "").strip()
         desc = _strip_html(item.get("description", ""))
         pub_dt = parse_pub_datetime(item.get("pubDate") or "")
@@ -339,12 +337,11 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
                      if isinstance(i, int) and 0 <= i < len(articles)]
             if not valid:
                 continue
-            rep = min(valid)  # preserve Google News order
+            rep = min(valid)  # preserve order
             if rep not in used:
                 kept_indices.append(rep)
             for i in valid:
                 used.add(i)
-        # 클러스터에 포함되지 않은 항목은 별도 클러스터로 살림
         for i in range(len(articles)):
             if i not in used:
                 kept_indices.append(i)
@@ -360,37 +357,42 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
 
 def filter_relevant_by_company(company: str, articles: list[dict], client: "OpenAI | None") -> list[dict]:
     """
-    한 회사의 기사 목록을 받아 그 회사가 실제로 핵심 주제인 기사만 남긴다.
-    회사명이 본문에 잠깐 언급된 무관 기사 제거.
-
-    실패 시(LLM 호출 실패 등) 원본 그대로 반환 (안전).
+    회사명이 포함된 유의미한 기사를 필터링합니다. 
+    제목뿐만 아니라 description(스니펫)을 함께 LLM에 제공하여 정확도를 높입니다.
     """
     if client is None or not articles:
         return articles
 
-    numbered = "\n".join(f"[{i}] {a.get('title', '')}" for i, a in enumerate(articles))
-    prompt = f"""다음은 '{company}' 회사 관련 뉴스 검색 결과입니다.
-각 제목을 보고 이 기사가 '{company}'에 대해 **새로운 정보를 주는지** 엄격하게 판단하세요.
+    # [수정됨] 제목과 요약(description)을 함께 묶어서 프롬프트 생성
+    numbered_items = []
+    for i, a in enumerate(articles):
+        desc = (a.get("description") or "").replace("\n", " ").strip()[:150]
+        numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
+    numbered = "\n".join(numbered_items)
 
-제목 목록:
+    # [수정됨] 제외 기준을 완화하여 업계 트렌드 종합 분석 기사도 포함하도록 지시
+    prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다.
+각 기사가 '{company}'의 사업 개발(BD) 및 시장 동향 파악에 유용한 정보인지 판단하세요.
+
+기사 목록:
 {numbered}
 
-## keep 기준 (둘 중 하나면 keep)
-1. '{company}'가 기사의 주어로 뭔가를 했을 때 — 제품 발표, 투자 유치, 계약 체결, 인사, 기술 공개, 인터뷰
-2. '{company}'가 파트너십/계약의 한 축일 때 — 양사가 동등하게 다뤄지는 협력 발표
+## Keep 기준 (다음 중 하나라도 해당하면 반드시 포함)
+1. '{company}'가 주도적으로 무언가를 한 기사 (제품 발표, 투자 유치, 계약, 인사 등)
+2. 업계 트렌드, 시장 분석, 다수 기업을 다루는 기획 기사 중 '{company}'가 의미 있게 언급되거나 비교군으로 등장하는 경우 (BD 관점에서 경쟁 구도 파악에 매우 중요함)
 
-## 제외 기준 (하나라도 해당하면 제외)
-- 다른 회사가 주인공인 기사에서 '{company}'는 파트너/고객으로 잠깐 언급만 됨
-- 여러 회사를 나열하는 리스트/분석 기사에 포함된 것
-- '{company}' 없이도 기사 내용이 완결되는 경우
-- 행사/컨퍼런스 패널 참석 정도의 언급
+## 제외 기준 (여기에만 해당하면 제외)
+- 단순 주식 시황, 증시 마감 (주가 등락만 기계적으로 나열)
+- 기업의 단순 채용 공고나 기계적 공시
+- 이름만 스치듯 지나가고 AI 반도체 시장 동향과 전혀 무관한 내용
 
 응답 형식 (오직 JSON):
 {{"keep": [0, 2, 5]}}
 
 규칙:
-- 확신이 없으면 제외 (엄격하게).
-- 해당 기사 없으면 {{"keep": []}} 반환."""
+- BD 분석 관점에서 조금이라도 가치가 있다면 과감하게 Keep 하세요. (너무 깐깐하게 제외하지 말 것)
+- 확신이 서지 않으면 Keep에 포함시키세요.
+- 해당 기사가 아예 없으면 {{"keep": []}} 반환."""
 
     try:
         try:
@@ -414,7 +416,7 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
         keep = data.get("keep", [])
         valid = [i for i in keep if isinstance(i, int) and 0 <= i < len(articles)]
         filtered = [articles[i] for i in valid]
-        print(f"  Relevance filter for {company}: {len(articles)} → {len(filtered)}")
+        print(f"  Relevance filter for {company}: {len(articles)} -> {len(filtered)}")
         return filtered
     except Exception as e:
         print(f"  [warn] Relevance filter failed for {company}, keeping all: {e}")
@@ -653,7 +655,6 @@ def main():
         print("  [warn] GITHUB_TOKEN not set: skipping AI clustering & briefs")
 
     # ── 1. Competitor news (raw) ─────────────────────────────────────────
-    # 30일 필터링 후에도 최대 3개를 확보하기 위해 더 많이 받아온다.
     COMPETITOR_CUTOFF_DAYS = 30
     COMPETITOR_MAX_ITEMS = 3
     competitor_cutoff = now_utc - datetime.timedelta(days=COMPETITOR_CUTOFF_DAYS)
@@ -667,15 +668,14 @@ def main():
                 if a["url"] not in seen_urls:
                     seen_urls.add(a["url"])
                     fetched.append(a)
-        # 최근 N일 내 기사만 유지. pub_dt 없는 기사는 제외 (Furiosa 필터링과 동일 방식).
+        
         recent = [a for a in fetched
                   if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
-        # 관련성 LLM 필터: 회사명만 잠깐 언급된 무관 기사 제거 (클러스터링/요약 토큰 절약).
+        
         relevant = filter_relevant_by_company(co["name"], recent, client)
-        # LLM 클러스터링: 같은 사건/syndicated 중복 제거 (회사별로 호출).
-        # client가 None이거나 기사 1개 이하면 그대로 반환됨.
+        
         deduped = cluster_articles_by_event(relevant, client)
-        # 최신순 정렬 (각 소스의 기본 정렬을 신뢰하지 않고 명시적으로 내림차순).
+        
         deduped.sort(key=lambda a: a["pub_dt"], reverse=True)
         articles = deduped[:COMPETITOR_MAX_ITEMS]
         companies_raw.append({
@@ -722,13 +722,10 @@ def main():
                 seen_titles.add(norm)
             all_furiosa.append(a)
 
-    # Google News 기본 정렬을 그대로 보존 (인기도/relevance proxy).
-    # 날짜 필터만 걸고 재정렬은 안 함. pub_dt 없는 기사는 제외.
     def in_window(a: dict, cutoff: datetime.datetime) -> bool:
         return a.get("pub_dt") is not None and a["pub_dt"] >= cutoff
 
     # ── 2.5 LLM 기반 의미 단위 클러스터링 (같은 사건 dedup) ───────────────
-    # 7일 안의 기사들만 클러스터링 대상으로 (오래된 기사 토큰 낭비 방지)
     in_weekly_window = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
     if client:
         deduped = cluster_articles_by_event(in_weekly_window, client)
@@ -736,18 +733,15 @@ def main():
         all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls
                        or not in_window(a, weekly_cutoff)]
 
-    # 일간/주간: pub_dt 내림차순 (최신순) 정렬 후 top N
-    # pub_dt가 None인 기사는 in_window에서 이미 걸러지므로 안전.
     def sort_key(a: dict):
         return a["pub_dt"]
 
-    # 일간: 최근 24시간 top N (최신순)
     furiosa_daily = sorted(
         [a for a in all_furiosa if in_window(a, daily_cutoff)],
         key=sort_key,
         reverse=True,
     )[:DAILY_LIMIT]
-    # 주간: 최근 7일 중 일간에 이미 들어간 건 제외하고 top N (최신순)
+    
     daily_urls = {a["url"] for a in furiosa_daily}
     furiosa_weekly = sorted(
         [a for a in all_furiosa
