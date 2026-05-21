@@ -14,12 +14,12 @@ try {
 })();
 </script>
 <style>
-@font-face { font-family: 'ABCFavorit'; src: url('assets/fonts/ABCFavorit-Regular.otf') format('opentype'); font-weight: 400; }
-@font-face { font-family: 'ABCFavorit'; src: url('assets/fonts/ABCFavorit-Medium.otf') format('opentype'); font-weight: 500; }
-@font-face { font-family: 'ABCFavorit'; src: url('assets/fonts/ABCFavorit-Bold.otf') format('opentype'); font-weight: 700; }
-@font-face { font-family: 'ABCFavoritHangul'; src: url('assets/fonts/ABCFavoritHangul-Regular.otf') format('opentype'); font-weight: 400; }
-@font-face { font-family: 'ABCFavoritHangul'; src: url('assets/fonts/ABCFavoritHangul-Medium.otf') format('opentype'); font-weight: 500; }
-@font-face { font-family: 'ABCFavoritHangul'; src: url('assets/fonts/ABCFavoritHangul-Bold.otf') format('opentype'); font-weight: 700; }
+@font-face { font-family: 'ABCFavorit'; src: url('assets/fonts/ABCFavorit-Regular.otf'); font-weight: 400; }
+@font-face { font-family: 'ABCFavorit'; src: url('assets/fonts/ABCFavorit-Medium.otf'); font-weight: 500; }
+@font-face { font-family: 'ABCFavorit'; src: url('assets/fonts/ABCFavorit-Bold.otf'); font-weight: 700; }
+@font-face { font-family: 'ABCFavoritHangul'; src: url('assets/fonts/ABCFavoritHangul-Regular.otf'); font-weight: 400; }
+@font-face { font-family: 'ABCFavoritHangul'; src: url('assets/fonts/ABCFavoritHangul-Medium.otf'); font-weight: 500; }
+@font-face { font-family: 'ABCFavoritHangul'; src: url('assets/fonts/ABCFavoritHangul-Bold.otf'); font-weight: 700; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
 --red: #E21500; --black: #0D0D0D; --card: #1A1A1A; --card-strong: #1E1E1E;
@@ -56,30 +56,20 @@ h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; 
 .meta { font-size: 0.88rem; color: var(--muted); margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
 .section-label { font-family: 'ABCFavorit', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-label); margin-bottom: 12px; }
 
-/* ── 🚨 동적 높이 동기화를 위한 핵심 CSS 레이아웃 ── */
-.top-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 20px; 
-    margin-bottom: 36px; 
-    align-items: stretch; /* 좌우 높이를 무조건 똑같이 맞춤 */
-}
-.top-grid > div {
-    display: flex;
-    flex-direction: column; /* 내부 타이틀과 스크롤 박스를 세로로 정렬 */
-}
+/* ── 부모 그리드 레이아웃 ── */
+.top-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 36px; }
+
+/* ── 🚨 카드 5개 높이로 완벽하게 고정한 스크롤 박스 ── */
 .trend-scroll-box { 
-    flex: 1; /* 고정 픽셀 지우고, 좌측 5개 카드가 늘려놓은 높이를 그대로 채움 */
+    height: 450px; /* 카드 5개가 깔끔하게 딱 맞아떨어지는 세로 길이 고정 */
     overflow-y: auto; 
     padding-right: 4px; 
 }
-
-/* 크롬, 사파리 등 브라우저 스크롤바 디자인 */
 .trend-scroll-box::-webkit-scrollbar { width: 4px; }
 .trend-scroll-box::-webkit-scrollbar-track { background: transparent; }
 .trend-scroll-box::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 4px; }
 
-/* 🚨 좌측 일간 리포트는 다 들어오므로 스크롤바를 숨겨서 완전한 일체형으로 만듦 */
+/* 🚨 좌측 일간 영역은 스크롤바를 숨겨서 완전한 고정 박스 디자인으로 노출 */
 #furiosa-daily::-webkit-scrollbar { display: none; }
 #furiosa-daily { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -376,7 +366,7 @@ function renderGroupedArticles(groupedItems, containerId) {
 fetch('report.json').then(r => r.json()).then(d => {
 if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
 
-// 양쪽 모두 완벽히 정렬된 타임라인 레이아웃으로 동기화 처리
+// 양쪽 모두 완벽히 동기화된 높이의 타임라인 구조로 렌더링 처리
 renderGroupedArticles(d.furiosa_daily, 'furiosa-daily');
 renderGroupedArticles(d.furiosa_weekly, 'furiosa-weekly');
 
