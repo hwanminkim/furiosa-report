@@ -87,15 +87,6 @@ def format_date_kst(dt: datetime.datetime | None, kst: pytz.BaseTzInfo) -> str:
     return dt.astimezone(kst).strftime("%m-%d")
 
 
-def format_date_with_weekday(dt: datetime.datetime | None, kst: pytz.BaseTzInfo) -> str:
-    """프론트엔드 스티키 헤더용 날짜 포맷 (예: 05-20 (수))"""
-    if dt is None:
-        return ""
-    dt_kst = dt.astimezone(kst)
-    days_ko = ["(월)", "(화)", "(수)", "(목)", "(금)", "(토)", "(일)"]
-    return f"{dt_kst.strftime('%m-%d')} {days_ko[dt_kst.weekday()]}"
-
-
 _HTML_TAG_RE = re.compile(r"<[^>]+>")
 
 
@@ -204,7 +195,6 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
 
     naver_q = query.replace(" OR ", " | ")
     
-    # 🚨 최근 7일 필터 유지를 위해 퓨리오사 크롤링용 최신순(sort=date) 복구 및 100개 탐색
     url = (f"https://openapi.naver.com/v1/search/news.json"
            f"?query={quote(naver_q)}&display=100&sort=date")
     
@@ -314,6 +304,14 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
 기사 목록:
 {numbered}
 
+## Keep 기준
+1. '{company}'가 주도적으로 무언가를 한 기사
+2. 업계 트렌드, 시장 분석 중 '{company}'가 의미 있게 언급된 경우
+
+## 제외 기준
+- 단순 주식 시황, 증시 마감
+- 기계적 공시
+
 응답 형식 (오직 JSON):
 {{"keep": [0, 2, 5]}}"""
 
@@ -354,47 +352,118 @@ def to_output(a: dict, kst: pytz.BaseTzInfo, include_brief: bool = False,
 def generate_briefs(articles_with_company: list[tuple], client: "OpenAI | None") -> dict:
     if client is None or not articles_with_company:
         return {}
-    items_in = [{"id": i, "company": comp, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]} 
-                for i, (comp, a) in enumerate(articles_with_company)]
 
-    prompt = f"경쟁사 뉴스 요약 및 BD 관점 생성용 프롬프트 생략 (기존 로직 유지)\nInput: {json.dumps(items_in, ensure_ascii=False)}"
+    items_in = []
+    for i, (company, a) in enumerate(articles_with_company):
+        items_in.append({
+            "id": i,
+            "company": company,
+            "title": a.get("title", ""),
+            "snippet": (a.get("description") or "")[:240],
+        })
+
+    prompt = f"""You are a BD (business development) analyst at Furiosa AI.
+
+## Furiosa AI 핵심 컨텍스트
+- 한국 AI 추론(inference) 전용 칩 스타트업
+- 주력 제품: RNGD (현재 주력 NPU) — 데이터센터 LLM 추론용
+- 강점: 전력 효율 (W당 성능), 추론 전용 최적화, MLPerf 벤치마크 실적
+- 타겟 시장: 데이터센터 LLM 추론 서비스, 엔터프라이즈 AI, sovereign AI 인프라
+- 경쟁 포지셔닝:
+  - 글로벌: NVIDIA H100/H200, RTX Pro 6000
+  - 추론 특화 그룹: Tenstorrent, Groq, Cerebras, SambaNova
+  - 국내: Rebellions
+
+## 작업
+각 경쟁사 뉴스에 대해 두 한국어 필드 생성:
+- "summary": 3문장, 사실 위주, 250~350자. 무엇/언제/어떻게/왜 중요한지 포함.
+- "bd_perspective": 1~2문장, 100~200자. Furiosa BD 입장에서 구체적인 함의.
+
+## 작성 원칙
+- 본문 정보가 약하면 "원문 확인 필요 — [궁금한점]" 이라고 작성.
+- 추측해서 답을 만들지 말 것. 일반론 절대 금지.
+- "주의가 필요하다", "협력 기회 모색" 같은 금지 표현 사용 금지.
+
+Input articles:
+{json.dumps(items_in, ensure_ascii=False)}
+
+Return JSON ONLY:
+{{"items": [{{"id": 0, "summary": "...", "bd_perspective": "..."}}, ...]}}"""
+
     try:
         resp = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=4000,
+            max_tokens=6000,
             temperature=0.3,
             response_format={"type": "json_object"},
         )
         raw = resp.choices[0].message.content or ""
-        data = json.loads(raw)
-        out = {}
+        m = re.search(r"\{[\s\S]*\}", raw)
+        data = json.loads(m.group() if m else raw)
+
+        out: dict = {}
         for entry in data.get("items", []):
             idx = entry.get("id")
-            if idx is not None and 0 <= idx < len(articles_with_company):
-                comp, a = articles_with_company[idx]
-                out[(comp, a["url"])] = {"summary": entry.get("summary", ""), "bd_perspective": entry.get("bd_perspective", "")}
+            if not isinstance(idx, int) or not (0 <= idx < len(articles_with_company)):
+                continue
+            company, a = articles_with_company[idx]
+            out[(company, a["url"])] = {
+                "summary": (entry.get("summary") or "").strip(),
+                "bd_perspective": (entry.get("bd_perspective") or "").strip(),
+            }
         return out
-    except Exception:
+    except Exception as e:
+        print(f"  [warn] brief generation failed: {e}")
         return {}
 
 
 def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") -> dict:
     if client is None or not articles:
         return {}
-    items_in = [{"id": i, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]} for i, a in enumerate(articles)]
-    prompt = f"Furiosa 뉴스 요약용 프롬프트 생략 (기존 로직 유지)\nInput: {json.dumps(items_in, ensure_ascii=False)}"
+
+    items_in = []
+    for i, a in enumerate(articles):
+        items_in.append({
+            "id": i,
+            "title": a.get("title", ""),
+            "snippet": (a.get("description") or "")[:240],
+        })
+
+    prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
+
+각 기사에 대해 한국어 요약을 만들어 주세요:
+- "summary": 3문장, 사실 위주로 핵심 내용을 충분히 풀어쓰기. 총 약 300자 (250~350자). 무엇이/언제/어떻게/왜 중요한지 포함.
+진부한 일반론 금지. 구체적인 함의 위주.
+
+Input articles:
+{json.dumps(items_in, ensure_ascii=False)}
+
+Return JSON ONLY:
+{{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
+
     try:
         resp = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=4000,
+            max_tokens=6000,
             temperature=0.3,
             response_format={"type": "json_object"},
         )
-        data = json.loads(resp.choices[0].message.content or "")
-        return {articles[entry["id"]]["url"]: entry.get("summary", "") for entry in data.get("items", []) if "id" in entry}
-    except Exception:
+        raw = resp.choices[0].message.content or ""
+        m = re.search(r"\{[\s\S]*\}", raw)
+        data = json.loads(m.group() if m else raw)
+
+        out: dict = {}
+        for entry in data.get("items", []):
+            idx = entry.get("id")
+            if not isinstance(idx, int) or not (0 <= idx < len(articles)):
+                continue
+            a = articles[idx]
+            out[a["url"]] = (entry.get("summary") or "").strip()
+        return out
+    except Exception as e:
+        print(f"  [warn] furiosa summary generation failed: {e}")
         return {}
 
 
@@ -402,14 +471,18 @@ def main():
     kst = pytz.timezone("Asia/Seoul")
     now = datetime.datetime.now(kst)
     now_utc = now.astimezone(pytz.utc)
+    
+    # 일간: 24시간
     daily_cutoff = now_utc - datetime.timedelta(hours=24)
+    # 주간: 7일 전 (오늘 24시간을 제외하면 실질적으로 과거 6일)
     weekly_cutoff = now_utc - datetime.timedelta(days=7)
+    
     print(f"[{now.strftime('%Y-%m-%d %H:%M KST')}] Starting report update...")
 
     token = os.environ.get("GITHUB_TOKEN")
     client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token) if token else None
 
-    # ── 1. Competitor 뉴스 수집 (기존 로직 동일) ─────────────────────────
+    # ── 1. Competitor 뉴스 수집 ─────────────────────────
     COMPETITOR_CUTOFF_DAYS = 30
     COMPETITOR_MAX_ITEMS = 3
     competitor_cutoff = now_utc - datetime.timedelta(days=COMPETITOR_CUTOFF_DAYS)
@@ -419,7 +492,7 @@ def main():
         fetched = []
         seen_urls = set()
         for query, lang in co["queries"]:
-            for a in fetch_articles(query, lang, n=100): # 100개 탐색
+            for a in fetch_articles(query, lang, n=100):
                 if a["url"] not in seen_urls:
                     seen_urls.add(a["url"])
                     fetched.append(a)
@@ -444,7 +517,7 @@ def main():
     all_furiosa = []
     seen_urls, seen_titles = set(), set()
     for query, lang in FURIOSA_QUERIES:
-        for a in fetch_articles(query, lang, n=100): # 🚨 100개 최신순 수집
+        for a in fetch_articles(query, lang, n=100):
             if a["url"] in seen_urls: continue
             norm = normalize_title(a["title"])
             if norm and norm in seen_titles: continue
@@ -461,11 +534,11 @@ def main():
         deduped_urls = {a["url"] for a in deduped}
         all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls or not in_window(a, weekly_cutoff)]
 
-    # ── 🚨 2.5 일간 / 주간 분리 및 주간 그룹핑(Grouping) 로직 ──
+    # ── 2.5 일간 / 주간 분리 ──
     # 1) 일간: 최근 24시간 이내 기사 (최대 5개)
     furiosa_daily_raw = sorted([a for a in all_furiosa if in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)[:5]
     
-    # 2) 주간: 최근 7일 중 '최근 24시간 이내 기사'는 완전히 배제 (겹침 방지)
+    # 2) 주간: 최근 7일 중 '최근 24시간 이내 기사'는 완전히 배제 = 실질적 6일치
     furiosa_weekly_raw = sorted([a for a in all_furiosa if in_window(a, weekly_cutoff) and not in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)
 
     # 요약 생성용 일괄 병합 및 호출
@@ -478,20 +551,22 @@ def main():
     # 3) 일간 데이터 아웃풋 변환
     furiosa_daily_out = [to_output(a, kst, include_summary_only=True) for a in furiosa_daily_raw]
 
-    # 4) 🚨 주간 데이터 날짜별 그룹핑 {"05-20 (수)": [기사1, 기사2]}
-    furiosa_weekly_group = {}
+    # 4) 주간 데이터 아웃풋 변환 (하루당 최대 2개 제한 적용)
+    furiosa_weekly_out = []
+    daily_count = {}
     for a in furiosa_weekly_raw:
-        date_key = format_date_with_weekday(a.get("pub_dt"), kst) # '05-20 (수)' 형태로 키 생성
-        if date_key not in furiosa_weekly_group:
-            furiosa_weekly_group[date_key] = []
-        furiosa_weekly_group[date_key].append(to_output(a, kst, include_summary_only=True))
+        # 날짜(예: '05-20')를 키로 사용하여 하루 몇 개 들어갔는지 카운트
+        d_str = format_date_kst(a.get("pub_dt"), kst)
+        if daily_count.get(d_str, 0) < 2:
+            furiosa_weekly_out.append(to_output(a, kst, include_summary_only=True))
+            daily_count[d_str] = daily_count.get(d_str, 0) + 1
 
     # ── 3. Write report.json ─────────────────────────────────────────────
     report = {
         "period": build_period(now),
         "updated_at": now.isoformat(),
         "furiosa_daily": furiosa_daily_out,
-        "furiosa_weekly": furiosa_weekly_group, # 🚨 딕셔너리 구조로 변경됨
+        "furiosa_weekly": furiosa_weekly_out, # 다시 일간과 완벽하게 동일한 배열 구조로 복구!
         "companies": companies_out,
     }
 
