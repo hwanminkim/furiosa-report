@@ -55,6 +55,9 @@ main { flex: 1; overflow-y: auto; padding: 36px 40px 80px; }
 h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; }
 .meta { font-size: 0.88rem; color: var(--muted); margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
 .section-label { font-family: 'ABCFavorit', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-label); margin-bottom: 12px; }
+/* 데스크탑: 토글 화살표 숨김 (주간 항상 펼쳐짐) */
+.weekly-toggle { display: flex; align-items: center; gap: 6px; cursor: default; }
+.weekly-toggle-arrow { display: none; font-size: 0.7rem; color: var(--muted); transition: transform 0.2s; }
 
 /* 1. 상단 그리드 레이아웃 */
 .top-grid { 
@@ -87,7 +90,19 @@ h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; 
 #furiosa-daily { -ms-overflow-style: none; scrollbar-width: none; }
 
 .date-group { margin-bottom: 20px; }
-.sticky-date-header { position: sticky; top: 0; background: var(--black); padding: 8px 0; font-family: 'ABCFavorit', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--red); border-bottom: 1px solid var(--border-soft); margin-bottom: 12px; z-index: 5; }
+.sticky-date-header {
+    position: sticky;
+    top: 0;
+    background: var(--black);
+    padding: 10px 0 8px;
+    margin: -2px 0 12px;
+    font-family: 'ABCFavorit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--red);
+    border-bottom: 1px solid var(--border-soft);
+    z-index: 5;
+}
 
 .hl-card { display: block; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; }
 .hl-card:hover { border-color: var(--red); }
@@ -158,8 +173,13 @@ h1 { font-size: 1.7rem; }
 .top-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
 .modal.article-modal { width: calc(100vw - 32px); padding: 22px 20px; }
 .modal { width: calc(100vw - 80px); max-width: 320px; }
-/* 모바일: 좌우 동기화 안 함 (세로 배치) */
-#furiosa-weekly { max-height: none !important; }
+/* 모바일: 주간 토글 활성화 */
+.weekly-toggle { cursor: pointer; user-select: none; }
+.weekly-toggle-arrow { display: inline; }
+.weekly-toggle.expanded .weekly-toggle-arrow { transform: rotate(90deg); }
+/* 기본 접힘: 주간 영역 숨김. 펼쳤을 때만 표시 */
+#furiosa-weekly { display: none; max-height: none !important; }
+.weekly-toggle.expanded + #furiosa-weekly { display: block; }
 }
 </style>
 </head>
@@ -188,7 +208,10 @@ h1 { font-size: 1.7rem; }
 <div id="furiosa-daily" class="trend-scroll-box"></div>
 </div>
 <div>
-<div class="section-label">Furiosa 주간 (과거 6일)</div>
+<div class="section-label weekly-toggle" id="weekly-toggle">
+<span>Furiosa 주간 (과거 6일)</span>
+<span class="weekly-toggle-arrow" id="weekly-toggle-arrow">▶</span>
+</div>
 <div id="furiosa-weekly" class="trend-scroll-box"></div>
 </div>
 </div>
@@ -330,6 +353,14 @@ try { localStorage.setItem('theme', !isLight ? 'light' : 'dark'); } catch(e) {}
 updateThemeToggleIcon();
 }
 themeToggle.addEventListener('click', toggleTheme); themeToggleMobile.addEventListener('click', toggleTheme); updateThemeToggleIcon();
+
+// 주간 섹션 토글 (모바일에서만 의미 있음, 데스크탑에선 CSS로 화살표 숨김)
+const weeklyToggle = document.getElementById('weekly-toggle');
+if (weeklyToggle) {
+weeklyToggle.addEventListener('click', () => {
+weeklyToggle.classList.toggle('expanded');
+});
+}
 
 const allCompanies = [...COMPANIES.global, ...COMPANIES.korea];
 document.querySelectorAll('.company-header').forEach(el => el.addEventListener('click', () => { const co = allCompanies.find(c => c.name === el.dataset.name); if (co) openModal(co); }));
