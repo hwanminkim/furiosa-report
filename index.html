@@ -56,20 +56,35 @@ h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; 
 .meta { font-size: 0.88rem; color: var(--muted); margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
 .section-label { font-family: 'ABCFavorit', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-label); margin-bottom: 12px; }
 
-/* ── 부모 그리드 레이아웃 ── */
-.top-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 36px; }
+/* 1. 상단 그리드 레이아웃: 자식들이 무조건 부모 높이에 맞게 늘어나도록 제어 */
+.top-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+    margin-bottom: 36px;
+    align-items: start; /* 위쪽 라인을 칼같이 맞춤 */
+}
 
-/* ── 🚨 카드 5개 높이로 완벽하게 고정한 스크롤 박스 ── */
+/* 2. 각 섹션을 세로 flex 공간으로 정의 */
+.top-grid > div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 3. 🚨 [핵심] 좌우 박스 위아래를 카드 5개 정량 사이즈로 가두기 */
 .trend-scroll-box { 
-    height: 450px; /* 카드 5개가 깔끔하게 딱 맞아떨어지는 세로 길이 고정 */
+    height: 445px;       /* 카드 5개와 간격이 딱 맞아떨어지는 절대 높이 */
+    max-height: 445px;   /* 우측 박스가 밑으로 흐르지 못하게 강제로 가둠 */
     overflow-y: auto; 
     padding-right: 4px; 
 }
+
+/* 크롬, 사파리 등 내부 스크롤바 디자인 */
 .trend-scroll-box::-webkit-scrollbar { width: 4px; }
 .trend-scroll-box::-webkit-scrollbar-track { background: transparent; }
 .trend-scroll-box::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 4px; }
 
-/* 🚨 좌측 일간 영역은 스크롤바를 숨겨서 완전한 고정 박스 디자인으로 노출 */
+/* 🚨 좌측 일간 영역은 5개가 다 들어차므로 스크롤바 트랙까지 완전히 제거 */
 #furiosa-daily::-webkit-scrollbar { display: none; }
 #furiosa-daily { -ms-overflow-style: none; scrollbar-width: none; }
 
