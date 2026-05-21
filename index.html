@@ -223,20 +223,11 @@ transition: border-color 0.15s;
 }
 .hl-card.linked:hover { border-color: var(--red); }
 .hl-card.furiosa-card { border-left: 2px solid var(--red); }
-.hl-card-date {
-font-family: 'ABCFavorit', sans-serif;
-font-size: 0.68rem;
-font-weight: 600;
-letter-spacing: 0.06em;
-color: var(--muted);
-display: block;
-margin-bottom: 5px;
-}
 .hl-card-text { font-size: 0.92rem; color: var(--text-news); line-height: 1.55; }
 .item-arrow { font-size: 0.72rem; color: var(--dim); margin-left: 3px; }
 .empty-note { font-size: 0.9rem; color: var(--muted); padding: 6px 2px; }
 
-/* 🚨 주간 영역용 날짜 그룹 & 스티키 헤더 */
+/* 🚨 주간/일간 공통 날짜 그룹 & 스티키 헤더 */
 .date-group { margin-bottom: 20px; }
 .sticky-date-header {
 position: sticky;
@@ -308,6 +299,7 @@ transition: color 0.15s;
 .news-title.as-text { color: var(--text-news); text-decoration: none; transition: color 0.15s; }
 .news-title.as-text:hover { color: var(--text-strong); }
 .news-item-icon { font-size: 0.7rem; color: var(--dim); margin-left: 3px; }
+
 /* ── Modal ── */
 .modal-backdrop {
 display: none;
@@ -366,6 +358,7 @@ font-family: inherit;
 transition: border-color 0.15s, color 0.15s;
 }
 .modal-close:hover { border-color: var(--border-mid); color: var(--text); }
+
 /* ── Article modal (wider) ── */
 .modal.article-modal {
 width: 600px;
@@ -410,6 +403,7 @@ color: var(--text-body);
 line-height: 1.6;
 white-space: pre-wrap;
 }
+
 /* ── Hamburger button & drawer (mobile only) ── */
 .header-left { display: flex; align-items: center; gap: 14px; }
 .hamburger {
@@ -463,11 +457,7 @@ padding: 0;
 @media (max-width: 640px) {
 header { padding: 0 16px; }
 .hamburger { display: block; }
-
-/* 데스크탑용 fixed 토글은 모바일에서 숨김 */
 #theme-toggle { display: none; }
-
-/* 모바일용 토글: drawer 바닥에 고정, drawer 열린 상태에서만 보임 */
 .theme-toggle-mobile {
 display: flex;
 position: fixed;
@@ -482,8 +472,6 @@ transition: opacity 0.2s ease;
 opacity: 1;
 pointer-events: auto;
 }
-
-/* sidebar → drawer */
 aside {
 position: fixed;
 top: var(--header-h);
@@ -496,14 +484,9 @@ transform: translateX(-100%);
 transition: transform 0.25s ease;
 }
 aside.open { transform: translateX(0); }
-
 main { padding: 24px 18px 60px; }
 h1 { font-size: 1.7rem; }
-
-/* Furiosa 일간/주간 → 1컬럼 */
 .top-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
-
-/* 모달 너비 화면 꽉 차게 */
 .modal.article-modal { width: calc(100vw - 32px); padding: 22px 20px; }
 .modal { width: calc(100vw - 80px); max-width: 320px; }
 }
@@ -527,22 +510,25 @@ h1 { font-size: 1.7rem; }
 <div class="page-eyebrow">Competitive Intelligence</div>
 <h1>경쟁사 동향 리포트</h1>
 <div class="meta" id="meta">Furiosa BD 참고용</div>
+
 <div class="top-grid" id="highlights">
 <div>
 <div class="section-label">Furiosa 일간 (최근 24시간)</div>
 <div id="furiosa-daily" class="trend-scroll-box"></div>
 </div>
 <div>
-<div class="section-label">Furiosa 주간 (최근 7일)</div>
+<div class="section-label">Furiosa 주간 (과거 6일)</div>
 <div id="furiosa-weekly" class="trend-scroll-box"></div>
 </div>
 </div>
+
 <div class="section-label">회사별 동향 — Korea</div>
 <div id="companies-korea"></div>
 <div class="section-label" style="margin-top:28px;">회사별 동향 — Global</div>
 <div id="companies-global"></div>
 </main>
 </div>
+
 <div class="modal-backdrop" id="modal-backdrop">
 <div class="modal">
 <div class="modal-title">Company</div>
@@ -562,6 +548,7 @@ h1 { font-size: 1.7rem; }
 <button class="modal-close" id="modal-close">닫기</button>
 </div>
 </div>
+
 <div class="modal-backdrop" id="article-backdrop">
 <div class="modal article-modal">
 <span class="article-modal-company" id="article-modal-company"></span>
@@ -585,6 +572,7 @@ h1 { font-size: 1.7rem; }
 </div>
 <button class="theme-toggle" id="theme-toggle" aria-label="테마 전환"></button>
 <button class="theme-toggle theme-toggle-mobile" id="theme-toggle-mobile" aria-label="테마 전환"></button>
+
 <script>
 const COMPANIES = {
 global: [
@@ -600,6 +588,7 @@ korea: [
 { name: "Mobilint", website: "https://mobilint.com", blog: "https://mobilint.com/blog" },
 ]
 };
+
 // ── Company info modal ────────────────────────────────────────────────
 const backdrop = document.getElementById('modal-backdrop');
 document.getElementById('modal-close').addEventListener('click', () => backdrop.classList.remove('open'));
@@ -610,6 +599,7 @@ document.getElementById('modal-website').href = company.website;
 document.getElementById('modal-blog').href = company.blog;
 backdrop.classList.add('open');
 }
+
 // ── Article modal (요약 + BD 시점 + 원문 링크) ────────────────────────
 const articleBackdrop = document.getElementById('article-backdrop');
 document.getElementById('article-modal-close').addEventListener('click', () => articleBackdrop.classList.remove('open'));
@@ -624,6 +614,7 @@ document.getElementById('article-modal-bd-section').style.display = hideBd ? 'no
 document.getElementById('article-modal-link').href = item.url || '#';
 articleBackdrop.classList.add('open');
 }
+
 // Esc → 양쪽 모달 모두 닫기 + drawer 닫기
 document.addEventListener('keydown', e => {
 if (e.key === 'Escape') {
@@ -637,6 +628,7 @@ if (db) db.classList.remove('open');
 if (tm) tm.classList.remove('visible');
 }
 });
+
 function renderCompany(c, newsItems) {
 const body = newsItems && newsItems.length > 0
 ? `<div class="company-body">${newsItems.map(item =>
@@ -654,8 +646,10 @@ return `<div class="company" id="co-${c.name}">
 ${body}
 </div>`;
 }
+
 document.getElementById('companies-global').innerHTML = COMPANIES.global.map(c => renderCompany(c, [])).join('');
 document.getElementById('companies-korea').innerHTML = COMPANIES.korea.map(c => renderCompany(c, [])).join('');
+
 // Sidebar
 const sidebar = document.getElementById('sidebar');
 sidebar.innerHTML = `
@@ -675,14 +669,15 @@ ${COMPANIES.global.map(c => `
 <span class="sidebar-dot"></span>${c.name}
 </div>`).join('')}
 `;
-// Sidebar click → scroll to center
+
 const mainContent = document.getElementById('main-content');
 function setActiveSidebarItem(targetId) {
 sidebar.querySelectorAll('.sidebar-item').forEach(i => {
 i.classList.toggle('active', i.dataset.target === targetId);
 });
 }
-let scrollLockUntil = 0; 
+
+let scrollLockUntil = 0;
 sidebar.querySelectorAll('.sidebar-item').forEach(item => {
 item.addEventListener('click', () => {
 setActiveSidebarItem(item.dataset.target);
@@ -698,10 +693,12 @@ mainContent.scrollTo({ top: targetTop - (containerH / 2) + (targetH / 2), behavi
 closeDrawer();
 });
 });
+
 // ── Mobile drawer ────────────────────────────────────────────────────
 const drawerBackdrop = document.getElementById('drawer-backdrop');
 const hamburger = document.getElementById('hamburger');
 const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
 function openDrawer() {
 sidebar.classList.add('open');
 drawerBackdrop.classList.add('open');
@@ -720,6 +717,7 @@ openDrawer();
 }
 });
 drawerBackdrop.addEventListener('click', closeDrawer);
+
 // ── Theme toggle ─────────────────────────────────────────────────────
 const themeToggle = document.getElementById('theme-toggle');
 const themeToggleM = document.getElementById('theme-toggle-mobile');
@@ -749,6 +747,7 @@ setTheme(getTheme() === 'dark' ? 'light' : 'dark');
 themeToggle.addEventListener('click', toggleTheme);
 themeToggleM.addEventListener('click', toggleTheme);
 updateThemeToggleIcon();
+
 // Company header click → modal
 const allCompanies = [...COMPANIES.global, ...COMPANIES.korea];
 document.querySelectorAll('.company-header').forEach(el => {
@@ -757,6 +756,7 @@ const co = allCompanies.find(c => c.name === el.dataset.name);
 if (co) openModal(co);
 });
 });
+
 const observer = new IntersectionObserver(entries => {
 if (Date.now() < scrollLockUntil) return;
 const visible = entries
@@ -768,7 +768,7 @@ document.querySelectorAll('.company').forEach(el => observer.observe(el));
 const highlightsEl = document.getElementById('highlights');
 if (highlightsEl) observer.observe(highlightsEl);
 
-// ── Render article list ─────────────────────
+// ── Render article list (통합 그룹핑 렌더링) ─────────────────────
 function escapeHtml(s) {
 return String(s ?? '')
 .replace(/&/g, '&amp;')
@@ -778,89 +778,65 @@ return String(s ?? '')
 .replace(/'/g, '&#039;');
 }
 
-// 1. 일간 리포트 렌더링 (기존 배열용)
-function renderDailyArticles(items, containerId) {
-const el = document.getElementById(containerId);
-if (!el) return;
-if (!items || items.length === 0) {
-el.innerHTML = '<div class="empty-note">No Update</div>';
-return;
-}
-el.innerHTML = items.map((a, i) => {
-const title = escapeHtml(a.title);
-const date = escapeHtml(a.date || '');
-return `
-<div class="hl-card linked furiosa-card" data-idx="${i}">
-${date ? `<span class="hl-card-date">${date}</span>` : ''}
-<span class="hl-card-text">${title} <span class="item-arrow">ⓘ</span></span>
-</div>`;
-}).join('');
-el.querySelectorAll('.hl-card').forEach(card => {
-card.addEventListener('click', () => {
-const idx = Number(card.dataset.idx);
-const item = items[idx];
-if (item) openArticleModal(item, 'Furiosa', true);
-});
-});
-}
+// 🚨 일간/주간 공통으로 사용할 타임라인(그룹핑) 렌더링 함수
+function renderGroupedArticles(groupedItems, containerId) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = ''; // 초기화
 
-// 🚨 2. 주간 리포트 렌더링 (딕셔너리 그룹핑용 - 신규 추가)
-function renderWeeklyGroupedArticles(groupedItems, containerId) {
-const el = document.getElementById(containerId);
-if (!el) return;
-el.innerHTML = ''; // 초기화
+    if (!groupedItems || Object.keys(groupedItems).length === 0) {
+        el.innerHTML = '<div class="empty-note">No Update</div>';
+        return;
+    }
 
-if (!groupedItems || Object.keys(groupedItems).length === 0) {
-el.innerHTML = '<div class="empty-note">No Update</div>';
-return;
-}
+    Object.entries(groupedItems).forEach(([dateKey, articles]) => {
+        // 날짜 그룹 컨테이너
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'date-group';
 
-Object.entries(groupedItems).forEach(([dateKey, articles]) => {
-// 1) 날짜 그룹 컨테이너 생성
-const groupDiv = document.createElement('div');
-groupDiv.className = 'date-group';
+        // 빨간색 스티키 날짜 헤더
+        const header = document.createElement('div');
+        header.className = 'sticky-date-header';
+        header.textContent = dateKey;
+        groupDiv.appendChild(header);
 
-// 2) 스티키 날짜 헤더 생성
-const header = document.createElement('div');
-header.className = 'sticky-date-header';
-header.textContent = dateKey;
-groupDiv.appendChild(header);
+        // 해당 날짜의 기사 카드 렌더링
+        articles.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'hl-card linked furiosa-card';
+            card.innerHTML = `<span class="hl-card-text">${escapeHtml(item.title)} <span class="item-arrow">ⓘ</span></span>`;
 
-// 3) 해당 날짜의 기사들을 카드로 렌더링
-articles.forEach(item => {
-const card = document.createElement('div');
-card.className = 'hl-card linked furiosa-card';
-card.innerHTML = `<span class="hl-card-text">${escapeHtml(item.title)} <span class="item-arrow">ⓘ</span></span>`;
+            // 클릭 이벤트 (모달창)
+            card.addEventListener('click', () => {
+                openArticleModal(item, 'Furiosa', true);
+            });
 
-// 클릭 시 기사 모달 띄우기
-card.addEventListener('click', () => {
-openArticleModal(item, 'Furiosa', true);
-});
+            groupDiv.appendChild(card);
+        });
 
-groupDiv.appendChild(card);
-});
-
-el.appendChild(groupDiv);
-});
+        el.appendChild(groupDiv);
+    });
 }
 
 // Load report.json
 fetch('report.json').then(r => r.json()).then(d => {
 if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
 
-// 🚨 일간과 주간 렌더링 함수를 분리해서 호출
-renderDailyArticles(d.furiosa_daily, 'furiosa-daily');
-renderWeeklyGroupedArticles(d.furiosa_weekly, 'furiosa-weekly');
+// 🚨 동일한 함수로 일간(왼쪽), 주간(오른쪽) 모두 렌더링!
+renderGroupedArticles(d.furiosa_daily, 'furiosa-daily');
+renderGroupedArticles(d.furiosa_weekly, 'furiosa-weekly');
 
-// Inject news items into company cards (click → article modal)
+// Inject news items into company cards
 if (d.companies) {
 d.companies.forEach(co => {
 const card = document.getElementById('co-' + co.name);
 if (!card) return;
 const existing = card.querySelector('.company-body');
 if (existing) existing.remove();
+
 const body = document.createElement('div');
 body.className = 'company-body';
+
 if (!co.items || co.items.length === 0) {
 const empty = document.createElement('div');
 empty.className = 'empty-note';
@@ -869,14 +845,15 @@ body.appendChild(empty);
 card.appendChild(body);
 return;
 }
+
 co.items.forEach(item => {
 const row = document.createElement('div');
 row.className = 'news-item clickable';
 row.innerHTML =
 `<span class="news-date">${escapeHtml(item.date || '')}</span>` +
 `<a class="news-title as-text" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}<span class="news-item-icon"> ⓘ</span></a>`;
+
 row.addEventListener('click', (e) => {
-// Cmd/Ctrl/Shift+click → 새 탭으로 원문 (브라우저 기본)
 if (e.metaKey || e.ctrlKey || e.shiftKey) return;
 e.preventDefault();
 openArticleModal(item, co.name);
