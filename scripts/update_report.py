@@ -320,9 +320,19 @@ def generate_competitor_summaries(articles_with_company: list[tuple], client: "O
     prompt = f"""다음은 AI 반도체 경쟁사 뉴스 기사 목록입니다.
 
 각 기사에 대해 한국어 요약을 만들어 주세요:
-- "summary": 3문장, 사실 위주, 250~350자. 무엇/언제/어떻게/왜 중요한지 포함.
+- "summary": 3문장, 사실 위주, 250~350자. 무엇/언제/어떻게를 포함.
 
-진부한 일반론 금지. 정보가 부족하면 추측하지 말고 "추가 정보 필요" 같이 명시.
+## 절대 금지 표현 (이런 일반론 문장은 쓰지 말 것)
+- "~분야의 경쟁력을 높이는 데 중요한 역할을 할 것이다"
+- "~기술의 발전에 기여할 것으로 기대된다"
+- "~시장에서의 경쟁력을 높이는 데 중요한 역할을 할 것이다"
+- "~산업 전반의 혁신을 촉진할 것으로 기대된다"
+- "기대된다", "전망된다" 같은 막연한 미래 추측
+
+## 작성 원칙
+1. 제목과 snippet에 있는 사실만 활용. 없는 정보 만들어내지 말 것.
+2. 정보가 부족하면 솔직하게 "본문 정보 부족 — 원문 확인 필요"로 마무리.
+3. 추측 금지. 일반론 절대 금지.
 
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
@@ -331,9 +341,9 @@ Return JSON ONLY:
 {{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
     try:
         resp = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=6000,
+            max_tokens=4000,
             temperature=0.3,
             response_format={"type": "json_object"},
         )
@@ -356,18 +366,30 @@ def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") ->
     for i, a in enumerate(articles):
         items_in.append({"id": i, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]})
     prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
+
 각 기사에 대해 한국어 요약을 만들어 주세요:
 - "summary": 3문장, 사실 위주로 핵심 내용을 충분히 풀어쓰기.
-진부한 일반론 금지.
+
+## 절대 금지 표현
+- "~분야의 경쟁력을 높이는 데 중요한 역할을 할 것이다"
+- "~기술의 발전에 기여할 것으로 기대된다"
+- "~산업 전반의 혁신을 촉진할 것으로 기대된다"
+- 막연한 추측/일반론 마무리 문장
+
+## 작성 원칙
+1. 제목과 snippet에 있는 사실만 활용. 없는 정보 만들어내지 말 것.
+2. 정보가 부족하면 "본문 정보 부족 — 원문 확인 필요"로 마무리.
+
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
+
 Return JSON ONLY:
 {{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
     try:
         resp = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=6000,
+            max_tokens=4000,
             temperature=0.3,
             response_format={"type": "json_object"},
         )
