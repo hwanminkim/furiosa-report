@@ -1,447 +1,410 @@
-#!/usr/bin/env python3
-"""
-Daily report updater.
-"""
-import datetime
-import email.utils
-import html
-import json
-import os
-import re
-import time
-import xml.etree.ElementTree as ET
-from pathlib import Path
-from urllib.error import HTTPError
-from urllib.parse import quote
-from urllib.request import urlopen, Request
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Furiosa BD 경쟁사 동향 리포트</title>
+<script>
+// FOUC 방지
+(function() {
+try {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+} catch(e) {}
+})();
+</script>
+<style>
+@font-face { font-family: 'ABCFavorit'; src: url('assets/fonts/ABCFavorit-Regular.otf'); font-weight: 400; }
+@font-face { font-family: 'ABCFavorit'; src: url('assets/fonts/ABCFavorit-Medium.otf'); font-weight: 500; }
+@font-face { font-family: 'ABCFavorit'; src: url('assets/fonts/ABCFavorit-Bold.otf'); font-weight: 700; }
+@font-face { font-family: 'ABCFavoritHangul'; src: url('assets/fonts/ABCFavoritHangul-Regular.otf'); font-weight: 400; }
+@font-face { font-family: 'ABCFavoritHangul'; src: url('assets/fonts/ABCFavoritHangul-Medium.otf'); font-weight: 500; }
+@font-face { font-family: 'ABCFavoritHangul'; src: url('assets/fonts/ABCFavoritHangul-Bold.otf'); font-weight: 700; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+--red: #E21500; --black: #0D0D0D; --card: #1A1A1A; --card-strong: #1E1E1E;
+--border: #2A2A2A; --border-mid: #333; --border-soft: #222;
+--text: #F0F0F0; --text-strong: #fff; --text-body: #DDDDDD; --text-news: #D8D8D8;
+--text-label: #c0c0c0; --text-list: #bbb; --muted: #999; --dim: #777;
+--hover-bg: rgba(255,255,255,0.03); --hover-bg-soft: rgba(255,255,255,0.025);
+--header-h: 64px;
+}
+:root[data-theme="light"] {
+--black: #FFFFFF; --card: #F5F5F5; --card-strong: #FAFAFA;
+--border: #E5E5E5; --border-mid: #DDD; --border-soft: #EEE;
+--text: #0D0D0D; --text-strong: #0D0D0D; --text-body: #1A1A1A; --text-news: #2A2A2A;
+--text-label: #555; --text-list: #555; --muted: #777; --dim: #999;
+--hover-bg: rgba(0,0,0,0.04); --hover-bg-soft: rgba(0,0,0,0.03);
+}
+html, body { height: 100%; overflow: hidden; }
+body { font-family: 'ABCFavoritHangul', 'ABCFavorit', sans-serif; background: var(--black); color: var(--text); display: flex; flex-direction: column; }
+header { height: var(--header-h); flex-shrink: 0; border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; align-items: center; justify-content: space-between; background: var(--black); z-index: 10; }
+header a { display: block; line-height: 0; }
+header img { height: 26px; }
+.header-tag { font-family: 'ABCFavorit', sans-serif; font-size: 0.68rem; font-weight: 500; color: var(--muted); border: 1px solid var(--border); padding: 4px 10px; border-radius: 2px; }
+.layout { flex: 1; display: flex; overflow: hidden; }
+aside { width: 188px; flex-shrink: 0; border-right: 1px solid var(--border); overflow-y: auto; padding: 28px 0 40px; }
+.sidebar-label { font-family: 'ABCFavorit', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-label); padding: 0 20px 8px; }
+.sidebar-divider { border: none; border-top: 1px solid var(--border); margin: 16px 20px; }
+.sidebar-item { display: flex; align-items: center; gap: 10px; padding: 8px 20px; font-size: 0.92rem; color: var(--text-list); cursor: pointer; border-left: 2px solid transparent; }
+.sidebar-item:hover { color: var(--text); background: var(--hover-bg); }
+.sidebar-item.active { color: var(--text); border-left-color: var(--red); background: rgba(226,21,0,0.06); }
+.sidebar-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+main { flex: 1; overflow-y: auto; padding: 36px 40px 80px; }
+.page-eyebrow { font-family: 'ABCFavorit', sans-serif; font-size: 0.75rem; font-weight: 500; color: var(--red); margin-bottom: 10px; }
+h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; }
+.meta { font-size: 0.88rem; color: var(--muted); margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+.section-label { font-family: 'ABCFavorit', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-label); margin-bottom: 12px; }
 
-import pytz
-from openai import OpenAI
+/* 1. 상단 그리드 레이아웃: 자식들이 무조건 부모 높이에 맞게 늘어나도록 제어 */
+.top-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+    margin-bottom: 36px;
+    align-items: start; /* 위쪽 라인을 칼같이 맞춤 */
+}
 
-REPO_ROOT = Path(__file__).parent.parent
-REPORT_PATH = REPO_ROOT / "report.json"
+/* 2. 각 섹션을 세로 flex 공간으로 정의 */
+.top-grid > div {
+    display: flex;
+    flex-direction: column;
+}
 
-COMPANIES = [
-    {"name": "NVIDIA", "region": "global", "queries": [("NVIDIA", "en")]},
-    {"name": "Tenstorrent", "region": "global", "queries": [("Tenstorrent", "en")]},
-    {"name": "SambaNova", "region": "global", "queries": [("SambaNova", "en")]},
-    {"name": "Cerebras", "region": "global", "queries": [("Cerebras", "en")]},
-    {"name": "Rebellions", "region": "korea", "queries": [("리벨리온", "ko"), ("Rebellions", "en")]},
-    {"name": "DeepX", "region": "korea", "queries": [("딥엑스", "ko"), ("DeepX", "en")]},
-    {"name": "HyperAccel", "region": "korea", "queries": [("하이퍼엑셀", "ko"), ("HyperAccel", "en")]},
-    {"name": "Mobilint", "region": "korea", "queries": [("모빌린트", "ko"), ("Mobilint", "en")]},
+/* 3. 🚨 [핵심] 좌우 박스 위아래를 카드 5개 정량 사이즈로 가두기 */
+.trend-scroll-box { 
+    height: 445px;       /* 카드 5개와 간격이 딱 맞아떨어지는 절대 높이 */
+    max-height: 445px;   /* 우측 박스가 밑으로 흐르지 못하게 강제로 가둠 */
+    overflow-y: auto; 
+    padding-right: 4px; 
+}
+
+/* 크롬, 사파리 등 내부 스크롤바 디자인 */
+.trend-scroll-box::-webkit-scrollbar { width: 4px; }
+.trend-scroll-box::-webkit-scrollbar-track { background: transparent; }
+.trend-scroll-box::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 4px; }
+
+/* 🚨 좌측 일간 영역은 5개가 다 들어차므로 스크롤바 트랙까지 완전히 제거 */
+#furiosa-daily::-webkit-scrollbar { display: none; }
+#furiosa-daily { -ms-overflow-style: none; scrollbar-width: none; }
+
+.date-group { margin-bottom: 20px; }
+.sticky-date-header { position: sticky; top: 0; background: var(--black); padding: 8px 0; font-family: 'ABCFavorit', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--red); border-bottom: 1px solid var(--border-soft); margin-bottom: 12px; z-index: 5; }
+
+.hl-card { display: block; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; }
+.hl-card:hover { border-color: var(--red); }
+.hl-card.furiosa-card { border-left: 2px solid var(--red); }
+.hl-card-text { font-size: 0.92rem; color: var(--text-news); line-height: 1.55; }
+.item-arrow { font-size: 0.72rem; color: var(--dim); margin-left: 3px; }
+.empty-note { font-size: 0.9rem; color: var(--muted); padding: 6px 2px; }
+
+/* Company cards */
+.company { border: 1px solid var(--border); border-radius: 4px; margin-bottom: 10px; background: var(--card); scroll-margin-top: 20px; }
+.company-header { display: flex; align-items: center; gap: 10px; padding: 14px 18px; cursor: pointer; }
+.company-header:hover .company-name { color: var(--text-strong); }
+.company-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.company-name { font-size: 1rem; font-weight: 600; }
+.header-chevron { margin-left: auto; font-size: 0.72rem; color: var(--dim); }
+.company-body { padding: 4px 18px 14px; border-top: 1px solid var(--border); }
+.news-item { display: flex; align-items: baseline; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border-soft); cursor: pointer; }
+.news-item:last-child { border-bottom: none; }
+.news-item:hover { background: var(--hover-bg-soft); }
+.news-date { font-family: 'ABCFavorit', sans-serif; font-size: 0.7rem; color: var(--muted); flex-shrink: 0; min-width: 32px; }
+.news-title { font-size: 0.88rem; color: var(--text-news); text-decoration: none; }
+.news-title:hover { color: var(--text-strong); }
+.news-item-icon { font-size: 0.7rem; color: var(--dim); margin-left: 3px; }
+
+/* Modal */
+.modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; align-items: center; justify-content: center; }
+.modal-backdrop.open { display: flex; }
+.modal { background: var(--card-strong); border: 1px solid var(--border-mid); border-radius: 8px; padding: 24px; width: 300px; box-shadow: 0 24px 48px rgba(0,0,0,0.5); }
+.modal-title { font-size: 0.68rem; font-weight: 600; color: var(--muted); margin-bottom: 5px; }
+.modal-company { font-size: 1.1rem; font-weight: 700; margin-bottom: 18px; }
+.modal-links { display: flex; flex-direction: column; gap: 8px; }
+.modal-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border: 1px solid var(--border-mid); border-radius: 4px; text-decoration: none; color: var(--text); font-size: 0.94rem; }
+.modal-link:hover { border-color: var(--red); background: rgba(226,21,0,0.06); }
+.modal-link-icon { font-size: 1rem; width: 20px; text-align: center; }
+.modal-link-label { flex: 1; }
+.modal-link-arrow { font-size: 0.68rem; color: var(--dim); }
+.modal-close { display: block; margin-top: 14px; width: 100%; padding: 8px; background: none; border: 1px solid var(--border-mid); border-radius: 4px; color: var(--dim); font-size: 0.78rem; cursor: pointer; }
+.modal-close:hover { border-color: var(--border-mid); color: var(--text); }
+.modal.article-modal { width: 600px; max-width: calc(100vw - 40px); max-height: 84vh; overflow-y: auto; padding: 28px 32px; }
+.article-modal-company { font-family: 'ABCFavorit', sans-serif; font-size: 1rem; font-weight: 700; color: var(--red); display: block; margin-bottom: 4px; }
+.article-modal-date { font-family: 'ABCFavorit', sans-serif; font-size: 1rem; color: var(--muted); display: block; margin-bottom: 10px; }
+.article-modal-title { font-size: 1.25rem; font-weight: 600; line-height: 1.45; margin-bottom: 18px; color: var(--text-strong); }
+.article-section { margin-bottom: 14px; }
+.article-section-label { font-family: 'ABCFavorit', sans-serif; font-size: 1rem; font-weight: 700; color: var(--red); margin-bottom: 5px; }
+.article-section-body { font-size: 1.05rem; color: var(--text-body); line-height: 1.6; white-space: pre-wrap; }
+
+/* Mobile & Theme */
+.header-left { display: flex; align-items: center; gap: 14px; }
+.hamburger { display: none; background: none; border: none; color: var(--text); font-size: 1.6rem; cursor: pointer; }
+.drawer-backdrop { display: none; position: fixed; inset: var(--header-h) 0 0 0; background: rgba(0,0,0,0.6); z-index: 50; }
+.drawer-backdrop.open { display: block; }
+.logo-light { display: none; }
+:root[data-theme="light"] .logo-dark { display: none; }
+:root[data-theme="light"] .logo-light { display: block; }
+.theme-toggle { position: fixed; bottom: 18px; left: 18px; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 30; }
+.theme-toggle-mobile { display: none; }
+
+@media (max-width: 640px) {
+header { padding: 0 16px; }
+.hamburger { display: block; }
+#theme-toggle { display: none; }
+.theme-toggle-mobile { display: flex; position: fixed; bottom: 18px; left: 18px; z-index: 101; opacity: 0; pointer-events: none; }
+.theme-toggle-mobile.visible { opacity: 1; pointer-events: auto; }
+aside { position: fixed; top: var(--header-h); left: 0; bottom: 0; width: 240px; background: var(--black); z-index: 100; transform: translateX(-100%); transition: transform 0.25s ease; }
+aside.open { transform: translateX(0); }
+main { padding: 24px 18px 60px; }
+h1 { font-size: 1.7rem; }
+.top-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
+.modal.article-modal { width: calc(100vw - 32px); padding: 22px 20px; }
+.modal { width: calc(100vw - 80px); max-width: 320px; }
+}
+</style>
+</head>
+<body>
+<header>
+<div class="header-left">
+<button id="hamburger" class="hamburger">☰</button>
+<a href="index.html">
+<img class="logo-dark" src="assets/img/Furiosa_AI_h_w.png" alt="Furiosa AI">
+<img class="logo-light" src="assets/img/Furiosa_AI_h_rgb_k.png" alt="Furiosa AI">
+</a>
+</div>
+<span class="header-tag">BD &amp; Sales | Hwanmin Kim</span>
+</header>
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<div class="layout">
+<aside id="sidebar"></aside>
+<main id="main-content">
+<div class="page-eyebrow">Competitive Intelligence</div>
+<h1>경쟁사 동향 리포트</h1>
+<div class="meta" id="meta">Furiosa BD 참고용</div>
+
+<div class="top-grid" id="highlights">
+<div>
+<div class="section-label">Furiosa 일간 (최근 24시간)</div>
+<div id="furiosa-daily" class="trend-scroll-box"></div>
+</div>
+<div>
+<div class="section-label">Furiosa 주간 (과거 6일)</div>
+<div id="furiosa-weekly" class="trend-scroll-box"></div>
+</div>
+</div>
+
+<div class="section-label">회사별 동향 — Korea</div>
+<div id="companies-korea"></div>
+<div class="section-label" style="margin-top:28px;">회사별 동향 — Global</div>
+<div id="companies-global"></div>
+</main>
+</div>
+
+<div class="modal-backdrop" id="modal-backdrop">
+<div class="modal">
+<div class="modal-title">Company</div>
+<div class="modal-company" id="modal-company-name"></div>
+<div class="modal-links">
+<a class="modal-link" id="modal-website" href="#" target="_blank"><span class="modal-link-icon">🌎</span><span class="modal-link-label">Web Site</span><span class="modal-link-arrow">↗</span></a>
+<a class="modal-link" id="modal-blog" href="#" target="_blank"><span class="modal-link-icon">🗂️</span><span class="modal-link-label">Tech Blog</span><span class="modal-link-arrow">↗</span></a>
+</div>
+<button class="modal-close" id="modal-close">닫기</button>
+</div>
+</div>
+
+<div class="modal-backdrop" id="article-backdrop">
+<div class="modal article-modal">
+<span class="article-modal-company" id="article-modal-company"></span>
+<span class="article-modal-date" id="article-modal-date"></span>
+<div class="article-modal-title" id="article-modal-title"></div>
+<div class="article-section">
+<div class="article-section-label">요약</div>
+<div class="article-section-body" id="article-modal-summary"></div>
+</div>
+<div class="article-section" id="article-modal-bd-section">
+<div class="article-section-label">Furiosa BD 시점</div>
+<div class="article-section-body" id="article-modal-bd"></div>
+</div>
+<a class="modal-link" id="article-modal-link" href="#" target="_blank"><span class="modal-link-icon">🔍</span><span class="modal-link-label">원문 보기</span><span class="modal-link-arrow">↗</span></a>
+<button class="modal-close" id="article-modal-close">닫기</button>
+</div>
+</div>
+
+<button class="theme-toggle" id="theme-toggle"></button>
+<button class="theme-toggle theme-toggle-mobile" id="theme-toggle-mobile"></button>
+
+<script>
+const COMPANIES = {
+global: [
+{ name: "NVIDIA", website: "https://www.nvidia.com", blog: "https://blogs.nvidia.com" },
+{ name: "Tenstorrent", website: "https://tenstorrent.com", blog: "https://tenstorrent.com/developers" },
+{ name: "Cerebras", website: "https://cerebras.net", blog: "https://cerebras.net/blog" },
+{ name: "SambaNova", website: "https://sambanova.ai", blog: "https://sambanova.ai/blog" },
+],
+korea: [
+{ name: "Rebellions", website: "https://rebellions.ai", blog: "https://kr.rebellions.ai/category/blogs/" },
+{ name: "DeepX", website: "https://deepx.ai", blog: "https://developer.deepx.ai/" },
+{ name: "HyperAccel", website: "https://hyperaccel.ai", blog: "https://hyper-accel.github.io/" },
+{ name: "Mobilint", website: "https://mobilint.com", blog: "https://mobilint.com/blog" },
 ]
+};
 
-FURIOSA_QUERIES = [
-    ('furiosa ai OR furiosaai OR "Furiosa AI" chip', "en"),
-    ('퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
-]
+// UI Handlers
+const backdrop = document.getElementById('modal-backdrop');
+document.getElementById('modal-close').addEventListener('click', () => backdrop.classList.remove('open'));
+backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
+function openModal(company) {
+document.getElementById('modal-company-name').textContent = company.name;
+document.getElementById('modal-website').href = company.website;
+document.getElementById('modal-blog').href = company.blog;
+backdrop.classList.add('open');
+}
 
-def gnews_url(query: str, lang: str) -> str:
-    if lang == "ko":
-        return f"https://news.google.com/rss/search?q={quote(query)}&hl=ko&gl=KR&ceid=KR:ko"
-    return f"https://news.google.com/rss/search?q={quote(query)}&hl=en-US&gl=US&ceid=US:en"
+const articleBackdrop = document.getElementById('article-backdrop');
+document.getElementById('article-modal-close').addEventListener('click', () => articleBackdrop.classList.remove('open'));
+articleBackdrop.addEventListener('click', e => { if (e.target === articleBackdrop) articleBackdrop.classList.remove('open'); });
+function openArticleModal(item, companyName, hideBd = false) {
+document.getElementById('article-modal-company').textContent = companyName;
+document.getElementById('article-modal-date').textContent = item.date || '';
+document.getElementById('article-modal-title').textContent = item.title || '';
+document.getElementById('article-modal-summary').textContent = item.summary || '(요약 중...)';
+document.getElementById('article-modal-bd').textContent = item.bd_perspective || '(BD 시점 생성 중...)';
+document.getElementById('article-modal-bd-section').style.display = hideBd ? 'none' : '';
+document.getElementById('article-modal-link').href = item.url || '#';
+articleBackdrop.classList.add('open');
+}
 
-_TITLE_SOURCE_SUFFIX = re.compile(r"\s+[-|–—·]\s+[^-|–—·]+$")
-_TITLE_NON_WORD = re.compile(r"[^\w가-힣\s]", flags=re.UNICODE)
-_TITLE_WHITESPACE = re.compile(r"\s+")
+document.addEventListener('keydown', e => {
+if (e.key === 'Escape') {
+backdrop.classList.remove('open'); articleBackdrop.classList.remove('open');
+const sb = document.getElementById('sidebar'); const db = document.getElementById('drawer-backdrop'); const tm = document.getElementById('theme-toggle-mobile');
+if (sb) sb.classList.remove('open'); if (db) db.classList.remove('open'); if (tm) tm.classList.remove('visible');
+}
+});
 
-def normalize_title(title: str) -> str:
-    if not title: return ""
-    t = _TITLE_SOURCE_SUFFIX.sub("", title)
-    t = t.lower()
-    t = _TITLE_NON_WORD.sub(" ", t)
-    t = _TITLE_WHITESPACE.sub(" ", t).strip()
-    return t
+function renderCompany(c, newsItems) {
+const body = newsItems && newsItems.length > 0 ? `<div class="company-body">${newsItems.map(item => `<div class="news-item"><span class="news-date">${item.date || ''}</span><a class="news-title" href="${item.url}" target="_blank">${item.title} ↗</a></div>`).join('')}</div>` : '';
+return `<div class="company" id="co-${c.name}"><div class="company-header" data-name="${c.name}"><div class="company-dot"></div><span class="company-name">${c.name}</span><span class="header-chevron">⊕</span></div>${body}</div>`;
+}
 
-def parse_pub_datetime(raw: str) -> datetime.datetime | None:
-    if not raw: return None
-    try:
-        dt = email.utils.parsedate_to_datetime(raw)
-        if dt is None: return None
-        if dt.tzinfo is None: dt = dt.replace(tzinfo=pytz.utc)
-        return dt.astimezone(pytz.utc)
-    except Exception:
-        return None
+document.getElementById('companies-global').innerHTML = COMPANIES.global.map(c => renderCompany(c, [])).join('');
+document.getElementById('companies-korea').innerHTML = COMPANIES.korea.map(c => renderCompany(c, [])).join('');
 
-def format_date_kst(dt: datetime.datetime | None, kst: pytz.BaseTzInfo) -> str:
-    if dt is None: return ""
-    return dt.astimezone(kst).strftime("%m-%d")
+const sidebar = document.getElementById('sidebar');
+sidebar.innerHTML = `<div class="sidebar-item" data-target="highlights" style="margin-bottom:4px;"><span class="sidebar-dot"></span>Furiosa 동향</div><hr class="sidebar-divider"><div class="sidebar-label">Korea</div>${COMPANIES.korea.map(c => `<div class="sidebar-item" data-target="co-${c.name}"><span class="sidebar-dot"></span>${c.name}</div>`).join('')}<hr class="sidebar-divider"><div class="sidebar-label">Global</div>${COMPANIES.global.map(c => `<div class="sidebar-item" data-target="co-${c.name}"><span class="sidebar-dot"></span>${c.name}</div>`).join('')}`;
 
-# 🚨 스티키 헤더를 위한 요일 포함 포맷 함수
-def format_date_with_weekday(dt: datetime.datetime | None, kst: pytz.BaseTzInfo) -> str:
-    if dt is None: return ""
-    dt_kst = dt.astimezone(kst)
-    days_ko = ["(월)", "(화)", "(수)", "(목)", "(금)", "(토)", "(일)"]
-    return f"{dt_kst.strftime('%m-%d')} {days_ko[dt_kst.weekday()]}"
+const mainContent = document.getElementById('main-content');
+function setActiveSidebarItem(targetId) { sidebar.querySelectorAll('.sidebar-item').forEach(i => i.classList.toggle('active', i.dataset.target === targetId)); }
 
-_HTML_TAG_RE = re.compile(r"<[^>]+>")
+let scrollLockUntil = 0;
+sidebar.querySelectorAll('.sidebar-item').forEach(item => {
+item.addEventListener('click', () => {
+setActiveSidebarItem(item.dataset.target);
+scrollLockUntil = Date.now() + 900; 
+const target = document.getElementById(item.dataset.target);
+if (!target) return;
+mainContent.scrollTo({ top: target.getBoundingClientRect().top - mainContent.getBoundingClientRect().top + mainContent.scrollTop - (mainContent.clientHeight / 2) + (target.offsetHeight / 2), behavior: 'smooth' });
+const sb = document.getElementById('sidebar'); const db = document.getElementById('drawer-backdrop'); const tm = document.getElementById('theme-toggle-mobile');
+if (sb) sb.classList.remove('open'); if (db) db.classList.remove('open'); if (tm) tm.classList.remove('visible');
+});
+});
 
-def _strip_html(s: str) -> str:
-    if not s: return ""
-    s = _HTML_TAG_RE.sub("", s)
-    s = html.unescape(s)
-    return s.strip()
+const drawerBackdrop = document.getElementById('drawer-backdrop');
+const hamburger = document.getElementById('hamburger');
+const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+hamburger.addEventListener('click', () => {
+if (sidebar.classList.contains('open')) { sidebar.classList.remove('open'); drawerBackdrop.classList.remove('open'); themeToggleMobile.classList.remove('visible'); }
+else { sidebar.classList.add('open'); drawerBackdrop.classList.add('open'); themeToggleMobile.classList.add('visible'); }
+});
+drawerBackdrop.addEventListener('click', () => { sidebar.classList.remove('open'); drawerBackdrop.classList.remove('open'); themeToggleMobile.classList.remove('visible'); });
 
-def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
-    try:
-        req = Request(gnews_url(query, lang), headers={"User-Agent": "Mozilla/5.0"})
-        with urlopen(req, timeout=10) as resp:
-            root = ET.fromstring(resp.read())
-    except Exception:
-        return []
-    results = []
-    for item in root.findall(".//item")[:n]:
-        title = (item.findtext("title") or "").strip()
-        link = (item.findtext("link") or "").strip()
-        desc = _strip_html(item.findtext("description") or "")
-        pub_dt = parse_pub_datetime(item.findtext("pubDate") or "")
-        if title and link:
-            results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": desc})
-    return results
+const themeToggle = document.getElementById('theme-toggle');
+function updateThemeToggleIcon() {
+const svg = `<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3 A9 9 0 0 1 12 21 Z" fill="currentColor"/></svg>`;
+themeToggle.innerHTML = svg; themeToggleMobile.innerHTML = svg;
+}
+function toggleTheme() {
+const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+if (!isLight) document.documentElement.setAttribute('data-theme', 'light'); else document.documentElement.removeAttribute('data-theme');
+try { localStorage.setItem('theme', !isLight ? 'light' : 'dark'); } catch(e) {}
+updateThemeToggleIcon();
+}
+themeToggle.addEventListener('click', toggleTheme); themeToggleMobile.addEventListener('click', toggleTheme); updateThemeToggleIcon();
 
-def _parse_gdelt_seendate(raw: str) -> datetime.datetime | None:
-    if not raw or len(raw) < 15: return None
-    try:
-        dt = datetime.datetime.strptime(raw, "%Y%m%dT%H%M%SZ")
-        return dt.replace(tzinfo=pytz.utc)
-    except Exception:
-        return None
+const allCompanies = [...COMPANIES.global, ...COMPANIES.korea];
+document.querySelectorAll('.company-header').forEach(el => el.addEventListener('click', () => { const co = allCompanies.find(c => c.name === el.dataset.name); if (co) openModal(co); }));
 
-def _fetch_gdelt(query: str, n: int) -> list[dict]:
-    full_query = f"{query} sourcelang:eng"
-    url = f"https://api.gdeltproject.org/api/v2/doc/doc?query={quote(full_query)}&mode=ArtList&maxrecords={n}&format=json&sort=DateDesc&timespan=30d"
-    req = Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    data = None
-    retry_delays = [2, 5]
-    for attempt in range(len(retry_delays) + 1):
-        try:
-            with urlopen(req, timeout=15) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-            break
-        except HTTPError as e:
-            if e.code == 429 and attempt < len(retry_delays):
-                time.sleep(retry_delays[attempt])
-                continue
-            break
-        except Exception:
-            break
-    time.sleep(2)
-    if data is None: return []
-    results = []
-    for item in (data.get("articles") or [])[:n]:
-        title = (item.get("title") or "").strip()
-        link = (item.get("url") or "").strip()
-        pub_dt = _parse_gdelt_seendate(item.get("seendate") or "")
-        if title and link:
-            results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": ""})
-    return results
+const observer = new IntersectionObserver(entries => {
+if (Date.now() < scrollLockUntil) return;
+const visible = entries.filter(e => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+if (visible[0]) setActiveSidebarItem(visible[0].target.id);
+}, { root: mainContent, threshold: 0.35 });
+document.querySelectorAll('.company').forEach(el => observer.observe(el));
+const highlightsEl = document.getElementById('highlights');
+if (highlightsEl) observer.observe(highlightsEl);
 
-def _fetch_naver(query: str, n: int) -> list[dict]:
-    cid = os.environ.get("NAVER_CLIENT_ID")
-    csec = os.environ.get("NAVER_CLIENT_SECRET")
-    if not cid or not csec: return []
-    naver_q = query.replace(" OR ", " | ")
-    url = f"https://openapi.naver.com/v1/search/news.json?query={quote(naver_q)}&display=100&sort=date"
-    req = Request(url, headers={"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": csec, "User-Agent": "Mozilla/5.0"})
-    try:
-        with urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except Exception:
-        return []
-    results = []
-    for item in data.get("items", [])[:n]:
-        title = _strip_html(item.get("title", ""))
-        link = (item.get("originallink") or item.get("link") or "").strip()
-        desc = _strip_html(item.get("description", ""))
-        pub_dt = parse_pub_datetime(item.get("pubDate") or "")
-        if title and link:
-            results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": desc})
-    return results
+function escapeHtml(s) { return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
 
-def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
-    if lang == "ko":
-        items = _fetch_naver(query, n)
-        if items: return items
-        return _fetch_google(query, lang, n)
-    items = _fetch_gdelt(query, n)
-    if items: return items
-    return _fetch_google(query, lang, n)
+// 공통 타임라인 그룹핑 렌더링 함수
+function renderGroupedArticles(groupedItems, containerId) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = ''; 
 
-def build_period(now: datetime.datetime) -> str:
-    today = now.date()
-    week_start = today - datetime.timedelta(days=6)
-    days_ko = ["(월)", "(화)", "(수)", "(목)", "(금)", "(토)", "(일)"]
-    return f"{week_start.strftime('%Y-%m-%d')}{days_ko[week_start.weekday()]} ~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}"
-
-def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> list[dict]:
-    if client is None or len(articles) < 2: return articles
-    numbered = "\n".join(f"[{i}] {a['title']}" for i, a in enumerate(articles))
-    prompt = f"""다음은 뉴스 제목 목록입니다. 각 줄은 [번호] 제목 형식.
-같은 사건을 다룬 제목들을 같은 클러스터로 묶어주세요.
-제목 목록:
-{numbered}
-응답 형식 (오직 JSON):
-{{"clusters": [[0, 2], [1], [3, 4, 5]]}}"""
-    try:
-        resp = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=600,
-            temperature=0.1,
-            response_format={"type": "json_object"},
-        )
-        raw = resp.choices[0].message.content or ""
-        m = re.search(r"\{[\s\S]*\}", raw)
-        data = json.loads(m.group() if m else raw)
-        clusters = data.get("clusters", [])
-        used = set()
-        kept_indices = []
-        for cluster in clusters:
-            valid = [i for i in cluster if isinstance(i, int) and 0 <= i < len(articles)]
-            if not valid: continue
-            rep = min(valid)
-            if rep not in used: kept_indices.append(rep)
-            for i in valid: used.add(i)
-        for i in range(len(articles)):
-            if i not in used: kept_indices.append(i)
-        kept_indices.sort()
-        return [articles[i] for i in kept_indices]
-    except Exception:
-        return articles
-
-def filter_relevant_by_company(company: str, articles: list[dict], client: "OpenAI | None") -> list[dict]:
-    if client is None or not articles: return articles
-    numbered_items = []
-    for i, a in enumerate(articles):
-        desc = (a.get("description") or "").replace("\n", " ").strip()[:150]
-        numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
-    numbered = "\n".join(numbered_items)
-    prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다. BD 및 시장 동향 파악에 유용한 정보인지 판단하세요.
-기사 목록:
-{numbered}
-## Keep 기준
-1. '{company}'가 주도적으로 무언가를 한 기사
-2. 업계 트렌드, 시장 분석 중 '{company}'가 의미 있게 언급된 경우
-## 제외 기준
-- 단순 주식 시황, 증시 마감
-- 기계적 공시
-응답 형식 (오직 JSON):
-{{"keep": [0, 2, 5]}}"""
-    try:
-        resp = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=400,
-            temperature=0.1,
-            response_format={"type": "json_object"},
-        )
-        raw = resp.choices[0].message.content or ""
-        m = re.search(r"\{[\s\S]*\}", raw)
-        data = json.loads(m.group() if m else raw)
-        keep = data.get("keep", [])
-        valid = [i for i in keep if isinstance(i, int) and 0 <= i < len(articles)]
-        return [articles[i] for i in valid]
-    except Exception:
-        return articles
-
-def to_output(a: dict, kst: pytz.BaseTzInfo, include_brief: bool = False, include_summary_only: bool = False) -> dict:
-    out = {
-        "title": a["title"],
-        "url": a["url"],
-        "date": format_date_kst(a.get("pub_dt"), kst),
-    }
-    if include_brief:
-        out["summary"] = a.get("summary", "")
-        out["bd_perspective"] = a.get("bd_perspective", "")
-    elif include_summary_only:
-        out["summary"] = a.get("summary", "")
-    return out
-
-def generate_briefs(articles_with_company: list[tuple], client: "OpenAI | None") -> dict:
-    if client is None or not articles_with_company: return {}
-    items_in = []
-    for i, (company, a) in enumerate(articles_with_company):
-        items_in.append({
-            "id": i, "company": company, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]
-        })
-    prompt = f"""You are a BD (business development) analyst at Furiosa AI.
-## 경쟁사 그룹
-글로벌: NVIDIA, Tenstorrent, Groq, Cerebras, SambaNova
-한국: Rebellions, DeepX, Mobilint, HyperAccel
-## 작업
-각 경쟁사 뉴스에 대해 두 한국어 필드 생성:
-- "summary": 3문장, 사실 위주, 250~350자.
-- "bd_perspective": 1~2문장, 100~200자. Furiosa BD 입장에서 구체적인 함의.
-## 작성 원칙
-본문 정보가 약하면 "원문 확인 필요" 작성. 추측 금지. 일반론 절대 금지.
-Input articles:
-{json.dumps(items_in, ensure_ascii=False)}
-Return JSON ONLY:
-{{"items": [{{"id": 0, "summary": "...", "bd_perspective": "..."}}, ...]}}"""
-    try:
-        resp = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=6000,
-            temperature=0.3,
-            response_format={"type": "json_object"},
-        )
-        raw = resp.choices[0].message.content or ""
-        m = re.search(r"\{[\s\S]*\}", raw)
-        data = json.loads(m.group() if m else raw)
-        out: dict = {}
-        for entry in data.get("items", []):
-            idx = entry.get("id")
-            if not isinstance(idx, int) or not (0 <= idx < len(articles_with_company)): continue
-            company, a = articles_with_company[idx]
-            out[(company, a["url"])] = {
-                "summary": (entry.get("summary") or "").strip(),
-                "bd_perspective": (entry.get("bd_perspective") or "").strip(),
-            }
-        return out
-    except Exception:
-        return {}
-
-def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") -> dict:
-    if client is None or not articles: return {}
-    items_in = []
-    for i, a in enumerate(articles):
-        items_in.append({"id": i, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]})
-    prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
-각 기사에 대해 한국어 요약을 만들어 주세요:
-- "summary": 3문장, 사실 위주로 핵심 내용을 충분히 풀어쓰기.
-진부한 일반론 금지.
-Input articles:
-{json.dumps(items_in, ensure_ascii=False)}
-Return JSON ONLY:
-{{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
-    try:
-        resp = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=6000,
-            temperature=0.3,
-            response_format={"type": "json_object"},
-        )
-        raw = resp.choices[0].message.content or ""
-        m = re.search(r"\{[\s\S]*\}", raw)
-        data = json.loads(m.group() if m else raw)
-        out: dict = {}
-        for entry in data.get("items", []):
-            idx = entry.get("id")
-            if not isinstance(idx, int) or not (0 <= idx < len(articles)): continue
-            a = articles[idx]
-            out[a["url"]] = (entry.get("summary") or "").strip()
-        return out
-    except Exception:
-        return {}
-
-def main():
-    kst = pytz.timezone("Asia/Seoul")
-    now = datetime.datetime.now(kst)
-    now_utc = now.astimezone(pytz.utc)
-    
-    daily_cutoff = now_utc - datetime.timedelta(hours=24)
-    weekly_cutoff = now_utc - datetime.timedelta(days=7)
-    
-    print(f"[{now.strftime('%Y-%m-%d %H:%M KST')}] Starting report update...")
-
-    token = os.environ.get("GITHUB_TOKEN")
-    client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token) if token else None
-
-    # ── 1. Competitor 뉴스 ──
-    COMPETITOR_CUTOFF_DAYS = 30
-    COMPETITOR_MAX_ITEMS = 3
-    competitor_cutoff = now_utc - datetime.timedelta(days=COMPETITOR_CUTOFF_DAYS)
-
-    companies_raw = []
-    for co in COMPANIES:
-        fetched = []
-        seen_urls = set()
-        for query, lang in co["queries"]:
-            for a in fetch_articles(query, lang, n=100):
-                if a["url"] not in seen_urls:
-                    seen_urls.add(a["url"])
-                    fetched.append(a)
-        recent = [a for a in fetched if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
-        relevant = filter_relevant_by_company(co["name"], recent, client)
-        deduped = cluster_articles_by_event(relevant, client)
-        deduped.sort(key=lambda a: a["pub_dt"], reverse=True)
-        companies_raw.append({"name": co["name"], "region": co["region"], "articles": deduped[:COMPETITOR_MAX_ITEMS]})
-
-    all_pairs = [(c["name"], a) for c in companies_raw for a in c["articles"]]
-    briefs = generate_briefs(all_pairs, client)
-    for c in companies_raw:
-        for a in c["articles"]:
-            key = (c["name"], a["url"])
-            if key in briefs:
-                a["summary"] = briefs[key]["summary"]
-                a["bd_perspective"] = briefs[key]["bd_perspective"]
-
-    companies_out = [{"name": c["name"], "region": c["region"], "items": [to_output(a, kst, include_brief=True) for a in c["articles"]]} for c in companies_raw]
-
-    # ── 2. Furiosa 뉴스 ──
-    all_furiosa = []
-    seen_urls, seen_titles = set(), set()
-    for query, lang in FURIOSA_QUERIES:
-        for a in fetch_articles(query, lang, n=100):
-            if a["url"] in seen_urls: continue
-            norm = normalize_title(a["title"])
-            if norm and norm in seen_titles: continue
-            seen_urls.add(a["url"])
-            if norm: seen_titles.add(norm)
-            all_furiosa.append(a)
-
-    def in_window(a: dict, cutoff: datetime.datetime) -> bool:
-        return a.get("pub_dt") is not None and a["pub_dt"] >= cutoff
-
-    in_weekly_window = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
-    if client:
-        deduped = cluster_articles_by_event(in_weekly_window, client)
-        deduped_urls = {a["url"] for a in deduped}
-        all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls or not in_window(a, weekly_cutoff)]
-
-    # ── 2.5 일간/주간 분리 ──
-    furiosa_daily_raw = sorted([a for a in all_furiosa if in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)[:5]
-    furiosa_weekly_raw = sorted([a for a in all_furiosa if in_window(a, weekly_cutoff) and not in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)
-
-    furiosa_articles = furiosa_daily_raw + furiosa_weekly_raw
-    furiosa_summaries = generate_furiosa_summaries(furiosa_articles, client)
-    for a in furiosa_articles:
-        if a["url"] in furiosa_summaries:
-            a["summary"] = furiosa_summaries[a["url"]]
-
-    # 🚨 3. 일간 그룹핑 
-    furiosa_daily_group = {}
-    for a in furiosa_daily_raw:
-        date_key = format_date_with_weekday(a.get("pub_dt"), kst)
-        if date_key not in furiosa_daily_group:
-            furiosa_daily_group[date_key] = []
-        furiosa_daily_group[date_key].append(to_output(a, kst, include_summary_only=True))
-
-    # 🚨 4. 주간 그룹핑 (하루 최대 2개 제한)
-    furiosa_weekly_group = {}
-    daily_count = {}
-    for a in furiosa_weekly_raw:
-        date_key = format_date_with_weekday(a.get("pub_dt"), kst)
-        if daily_count.get(date_key, 0) < 2:
-            if date_key not in furiosa_weekly_group:
-                furiosa_weekly_group[date_key] = []
-            furiosa_weekly_group[date_key].append(to_output(a, kst, include_summary_only=True))
-            daily_count[date_key] = daily_count.get(date_key, 0) + 1
-
-    report = {
-        "period": build_period(now),
-        "updated_at": now.isoformat(),
-        "furiosa_daily": furiosa_daily_group, # 딕셔너리로 정상 출력!
-        "furiosa_weekly": furiosa_weekly_group, # 딕셔너리로 정상 출력!
-        "companies": companies_out,
+    if (!groupedItems || Object.keys(groupedItems).length === 0) {
+        el.innerHTML = '<div class="empty-note">No Update</div>';
+        return;
     }
 
-    with open(REPORT_PATH, "w", encoding="utf-8") as f:
-        json.dump(report, f, ensure_ascii=False, indent=2)
-    print(f"Done. Update completed.")
+    Object.entries(groupedItems).forEach(([dateKey, articles]) => {
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'date-group';
 
-if __name__ == "__main__":
-    main()
+        const header = document.createElement('div');
+        header.className = 'sticky-date-header';
+        header.textContent = dateKey;
+        groupDiv.appendChild(header);
+
+        articles.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'hl-card linked furiosa-card';
+            card.innerHTML = `<span class="hl-card-text">${escapeHtml(item.title)} <span class="item-arrow">ⓘ</span></span>`;
+            card.addEventListener('click', () => { openArticleModal(item, 'Furiosa', true); });
+            groupDiv.appendChild(card);
+        });
+
+        el.appendChild(groupDiv);
+    });
+}
+
+// Data Fetching
+fetch('report.json').then(r => r.json()).then(d => {
+if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
+
+// 양쪽 모두 완벽히 동기화된 높이의 타임라인 구조로 렌더링 처리
+renderGroupedArticles(d.furiosa_daily, 'furiosa-daily');
+renderGroupedArticles(d.furiosa_weekly, 'furiosa-weekly');
+
+if (d.companies) {
+d.companies.forEach(co => {
+const card = document.getElementById('co-' + co.name);
+if (!card) return;
+const existing = card.querySelector('.company-body');
+if (existing) existing.remove();
+const body = document.createElement('div'); body.className = 'company-body';
+if (!co.items || co.items.length === 0) {
+const empty = document.createElement('div'); empty.className = 'empty-note'; empty.textContent = '최근 30일 내 뉴스 없음'; body.appendChild(empty); card.appendChild(body); return;
+}
+co.items.forEach(item => {
+const row = document.createElement('div'); row.className = 'news-item clickable';
+row.innerHTML = `<span class="news-date">${escapeHtml(item.date || '')}</span><a class="news-title as-text" href="${escapeHtml(item.url)}" target="_blank">${escapeHtml(item.title)}<span class="news-item-icon"> ⓘ</span></a>`;
+row.addEventListener('click', (e) => { if (e.metaKey || e.ctrlKey || e.shiftKey) return; e.preventDefault(); openArticleModal(item, co.name); });
+body.appendChild(row);
+});
+card.appendChild(body);
+});
+}
+}).catch(() => {});
+</script>
+</body>
+</html>
