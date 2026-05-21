@@ -245,10 +245,6 @@ h1 { font-size: 1.7rem; }
 <div class="article-section-label">요약</div>
 <div class="article-section-body" id="article-modal-summary"></div>
 </div>
-<div class="article-section" id="article-modal-bd-section">
-<div class="article-section-label">Furiosa BD 시점</div>
-<div class="article-section-body" id="article-modal-bd"></div>
-</div>
 <a class="modal-link" id="article-modal-link" href="#" target="_blank"><span class="modal-link-icon">🔍</span><span class="modal-link-label">원문 보기</span><span class="modal-link-arrow">↗</span></a>
 <button class="modal-close" id="article-modal-close">닫기</button>
 </div>
@@ -287,13 +283,11 @@ backdrop.classList.add('open');
 const articleBackdrop = document.getElementById('article-backdrop');
 document.getElementById('article-modal-close').addEventListener('click', () => articleBackdrop.classList.remove('open'));
 articleBackdrop.addEventListener('click', e => { if (e.target === articleBackdrop) articleBackdrop.classList.remove('open'); });
-function openArticleModal(item, companyName, hideBd = false) {
+function openArticleModal(item, companyName) {
 document.getElementById('article-modal-company').textContent = companyName;
 document.getElementById('article-modal-date').textContent = item.date || '';
 document.getElementById('article-modal-title').textContent = item.title || '';
 document.getElementById('article-modal-summary').textContent = item.summary || '(요약 중...)';
-document.getElementById('article-modal-bd').textContent = item.bd_perspective || '(BD 시점 생성 중...)';
-document.getElementById('article-modal-bd-section').style.display = hideBd ? 'none' : '';
 document.getElementById('article-modal-link').href = item.url || '#';
 articleBackdrop.classList.add('open');
 }
@@ -401,7 +395,7 @@ function renderGroupedArticles(groupedItems, containerId) {
             const card = document.createElement('div');
             card.className = 'hl-card linked furiosa-card';
             card.innerHTML = `<span class="hl-card-text">${escapeHtml(item.title)} <span class="item-arrow">ⓘ</span></span>`;
-            card.addEventListener('click', () => { openArticleModal(item, 'Furiosa', true); });
+            card.addEventListener('click', () => { openArticleModal(item, 'Furiosa'); });
             groupDiv.appendChild(card);
         });
 
