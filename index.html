@@ -205,7 +205,7 @@ h1 { font-size: 1.7rem; }
 
 <div class="top-grid" id="highlights">
 <div>
-<div class="section-label">Furiosa 일간 (최근 24시간)</div>
+<div class="section-label">Furiosa 일간 (00시 기준)</div>
 <div id="furiosa-daily" class="trend-scroll-box"></div>
 </div>
 <div>
@@ -372,13 +372,29 @@ if (highlightsEl) observer.observe(highlightsEl);
 function escapeHtml(s) { return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
 
 // 공통 타임라인 그룹핑 렌더링 함수
-function renderGroupedArticles(groupedItems, containerId) {
+function renderGroupedArticles(groupedItems, containerId, todayHeader) {
     const el = document.getElementById(containerId);
     if (!el) return;
     el.innerHTML = ''; 
 
     if (!groupedItems || Object.keys(groupedItems).length === 0) {
-        el.innerHTML = '<div class="empty-note">No Update</div>';
+        // 일간(todayHeader 전달됨): 오늘 날짜 헤더 + No Update
+        // 주간(todayHeader 없음): No Update만
+        if (todayHeader) {
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'date-group';
+            const header = document.createElement('div');
+            header.className = 'sticky-date-header';
+            header.textContent = todayHeader;
+            groupDiv.appendChild(header);
+            const empty = document.createElement('div');
+            empty.className = 'empty-note';
+            empty.textContent = 'No Update';
+            groupDiv.appendChild(empty);
+            el.appendChild(groupDiv);
+        } else {
+            el.innerHTML = '<div class="empty-note">No Update</div>';
+        }
         return;
     }
 
@@ -403,6 +419,18 @@ function renderGroupedArticles(groupedItems, containerId) {
     });
 }
 
+// 오늘 KST 날짜를 "MM-DD (요일)" 포맷으로 — 일간 빈 상태일 때 헤더용
+function todayKstHeader() {
+    const now = new Date();
+    // KST 변환 (UTC+9)
+    const kstMs = now.getTime() + (now.getTimezoneOffset() * 60000) + (9 * 60 * 60000);
+    const kst = new Date(kstMs);
+    const mm = String(kst.getMonth() + 1).padStart(2, '0');
+    const dd = String(kst.getDate()).padStart(2, '0');
+    const daysKo = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
+    return `${mm}-${dd} ${daysKo[kst.getDay()]}`;
+}
+
 // 일간 높이에 맞춰 주간 max-height 설정 (데스크탑만)
 function syncFuriosaHeights() {
     const daily = document.getElementById('furiosa-daily');
@@ -421,7 +449,7 @@ window.addEventListener('resize', syncFuriosaHeights);
 fetch('report.json').then(r => r.json()).then(d => {
 if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
 
-renderGroupedArticles(d.furiosa_daily, 'furiosa-daily');
+renderGroupedArticles(d.furiosa_daily, 'furiosa-daily', todayKstHeader());
 renderGroupedArticles(d.furiosa_weekly, 'furiosa-weekly');
 // 렌더 직후 + 다음 프레임에서 한 번 더 (폰트 로드 등 늦은 레이아웃 반영)
 syncFuriosaHeights();
