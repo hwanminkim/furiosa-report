@@ -100,44 +100,6 @@ def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
             results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": desc})
     return results
 
-def _fetch_newsdata(query: str, n: int) -> list[dict]:
-    """
-    NewsData.io API로 영문 뉴스 가져오기. description (가능하면 full_content) 풍부.
-    한도: 무료 200 req/일, 응답당 article 약 10개.
-    """
-    api_key = os.environ.get("NEWSDATA_API_KEY")
-    if not api_key: return []
-    # full_content=1 옵션은 무료 플랜에서 제한적일 수 있음. description은 항상 제공됨.
-    url = (
-        f"https://newsdata.io/api/1/latest"
-        f"?apikey={quote(api_key)}"
-        f"&q={quote(query)}"
-        f"&language=en"
-        f"&size={min(n, 10)}"
-    )
-    req = Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    try:
-        with urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except Exception:
-        return []
-    if data.get("status") != "success":
-        return []
-    results = []
-    for item in (data.get("results") or [])[:n]:
-        title = (item.get("title") or "").strip()
-        link = (item.get("link") or "").strip()
-        desc = (item.get("description") or "").strip()
-        # full_content가 있으면 더 풍부함
-        full = (item.get("content") or "").strip()
-        if full and len(full) > len(desc):
-            desc = full
-        pub_dt = parse_pub_datetime(item.get("pubDate") or "")
-        if title and link:
-            results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": desc})
-    return results
-
-
 def _parse_gdelt_seendate(raw: str) -> datetime.datetime | None:
     if not raw or len(raw) < 15: return None
     try:
@@ -202,26 +164,13 @@ def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
         items = _fetch_naver(query, n)
         if items: return items
         return _fetch_google(query, lang, n)
-    # 영문 폴백 체인: NewsData.io (풍부한 description) → GDELT (시간 정렬) → Google RSS (보완)
-    # NewsData.io 결과를 primary로, 부족하면 GDELT로 보충
-    newsdata_items = _fetch_newsdata(query, n)
-    gdelt_items = _fetch_gdelt(query, n)
-
-    # 둘 다 비면 마지막 폴백
-    if not newsdata_items and not gdelt_items:
+    # 영문: GDELT가 시간/정렬 좋아서 primary, 단 description이 비어있음
+    # Google News RSS로 description 보완 (제목 normalize 매칭)
+    items = _fetch_gdelt(query, n)
+    if not items:
         return _fetch_google(query, lang, n)
-
-    # URL 기반 dedup, NewsData.io 우선
-    seen_urls = set()
-    merged = []
-    for a in newsdata_items + gdelt_items:
-        if a["url"] in seen_urls:
-            continue
-        seen_urls.add(a["url"])
-        merged.append(a)
-
-    # description 비어있는 항목을 Google RSS로 보완 (제목 normalize 매칭)
-    has_empty_desc = any(not (a.get("description") or "").strip() for a in merged)
+    # GDELT 결과에 description 비어있으면 Google RSS에서 같은 제목 찾아 채우기
+    has_empty_desc = any(not (a.get("description") or "").strip() for a in items)
     if has_empty_desc:
         rss_items = _fetch_google(query, lang, n)
         rss_by_norm = {}
@@ -229,14 +178,13 @@ def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
             norm = normalize_title(r.get("title", ""))
             if norm and r.get("description"):
                 rss_by_norm[norm] = r["description"]
-        for a in merged:
+        for a in items:
             if (a.get("description") or "").strip():
                 continue
             norm = normalize_title(a.get("title", ""))
             if norm in rss_by_norm:
                 a["description"] = rss_by_norm[norm]
-
-    return merged[:n]
+    return items
 
 def build_period(now: datetime.datetime) -> str:
     today = now.date()
