@@ -56,35 +56,33 @@ h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; 
 .meta { font-size: 0.88rem; color: var(--muted); margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
 .section-label { font-family: 'ABCFavorit', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-label); margin-bottom: 12px; }
 
-/* 1. 상단 그리드 레이아웃: 자식들이 무조건 부모 높이에 맞게 늘어나도록 제어 */
+/* 1. 상단 그리드 레이아웃 */
 .top-grid { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
     gap: 20px; 
     margin-bottom: 36px;
-    align-items: start; /* 위쪽 라인을 칼같이 맞춤 */
+    align-items: start;
 }
 
-/* 2. 각 섹션을 세로 flex 공간으로 정의 */
 .top-grid > div {
     display: flex;
     flex-direction: column;
 }
 
-/* 3. 🚨 [핵심] 좌우 박스 위아래를 카드 5개 정량 사이즈로 가두기 */
+/* 좌우 박스 모두 스크롤 가능. 일간 높이는 콘텐츠 자연 높이로,
+   주간 max-height는 JS가 일간 높이에 맞춰 동적으로 설정 */
 .trend-scroll-box { 
-    height: 445px;       /* 카드 5개와 간격이 딱 맞아떨어지는 절대 높이 */
-    max-height: 445px;   /* 우측 박스가 밑으로 흐르지 못하게 강제로 가둠 */
     overflow-y: auto; 
     padding-right: 4px; 
 }
 
-/* 크롬, 사파리 등 내부 스크롤바 디자인 */
+/* 스크롤바 디자인 */
 .trend-scroll-box::-webkit-scrollbar { width: 4px; }
 .trend-scroll-box::-webkit-scrollbar-track { background: transparent; }
 .trend-scroll-box::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 4px; }
 
-/* 🚨 좌측 일간 영역은 5개가 다 들어차므로 스크롤바 트랙까지 완전히 제거 */
+/* 일간은 자기 콘텐츠만큼 자연스럽게 늘어남 — 스크롤바도 안 보이게 */
 #furiosa-daily::-webkit-scrollbar { display: none; }
 #furiosa-daily { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -160,6 +158,8 @@ h1 { font-size: 1.7rem; }
 .top-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
 .modal.article-modal { width: calc(100vw - 32px); padding: 22px 20px; }
 .modal { width: calc(100vw - 80px); max-width: 320px; }
+/* 모바일: 좌우 동기화 안 함 (세로 배치) */
+#furiosa-weekly { max-height: none !important; }
 }
 </style>
 </head>
@@ -377,13 +377,29 @@ function renderGroupedArticles(groupedItems, containerId) {
     });
 }
 
+// 일간 높이에 맞춰 주간 max-height 설정 (데스크탑만)
+function syncFuriosaHeights() {
+    const daily = document.getElementById('furiosa-daily');
+    const weekly = document.getElementById('furiosa-weekly');
+    if (!daily || !weekly) return;
+    if (window.innerWidth <= 640) {
+        weekly.style.maxHeight = '';
+        return;
+    }
+    const h = daily.offsetHeight;
+    if (h > 0) weekly.style.maxHeight = h + 'px';
+}
+window.addEventListener('resize', syncFuriosaHeights);
+
 // Data Fetching
 fetch('report.json').then(r => r.json()).then(d => {
 if (d.period) document.getElementById('meta').textContent = d.period + ' · Furiosa BD 참고용';
 
-// 양쪽 모두 완벽히 동기화된 높이의 타임라인 구조로 렌더링 처리
 renderGroupedArticles(d.furiosa_daily, 'furiosa-daily');
 renderGroupedArticles(d.furiosa_weekly, 'furiosa-weekly');
+// 렌더 직후 + 다음 프레임에서 한 번 더 (폰트 로드 등 늦은 레이아웃 반영)
+syncFuriosaHeights();
+requestAnimationFrame(syncFuriosaHeights);
 
 if (d.companies) {
 d.companies.forEach(co => {
