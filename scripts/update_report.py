@@ -223,7 +223,7 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
     # [수정됨] sort=date 대신 sort=sim(정확도순)으로 변경하여 양질의 기사가 먼저 오게 함
     # 최소 display 개수도 조금 늘려 더 넓은 범위에서 유의미한 기사를 탐색
     url = (f"https://openapi.naver.com/v1/search/news.json"
-           f"?query={quote(naver_q)}&display={min(max(n, 30), 100)}&sort=sim")
+           f"?query={quote(naver_q)}&display=100&sort=date")
     
     req = Request(url, headers={
         "X-Naver-Client-Id": cid,
@@ -711,7 +711,8 @@ def main():
     seen_urls = set()
     seen_titles = set()
     for query, lang in FURIOSA_QUERIES:
-        for a in fetch_articles(query, lang, n=30):
+        # 여기서 n=30 을 n=100 으로 늘려줍니다!
+        for a in fetch_articles(query, lang, n=100):
             if a["url"] in seen_urls:
                 continue
             norm = normalize_title(a["title"])
