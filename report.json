@@ -1,13 +1,13 @@
 {
   "period": "2026-05-15(금) ~ 2026-05-21(목)",
-  "updated_at": "2026-05-21T17:57:00.460388+09:00",
+  "updated_at": "2026-05-21T18:04:50.748029+09:00",
   "furiosa_daily": {
     "05-21 (목)": [
       {
         "title": "에너지공기업, AI 전환 속도전…민관 손잡고 본격 가속",
         "url": "https://www.newspim.com/news/view/20260521000963",
         "date": "05-21",
-        "summary": "동서발전은 퓨리오사AI와 코난테크놀로지와 함께 국산 AI 기반시설 구축 및 실증을 위한 업무협약을 체결했다. 협약의 주요 내용은 국산 신경망처리장치(NPU)와 대규모 언어모델(LLM)을 활용하여 AI 실증을 진행하는 것이다. 이번 협약은 기존 외산 그래픽처리장치 의존도를 줄이고 국산 기술을 발전시키기 위한 노력의 일환이다."
+        "summary": "동서발전은 퓨리오사AI와 코난테크놀로지와 함께 '국산 AI 기반시설 구축 및 실증 업무협약'을 체결했다. 협약의 주요 내용은 국산 신경망처리장치(NPU)와 대규모 언어모델(LLM)을 활용한 AI 실증 프로젝트 추진이다. 이는 기존 외산 그래픽처리장치(GPU) 의존도를 줄이기 위한 노력의 일환으로 보인다."
       }
     ]
   },
@@ -17,19 +17,13 @@
         "title": "동서발전, 국산 AI 반도체 실증 나선다",
         "url": "https://www.wikitree.co.kr/articles/1137594",
         "date": "05-20",
-        "summary": "동서발전은 울산 본사에서 퓨리오사AI 및 코난테크놀로지와 협력 체계를 구축하고 국산 AI 반도체 실증에 나섰다. 이를 통해 발전 산업 현장에 국산 신경망처리장치(NPU)와 대규모 언어모델(LLM)을 적용하는 방안을 모색할 예정이다. 협력은 국산 기술의 실질적 활용 가능성을 검증하는 데 초점이 맞춰져 있다."
+        "summary": "동서발전은 울산 본사에서 퓨리오사AI 및 코난테크놀로지와 협력 체계를 구축했다. 이번 협력은 발전 산업 현장에 국산 신경망처리장치(NPU)와 대규모 언어모델(LLM)을 적용하기 위한 실증을 목표로 한다. 이를 통해 국산 AI 반도체 기술의 실제 활용 가능성을 검증하고자 한다."
       },
       {
         "title": "코난테크-퓨리오사AI, 동서발전서 국산 AI인프라 실증",
         "url": "https://www.dt.co.kr/article/12063581?ref=naver",
         "date": "05-20",
-        "summary": "코난테크놀로지는 퓨리오사AI 및 한국동서발전과 함께 국산 인공지능 기반시설 구축 및 실증을 위한 업무협약을 체결했다. 협약의 핵심은 퓨리오사AI의 신경망처리장치(NPU)와 코난테크놀로지의 기술을 활용하여 AI 인프라를 실증하는 것이다. 이를 통해 국산 기술의 현장 적용 가능성을 평가할 계획이다."
-      },
-      {
-        "title": "한국동서발전, 퓨리오사AI·코난테크놀로지와 업무협약",
-        "url": "https://www.joongang.co.kr/article/25429924",
-        "date": "05-20",
-        "summary": "한국동서발전은 퓨리오사AI와 코난테크놀로지와 함께 국산 인공지능 기반시설 구축 및 실증을 위한 업무협약을 체결했다. 협약식은 5월 18일 울산 중구에 위치한 동서발전 본사에서 진행되었다. 협약의 주요 목표는 국산 신경망처리장치(NPU)와 관련 기술의 실증을 통해 AI 기반시설의 활용 가능성을 검토하는 것이다."
+        "summary": "코난테크놀로지는 퓨리오사AI 및 동서발전과 함께 '국산 인공지능 기반시설 구축 및 실증'을 위한 업무협약을 체결했다고 발표했다. 협약의 주요 내용은 퓨리오사AI의 신경망처리장치(NPU)와 코난테크놀로지의 소프트웨어를 활용한 AI 인프라 실증이다. 협약의 구체적인 실증 과정과 결과는 추가 확인이 필요하다."
       }
     ]
   },
@@ -42,42 +36,67 @@
           "title": "NVIDIA Unveils $80B Buyback , Raises Dividend 25x to $0 . 25",
           "url": "https://www.banklesstimes.com/articles/2026/05/21/nvidia-unveils-80b-buyback-raises-dividend-25x-to-0-25/",
           "date": "05-21",
-          "summary": "본문 정보 부족 — 원문 확인 필요."
+          "summary": "본문 정보 부족 — 원문 확인 필요"
         },
         {
           "title": "NVIDIA reports record USD 81 . 6 billion first quarter revenue ; Projects USD 91 . 0 billion for second quarter",
           "url": "http://www.sanantoniopost.com/news/279065122/nvidia-reports-record-usd-816-billion-first-quarter-revenue-projects-usd-910-billion-for-second-quarter",
           "date": "05-21",
-          "summary": "본문 정보 부족 — 원문 확인 필요."
+          "summary": "본문 정보 부족 — 원문 확인 필요"
         },
         {
           "title": "Nvidia posts record quarter as AI demand surges , but muted guidance caps investor excitement",
           "url": "https://www.proactiveinvestors.com/companies/news/1092649/nvidia-posts-record-quarter-as-ai-demand-surges-but-muted-guidance-caps-investor-excitement-1092649.html",
           "date": "05-21",
-          "summary": "Nvidia는 AI 수요 급증으로 인해 분기별 최고 실적을 기록했다는 소식을 전했다. 그러나 향후 전망이 다소 제한적이라는 점이 투자자들의 기대를 약간 낮췄다. 자세한 내용은 원문 확인이 필요하다."
+          "summary": "본문 정보 부족 — 원문 확인 필요"
         }
       ]
     },
     {
       "name": "Tenstorrent",
       "region": "global",
-      "items": []
+      "items": [
+        {
+          "title": "Smallest . ai and Tenstorrent Partnership Democratises Voice AI - 4x reduction in cost through hardware acceleration",
+          "url": "https://www.design-reuse.com/news/202530526-smallest-ai-and-tenstorrent-partnership-democratises-voice-ai-4x-reduction-in-cost-through-hardware-acceleration/",
+          "date": "05-18",
+          "summary": "본문 정보 부족 — 원문 확인 필요"
+        },
+        {
+          "title": "Tenstorrent Vows to  Crush Everyone  as Galaxy Blackhole Hits 350 Tokens / s on DeepSeek R1 , Undercutting NVIDIA GB300 5x AI TCO",
+          "url": "https://wccftech.com/tenstorrent-vows-to-crush-everyone-galaxy-blackhole-hits-350-tokens-on-deepseek-r1-undercut-nvidia-gb300-ai-tco/",
+          "date": "05-03",
+          "summary": "본문 정보 부족 — 원문 확인 필요"
+        },
+        {
+          "title": "Tenstorrent Enables AI At Scale with Industry - Leading Performance Deployed on Novel Networked AI Architecture",
+          "url": "http://www.irishsun.com/news/279016850/tenstorrent-enables-ai-at-scale-with-industry-leading-performance-deployed-on-novel-networked-ai-architecture",
+          "date": "04-29",
+          "summary": "본문 정보 부족 — 원문 확인 필요"
+        }
+      ]
     },
     {
       "name": "SambaNova",
       "region": "global",
       "items": [
         {
-          "title": "SambaNova Challenges Cerebras Strategy",
-          "url": "https://www.marketscreener.com/news/sambanova-challenges-cerebras-strategy-ce7f5bd2d081f22c",
+          "title": "Watch SambaNova Challenges Cerebras Strategy - Bloomberg.com",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNbEVQekNBbzNleFZNRGJZVkdwVXNuUVFJVEIwZXkxMU1wSGJwZGdhdzBLRkdER25sYy1HOThIaThESTJIaWRnR0tEak91R0FCcGc0VjFfNWJBWXd1OWhlRExqVjNuaDk5YkFvbGMxeG9INVBLaUY4cUhTcWFHNmRlZFJ6dXFJMGhZRUlxYUhLZ2phMWlYZm5PZw?oc=5",
           "date": "05-15",
-          "summary": "본문 정보 부족 — 원문 확인 필요."
+          "summary": "본문 정보 부족 — 원문 확인 필요"
         },
         {
-          "title": "Intel Sambanova deal gets U . S . antitrust clearance",
-          "url": "https://news.az/news/int-el-s-sambanova-deal-gets-us-antitrust-clearance",
-          "date": "05-02",
-          "summary": "Intel과 SambaNova의 협력에 대한 미국 반독점 당국의 승인이 이루어졌다. 이로 인해 두 회사 간의 거래가 공식적으로 허가되었다. 추가적인 세부 사항은 원문 확인이 필요하다."
+          "title": "Argyll and SambaNova launch sovereign AI cloud in the UK - Data Center Dynamics",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPQlBrVU1uSjNrTFN0c2d6Zll4Z1hZakV3bFg4NTdSRmZaU2lDajJvb1JkbTZhUTYzUGJ3ZmNjSGlyUGk0SDNlMUYyV3QwUFU4N0Vjd3VGOGtBcU1lNE14Z2tMNloycFJJOXV2eDR4djNlX2dWOVdwdmZUY2FvMmgtdk80WnNYVkRfVW4zRTZnUkNFNmh2SE9hZjdkcmZ6RjAySXc?oc=5",
+          "date": "05-06",
+          "summary": "본문 정보 부족 — 원문 확인 필요"
+        },
+        {
+          "title": "Intel's Sambanova deal gets U.S. antitrust clearance - Reuters",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPa25uWU40U1d3S3Z1RElRVjBuQzVXbHVMQzRlelJWdVhPQmlNRzVKaDhfWTdLYjNqcnUySWdWblRZdFdjQzVKVFdwYnFKSnNIMk11dmhBdnpwZlZpLTlyRTlOdkRYUWl6N3Q1TEVrRVBjMkg5Nm5uTW5zM2Q0V3l5bVVEUnZFMkZ6S0lBLUlMd3lQOXRETURZU3VWU3BuNjBoc016Mi1pNzNCRmYzQ0I2b0M0MFE2LXBtbXBFMTRIdUF5Tk0?oc=5",
+          "date": "05-01",
+          "summary": "본문 정보 부족 — 원문 확인 필요"
         }
       ]
     },
@@ -86,22 +105,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Cerebras IPO Euphoria Sends CBRS Stock Into Rare Air",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/cerebras-ipo-euphoria-sends-cbrs-113002735.html",
+          "title": "Cathie Wood Dumps AMD Shares Once Again, Ark Buys Cerebras And This Peter Thiel-Backed Crypto Play - Benzinga",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxObUVEY1JhMnVaS0g2dWIyaHA2T00zclhLMGU2MHo3QUd2OUpnZFU2NTQtT0xJSEk0WkZHRFh3QWVMSnVrYWtsbER6amc4N3JSb212ZWUwWUxldDAwaDlZdUVZWmNDc2RqYnFsdnlqdTV5NjFkeEQwdVRIVHZXbW9MWmZvOGVIb3B0cmZHTkotcDNtQ21HeU43REpseG5fRjA5V2tIMEs3M1JBNVZwVml3MGIybzVPRE9JMEQxWUxR?oc=5",
+          "date": "05-21",
+          "summary": "본문 정보 부족 — 원문 확인 필요"
+        },
+        {
+          "title": "Cerebras Brings Trillion Parameter Inference to Enterprises with Kimi K2.6 >> - Cerebras",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8zLUxPOHhnY0V6ajM0cXFWT0Y1cnlBQXJ4YkR2bHd2TEF5UkRxUmNRd0tyNmYybzk4SGVqOFpTRXpsazVqci00V3BnLU1ZeXBRT09ReTRuNXZSNk1rbXZoRzk5c2NiRjQ?oc=5",
           "date": "05-20",
-          "summary": "Cerebras가 IPO를 통해 큰 성공을 거두며 CBRS 주식이 급등했다. 이로 인해 투자자들 사이에서 높은 관심을 받고 있다. 자세한 내용은 원문 확인이 필요하다."
+          "summary": "본문 정보 부족 — 원문 확인 필요"
         },
         {
-          "title": "Could Cerebras Be the Next Nvidia ? | The Motley Fool",
-          "url": "https://www.fool.com/investing/2026/05/19/could-cerebras-be-the-next-nvidia/?source=iedfolrf0000001",
-          "date": "05-19",
-          "summary": "본문 정보 부족 — 원문 확인 필요."
-        },
-        {
-          "title": "Cerebras Is the Biggest IPO of the Year . If You Buy CBRS Stock Now , Brace Yourself for Volatility Ahead .",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/cerebras-biggest-ipo-buy-cbrs-153002579.html",
+          "title": "AI chip giant Cerebras soars after blockbuster Nasdaq debut - Fox Business",
+          "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE84eWFLVlQ5YVlGbW1KUHlFNE1ZS09tQ29ZZ0I4aGFjTHFmcUdpQkl4REY0VXBuVTRCcWFpc0lOZHVTQ2U3RktJbHFTYkRqeS1NYkRRV09yWWktM28?oc=5",
           "date": "05-18",
-          "summary": "Cerebras가 올해 가장 큰 IPO를 기록하며 주식 시장에서 주목받고 있다. 그러나 투자자들은 향후 변동성에 대비해야 할 것으로 보인다. 자세한 내용은 원문 확인이 필요하다."
+          "summary": "본문 정보 부족 — 원문 확인 필요"
         }
       ]
     },
@@ -113,19 +132,19 @@
           "title": "리벨리온, '1MW' 규모 데이터센터 직접 운영한다",
           "url": "https://www.thelec.kr/news/articleView.html?idxno=56994",
           "date": "05-21",
-          "summary": "리벨리온은 서울 강서 지역에 1MW 규모의 데이터센터를 직접 운영하기 시작했다. 이 데이터센터는 리벨리온의 NPU 칩 성능을 실제 환경에서 테스트하고 고객사 검증 서비스를 제공하기 위해 구축되었다. 해당 소식은 10월 21일 업계를 통해 알려졌다."
+          "summary": "리벨리온은 서울 강서 지역에 '1MW' 규모의 데이터센터를 구축했다. 이 데이터센터는 자사 신경망처리(NPU) 칩의 성능을 실제 환경에서 테스트하고 고객사 검증 서비스를 제공하기 위한 목적으로 설계되었다. 21일 업계에 따르면 리벨리온은 이를 통해 AI 반도체 기술의 실용성을 강화하고자 한다."
         },
         {
           "title": "삼성·하이닉스만 믿다간 늦는다? '이것' 놓치면 한국 식민지 된다",
           "url": "https://www.ytn.co.kr/_ln/0102_202605211517504060",
           "date": "05-21",
-          "summary": "본문 정보 부족 — 원문 확인 필요."
+          "summary": "본문 정보 부족 — 원문 확인 필요"
         },
         {
-          "title": "[창간기획-AI 대전환] SKT·KT·LGU+, 통신 넘어 AI 시대로",
-          "url": "https://daily.hankooki.com/news/articleView.html?idxno=1369141",
+          "title": "5년 동안 '150조원' 투입…'국민성장펀드' 22일부터 가입자 받는다",
+          "url": "https://www.sidae.com/article/2026052110343034193",
           "date": "05-21",
-          "summary": "SKT, KT, LGU+가 스타트업 리벨리온과 협력하여 차세대 AI 인프라 기술 개발에 나섰다. 이 협력은 Arm의 데이터센터용 프로세서와 리벨리온의 NPU를 통합하여 서버 효율성을 높이는 데 초점을 맞추고 있다. 자세한 내용은 원문 확인이 필요하다."
+          "summary": "리벨리온과 업스테이지를 포함한 유망 스타트업들에 대해 1조 2000억 원 규모의 직접 투자가 이루어진다. 이 자금은 차세대 AI 반도체 및 소버린 AI 분야에서 글로벌 경쟁력을 확보하기 위한 목적으로 집행된다. 해당 투자 계획은 국민성장펀드의 일환으로 22일부터 가입자를 받는다."
         }
       ]
     },
@@ -137,13 +156,19 @@
           "title": "\"4월 수주액이 전년치 육박\"…성장궤도 탄 딥엑스",
           "url": "https://dealsite.co.kr/articles/162172",
           "date": "05-21",
-          "summary": "딥엑스는 글로벌 고객사를 대상으로 AI 반도체 상업화를 본격화하며 성장 궤도에 올랐다. 2023년 4월 수주액이 전년도 전체 수주액에 육박하며, 하반기 실적 성장 가능성이 높아지고 있다. 딥엑스는 양산 체제를 통해 반복 주문과 수출 비중을 확대하고 있다."
+          "summary": "딥엑스는 글로벌 고객사를 중심으로 피지컬 AI 반도체 상업화를 본격화하고 있다. 2023년 4월 수주액이 전년도 전체 수주액에 육박하며 반복 주문과 수출 비중 증가를 통해 하반기 실적 성장이 예상된다. 딥엑스는 양산 체제를 기반으로 시장 확대를 추진 중이다."
         },
         {
           "title": "딥엑스-울트라리틱스, AI 반도체 플랫폼 통합",
           "url": "http://www.hansbiz.co.kr/news/articleView.html?idxno=839241",
           "date": "05-17",
-          "summary": "딥엑스는 울트라리틱스와 전략적 파트너십을 체결했다. 이를 통해 딥엑스의 NPU가 울트라리틱스의 객체 인식 AI 모델 YOLO에 네이티브로 통합되었다. 협력 발표는 10월 17일 이루어졌다."
+          "summary": "딥엑스는 울트라리틱스와 전략적 파트너십을 체결했다. 이를 통해 딥엑스의 NPU가 울트라리틱스의 객체 인식 AI 모델 YOLO에 네이티브로 통합된다. 이번 협력은 2023년 4월 17일 발표되었다."
+        },
+        {
+          "title": "현대차, 딥엑스·텔레칩스와 자율주행 반도체 개발 논의",
+          "url": "https://www.thelec.kr/news/articleView.html?idxno=56043",
+          "date": "05-04",
+          "summary": "현대차는 딥엑스와 텔레칩스와 함께 자율주행 반도체 개발을 논의 중이다. 복수의 업계 관계자에 따르면 컨소시엄 구성은 2023년 내 가시화될 예정이다. 이 협력은 자율주행 기술 개발을 위한 초기 단계로 보인다."
         }
       ]
     },
@@ -155,13 +180,19 @@
           "title": "하이퍼엑셀, 차세대 인공지능 칩 '카르멘' 개발 착수",
           "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421214",
           "date": "05-21",
-          "summary": "하이퍼엑셀은 차세대 추론용 AI 반도체 '카르멘' 개발을 시작했다. 이 칩은 데이터센터를 대상으로 하며, 2028년 개념검증(PoC)을 거쳐 2029년 초 대량 양산을 목표로 하고 있다. 칩에는 3D IC와 고대역폭 플래시(HBF) 기술이 포함될 예정이다."
+          "summary": "하이퍼엑셀은 차세대 추론용 인공지능(AI) 반도체 '카르멘' 개발에 착수했다. 데이터센터를 대상으로 한 이 칩은 2028년 개념검증(PoC)을 거쳐 2029년 초 대량 양산을 목표로 하고 있다. 해당 칩은 3D IC와 고대역폭 플래시(HBF) 기술을 포함한다."
         },
         {
           "title": "세미파이브, 147억원 규모 AI 반도체 개발 계약 체결",
           "url": "https://www.thelec.kr/news/articleView.html?idxno=56942",
           "date": "05-20",
-          "summary": "세미파이브는 147억 원 규모의 AI 반도체 개발 계약을 체결했다. 계약은 엑시나와 하이퍼엑셀 등 4나노 고객을 대상으로 이루어졌으며, 칩 개발 단계에 따라 계약금을 나눠 받는 구조다. 2023년 1분기 기준 나이오븀 개발률은 14.7%, 4나노 NPU 개발률은 3.2%로 보고되었다."
+          "summary": "세미파이브는 하이퍼엑셀을 포함한 4나노 고객과 AI 반도체 개발 계약을 체결했다. 계약금은 칩 개발 단계에 따라 나눠 지급되며, 2023년 1분기 기준 나이오븀 개발률은 14.7%, 4나노 NPU 개발률은 3.2%로 집계되었다. 이는 AI 반도체 개발의 초기 진행 상황을 보여준다."
+        },
+        {
+          "title": "[기획]1000억원 이상 R&D 지원 속 AI 반도체 기술자립 가속화…AI주권 확...",
+          "url": "https://www.etnews.com/20260515000210",
+          "date": "05-17",
+          "summary": "하이퍼엑셀은 저전력 D램 기반 주문형 반도체 '베르다'를 출시했다. 또한 국내 AI 가속기 기업 최초로 AWS F2 인스턴스를 통해 LPU 상용 서비스를 시작했다. 이 기술은 설계 선택권과 공급 대안을 제공하며 확장 가능성을 높이고 있다."
         }
       ]
     },
@@ -173,19 +204,19 @@
           "title": "누구나 AI 에이전트를 만들고 수익 창출하는 시대...솔트룩스, AI 서비스...",
           "url": "https://www.aitimes.kr/news/articleView.html?idxno=40111",
           "date": "05-20",
-          "summary": "본문 정보 부족 — 원문 확인 필요."
+          "summary": "본문 정보 부족 — 원문 확인 필요"
         },
         {
           "title": "노타, 1분기 매출 35억…전년비 53배 성장",
           "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=04057366645450232",
           "date": "05-18",
-          "summary": "노타는 퓨리오사AI와 모빌린트 등과 협력하여 데이터센터 및 엣지 AI 분야로 사업을 확장하고 있다. 최근 클라우드 인프라 영역으로도 진출 기반을 마련했다는 소식이 전해졌다. 자세한 내용은 원문 확인이 필요하다."
+          "summary": "노타는 퓨리오사AI와 모빌린트 등과 협력하여 데이터센터 및 엣지 AI 분야로 사업을 확장하고 있다. 또한 클라우드 인프라 영역으로 진출 기반을 마련하며 피지컬 AI 시장 공략을 강화하고 있다. 최근 노타의 매출은 전년 대비 급성장했다."
         },
         {
           "title": "노타, 솔루션 사업 확대로 1분기 매출 54배 성장…36억원",
           "url": "https://www.etnews.com/20260518000259",
           "date": "05-18",
-          "summary": "노타는 삼성전자, Arm, 퓨리오사AI, 모빌린트 등과 협력하며 플랫폼 사업을 확장하고 있다. 이를 통해 데이터센터, 엣지 AI, 클라우드 인프라 등 다양한 영역으로 진출하고 있다. 채명수 대표는 AI 최적화 기술의 다방면 활용을 강조했다."
+          "summary": "노타는 삼성전자, Arm, 퓨리오사AI, 모빌린트와 협력하며 플랫폼 사업을 확장하고 있다. 이 회사는 모바일, 반도체 IP, 데이터센터, 엣지 AI를 넘어 클라우드 인프라까지 사업 영역을 확대하고 있다. 채명수 대표는 AI 최적화 기술을 기반으로 한 지속적인 성장을 강조했다."
         }
       ]
     }
