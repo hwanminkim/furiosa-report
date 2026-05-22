@@ -8,10 +8,8 @@ import html
 import json
 import os
 import re
-import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from urllib.error import HTTPError
 from urllib.parse import quote
 from urllib.request import urlopen, Request
 
@@ -100,91 +98,45 @@ def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
             results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": desc})
     return results
 
-def _parse_gdelt_seendate(raw: str) -> datetime.datetime | None:
-    if not raw or len(raw) < 15: return None
-    try:
-        dt = datetime.datetime.strptime(raw, "%Y%m%dT%H%M%SZ")
-        return dt.replace(tzinfo=pytz.utc)
-    except Exception:
-        return None
-
-def _fetch_gdelt(query: str, n: int) -> list[dict]:
-    full_query = f"{query} sourcelang:eng"
-    url = f"https://api.gdeltproject.org/api/v2/doc/doc?query={quote(full_query)}&mode=ArtList&maxrecords={n}&format=json&sort=DateDesc&timespan=30d"
-    req = Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    data = None
-    retry_delays = [2, 5]
-    for attempt in range(len(retry_delays) + 1):
-        try:
-            with urlopen(req, timeout=15) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-            break
-        except HTTPError as e:
-            if e.code == 429 and attempt < len(retry_delays):
-                time.sleep(retry_delays[attempt])
-                continue
-            break
-        except Exception:
-            break
-    time.sleep(2)
-    if data is None: return []
-    results = []
-    for item in (data.get("articles") or [])[:n]:
-        title = (item.get("title") or "").strip()
-        link = (item.get("url") or "").strip()
-        pub_dt = _parse_gdelt_seendate(item.get("seendate") or "")
-        if title and link:
-            results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": ""})
-    return results
-
 def _fetch_naver(query: str, n: int) -> list[dict]:
     cid = os.environ.get("NAVER_CLIENT_ID")
     csec = os.environ.get("NAVER_CLIENT_SECRET")
     if not cid or not csec: return []
     naver_q = query.replace(" OR ", " | ")
-    url = f"https://openapi.naver.com/v1/search/news.json?query={quote(naver_q)}&display=100&sort=date"
-    req = Request(url, headers={"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": csec, "User-Agent": "Mozilla/5.0"})
-    try:
-        with urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except Exception:
-        return []
     results = []
-    for item in data.get("items", [])[:n]:
-        title = _strip_html(item.get("title", ""))
-        link = (item.get("originallink") or item.get("link") or "").strip()
-        desc = _strip_html(item.get("description", ""))
-        pub_dt = parse_pub_datetime(item.get("pubDate") or "")
-        if title and link:
+    seen_links = set()
+    # 페이지네이션: start=1, 101 (총 200건까지 가져와 며칠 지난 기사도 포함되도록)
+    for start in (1, 101):
+        url = f"https://openapi.naver.com/v1/search/news.json?query={quote(naver_q)}&display=100&start={start}&sort=date"
+        req = Request(url, headers={"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": csec, "User-Agent": "Mozilla/5.0"})
+        try:
+            with urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+        except Exception:
+            break
+        items = data.get("items", [])
+        if not items:
+            break
+        for item in items:
+            title = _strip_html(item.get("title", ""))
+            link = (item.get("originallink") or item.get("link") or "").strip()
+            if not (title and link) or link in seen_links:
+                continue
+            seen_links.add(link)
+            desc = _strip_html(item.get("description", ""))
+            pub_dt = parse_pub_datetime(item.get("pubDate") or "")
             results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": desc})
-    return results
+        if len(items) < 100:
+            break
+    return results[:n]
 
 def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
     if lang == "ko":
         items = _fetch_naver(query, n)
         if items: return items
         return _fetch_google(query, lang, n)
-    # 영문: GDELT가 시간/정렬 좋아서 primary, 단 description이 비어있음
-    # Google News RSS로 description 보완 (제목 normalize 매칭)
-    items = _fetch_gdelt(query, n)
-    if not items:
-        return _fetch_google(query, lang, n)
-    # GDELT 결과에 description 비어있으면 Google RSS에서 같은 제목 찾아 채우기
-    has_empty_desc = any(not (a.get("description") or "").strip() for a in items)
-    if has_empty_desc:
-        rss_items = _fetch_google(query, lang, n)
-        rss_by_norm = {}
-        for r in rss_items:
-            norm = normalize_title(r.get("title", ""))
-            if norm and r.get("description"):
-                rss_by_norm[norm] = r["description"]
-        for a in items:
-            if (a.get("description") or "").strip():
-                continue
-            norm = normalize_title(a.get("title", ""))
-            if norm in rss_by_norm:
-                a["description"] = rss_by_norm[norm]
-    return items
+    # 영문: Google News RSS만 사용 (GDELT는 description이 비어 요약 불가)
+    return _fetch_google(query, lang, n)
 
 def build_period(now: datetime.datetime) -> str:
     today = now.date()
