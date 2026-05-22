@@ -16,6 +16,12 @@ from urllib.request import urlopen, Request
 import pytz
 from openai import OpenAI
 
+try:
+    import trafilatura
+    _HAS_TRAFILATURA = True
+except ImportError:
+    _HAS_TRAFILATURA = False
+
 REPO_ROOT = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
 
@@ -79,6 +85,34 @@ def _strip_html(s: str) -> str:
     s = _HTML_TAG_RE.sub("", s)
     s = html.unescape(s)
     return s.strip()
+
+# URL → 본문 캐시 (한 실행 안에서 같은 URL 재크롤링 방지)
+_BODY_CACHE: dict[str, str] = {}
+
+def fetch_article_body(url: str, min_chars: int = 200) -> str:
+    """기사 URL에서 본문을 추출. 실패 시 빈 문자열 반환.
+    trafilatura 미설치/추출 실패/너무 짧은 결과는 모두 빈 문자열."""
+    if not url or not _HAS_TRAFILATURA:
+        return ""
+    if url in _BODY_CACHE:
+        return _BODY_CACHE[url]
+    body = ""
+    try:
+        downloaded = trafilatura.fetch_url(url, no_ssl=True)
+        if downloaded:
+            extracted = trafilatura.extract(
+                downloaded,
+                include_comments=False,
+                include_tables=False,
+                no_fallback=False,
+                favor_precision=True,
+            )
+            if extracted and len(extracted.strip()) >= min_chars:
+                body = extracted.strip()
+    except Exception:
+        body = ""
+    _BODY_CACHE[url] = body
+    return body
 
 def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
     try:
@@ -337,8 +371,10 @@ def generate_competitor_summaries(articles_with_company: list[tuple], client: "O
     if client is None or not articles_with_company: return {}
     items_in = []
     for i, (company, a) in enumerate(articles_with_company):
+        body = fetch_article_body(a.get("url", ""))
+        snippet = body if body else (a.get("description") or "")
         items_in.append({
-            "id": i, "company": company, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]
+            "id": i, "company": company, "title": a.get("title", ""), "snippet": snippet[:1500]
         })
     prompt = f"""다음은 AI 반도체 경쟁사 뉴스 기사 목록입니다.
 
@@ -387,7 +423,9 @@ def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") ->
     if client is None or not articles: return {}
     items_in = []
     for i, a in enumerate(articles):
-        items_in.append({"id": i, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]})
+        body = fetch_article_body(a.get("url", ""))
+        snippet = body if body else (a.get("description") or "")
+        items_in.append({"id": i, "title": a.get("title", ""), "snippet": snippet[:1500]})
     prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
 
 각 기사에 대해 한국어 요약을 만들어 주세요:
