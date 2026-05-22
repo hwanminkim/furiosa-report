@@ -100,49 +100,6 @@ def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
             results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": desc})
     return results
 
-def _fetch_newsdata(query: str, n: int) -> list[dict]:
-    """
-    NewsData.io API로 영문 뉴스 가져오기. description 풍부.
-    한도: 무료 200 req/일.
-    """
-    api_key = os.environ.get("NEWSDATA_API_KEY")
-    if not api_key:
-        print(f"[newsdata] API key not set, skip")
-        return []
-    url = (
-        f"https://newsdata.io/api/1/latest"
-        f"?apikey={quote(api_key)}"
-        f"&q={quote(query)}"
-        f"&language=en"
-        f"&size={min(n, 10)}"
-    )
-    req = Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    try:
-        with urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except Exception as e:
-        print(f"[newsdata] fetch error for q='{query[:40]}': {e}")
-        return []
-    if data.get("status") != "success":
-        print(f"[newsdata] status not success for q='{query[:40]}': {data.get('status')} / {str(data)[:200]}")
-        return []
-    results = []
-    raw_results = data.get("results") or []
-    for item in raw_results[:n]:
-        title = (item.get("title") or "").strip()
-        link = (item.get("link") or "").strip()
-        desc = (item.get("description") or "").strip()
-        full = (item.get("content") or "").strip()
-        if full and len(full) > len(desc):
-            desc = full
-        pub_dt = parse_pub_datetime(item.get("pubDate") or "")
-        if title and link:
-            results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": desc})
-    with_desc = sum(1 for r in results if r["description"])
-    print(f"[newsdata] q='{query[:40]}' → {len(raw_results)} raw, {len(results)} kept, {with_desc} with description")
-    return results
-
-
 def _parse_gdelt_seendate(raw: str) -> datetime.datetime | None:
     if not raw or len(raw) < 15: return None
     try:
@@ -207,25 +164,13 @@ def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
         items = _fetch_naver(query, n)
         if items: return items
         return _fetch_google(query, lang, n)
-    # 영문 폴백 체인: NewsData.io (풍부 description) → GDELT (시간 정렬) → Google RSS 보완
-    newsdata_items = _fetch_newsdata(query, n)
-    gdelt_items = _fetch_gdelt(query, n)
-    print(f"[fetch_en] q='{query[:40]}' newsdata={len(newsdata_items)}, gdelt={len(gdelt_items)}")
-
-    if not newsdata_items and not gdelt_items:
+    # 영문: GDELT가 시간/정렬 좋아서 primary, 단 description이 비어있음
+    # Google News RSS로 description 보완 (제목 normalize 매칭)
+    items = _fetch_gdelt(query, n)
+    if not items:
         return _fetch_google(query, lang, n)
-
-    # URL 기반 dedup, NewsData.io 결과 우선
-    seen_urls = set()
-    merged = []
-    for a in newsdata_items + gdelt_items:
-        if a["url"] in seen_urls:
-            continue
-        seen_urls.add(a["url"])
-        merged.append(a)
-
-    # description 비어있는 항목을 Google RSS로 보완
-    has_empty_desc = any(not (a.get("description") or "").strip() for a in merged)
+    # GDELT 결과에 description 비어있으면 Google RSS에서 같은 제목 찾아 채우기
+    has_empty_desc = any(not (a.get("description") or "").strip() for a in items)
     if has_empty_desc:
         rss_items = _fetch_google(query, lang, n)
         rss_by_norm = {}
@@ -233,19 +178,13 @@ def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
             norm = normalize_title(r.get("title", ""))
             if norm and r.get("description"):
                 rss_by_norm[norm] = r["description"]
-        filled = 0
-        for a in merged:
+        for a in items:
             if (a.get("description") or "").strip():
                 continue
             norm = normalize_title(a.get("title", ""))
             if norm in rss_by_norm:
                 a["description"] = rss_by_norm[norm]
-                filled += 1
-        print(f"[fetch_en] q='{query[:40]}' rss filled {filled} descriptions")
-
-    final_with_desc = sum(1 for a in merged[:n] if (a.get('description') or '').strip())
-    print(f"[fetch_en] q='{query[:40]}' FINAL: {len(merged[:n])} items, {final_with_desc} with description")
-    return merged[:n]
+    return items
 
 def build_period(now: datetime.datetime) -> str:
     today = now.date()
