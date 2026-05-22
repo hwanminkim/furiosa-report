@@ -31,8 +31,7 @@ COMPANIES = [
 ]
 
 FURIOSA_QUERIES = [
-    ('furiosa ai OR furiosaai OR "Furiosa AI" chip', "en"),
-    ('퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
+    ('퓨리오사 OR 퓨리오사AI OR FuriosaAI OR "Furiosa AI"', "ko"),
 ]
 
 def gnews_url(query: str, lang: str) -> str:
@@ -355,7 +354,7 @@ def generate_competitor_summaries(articles_with_company: list[tuple], client: "O
 
 ## 작성 원칙
 1. 제목과 snippet에 있는 사실만 활용. 없는 정보 만들어내지 말 것.
-2. 정보가 부족하면 솔직하게 "본문 정보 부족 — 원문 확인 필요"로 마무리.
+2. 정보가 부족하면 짧게 1~2문장으로만 요약하고 끝낼 것. 억지로 늘리지 말 것.
 3. 추측 금지. 일반론 절대 금지.
 
 Input articles:
@@ -402,7 +401,7 @@ def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") ->
 
 ## 작성 원칙
 1. 제목과 snippet에 있는 사실만 활용. 없는 정보 만들어내지 말 것.
-2. 정보가 부족하면 "본문 정보 부족 — 원문 확인 필요"로 마무리.
+2. 정보가 부족하면 짧게 1~2문장으로만 요약하고 끝낼 것. 억지로 늘리지 말 것.
 
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
