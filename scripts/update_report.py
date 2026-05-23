@@ -71,7 +71,6 @@ def format_date_kst(dt: datetime.datetime | None, kst: pytz.BaseTzInfo) -> str:
     if dt is None: return ""
     return dt.astimezone(kst).strftime("%m-%d")
 
-# 🚨 스티키 헤더를 위한 요일 포함 포맷 함수
 def format_date_with_weekday(dt: datetime.datetime | None, kst: pytz.BaseTzInfo) -> str:
     if dt is None: return ""
     dt_kst = dt.astimezone(kst)
@@ -86,12 +85,9 @@ def _strip_html(s: str) -> str:
     s = html.unescape(s)
     return s.strip()
 
-# URL → 본문 캐시 (한 실행 안에서 같은 URL 재크롤링 방지)
 _BODY_CACHE: dict[str, str] = {}
 
 def fetch_article_body(url: str, min_chars: int = 200) -> str:
-    """기사 URL에서 본문을 추출. 실패 시 빈 문자열 반환.
-    trafilatura 미설치/추출 실패/너무 짧은 결과는 모두 빈 문자열."""
     if not url or not _HAS_TRAFILATURA:
         return ""
     if url in _BODY_CACHE:
@@ -138,7 +134,6 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
     naver_q = query.replace(" OR ", " | ")
     results = []
     seen_links = set()
-    # 페이지네이션: start=1, 101 (총 200건까지 가져와 며칠 지난 기사도 포함되도록)
     for start in (1, 101):
         url = f"https://openapi.naver.com/v1/search/news.json?query={quote(naver_q)}&display=100&start={start}&sort=date"
         req = Request(url, headers={"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": csec, "User-Agent": "Mozilla/5.0"})
@@ -168,7 +163,6 @@ def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
         items = _fetch_naver(query, n)
         if items: return items
         return _fetch_google(query, lang, n)
-    # 영문: Google News RSS만 사용 (GDELT는 description이 비어 요약 불가)
     return _fetch_google(query, lang, n)
 
 def build_period(now: datetime.datetime) -> str:
@@ -178,12 +172,9 @@ def build_period(now: datetime.datetime) -> str:
     return f"{week_start.strftime('%Y-%m-%d')}{days_ko[week_start.weekday()]} ~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}"
 
 def _extract_keywords(title: str) -> set:
-    """제목에서 의미 있는 키워드 추출 (2글자 이상 한글/영문 단어, 흔한 단어 제외)."""
     if not title:
         return set()
-    # 한글 2글자+ / 영문 3글자+ 단어 추출
     words = re.findall(r"[가-힣]{2,}|[a-zA-Z]{3,}", title)
-    # 흔한 단어/조사 제외 (의미 없는 매칭 방지)
     stopwords = {
         "있다", "한다", "위한", "위해", "통해", "통한", "관련", "대한", "대해",
         "지난", "오는", "올해", "내년", "최근", "이번", "그리고", "또는", "하는",
@@ -193,14 +184,8 @@ def _extract_keywords(title: str) -> set:
 
 
 def dedup_by_keyword_overlap(articles: list[dict], min_overlap: int = 3) -> list[dict]:
-    """
-    키워드 오버랩으로 같은 사건 dedup. 발행일 빠른 기사를 우선 남김.
-    articles는 pub_dt 오름차순 정렬되어 있다고 가정(아니면 정렬).
-    min_overlap개 이상 키워드 겹치면 같은 사건으로 간주.
-    """
     if len(articles) < 2:
         return articles
-    # 발행일 오름차순 (오래된 게 먼저 = 첫 보도 우선)
     sorted_arts = sorted(articles, key=lambda a: a.get("pub_dt") or datetime.datetime.min.replace(tzinfo=pytz.utc))
     kept = []
     kept_keywords = []
@@ -267,22 +252,41 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
     except Exception:
         return articles
 
+
 def filter_relevant_by_company(company: str, articles: list[dict], client: "OpenAI | None") -> list[dict]:
+    """
+    회사가 기사의 '주체'인 경우만 keep. 단순 언급/나열은 제외.
+    """
     if client is None or not articles: return articles
     numbered_items = []
     for i, a in enumerate(articles):
-        desc = (a.get("description") or "").replace("\n", " ").strip()[:150]
+        desc = (a.get("description") or "").replace("\n", " ").strip()[:200]
         numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
     numbered = "\n".join(numbered_items)
-    prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다. BD 및 시장 동향 파악에 유용한 정보인지 판단하세요.
+    prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다.
+**'{company}'가 기사의 주체(주어)로 등장한 기사만** keep 하세요.
+
+## Keep 기준 (이 중 하나라도 명확하면 keep)
+1. 제목에 '{company}'가 직접 등장하고 그것이 기사의 주된 주체
+2. '{company}'가 발표/투자/제품/협력/실적 등 행동의 주체로 명시
+3. '{company}'의 칩, 사업, 인사, 전략을 핵심으로 다룬 기사
+4. '{company}'가 협력의 주요 당사자 중 하나인 경우 (예: "A사와 {company}, 파트너십 체결")
+
+## 제외 기준 (이 중 하나라도 해당하면 제외)
+1. **다른 회사가 주체이고 '{company}'는 본문 중 사이드로 짧게 언급된 경우**
+   예: "정부, 150조 펀드 발표... 리벨리온 등이 수혜 예상"
+   → 주체는 정부 정책, 제외.
+2. 업계 트렌드 기사에서 'NVIDIA, 리벨리온, 퓨리오사' 식으로 여러 기업 중 하나로 나열만 된 경우
+3. 단순 주식 시황, 증시 마감, 기계적 공시
+4. 정부/협회 정책 발표에서 여러 기업 중 하나로 언급된 경우
+
+## 판단 원칙
+**제목과 요약에서 '{company}'가 주인공인가?**가 핵심 질문.
+애매하면 제외. 보수적으로 판단.
+
 기사 목록:
 {numbered}
-## Keep 기준
-1. '{company}'가 주도적으로 무언가를 한 기사
-2. 업계 트렌드, 시장 분석 중 '{company}'가 의미 있게 언급된 경우
-## 제외 기준
-- 단순 주식 시황, 증시 마감
-- 기계적 공시
+
 응답 형식 (오직 JSON):
 {{"keep": [0, 2, 5]}}"""
     try:
@@ -304,8 +308,7 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
 
 def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> list[dict]:
     """
-    Furiosa AI가 주체로 등장한 기사만 keep. 단순 언급/사이드 등장은 제외.
-    경쟁사 기사에 Furiosa가 짧게 언급되는 케이스를 잘못 묶지 않도록 엄격하게.
+    Furiosa AI가 주체로 등장한 기사만 keep. 협력 주체 중 하나여도 keep.
     """
     if client is None or not articles: return articles
     numbered_items = []
@@ -314,24 +317,24 @@ def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> lis
         numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
     numbered = "\n".join(numbered_items)
     prompt = f"""다음은 'Furiosa AI(퓨리오사AI)' 키워드로 검색된 뉴스 기사 목록입니다.
-**Furiosa AI가 주체(주어)로 등장한 기사만** keep 하세요.
+**Furiosa AI가 주체로 등장한 기사만** keep 하세요.
 
 ## Keep 기준 (이 중 하나라도 명확하면 keep)
-1. 제목에 'Furiosa', '퓨리오사' 등이 직접 등장하고 그것이 기사의 주된 주체
+1. 제목에 'Furiosa', '퓨리오사' 등이 직접 등장
 2. Furiosa AI가 발표/투자/제품/협력 등 행동의 주체로 명시
 3. Furiosa AI의 칩, 사업, 인사, 전략을 핵심으로 다룬 기사
+4. **Furiosa AI가 협력의 주요 당사자 중 하나인 경우 (예: "A사가 퓨리오사AI와 협력해 ...")**
+5. **Furiosa AI 제품(NPU, 레니게이드 등)이 다른 회사 솔루션과 결합된 핵심 사례 기사**
 
 ## 제외 기준 (이 중 하나라도 해당하면 제외)
-1. **다른 회사가 주체이고 Furiosa AI는 본문 중 한 문단 정도로 사이드 언급된 경우**
-   예: "리벨리온이 데이터센터 구축... 한편 퓨리오사AI도 데이터센터에 입주했다"
-   → 주체는 리벨리온, 제외.
-2. 업계 트렌드 기사에서 'NVIDIA, 리벨리온, 퓨리오사' 식으로 나열만 된 경우
+1. **다른 회사 기사 본문에 한두 문장 사이드로 끼어든 경우**
+   예: "리벨리온이 데이터센터 구축... 한편 퓨리오사AI도 입주" → 제외 (주체는 리벨리온)
+2. 업계 트렌드 기사에서 'NVIDIA, 리벨리온, 퓨리오사' 식으로 여러 기업 중 하나로 나열만 된 경우
 3. 단순 주식 시황, 증시 마감
-4. 정부/협회 정책 발표에서 여러 기업 중 하나로 언급된 경우
 
 ## 판단 원칙
-**제목과 요약에서 Furiosa가 주인공인가?**가 핵심 질문.
-애매하면 제외. 보수적으로 판단.
+협력 기사는 keep. Furiosa가 협력의 핵심 당사자면 OK.
+단순 나열 또는 한 문장 사이드 언급만 제외.
 
 기사 목록:
 {numbered}
@@ -367,7 +370,6 @@ def to_output(a: dict, kst: pytz.BaseTzInfo, include_summary: bool = False) -> d
     return out
 
 def generate_competitor_summaries(articles_with_company: list[tuple], client: "OpenAI | None") -> dict:
-    """경쟁사 기사에 대해 요약만 생성. BD 시점은 생성 안 함."""
     if client is None or not articles_with_company: return {}
     items_in = []
     for i, (company, a) in enumerate(articles_with_company):
@@ -472,13 +474,11 @@ def main():
     now = datetime.datetime.now(kst)
     now_utc = now.astimezone(pytz.utc)
     
-    # 일간: 오늘 KST 00시 기준 (예: 5/21 실행 → 5/21 00:00 KST 이후 기사만 포함)
     daily_start_kst = kst.localize(datetime.datetime.combine(
         now.date(),
         datetime.time(0, 0)
     ))
     daily_cutoff = daily_start_kst.astimezone(pytz.utc)
-    # 주간: 오늘 - 6일의 KST 자정 0시 기준 (예: 5/21 실행 → 5/15 00:00 KST 이후 기사만 포함)
     weekly_start_kst = kst.localize(datetime.datetime.combine(
         now.date() - datetime.timedelta(days=6),
         datetime.time(0, 0)
@@ -490,7 +490,6 @@ def main():
     token = os.environ.get("GITHUB_TOKEN")
     client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token) if token else None
 
-    # ── 1. Competitor 뉴스 ──
     COMPETITOR_CUTOFF_DAYS = 30
     COMPETITOR_MAX_ITEMS = 3
     competitor_cutoff = now_utc - datetime.timedelta(days=COMPETITOR_CUTOFF_DAYS)
@@ -520,7 +519,6 @@ def main():
 
     companies_out = [{"name": c["name"], "region": c["region"], "items": [to_output(a, kst, include_summary=True) for a in c["articles"]]} for c in companies_raw]
 
-    # ── 2. Furiosa 뉴스 ──
     all_furiosa = []
     seen_urls, seen_titles = set(), set()
     for query, lang in FURIOSA_QUERIES:
@@ -535,7 +533,6 @@ def main():
     def in_window(a: dict, cutoff: datetime.datetime) -> bool:
         return a.get("pub_dt") is not None and a["pub_dt"] >= cutoff
 
-    # Furiosa가 주체인 기사만 통과시킴 (사이드 언급된 경쟁사 기사 제외)
     in_weekly_window_raw = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
     if client and in_weekly_window_raw:
         kept_subject = filter_furiosa_subject(in_weekly_window_raw, client)
@@ -548,13 +545,11 @@ def main():
         deduped_urls = {a["url"] for a in deduped}
         all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls or not in_window(a, weekly_cutoff)]
 
-    # 키워드 오버랩 dedup (LLM 클러스터링 보완): 표현 달라도 같은 사건 잡아냄
     in_weekly_window_2 = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
     kept = dedup_by_keyword_overlap(in_weekly_window_2, min_overlap=3)
     kept_urls = {a["url"] for a in kept}
     all_furiosa = [a for a in all_furiosa if a["url"] in kept_urls or not in_window(a, weekly_cutoff)]
 
-    # ── 2.5 일간/주간 분리 ──
     furiosa_daily_raw = sorted([a for a in all_furiosa if in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)[:5]
     furiosa_weekly_raw = sorted([a for a in all_furiosa if in_window(a, weekly_cutoff) and not in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)
 
@@ -564,7 +559,6 @@ def main():
         if a["url"] in furiosa_summaries:
             a["summary"] = furiosa_summaries[a["url"]]
 
-    # 🚨 3. 일간 그룹핑 
     furiosa_daily_group = {}
     for a in furiosa_daily_raw:
         date_key = format_date_with_weekday(a.get("pub_dt"), kst)
@@ -572,7 +566,6 @@ def main():
             furiosa_daily_group[date_key] = []
         furiosa_daily_group[date_key].append(to_output(a, kst, include_summary=True))
 
-    # 🚨 4. 주간 그룹핑 (하루 최대 3개 제한)
     furiosa_weekly_group = {}
     daily_count = {}
     for a in furiosa_weekly_raw:
