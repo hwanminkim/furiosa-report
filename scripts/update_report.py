@@ -38,6 +38,10 @@ COMPANIES = [
 
 FURIOSA_QUERIES = [
     ('퓨리오사 OR 퓨리오사AI OR FuriosaAI OR "Furiosa AI"', "ko"),
+    ('퓨리오사AI 협력', "ko"),
+    ('퓨리오사AI 투자', "ko"),
+    ('퓨리오사AI 레니게이드 OR RNGD', "ko"),
+    ('백준호 퓨리오사', "ko"),
 ]
 
 def gnews_url(query: str, lang: str) -> str:
@@ -134,7 +138,8 @@ def _fetch_naver(query: str, n: int) -> list[dict]:
     naver_q = query.replace(" OR ", " | ")
     results = []
     seen_links = set()
-    for start in (1, 101):
+    # 페이지네이션: start=1, 101, 201, 301, 401 (총 500건까지 가져와 6일 전 기사도 포함되도록)
+    for start in (1, 101, 201, 301, 401):
         url = f"https://openapi.naver.com/v1/search/news.json?query={quote(naver_q)}&display=100&start={start}&sort=date"
         req = Request(url, headers={"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": csec, "User-Agent": "Mozilla/5.0"})
         try:
