@@ -1,28 +1,37 @@
 {
   "period": "2026-05-19(화) ~ 2026-05-25(월)",
-  "updated_at": "2026-05-25T08:44:53.421835+09:00",
-  "furiosa_daily": {},
+  "updated_at": "2026-05-25T21:52:59.915662+09:00",
+  "furiosa_daily": {
+    "05-25 (월)": [
+      {
+        "title": "국민성장펀드 AI 투자 확대…최적화·인프라 기업 수혜 '관심'",
+        "url": "https://www.newsis.com/view/NISX20260522_0003640871",
+        "date": "05-25",
+        "summary": "정부는 국민성장펀드를 통해 AI 밸류체인 전반에 대한 투자를 확대하고 있으며, 퓨리오사AI와 업스테이지가 주요 수혜 기업으로 주목받고 있다. 퓨리오사AI는 고효율 NPU '레니게이드'를 기반으로 데이터센터 및 AI 인프라 시장에서 입지를 넓히고 있으며, 업스테이지는 자체 LLM '솔라'를 통해 기업용 AI 시장에서 성과를 내고 있다. 또한, 노타는 이들 기업과 협력하여 AI 모델 최적화 기술을 제공하며 상용화 과정에서 중요한 역할을 하고 있다."
+      }
+    ]
+  },
   "furiosa_weekly": {
-    "05-23 (토)": [
+    "05-21 (목)": [
       {
-        "title": "리벨리온 다음 ‘K-엔비디아’는…국민성장펀드 선택에 쏠린 눈",
-        "url": "https://www.sedaily.com/article/20047573?ref=naver",
-        "date": "05-23",
-        "summary": "국민성장펀드는 최근 리벨리온과 업스테이지 등 국내 주요 AI 기업에 대규모 투자를 단행하며 이들 기업의 기업가치를 크게 끌어올렸다. 퓨리오사AI는 국민성장펀드의 다음 투자 대상으로 유력하게 거론되며, 차세대 AI 반도체 '레니게이드'를 통해 글로벌 시장 진출을 준비 중이다. 반면, 딥엑스에 대한 투자는 내부 평가 의견 차이로 잠정 중단된 상태다."
-      },
-      {
-        "title": "‘100조’ 기업이 비교 대상…퓨리오사AI 나스닥行 매력 여전 [시그널]",
-        "url": "https://www.sedaily.com/article/20047365?ref=naver",
-        "date": "05-23",
-        "summary": "퓨리오사AI는 나스닥 상장을 염두에 두고 있으며, 비교 기업으로 삼는 세레브라스가 성공적으로 나스닥에 안착한 점이 긍정적 신호로 작용하고 있다. 퓨리오사AI는 2세대 AI 칩 '레니게이드'의 양산을 앞두고 있으며, 올해 매출 1000억 원대를 목표로 하고 있다. 국민성장펀드의 투자 여부가 퓨리오사AI의 상장 행선지를 결정짓는 주요 변수로 평가된다."
+        "title": "\"엔비디아보다 가성비 있게 … AI데이터센터 구축 도울것\"",
+        "url": "https://www.mk.co.kr/article/12054703",
+        "date": "05-21",
+        "summary": "망고부스트는 엔비디아의 고가 AI 데이터센터 솔루션에 대한 가성비 대안을 제시하며, DPU부터 소프트웨어까지 아우르는 풀스택 AI 시스템 구축을 목표로 하고 있다. 이 회사는 삼성전자, SK하이닉스 등 국내 기업들과 협력하며, 퓨리오사AI와 함께 국산 NPU 기반 데이터센터 솔루션 개발에도 참여하고 있다. AI 데이터센터 시장이 급성장하는 가운데, 망고부스트는 국내 기술로 독립적인 AI 인프라를 구축하려는 움직임을 보이고 있다."
       }
     ],
-    "05-22 (금)": [
+    "05-20 (수)": [
       {
-        "title": "[원에이AI 반도체 연구개발에 1000억대 뭉칫돈",
-        "url": "https://www.etnews.com/20260521000443",
-        "date": "05-22",
-        "summary": "AI 서비스 확산으로 GPU 수요가 급증하며 고비용 구조 해소가 중요한 과제로 떠오르고 있다. 과학기술정보통신부는 올해 AI 반도체 연구개발에 1000억 원 이상의 예산을 투입하며 관련 산업을 지원하고 있다. 퓨리오사AI, 딥엑스, 파네시아 등 국내 기업들은 정부 지원과 자체 기술력을 바탕으로 글로벌 시장 진출을 준비 중이다."
+        "title": "동서발전, 국산 AI 반도체 실증 나선다",
+        "url": "https://www.wikitree.co.kr/articles/1137594",
+        "date": "05-20",
+        "summary": "한국동서발전은 퓨리오사AI와 코난테크놀로지와 협력하여 발전소 현장에서 국산 NPU와 LLM을 실증하는 프로젝트를 시작했다. 이번 실증은 발전소 운전·정비·제어 분야에서 국산 AI 기술의 안정성과 성능을 검증하는 데 초점을 맞추고 있다. 이는 공공 발전 분야에서 국산 AI 기술의 적용 가능성을 확인하는 중요한 시험무대가 될 것으로 보인다."
+      },
+      {
+        "title": "유라클 AI자원관리 플랫폼 ‘오르다’, 퓨리오사AI NPU 연동",
+        "url": "https://www.dt.co.kr/article/12063580?ref=naver",
+        "date": "05-20",
+        "summary": "유라클의 AI 자원·워크로드 관리 플랫폼 '오르다'가 퓨리오사AI의 2세대 NPU '레니게이드'와 성공적으로 연동되었다. 이를 통해 고객은 AI 서비스 운영에서 효율성을 높일 수 있는 기술적 기반을 확보하게 되었다."
       }
     ]
   },
@@ -32,22 +41,22 @@
       "region": "global",
       "items": [
         {
-          "title": "NVIDIA AI Releases Gated DeltaNet-2: A Linear Attention Layer That Decouples Erase and Write in the Delta Rule - MarkTechPost",
-          "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQSXNsd3dxNkhZWWxieUVGLTVsaDhtbkdWcE9XUnMyZkFETFlzM0VTOEhKNjUyeXVmcnJLZmgtUjRKMmRDRVBMRFNWRjRjTWMwQmtWNEJGUjh6c3N4OVk0UDJvVE9DNC1JbjBweXQ0d0pHYVR2UEkxU1FnOGE4SGVvaUMzX3dEbnBBUFh5NVBGUTZZOUQ3ei1hXzFDX2VGRE1VczhaUV93dGtXYmppd2RlTlRWcVdHR2RLdV90SmotYi1UZmtydEtucUVKcDdDU3ZLbndnMGRPUmtvd1lrMWhuZUN6SWQ?oc=5",
+          "title": "Nvidia's Jensen Huang says CEOs who blame AI for layoffs are giving a 'lazy' excuse - Business Insider",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNQUdXdTBOR0Z2V0VxYzlDZklWeVg0U3dwcnZPNkN2dzJhSVFKU1RScGkzQ0J6dmk5bTNldkkwVUlhWmI3c2VpYXM3cjdQQWtSX1RmS2NMX1B3ZHdHVXJ1QThLNkdYUEtHeVZLUGE0S3pFZzBqZHNGdVVGMmdiN2UxTGhrZ0RDNU5vVW1aY0Q1c0l4RGhXb1dUcWduTXg?oc=5",
+          "date": "05-25",
+          "summary": "NVIDIA의 젠슨 황 CEO는 AI를 이유로 해고를 정당화하는 CEO들을 비판하며 이를 '게으른 변명'이라고 지적했다. 그는 AI가 직업을 없애는 것이 아니라, 새로운 기회를 창출할 수 있는 도구로 활용되어야 한다고 강조했다. 이 발언은 최근 기업들이 AI 도입으로 인한 인력 감축을 정당화하는 경향에 대한 비판으로 해석된다."
+        },
+        {
+          "title": "EXCLUSIVE: Nvidia CEO Jensen Huang Is Flying To Taiwan Nearly Every Month Asking For More GPUs – The Answer Remains Not Yet - Yahoo Finance",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOWmJYbzNiSk1XTmt2TGlfWWlUMDlOOFprT3FoaWp1WGxvQ2xLUjZFQmlsNXMtOG1zaE5lQ1F3ZFROOUdiN1cybnBieUlJelhoTTRxa3JLVDVFdjl2Y05VMDdyQ1VORklYeFNvekZfU3BCRnNfaXZ6UlBvMWlsb0JnNmRtTGUyS1FZbmI5WWtpVDNzeVJPZWtCTl9aekNfSHJwZXRoXw?oc=5",
           "date": "05-24",
-          "summary": "NVIDIA가 Gated DeltaNet-2를 발표했다. 이 기술은 Delta Rule에서 삭제와 쓰기 과정을 분리하는 선형 어텐션 레이어를 제공한다. 이를 통해 AI 모델의 성능과 효율성이 향상될 것으로 보인다."
+          "summary": "NVIDIA의 젠슨 황 CEO가 대만을 매달 방문하며 GPU 추가 생산을 요청하고 있으나, 아직 확답을 받지 못한 것으로 알려졌다. 이는 AI 반도체 수요 급증에 따른 것으로 보인다. 대만은 주요 반도체 제조 허브로, NVIDIA의 공급망에서 중요한 역할을 하고 있다."
         },
         {
           "title": "Nvidia CEO Urges Super Micro to Tighten Up Amid Taiwan Crackdown - Bloomberg.com",
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPbmJNYzJxZGpWdTU5RkllSDNIQzFGZlhsTFUzS2R4OVhZbzRQMUk4VnFnQmdfX2txWEhsSFU4aHlGQnhiakxoZjJXQzBrblA1VEVmbDlJUWNNRTNvWERzRGdfRUE4bzFlUUREbGU0dk84Y2I0ZWo5UXl5OHhBWFJKRW5Ea21MQmhxRldwQmJHZ0t1YjF0QjE0MTE0eDg1UXIzTFplVmdfMGdPM3EzMnlfLTVvczNkQQ?oc=5",
           "date": "05-24",
-          "summary": "NVIDIA의 CEO가 대만에서의 단속 강화와 관련하여 Super Micro에 개선을 촉구했다. 이는 공급망 관리와 관련된 문제를 해결하기 위한 조치로 보인다. 구체적인 내용은 기사에 언급되지 않았다."
-        },
-        {
-          "title": "Analyst says Nvidia poised to capture two-thirds of the x86 server CPU market from Intel and AMD with expected $20 billion in revenue — 'Nvidia is already on track' to deliver 4 million Vera CPUs in FY2027 - Tom's Hardware",
-          "url": "https://news.google.com/rss/articles/CBMi6wJBVV95cUxOcEVJT0g3R3JvM2ZRZ1JnQWNIc1lFaUs1eGRqZDZRdDRwSFJCMFVIMlR2aGl4N0hKNXdfUUVBTUNhXzBwbDlnWk1ncFo3Uk1ZV3owTHN6aFBQTlJCQ1F0VC1jSjl6VnhNM0R2OURGOGQxbXNRSUEzcDNvM1NLdXAxMElDQUIwVE1zZS1jdGRnLUk3ZExiS1hxTW5zeUttUVRaQ29QY2VQNjAxMERhaGg2dDgxZ1ZXMThNWWRWWVVnMmNMZnJOZEw4OElFMlU3dFp2VHQ2UmhnQnRjQ2FoTEJFRUEzTzJqS0NlbFFISmlhN0hpS1hRSmlXZm9IQUp2X2xPa09VZUlTeEtSZGd1ZmNhbTF0bGFPNW5ScnZ0UzhkYVBDcUhlTWZMb3BWSExldTR1eER4UEZoU0JXODFCck5FZVgzZnpzR1Bia0NIRXJzeHRJRHJrSW9xNXRMN296SDFGRFNXOUx6c2VzRHM?oc=5",
-          "date": "05-22",
-          "summary": "NVIDIA가 2027 회계연도까지 4백만 개의 Vera CPU를 출하할 예정으로, Intel과 AMD를 제치고 x86 서버 CPU 시장의 3분의 2를 점유할 것으로 전망된다. 예상 매출은 약 200억 달러에 이를 것으로 보인다. 이는 NVIDIA의 서버 CPU 시장에서의 강력한 입지를 보여준다."
+          "summary": "NVIDIA의 젠슨 황 CEO는 대만의 규제 강화에 대응해 협력사인 슈퍼마이크로에 운영 효율성을 높일 것을 촉구했다. 이는 대만 내 반도체 산업 환경 변화에 따른 조치로 보인다. 구체적인 내용은 보도되지 않았다."
         }
       ]
     },
@@ -56,22 +65,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Positioning Japan at the Center of AI and Next-Generation Semiconductor Design: Tenstorrent's Growth Strategy - jetro.go.jp",
-          "url": "https://news.google.com/rss/articles/CBMisgJBVV95cUxPME9DRTNFRVNWTDdBRlJMUEF1R2I5T0pmVnpUQXZwMW1QYjc4eHNuSkRFbzloSGVqNUVRZ1djNmZiQnJ2ZTdYUFVFOFpMY3VMOWRraFZWTTVtRENydmhHRXUtVF83WmxKdHVMdzVacGVxSG95NmZXNEtJaXFEZ0llLW5rYmduZDJIMXZoZl9HYjY1a0ltZ0Q1c19rSmw4dUV4aC13dFJRaXllYUNtdy1DZWxzcmpCN09DOWlxSmpYWmlEUzF2ZDZQZHZTcmJ1clFDZjdLRTJLS2Q1YmdiazZOT1pReEF6Xzgyam45Z0MxUUJoR3ZuT1M4UmV0Z0hrNFpuU0ZUZW5KTVZRNGRFY1QwdU5PaVpxT2dVN3FiQlJ4c0ZHQlhWcS0tMlVwUXRZQ3BLV2c?oc=5",
-          "date": "05-24",
-          "summary": "Tenstorrent는 일본을 AI와 차세대 반도체 설계의 중심지로 삼기 위한 성장 전략을 발표했다. 이 전략은 일본 내에서의 기술 개발과 협력을 강화하는 데 중점을 두고 있다. 구체적인 실행 계획은 기사에 언급되지 않았다."
-        },
-        {
-          "title": "AI Chip Startup Tenstorrent Draws Takeover Interest From Intel, Qualcomm - Bloomberg.com",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPU2xHOXVuS3QydHdycTRteE15WjV3WGRObUpZdnJpTDlfYWhtZ280TUtXa0hBZVBLdldPTlRZdFQ1SzZsdEdwclVNYjUweDRWZUkzSHA2alpfdmd1ZlM3dTdDd3FwdTZtekZGZlhNSms4Y29nMUtEbld6UnlzVTlqblhrNjdQaW1UdWROWHZ1RDJkXzRwcTlSYno5ci1RMlRoSDNWRVlBV1hzNU80R1VTRlBIc05JcTZpTEdycGprYw?oc=5",
-          "date": "05-19",
-          "summary": "AI 칩 스타트업 Tenstorrent가 Intel과 Qualcomm으로부터 인수 관심을 받고 있다. 이는 Tenstorrent의 기술력과 시장 가능성을 보여주는 사례로 볼 수 있다. 추가적인 세부 사항은 기사에 포함되지 않았다."
+          "title": "AI chip startup Tenstorrent draws takeover interest from Intel, Qualcomm - MSN",
+          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNRGQzTGtDNS1DMllxS1ZfQ3huTnBRMXd1UFd6XzlIR3NQaVVrU3BVbF8wT2Vjb1kxNWNqQ3RYSjZ2N1g1UFk0YXE4YzZvdkVKTG1QM3pRaXVNTDFzSXJKZ09oQUhOS3BvdEFrQnRjdHo3Y3hyUVNySTlsOVZRMUgyX1VlZGN3MU9kYXRHQUU2ZURpdXBLR1ZPZ2dnam5UTHNfZDB0V1RSRmJ6MXdQRWNCWmxnSmxObGhQYXM1U1F5M2NnMzFsdFNaQWRFYzZBdUNlMV9pN1JlOHRPN2VweVpucA?oc=5",
+          "date": "05-25",
+          "summary": "AI 칩 스타트업 텐스토런트가 인텔과 퀄컴으로부터 인수 관심을 받고 있다. 이는 해당 기업의 기술력과 시장 가능성을 반영하는 것으로 보인다. 자세한 조건이나 협상 상황은 공개되지 않았다."
         },
         {
           "title": "Smallest.ai and Tenstorrent Partnership Democratises Voice AI - 4x reduction in cost through hardware acceleration - TheWire.in",
           "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNMXVDQ1NRRmlESUphR3BuUVl6MVFHRWVmenc0bDZhUjAxWGlrQWYtZXpjM1BkM0RpU1lYTC13WTAxc2l2ZXNQQ1JWc2pJdVV6QTZiTVA3SXczRUpXdmlrdDUyd3BNWUZVSjdqUzBaaC02UkdSUTlZRmhORTNQMnlfeUFaUFNFNTA1Qko4Y3BQelQxcnp5VFQ5SXF3S2MyWnd1VFJKU3V4TXZMUmtNaVFfaUh5MmUxX05RY0tNWVNKNkJzUEtjQjRRcjJScUFlTHpzUkNSM25aUTc4OFBYN0JwSGFXX2VaUGZsV2Q40gHrAUFVX3lxTE0xdUNDU1FGaURJSmFHcG5RWXoxUUdFZWZ6dzRsNmFSMDFYaWtBZi1lemMzUGQzRGlTWVhMLXdZMDFzaXZlc1BDUlZzakl1VXpBNmJNUDdJdzNFSld2aWt0NTJ3cE1ZRlVKN2pTMFpoLTZSR1JROVlGaE5FM1AyeV95QVpQU0U1MDVCSjhjcFB6VDFyenlUVDlJcXdLYzJad3VUUkpTdXhNdkxSa01pUV9pSHkyZTFfTlFjS01ZU0o2QnNQS2NCNFFyMlJxQWVMenNSQ1IzblpRNzg4UFg3QnBIYVdfZVpQZmxXZDg?oc=5",
           "date": "05-11",
-          "summary": "Tenstorrent와 Smallest.ai가 협력하여 음성 AI 기술의 민주화를 추진하고 있다. 이 협력은 하드웨어 가속화를 통해 비용을 4배 절감하는 것을 목표로 한다. 이를 통해 더 많은 사용자들이 음성 AI 기술을 활용할 수 있게 될 전망이다."
+          "summary": "텐스토런트는 Smallest.ai와 협력하여 음성 AI 기술의 상용화를 추진 중이다. 하드웨어 가속 기술을 통해 비용을 4배 절감하는 데 성공했다. 이 협력은 음성 AI 기술의 대중화를 목표로 한다."
+        },
+        {
+          "title": "Tenstorrent Selects Samsung Foundry to Manufacture Next-Gen AI Chiplet - HPCwire",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQZy00LVJHWFRkQl9Nak1ZNTM4enRBMlo3UDdydXhHdDBXTW96eGtpMUpKQWo3bjB4RGJmZmFWOWxTMmRVSzVrbjl4V0ZNTmZXNlVyWWtoNUtwRnFlWGExeUpqMDJIWV96ODhkbGZLUGNVZ2ZKSjNrTHFmVWRiRktKVE5HVzhZSVpWczJwbzl5RVV6T0NYVzVsUDVsZEhBZUt2UkxrVDRVVlRFMm9vbWNocTRjZEx2bjQzN2YwVg?oc=5",
+          "date": "05-05",
+          "summary": "텐스토런트는 삼성 파운드리를 통해 차세대 AI 칩렛을 생산하기로 결정했다. 이 협력은 텐스토런트의 기술력을 바탕으로 한 새로운 AI 칩 개발을 목표로 한다. 구체적인 생산 일정은 공개되지 않았다."
         }
       ]
     },
@@ -83,13 +92,13 @@
           "title": "SambaNova and Intel’s heterogeneous x86 AI architecture - Cloud Computing News",
           "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPSnFZSnpuMmJDeFE1Nzl2bXIwcWl3QjBid3ZGU0ZaTDNKQmt5R0N2akpGN2MtQmE1TWE0Q09QWm13azhHZ3FieG8xV3A4eWd3Z0pWSU41OEpFSDN3RnBwbzgxQ0RPTHZSTnV2QzZ3aWE2YUFhdWdGTXpidmluZk5CMmx0Wk5qS2xLTVpHRzRuYmZnaFlnUUpCUXZFWW9aSVZ5SFE?oc=5",
           "date": "05-25",
-          "summary": "SambaNova와 Intel이 이종 x86 AI 아키텍처를 기반으로 협력하고 있다. 이 협력은 AI 기술의 발전과 관련된 새로운 아키텍처 개발을 목표로 한다. 구체적인 기술적 세부 사항은 기사에 언급되지 않았다."
+          "summary": "삼바노바와 인텔이 이종 x86 AI 아키텍처를 기반으로 협력하고 있다. 이 협력은 클라우드 컴퓨팅 환경에서의 AI 성능을 강화하기 위한 것으로 보인다. 구체적인 기술적 세부사항은 공개되지 않았다."
         },
         {
-          "title": "Watch SambaNova Challenges Cerebras Strategy - Bloomberg.com",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNbEVQekNBbzNleFZNRGJZVkdwVXNuUVFJVEIwZXkxMU1wSGJwZGdhdzBLRkdER25sYy1HOThIaThESTJIaWRnR0tEak91R0FCcGc0VjFfNWJBWXd1OWhlRExqVjNuaDk5YkFvbGMxeG9INVBLaUY4cUhTcWFHNmRlZFJ6dXFJMGhZRUlxYUhLZ2phMWlYZm5PZw?oc=5",
+          "title": "SambaNova Systems - 2026 Funding Rounds & List of Investors - Tracxn",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNWjRjQ0d4OEUwX0pqRGtaMWJybEN0RXN0Rldjc3lxdWtVLVJFdU9NMXNWWGdjXzdoMEpESFpSXzdfd0Y1SkwtdDNGeHJwdFZ1VWMyUUhmY29Lc2w2NkxpbmlQaWh3OVRTQ0VTdndnQlBkN3QyNWJtLXlhTFBzLXZPMWhZbWRfNUV5Q2RfdFNWeTJ5XzNQQmptN1hZRE9tODFBM0k2QVhJTW5rT3Q5UWRLRDEtbGt4QQ?oc=5",
           "date": "05-15",
-          "summary": "SambaNova가 Cerebras의 전략에 도전장을 내밀었다. 두 회사 간의 경쟁이 AI 반도체 시장에서 주목받고 있다. 구체적인 도전 내용은 기사에 명시되지 않았다."
+          "summary": "삼바노바 시스템즈는 2026년까지 추가 자금 조달 라운드를 계획 중이다. 투자자 명단과 구체적인 자금 조달 목표는 아직 공개되지 않았다. 이는 기업의 장기적인 성장 전략의 일환으로 보인다."
         }
       ]
     },
@@ -98,10 +107,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Cerebras vs. Nvidia: Which AI Stock Is the Smarter Buy Right Now? - The Motley Fool",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNUkFnWWlCUmVVQUtTNUlxXzFLbWl3SzJfQ2tId0ZtUDA3UHByNTRBbmQ1TTBWOVBJMGNqRVd0a3Jkdi14a0kzOVVDeEtOYU1laEtYWWpDY0ppejU0NW5fQmxqd2g4UktuaEZ4ZUd6eURzeEJoMjR1MzVCVDNRWndQM0Jua3NoS2gwZ0FjdndPVmtGTTVyUGs3Rg?oc=5",
+          "title": "Cathie Wood’s ARK buys Cerebras stock, sells AMD - Investing.com",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQeFBlcmRpaE1fY0hPd0NfNFZoZ1YyU1h3UWNHSGM1TjRFemltWk14cHVMZElKQ3BqQ3lTa3lBVldKQ3czVVZZOWhsc0NFd3dVeHJkLTFjbG52WS04TjlvNzF6Uk9oRU82cDVZLS1QbmRrdDF1LTBjdXpwTzA3UERkd1VwVFJjQkR0WjRscEZQUVRZdVZYZXY1QXNoemxlUzNsbEJ0V193?oc=5",
           "date": "05-23",
-          "summary": "Cerebras와 NVIDIA가 AI 주식 투자 관점에서 비교되고 있다. 두 회사의 기술력과 시장 점유율이 주요 비교 요소로 다뤄지고 있다. 구체적인 투자 추천은 기사에 언급되지 않았다."
+          "summary": "캐시 우드의 ARK 인베스트가 Cerebras 주식을 매입하고 AMD 주식을 매도했다. 이는 ARK가 Cerebras의 기술력과 성장 가능성을 긍정적으로 평가했음을 시사한다. 구체적인 매입 규모는 언급되지 않았다."
+        },
+        {
+          "title": "Cerebras Systems' Chips May Be 15X Faster Than Some of Nvidia's Blackwell Models, but Nvidia Has 2 Distinct Advantages - The Motley Fool",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPTTlFXzFjaGE5aFZsWTVyNE5teDVzc1dBRUJSdkFkTlVKOWdHeDdUcFFFeUstMkFSTzZaNVM1U2NjVGRtTlc2T29Ma0RfVXhsVzdGTTZuNnBSd3Atb1BkRmUzS1g4dlFUMS11a3Vuem9QZHhMTG94WFp1Z3RKLWp3LVRmWlJ1SXFab0IzekpsQkFQSDc1VkFOTw?oc=5",
+          "date": "05-23",
+          "summary": "Cerebras Systems의 칩이 일부 NVIDIA의 Blackwell 모델보다 최대 15배 빠른 성능을 보일 수 있는 것으로 평가됐다. 그러나 NVIDIA는 소프트웨어 생태계와 시장 점유율에서 여전히 두 가지 주요 강점을 가지고 있다. Cerebras의 기술적 우위가 시장에서 어떻게 작용할지는 지켜봐야 한다."
+        },
+        {
+          "title": "Cerebras Systems’ (CBRS) Debut Dazzled Investors. I’m Not Chasing the Stock - TipRanks",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQVi1Ib2V0TjE4cUxzU0s3NnlNb2lUMkh2UU5mWW93eTEtMV9UalluRXF1cGhfYnl3N2UzWTJtZHd1OXczXzMxZnBGWGpCUHZpQWRXUV8td1VzUm5jNDkxMkYtM0JpamcxRmZNeHpZTEY3blAyNVlqMktPcU01bEVGMWd3aWlJMVZBTEpuSlltVkxaeDlJMkFfZFk0MUVySDBDdmc?oc=5",
+          "date": "05-22",
+          "summary": "Cerebras Systems의 주식이 투자자들의 관심을 끌었으나, 일부 투자자들은 주가 상승 이후 추가 매수를 주저하고 있다. 이는 초기 기대와 달리 주가가 과대평가되었다는 우려 때문으로 보인다. 구체적인 투자 전략은 기사에서 언급되지 않았다."
         }
       ]
     },
@@ -110,22 +131,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "국민성장펀드 3차 AI 투자처 어디?…‘B2C 서비스·피지컬AI’ 유력 전망",
-          "url": "https://www.ddaily.co.kr/page/view/2026052213392518136",
-          "date": "05-24",
-          "summary": "국민성장펀드의 3차 메가프로젝트 AI 투자처로 리벨리온이 선정되었다. 리벨리온은 국산 NPU 개발 필요성에 따라 6000억 원의 투자를 유치했다. 이는 정책자금 2500억 원, 산업은행 500억 원, 민간 투자 3000억 원으로 구성된다."
-        },
-        {
           "title": "리벨리온, '1MW' 규모 데이터센터 직접 운영한다",
           "url": "https://www.thelec.kr/news/articleView.html?idxno=56994",
           "date": "05-21",
-          "summary": "리벨리온이 서울 마곡에 1MW 규모의 데이터센터를 구축했다. 이 데이터센터는 자사 NPU 칩의 성능 테스트와 고객 검증 서비스를 제공하기 위해 설계되었다. 데이터센터 개발은 디씨피(DCP)가 담당했으며, 리벨리온은 임대 형태로 운영한다."
+          "summary": "리벨리온은 서울 마곡에 1MW 규모의 데이터센터를 구축하고 자사 NPU 칩 성능 테스트와 고객 검증 서비스를 제공한다. 데이터센터는 1세대 '아톰', 2세대 '리벨100', 차세대 칩 테스트에 활용될 예정이다. 리벨리온은 이를 통해 클라우드 업체와의 협력을 강화하고 대량 발주로 이어질 가능성을 모색하고 있다."
+        },
+        {
+          "title": "5년 동안 '150조원' 투입…'국민성장펀드' 22일부터 가입자 받는다",
+          "url": "https://www.sidae.com/article/2026052110343034193",
+          "date": "05-21",
+          "summary": "정부가 미래 첨단전략산업 지원을 위해 5년간 150조 원 규모의 '국민성장펀드'를 조성한다. 이 펀드는 AI 반도체, HBM 공장 지원, 유망 스타트업 직접 투자 등 다양한 첨단 산업 육성에 사용될 예정이다. 22일부터 주요 은행과 증권사를 통해 가입이 가능하며, 최대 1800만 원 소득공제 혜택이 제공된다."
         },
         {
           "title": "[기자수첩] 국민성장펀드, IPO '보증수표' 아니다",
           "url": "https://www.newstopkorea.com/news/articleView.html?idxno=45024",
           "date": "05-19",
-          "summary": "국민성장펀드 투자가 스타트업의 성장 가능성을 보여주는 신호로 평가받고 있다. 리벨리온은 6400억 원의 프리IPO 자금을 확보하며 기업가치 3조4000억 원으로 평가되었다. 그러나 정책금융 투자가 상장 성공을 보장하지는 않는다는 점이 강조되었다."
+          "summary": "국민성장펀드가 스타트업의 성장 가능성을 보여주는 신호로 작용하지만, 상장을 보장하지는 않는다는 의견이 제기됐다. 리벨리온은 이 펀드의 첫 직접 투자 기업으로 6400억 원의 프리IPO 자금을 확보하며 3조4000억 원의 기업가치를 평가받았다. 그러나 시장은 투자 유치보다 기업의 실적과 경쟁력을 더 중요하게 본다는 점이 강조됐다."
         }
       ]
     },
@@ -134,22 +155,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "폴라리스그룹, 양자보안 업무 플랫폼 확대",
-          "url": "https://dealsite.co.kr/articles/162385",
-          "date": "05-22",
-          "summary": "폴라리스그룹이 양자보안 기술을 그룹 내 서비스에 확대 적용하고 있다. 문서 작성, 협업, 전자결재, AI 및 로봇 제어 등 다양한 업무 플랫폼에 양자내성암호(PQC)를 도입 중이다. 이를 통해 공공·금융·기업 시장에서 보안 수준을 강화할 계획이다."
-        },
-        {
           "title": "\"4월 수주액이 전년치 육박\"…성장궤도 탄 딥엑스",
           "url": "https://dealsite.co.kr/articles/162172",
           "date": "05-21",
-          "summary": "딥엑스가 글로벌 고객사를 대상으로 피지컬 AI 반도체 상업화를 본격화하고 있다. 4월 구매계약 규모가 전년 매출에 육박하며, 수출 비중이 3분의 2 이상을 차지했다. 딥엑스는 반복 주문을 기반으로 연간 수백억 원대 매출을 기대하고 있다."
+          "summary": "딥엑스는 올해 4월까지 전년도 매출에 육박하는 수주를 기록하며 글로벌 시장에서 상업화를 본격화하고 있다. 수출이 전체 구매 계약의 3분의 2를 차지하며, 반복 주문 기반의 매출 구조가 자리 잡고 있다. 딥엑스는 스마트팩토리, 로보틱스 등 다양한 분야에서 제품을 공급하며 글로벌 시장에서 입지를 확대하고 있다."
         },
         {
           "title": "딥엑스-울트라리틱스, AI 반도체 플랫폼 통합",
           "url": "http://www.hansbiz.co.kr/news/articleView.html?idxno=839241",
           "date": "05-17",
-          "summary": "딥엑스가 울트라리틱스와 협력하여 NPU를 YOLO AI 모델에 통합했다. 이를 통해 개발자들은 딥엑스 칩에 최적화된 AI 모델을 간편하게 배포할 수 있게 되었다. 딥엑스는 초저전력 환경에서 피지컬 AI 구현을 목표로 글로벌 시장에서 경쟁력을 강화하고 있다."
+          "summary": "딥엑스는 울트라리틱스와 협력하여 자사 NPU를 YOLO AI 모델에 통합했다. 개발자들은 단순한 명령어 입력만으로 딥엑스 칩에 최적화된 AI 모델을 배포할 수 있게 되었다. 이 협력은 딥엑스가 글로벌 비전 AI 생태계에서 입지를 강화하는 계기가 될 것으로 보인다."
+        },
+        {
+          "title": "딥엑스 NPU, 비전AI 플랫폼 'YOLO' 디폴트 HW 옵션 중 하나로",
+          "url": "https://www.mt.co.kr/future/2026/05/15/2026051515240463618",
+          "date": "05-15",
+          "summary": "딥엑스는 울트라리틱스와 파트너십을 맺고, YOLO 모델 사용자들에게 자사 NPU를 기본 옵션으로 제공한다. 개발자들은 단순 명령어로 AI 모델을 딥엑스 칩에 최적화해 배포할 수 있는 원클릭 개발 환경을 이용할 수 있다. 이는 하드웨어 통합 문제를 해결하고 글로벌 시장에서 한국 AI 반도체의 입지를 강화하는 중요한 사례로 평가된다."
         }
       ]
     },
@@ -161,19 +182,19 @@
           "title": "'학습' 넘어 '추론'으로… 차세대 AI 반도체 아키텍처 기술 워크숍 '성료...",
           "url": "https://www.etnews.com/20260522000074",
           "date": "05-22",
-          "summary": "하이퍼엑셀이 차세대 AI 반도체 아키텍처 기술 워크숍을 개최했다. 워크숍에서는 AI 반도체 개발의 시스템/아키텍처 단계와 HW·SW 통합 설계가 중점적으로 논의되었다. 전력 관리와 발열 제어 등 엣지 환경에 맞춘 최적화 기술이 주요 주제로 다뤄졌다."
+          "summary": "AI 반도체 시장이 학습에서 추론 중심으로 변화하는 가운데, 차세대 AI 반도체 기술 워크숍이 서울에서 개최됐다. 워크숍에서는 칩 아키텍처 설계와 소프트웨어 통합 기술 등 차세대 AI 반도체 개발 전략이 논의됐다. 특히, 전력 관리와 발열 제어 같은 시스템 최적화의 중요성이 강조되었다."
         },
         {
           "title": "하이퍼엑셀, 차세대 인공지능 칩 '카르멘' 개발 착수",
           "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421214",
           "date": "05-21",
-          "summary": "하이퍼엑셀이 차세대 AI 반도체 '카르멘' 개발에 착수했다. 데이터센터용으로 설계된 이 칩은 2028년 개념검증(PoC)을 목표로 하며, 3D IC와 HBF 등 신기술 도입을 검토 중이다. 이후 온디바이스용 '카르멘-엣지' 개발도 계획하고 있다."
+          "summary": "하이퍼엑셀이 차세대 AI 반도체 '카르멘' 개발에 착수했으며, 2028년 PoC를 목표로 하고 있다. 이 칩은 데이터센터용으로 설계되며, 3D IC와 HBF 등 신기술 도입이 검토되고 있다. 이후 온디바이스용 '카르멘-엣지' 개발도 계획 중이다."
         },
         {
           "title": "[기획]이진원 하이퍼엑셀 CTO “단기 과제·실패 용인, AI 반도체 성공 ...",
           "url": "https://www.etnews.com/20260515000265",
           "date": "05-17",
-          "summary": "하이퍼엑셀 CTO 이진원이 한국의 AI와 반도체 기술 역량을 강조하며, 단기 과제와 실패를 용인하는 환경이 필요하다고 언급했다. 그는 정부의 지원이 AI 반도체 상용화와 시장 진입에 큰 역할을 하고 있다고 평가했다. 기술 고도화를 위해 짧은 주기의 과제 기획이 중요하다고 제언했다."
+          "summary": "하이퍼엑셀 CTO 이진원은 한국이 AI 반도체 시장에서 큰 역할을 할 수 있는 기술적 강점을 가지고 있다고 평가했다. 그는 단기 과제와 정부 지원이 AI 반도체 기술 상용화에 중요한 역할을 하고 있다고 언급했다. 또한, GPU 대안으로 AI 반도체의 중요성이 커지고 있다고 강조했다."
         }
       ]
     },
@@ -182,22 +203,16 @@
       "region": "korea",
       "items": [
         {
+          "title": "Mobilint Registers Two AI Semiconductor Products on Korea's Public Procurement Marketplace - thelec.net",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1SaVk1SmJGaE1EeS03WmdsNlBTLVNISHVQVzB0MF9aZ2hYODVTS1d6V3FpRExzUkRZdjFXblVBcTZxWmxPdTNtaS01VEFjRE1FR2RYbUctYTJsT3FmZ1VDQVVhaGNRS0k?oc=5",
+          "date": "05-23",
+          "summary": "모빌린트가 AI 반도체 제품 두 가지를 한국 조달청의 혁신제품으로 등록했다. MLX-A1과 MLA100은 각각 온디바이스 AI 컴퓨터와 PCIe 카드 형태의 AI 가속기로, 공공기관의 AI 인프라 도입을 지원할 예정이다. 이는 공공 AI 시장 공략의 일환으로, 공공기관 중심의 도입 사례 확대를 목표로 한다."
+        },
+        {
           "title": "모빌린트 'NPU 솔루션' 조달청 혁신제품 등록…\"공공시장 공략\"",
           "url": "https://www.mt.co.kr/future/2026/05/22/2026052214135044338",
           "date": "05-22",
-          "summary": "모빌린트가 NPU 기반 AI 솔루션 'MLX-A1'과 'MLA100'을 조달청 혁신제품으로 등록했다. 이를 통해 공공기관이 해당 제품을 신속히 도입할 수 있는 길이 열렸다. 두 제품은 온디바이스 AI와 PCIe 카드형 AI 가속기로 설계되었다."
-        },
-        {
-          "title": "모빌린트, AI 반도체 2종 조달청 쇼핑몰 등록",
-          "url": "https://www.thelec.kr/news/articleView.html?idxno=57047",
-          "date": "05-22",
-          "summary": "모빌린트의 NPU 기반 AI 제품 'MLX-A1'과 'MLA100'이 조달청 혁신제품으로 지정되었다. 이로 인해 공공기관은 해당 제품을 빠르게 도입할 수 있게 되었으며, 공공 AI 인프라에 적합한 고성능·저전력 솔루션으로 주목받고 있다. 제품은 교육, 스마트 제조, 공공 안전 등 다양한 분야에서 활용 가능하다."
-        },
-        {
-          "title": "모빌린트, 국산 NPU 솔루션으로 공공 AI 시장 진입",
-          "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=668262",
-          "date": "05-22",
-          "summary": "모빌린트가 자사 NPU 기반 AI 솔루션을 조달청 혁신제품으로 등록하며 공공 AI 시장에 진입했다. MLX-A1과 MLA100은 엣지 AI 환경에서 독립적으로 작동하거나 기존 서버에 추가 기능을 제공할 수 있다. 이번 등록으로 공공기관의 국산 AI 반도체 도입이 용이해졌다."
+          "summary": "모빌린트는 AI 연산용 컴퓨터 'MLX-A1'과 PCIe 카드 'MLA100'을 조달청 나라장터에 혁신제품으로 등록했다. 이로 인해 공공기관이 모빌린트의 AI 솔루션을 보다 쉽게 도입할 수 있게 되었다. 두 제품은 전력 효율성과 가격 경쟁력을 강조하며 공공 AI 시장을 목표로 하고 있다."
         }
       ]
     }
