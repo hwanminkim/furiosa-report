@@ -290,34 +290,55 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
     if client is None or not articles: return articles
     numbered_items = []
     for i, a in enumerate(articles):
-        desc = (a.get("description") or "").replace("\n", " ").strip()[:150]
+        desc = (a.get("description") or "").replace("\n", " ").strip()[:200]
         numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
     numbered = "\n".join(numbered_items)
-    prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다. BD 및 시장 동향 파악에 유용한 정보인지 판단하세요.
+    prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다. 각 기사에 대해 '{company}'의 관련도를 1~3점으로 평가하세요.
+
+## 점수 기준
+
+**3점 — 회사가 기사의 주체**
+'{company}'가 직접 무언가를 한 것이 기사의 핵심. 제목에 회사명이 등장하는 경우가 많음.
+예: "{company}, 신규 계약 체결" / "{company} 신제품 발표" / "{company} 투자 유치" / "{company} 대표 인터뷰"
+
+**2점 — 공동 주체**
+'{company}'가 다자간 사건의 핵심 당사자 중 하나. 제목 또는 첫 문단에 회사명이 등장하고 액션의 한 축을 담당.
+예: "삼성-{company} 협력 발표" / "A사·B사·{company} 컨소시엄 출범"
+
+**1점 — 단순 언급 (제외 대상)**
+기사 본질은 다른 곳에 있고 '{company}'는 곁다리로 언급됨.
+예: 다른 회사가 주체인 기사에 '{company}' 한 줄 언급 / 시황·증시 기사 / 트렌드 기사에서 후발주자 나열 중 하나로 거론 / 단순 행사 알림에 연사로 한 명 등장
+
+## 판단 원칙
+- 애매하면 낮은 점수.
+- 제목에 '{company}'가 없고 본문 한 줄만 언급되면 1점.
+- 트렌드/시황/시장 분석 기사에서 여러 회사를 나열한 경우 1점.
+
 기사 목록:
 {numbered}
-## Keep 기준
-1. '{company}'가 주도적으로 무언가를 한 기사
-2. 업계 트렌드, 시장 분석 중 '{company}'가 의미 있게 언급된 경우
-## 제외 기준
-- 단순 주식 시황, 증시 마감
-- 기계적 공시
-응답 형식 (오직 JSON):
-{{"keep": [0, 2, 5]}}"""
+
+응답 형식 (오직 JSON, 모든 기사에 대해 점수 부여):
+{{"scores": [{{"id": 0, "score": 3}}, {{"id": 1, "score": 1}}, ...]}}"""
     try:
         resp = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=400,
+            max_tokens=600,
             temperature=0.1,
             response_format={"type": "json_object"},
         )
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
-        keep = data.get("keep", [])
-        valid = [i for i in keep if isinstance(i, int) and 0 <= i < len(articles)]
-        return [articles[i] for i in valid]
+        scores = data.get("scores", [])
+        kept_indices = []
+        for entry in scores:
+            idx = entry.get("id")
+            score = entry.get("score")
+            if isinstance(idx, int) and 0 <= idx < len(articles) and isinstance(score, int) and score >= 2:
+                kept_indices.append(idx)
+        kept_indices.sort()
+        return [articles[i] for i in kept_indices]
     except Exception:
         return articles
 
@@ -390,7 +411,7 @@ def generate_competitor_summaries(articles_with_company: list[tuple], client: "O
     items_in = []
     for i, (company, a) in enumerate(articles_with_company):
         items_in.append({
-            "id": i, "company": company, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]
+            "id": i, "company": company, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:500]
         })
     prompt = f"""다음은 AI 반도체 경쟁사 뉴스 기사 목록입니다.
 
@@ -401,10 +422,11 @@ def generate_competitor_summaries(articles_with_company: list[tuple], client: "O
 - "~분야의 경쟁력을 높이는 데 중요한 역할을 할 것이다"
 - "~기술의 발전에 기여할 것으로 기대된다"
 - "기대된다", "전망된다" 같은 막연한 미래 추측
+- "본문 정보 부족", "원문 확인 필요", "추가 정보 필요" 등 정보 부족을 명시하는 문구
 
 ## 작성 원칙
 1. 제목과 snippet에 있는 사실만 활용.
-2. 정보가 부족하면 "본문 정보 부족 — 원문 확인 필요"로 마무리.
+2. 정보가 적더라도 제목과 snippet에서 추출 가능한 사실만으로 자연스러운 3문장 요약을 작성. 정보 부족을 언급하지 말 것.
 
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
@@ -436,13 +458,19 @@ def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") ->
     if client is None or not articles: return {}
     items_in = []
     for i, a in enumerate(articles):
-        items_in.append({"id": i, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]})
+        items_in.append({"id": i, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:500]})
     prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
 
 각 기사에 대해 한국어 요약을 만들어 주세요:
 - "summary": 3문장, 사실 위주.
 
-진부한 일반론 금지. 정보 부족시 "본문 정보 부족 — 원문 확인 필요"로 마무리.
+진부한 일반론 금지.
+
+## 절대 금지 표현
+- "본문 정보 부족", "원문 확인 필요", "추가 정보 필요" 등 정보 부족을 명시하는 문구
+- "기대된다", "전망된다" 같은 막연한 미래 추측
+
+정보가 적더라도 제목과 snippet에서 추출 가능한 사실만으로 자연스러운 3문장 요약을 작성. 정보 부족을 언급하지 말 것.
 
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
