@@ -306,7 +306,7 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
 
 def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> list[dict]:
     """
-    Furiosa AI가 주체로 등장한 기사만 keep. 단순 언급/사이드 등장은 제외.
+    Furiosa AI 관련 기사 필터. 단순 한 줄 사이드 언급/시황/완전 무관만 제외.
     """
     if client is None or not articles: return articles
     numbered_items = []
@@ -315,24 +315,25 @@ def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> lis
         numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
     numbered = "\n".join(numbered_items)
     prompt = f"""다음은 'Furiosa AI(퓨리오사AI)' 키워드로 검색된 뉴스 기사 목록입니다.
-**Furiosa AI가 주체(주어)로 등장한 기사만** keep 하세요.
+Furiosa AI 관련 정보가 의미 있게 담긴 기사인지 판단하세요.
 
-## Keep 기준 (이 중 하나라도 명확하면 keep)
-1. 제목에 'Furiosa', '퓨리오사' 등이 직접 등장하고 그것이 기사의 주된 주체
-2. Furiosa AI가 발표/투자/제품/협력 등 행동의 주체로 명시
-3. Furiosa AI의 칩, 사업, 인사, 전략을 핵심으로 다룬 기사
+## Keep 기준 (다음 중 하나라도 해당하면 keep)
+1. 제목 또는 요약에 'Furiosa', '퓨리오사'가 등장
+2. Furiosa AI가 발표/투자/제품/협력/실적 등의 주체
+3. Furiosa AI와 다른 회사 간 협력 (예: "A사와 퓨리오사AI 협력")
+   → 협력 기사는 무조건 keep. 협력의 주체가 누구든 상관 없음.
+4. Furiosa AI 제품(NPU, 레니게이드 등)이 다른 솔루션과 결합된 사례
+5. Furiosa AI의 사업/투자/IPO/인사/전략/대표 발언 관련
+6. Furiosa AI가 투자 대상으로 명시된 정부 펀드/금융 기사
 
-## 제외 기준 (이 중 하나라도 해당하면 제외)
-1. **다른 회사가 주체이고 Furiosa AI는 본문 중 한 문단 정도로 사이드 언급된 경우**
-   예: "리벨리온이 데이터센터 구축... 한편 퓨리오사AI도 데이터센터에 입주했다"
-   → 주체는 리벨리온, 제외.
-2. 업계 트렌드 기사에서 'NVIDIA, 리벨리온, 퓨리오사' 식으로 나열만 된 경우
-3. 단순 주식 시황, 증시 마감
-4. 정부/협회 정책 발표에서 여러 기업 중 하나로 언급된 경우
+## 제외 기준 (다음 중 하나라도 명백하면 제외)
+1. 단순 주식 시황, 증시 마감 (예: "코스피 마감")
+2. 다른 회사 기사 끝에 "퓨리오사AI 등 ~ 기업도" 식 한 줄만 단순 나열
+3. 완전 무관한 기사가 잘못 검색됨 (예: 행사·포럼 단순 알림 + 퓨리오사 대표가 연사 한 명일 뿐)
 
 ## 판단 원칙
-**제목과 요약에서 Furiosa가 주인공인가?**가 핵심 질문.
-애매하면 제외. 보수적으로 판단.
+**제목이나 요약에 '퓨리오사'가 있고, 한 줄 단순 언급이 아니면 keep.**
+**애매하면 keep.** 명백히 무관한 것만 제외.
 
 기사 목록:
 {numbered}
