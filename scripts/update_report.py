@@ -210,6 +210,22 @@ def build_period(now: datetime.datetime) -> str:
     days_ko = ["(월)", "(화)", "(수)", "(목)", "(금)", "(토)", "(일)"]
     return f"{week_start.strftime('%Y-%m-%d')}{days_ko[week_start.weekday()]} ~ {today.strftime('%Y-%m-%d')}{days_ko[today.weekday()]}"
 
+_KOREAN_PARTICLES = (
+    "에서는", "에서도", "에서", "에게도", "에게서", "에게", "한테",
+    "까지", "부터", "조차", "마저", "에는", "에도",
+    "으로", "라고", "이라고",
+    "은", "는", "이", "가", "을", "를", "와", "과", "의", "도", "만",
+    "에", "로", "서",
+)
+
+def _normalize_korean(word: str) -> str:
+    """Strip common Korean particles from word end to merge variants like 퓨리오사/퓨리오사와, 동서발전/동서발전서."""
+    if not word: return word
+    for p in _KOREAN_PARTICLES:
+        if word.endswith(p) and len(word) - len(p) >= 2:
+            return word[:-len(p)]
+    return word
+
 def _extract_keywords(title: str) -> set:
     if not title:
         return set()
@@ -219,7 +235,16 @@ def _extract_keywords(title: str) -> set:
         "지난", "오는", "올해", "내년", "최근", "이번", "그리고", "또는", "하는",
         "the", "and", "for", "with", "from", "into", "this", "that", "have",
     }
-    return {w.lower() for w in words if w.lower() not in stopwords}
+    result = set()
+    for w in words:
+        lw = w.lower()
+        if lw in stopwords: continue
+        # Hangul words: strip particle suffix
+        if re.match(r"^[가-힣]+$", lw):
+            lw = _normalize_korean(lw)
+            if len(lw) < 2: continue
+        result.add(lw)
+    return result
 
 
 def dedup_by_keyword_overlap(articles: list[dict], min_overlap: int = 3) -> list[dict]:
