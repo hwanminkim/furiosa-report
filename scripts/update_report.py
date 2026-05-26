@@ -260,7 +260,7 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
 
 def filter_relevant_by_company(company: str, articles: list[dict], client: "OpenAI | None") -> list[dict]:
     """
-    회사가 기사의 '주체'인 경우만 keep. 단순 언급/나열은 제외.
+    회사 관련 기사 필터. 단순 나열/시황 제외하고 나머지는 관대하게 keep.
     """
     if client is None or not articles: return articles
     numbered_items = []
@@ -268,26 +268,23 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
         desc = (a.get("description") or "").replace("\n", " ").strip()[:200]
         numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
     numbered = "\n".join(numbered_items)
-    prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다.
-**'{company}'가 기사의 주체(주어)로 등장한 기사만** keep 하세요.
+    prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다. BD 및 시장 동향 파악에 유용한 정보인지 판단하세요.
 
-## Keep 기준 (이 중 하나라도 명확하면 keep)
-1. 제목에 '{company}'가 직접 등장하고 그것이 기사의 주된 주체
-2. '{company}'가 발표/투자/제품/협력/실적 등 행동의 주체로 명시
-3. '{company}'의 칩, 사업, 인사, 전략을 핵심으로 다룬 기사
-4. '{company}'가 협력의 주요 당사자 중 하나인 경우 (예: "A사와 {company}, 파트너십 체결")
+## Keep 기준 (대부분 keep, 다음과 같으면 keep)
+1. '{company}'가 발표/투자/제품/협력 등 행동의 주체
+2. '{company}'가 협력의 주요 당사자 (예: "A사와 {company}, 파트너십")
+3. '{company}'가 투자/펀드의 핵심 대상으로 명시 (예: "{company}에 150억 투자")
+4. '{company}'의 제품, 사업, 인사, 전략을 다룬 기사
+5. 업계 트렌드 기사에서 '{company}'가 의미 있는 비중으로 다뤄진 경우
 
-## 제외 기준 (이 중 하나라도 해당하면 제외)
-1. **다른 회사가 주체이고 '{company}'는 본문 중 사이드로 짧게 언급된 경우**
-   예: "정부, 150조 펀드 발표... 리벨리온 등이 수혜 예상"
-   → 주체는 정부 정책, 제외.
-2. 업계 트렌드 기사에서 'NVIDIA, 리벨리온, 퓨리오사' 식으로 여러 기업 중 하나로 나열만 된 경우
-3. 단순 주식 시황, 증시 마감, 기계적 공시
-4. 정부/협회 정책 발표에서 여러 기업 중 하나로 언급된 경우
+## 제외 기준 (다음 중 하나라도 명백하면 제외)
+1. 단순 주식 시황, 증시 마감
+2. 기계적 공시
+3. '{company}'가 본문 끝에 한 줄로만 단순 나열된 경우
+   (예: "AI 반도체 시장... NVIDIA, 리벨리온, 퓨리오사 등 다양한 기업 활동")
 
 ## 판단 원칙
-**제목과 요약에서 '{company}'가 주인공인가?**가 핵심 질문.
-애매하면 제외. 보수적으로 판단.
+**애매하면 keep. 명백히 무관한 것만 제외.**
 
 기사 목록:
 {numbered}
