@@ -22,20 +22,27 @@ REPO_ROOT = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
 
 COMPANIES = [
-    {"name": "NVIDIA", "region": "global", "queries": [("NVIDIA", "en")]},
-    {"name": "Tenstorrent", "region": "global", "queries": [("Tenstorrent", "en")]},
-    {"name": "SambaNova", "region": "global", "queries": [("SambaNova", "en")]},
-    {"name": "Cerebras", "region": "global", "queries": [("Cerebras", "en")]},
-    {"name": "Rebellions", "region": "korea", "queries": [("리벨리온", "ko"), ("Rebellions", "en")]},
-    {"name": "DeepX", "region": "korea", "queries": [("딥엑스", "ko"), ("DeepX", "en")]},
-    {"name": "HyperAccel", "region": "korea", "queries": [("하이퍼엑셀", "ko"), ("HyperAccel", "en")]},
-    {"name": "Mobilint", "region": "korea", "queries": [("모빌린트", "ko"), ("Mobilint", "en")]},
+    {"name": "NVIDIA", "region": "global", "aliases": ["NVIDIA", "엔비디아"], "queries": [("NVIDIA", "en")]},
+    {"name": "Tenstorrent", "region": "global", "aliases": ["Tenstorrent", "텐스토렌트"], "queries": [("Tenstorrent", "en")]},
+    {"name": "SambaNova", "region": "global", "aliases": ["SambaNova", "삼바노바"], "queries": [("SambaNova", "en")]},
+    {"name": "Cerebras", "region": "global", "aliases": ["Cerebras", "세레브라스"], "queries": [("Cerebras", "en")]},
+    {"name": "Rebellions", "region": "korea", "aliases": ["Rebellions", "리벨리온"], "queries": [("리벨리온", "ko"), ("Rebellions", "en")]},
+    {"name": "DeepX", "region": "korea", "aliases": ["DeepX", "딥엑스"], "queries": [("딥엑스", "ko"), ("DeepX", "en")]},
+    {"name": "HyperAccel", "region": "korea", "aliases": ["HyperAccel", "하이퍼엑셀"], "queries": [("하이퍼엑셀", "ko"), ("HyperAccel", "en")]},
+    {"name": "Mobilint", "region": "korea", "aliases": ["Mobilint", "모빌린트"], "queries": [("모빌린트", "ko"), ("Mobilint", "en")]},
 ]
 
 FURIOSA_QUERIES = [
     ('furiosa ai OR furiosaai OR "Furiosa AI" chip', "en"),
     ('퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
 ]
+
+FURIOSA_ALIASES = ["Furiosa", "퓨리오사", "FuriosaAI", "furiosaai"]
+
+def title_contains_alias(title: str, aliases: list[str]) -> bool:
+    if not title or not aliases: return False
+    t_lower = title.lower()
+    return any(alias.lower() in t_lower for alias in aliases)
 
 def gnews_url(query: str, lang: str) -> str:
     if lang == "ko":
@@ -286,10 +293,16 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
     except Exception:
         return articles
 
-def filter_relevant_by_company(company: str, articles: list[dict], client: "OpenAI | None") -> list[dict]:
-    if client is None or not articles: return articles
+def filter_relevant_by_company(company: str, aliases: list[str], articles: list[dict], client: "OpenAI | None") -> list[dict]:
+    if not articles: return articles
+    # Hard rule: 제목에 회사 alias가 없으면 즉시 제외
+    title_matched = [a for a in articles if title_contains_alias(a.get("title", ""), aliases)]
+    if not title_matched:
+        return []
+    if client is None:
+        return title_matched
     numbered_items = []
-    for i, a in enumerate(articles):
+    for i, a in enumerate(title_matched):
         desc = (a.get("description") or "").replace("\n", " ").strip()[:200]
         numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
     numbered = "\n".join(numbered_items)
@@ -342,20 +355,25 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
         for entry in scores:
             idx = entry.get("id")
             score = entry.get("score")
-            if isinstance(idx, int) and 0 <= idx < len(articles) and isinstance(score, int) and score >= 2:
+            if isinstance(idx, int) and 0 <= idx < len(title_matched) and isinstance(score, int) and score >= 2:
                 kept_indices.append(idx)
         kept_indices.sort()
-        return [articles[i] for i in kept_indices]
+        return [title_matched[i] for i in kept_indices]
     except Exception:
-        return articles
+        return title_matched
 
 def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> list[dict]:
     """
-    Furiosa AI 기사 필터. 3단계 점수제, 2점 이상만 keep.
+    Furiosa AI 기사 필터. 제목 alias 하드 룰 + 3단계 점수제, 2점 이상만 keep.
     """
-    if client is None or not articles: return articles
+    if not articles: return articles
+    title_matched = [a for a in articles if title_contains_alias(a.get("title", ""), FURIOSA_ALIASES)]
+    if not title_matched:
+        return []
+    if client is None:
+        return title_matched
     numbered_items = []
-    for i, a in enumerate(articles):
+    for i, a in enumerate(title_matched):
         desc = (a.get("description") or "").replace("\n", " ").strip()[:200]
         numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
     numbered = "\n".join(numbered_items)
@@ -409,12 +427,12 @@ Furiosa AI와 다른 회사/기관이 **함께 액션을 수행**한 경우만 �
         for entry in scores:
             idx = entry.get("id")
             score = entry.get("score")
-            if isinstance(idx, int) and 0 <= idx < len(articles) and isinstance(score, int) and score >= 2:
+            if isinstance(idx, int) and 0 <= idx < len(title_matched) and isinstance(score, int) and score >= 2:
                 kept_indices.append(idx)
         kept_indices.sort()
-        return [articles[i] for i in kept_indices]
+        return [title_matched[i] for i in kept_indices]
     except Exception:
-        return articles
+        return title_matched
 
 
 def to_output(a: dict, kst: pytz.BaseTzInfo, include_summary: bool = False) -> dict:
@@ -553,7 +571,7 @@ def main():
                     seen_urls.add(a["url"])
                     fetched.append(a)
         recent = [a for a in fetched if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
-        relevant = filter_relevant_by_company(co["name"], recent, client)
+        relevant = filter_relevant_by_company(co["name"], co["aliases"], recent, client)
         deduped = cluster_articles_by_event(relevant, client)
         deduped.sort(key=lambda a: a["pub_dt"], reverse=True)
         companies_raw.append({"name": co["name"], "region": co["region"], "articles": deduped[:COMPETITOR_MAX_ITEMS]})
