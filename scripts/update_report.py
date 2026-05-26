@@ -297,22 +297,29 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
 
 ## 점수 기준
 
-**3점 — 회사가 기사의 주체**
-'{company}'가 직접 무언가를 한 것이 기사의 핵심. 제목에 회사명이 등장하는 경우가 많음.
+**3점 — 회사가 기사의 주체 (sole actor)**
+'{company}'가 직접 한 액션이 기사의 핵심. 제목이 회사의 행동을 묘사.
 예: "{company}, 신규 계약 체결" / "{company} 신제품 발표" / "{company} 투자 유치" / "{company} 대표 인터뷰"
 
-**2점 — 공동 주체**
-'{company}'가 다자간 사건의 핵심 당사자 중 하나. 제목 또는 첫 문단에 회사명이 등장하고 액션의 한 축을 담당.
-예: "삼성-{company} 협력 발표" / "A사·B사·{company} 컨소시엄 출범"
+**2점 — 양측이 함께 능동적 액션을 한 공동 주체 (co-actor)**
+'{company}'와 다른 회사/기관이 **함께 액션을 수행**한 경우만 해당. 회사가 능동적 당사자여야 함.
+예: "삼성-{company} 협력 발표" / "{company}, A사와 MOU 체결" / "A사·B사·{company} 컨소시엄 출범"
 
-**1점 — 단순 언급 (제외 대상)**
-기사 본질은 다른 곳에 있고 '{company}'는 곁다리로 언급됨.
-예: 다른 회사가 주체인 기사에 '{company}' 한 줄 언급 / 시황·증시 기사 / 트렌드 기사에서 후발주자 나열 중 하나로 거론 / 단순 행사 알림에 연사로 한 명 등장
+**1점 — 단순 언급, 수동적 객체, 사이드 등장 (제외 대상)**
+다음 케이스는 **무조건 1점**:
+- 펀드/투자 기사에서 '{company}'가 *투자 대상* 중 하나로만 언급 (예: "X펀드, A사·B사·{company}에 투자")
+- 트렌드/시장 분석/산업 동향 기사에서 여러 회사 중 하나로 나열 (예: "K-팹리스 기업들이 시장에 진출... A사·B사·{company} 등")
+- 다른 회사가 주체인 기사에 '{company}'가 곁다리로 언급 (예: 노타/딥엑스 기사 끝부분에 "{company} 등도" 식)
+- 시황·증시·주가 기사
+- 행사·포럼·전시회 알림에 '{company}' 임원이 연사 중 한 명으로 등장
+- '{company}' 제품/칩이 다른 솔루션의 부품으로 한 줄 언급
+- 정부 정책/펀드 기사에서 수혜자/대상자로 언급
 
-## 판단 원칙
-- 애매하면 낮은 점수.
-- 제목에 '{company}'가 없고 본문 한 줄만 언급되면 1점.
-- 트렌드/시황/시장 분석 기사에서 여러 회사를 나열한 경우 1점.
+## 핵심 원칙
+- 회사가 **능동적 주체(actor)**여야 2점 이상. **수동적 객체(object)**거나 *언급되는 대상*이면 1점.
+- 기사 제목이 다른 회사·주체의 행동을 묘사하면 거의 항상 1점.
+- 트렌드 기사에서 다른 여러 회사와 함께 나열되면 1점.
+- 애매하면 1점.
 
 기사 목록:
 {numbered}
@@ -344,7 +351,7 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
 
 def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> list[dict]:
     """
-    Furiosa AI 관련 기사 필터. 단순 한 줄 사이드 언급/시황/완전 무관만 제외.
+    Furiosa AI 기사 필터. 3단계 점수제, 2점 이상만 keep.
     """
     if client is None or not articles: return articles
     numbered_items = []
@@ -352,46 +359,60 @@ def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> lis
         desc = (a.get("description") or "").replace("\n", " ").strip()[:200]
         numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
     numbered = "\n".join(numbered_items)
-    prompt = f"""다음은 'Furiosa AI(퓨리오사AI)' 키워드로 검색된 뉴스 기사 목록입니다.
-Furiosa AI 관련 정보가 의미 있게 담긴 기사인지 판단하세요.
+    prompt = f"""다음은 'Furiosa AI(퓨리오사AI)' 키워드로 검색된 뉴스 기사 목록입니다. 각 기사에 대해 Furiosa AI의 관련도를 1~3점으로 평가하세요.
 
-## Keep 기준 (다음 중 하나라도 해당하면 keep)
-1. 제목 또는 요약에 'Furiosa', '퓨리오사'가 등장
-2. Furiosa AI가 발표/투자/제품/협력/실적 등의 주체
-3. Furiosa AI와 다른 회사 간 협력 (예: "A사와 퓨리오사AI 협력")
-   → 협력 기사는 무조건 keep. 협력의 주체가 누구든 상관 없음.
-4. Furiosa AI 제품(NPU, 레니게이드 등)이 다른 솔루션과 결합된 사례
-5. Furiosa AI의 사업/투자/IPO/인사/전략/대표 발언 관련
-6. Furiosa AI가 투자 대상으로 명시된 정부 펀드/금융 기사
+## 점수 기준
 
-## 제외 기준 (다음 중 하나라도 명백하면 제외)
-1. 단순 주식 시황, 증시 마감 (예: "코스피 마감")
-2. 다른 회사 기사 끝에 "퓨리오사AI 등 ~ 기업도" 식 한 줄만 단순 나열
-3. 완전 무관한 기사가 잘못 검색됨 (예: 행사·포럼 단순 알림 + 퓨리오사 대표가 연사 한 명일 뿐)
+**3점 — Furiosa AI가 기사의 주체 (sole actor)**
+Furiosa AI가 직접 한 액션이 기사의 핵심. 제목이 Furiosa AI의 행동을 묘사.
+예: "퓨리오사AI, 신규 계약 체결" / "퓨리오사AI 레니게이드 발표" / "퓨리오사AI 투자 유치" / "백준호 대표 인터뷰"
 
-## 판단 원칙
-**제목이나 요약에 '퓨리오사'가 있고, 한 줄 단순 언급이 아니면 keep.**
-**애매하면 keep.** 명백히 무관한 것만 제외.
+**2점 — 양측이 함께 능동적 액션을 한 공동 주체 (co-actor)**
+Furiosa AI와 다른 회사/기관이 **함께 액션을 수행**한 경우만 해당. Furiosa AI가 능동적 당사자여야 함.
+예: "삼성-퓨리오사AI 협력 발표" / "퓨리오사AI, A사와 MOU" / "A사·B사·퓨리오사AI 컨소시엄"
+주의: 단순 "A사 솔루션에 퓨리오사 NPU 탑재" 식 부품 언급은 1점.
+
+**1점 — 단순 언급, 수동적 객체, 사이드 등장 (제외 대상)**
+다음 케이스는 **무조건 1점**:
+- 펀드/투자 기사에서 퓨리오사AI가 *투자 대상* 중 하나로만 언급 (예: "X펀드, A사·B사·퓨리오사AI에 투자")
+- 트렌드/시장 분석/산업 동향 기사에서 여러 회사 중 하나로 나열 (예: "K-팹리스 기업들... 리벨리온·퓨리오사·딥엑스 등")
+- 다른 회사가 주체인 기사에 퓨리오사가 곁다리로 언급 (예: 노타/딥엑스 기사 끝부분에 "퓨리오사AI 등도" 식)
+- 시황·증시·주가 기사
+- 행사·포럼·전시회 알림에 백준호 대표가 연사 중 한 명으로 등장 (단순 알림)
+- 퓨리오사 제품/칩이 다른 솔루션의 부품으로 한 줄 언급
+- 정부 정책/펀드 기사에서 수혜자/대상자로 언급
+
+## 핵심 원칙
+- Furiosa AI가 **능동적 주체(actor)**여야 2점 이상. **수동적 객체(object)**거나 *언급되는 대상*이면 1점.
+- 기사 제목이 다른 회사·주체의 행동을 묘사하면 거의 항상 1점.
+- 트렌드 기사에서 다른 여러 회사와 함께 나열되면 1점.
+- 애매하면 1점.
 
 기사 목록:
 {numbered}
 
-응답 형식 (오직 JSON):
-{{"keep": [0, 2, 5]}}"""
+응답 형식 (오직 JSON, 모든 기사에 대해 점수 부여):
+{{"scores": [{{"id": 0, "score": 3}}, {{"id": 1, "score": 1}}, ...]}}"""
     try:
         resp = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=400,
+            max_tokens=600,
             temperature=0.1,
             response_format={"type": "json_object"},
         )
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
-        keep = data.get("keep", [])
-        valid = [i for i in keep if isinstance(i, int) and 0 <= i < len(articles)]
-        return [articles[i] for i in valid]
+        scores = data.get("scores", [])
+        kept_indices = []
+        for entry in scores:
+            idx = entry.get("id")
+            score = entry.get("score")
+            if isinstance(idx, int) and 0 <= idx < len(articles) and isinstance(score, int) and score >= 2:
+                kept_indices.append(idx)
+        kept_indices.sort()
+        return [articles[i] for i in kept_indices]
     except Exception:
         return articles
 
