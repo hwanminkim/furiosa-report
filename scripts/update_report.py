@@ -8,19 +8,15 @@ import html
 import json
 import os
 import re
+import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.parse import quote
 from urllib.request import urlopen, Request
 
 import pytz
 from openai import OpenAI
-
-try:
-    import trafilatura
-    _HAS_TRAFILATURA = True
-except ImportError:
-    _HAS_TRAFILATURA = False
 
 REPO_ROOT = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
@@ -37,11 +33,8 @@ COMPANIES = [
 ]
 
 FURIOSA_QUERIES = [
-    ('퓨리오사 OR 퓨리오사AI OR FuriosaAI OR "Furiosa AI"', "ko"),
-    ('퓨리오사AI 협력', "ko"),
-    ('퓨리오사AI 투자', "ko"),
-    ('퓨리오사AI 레니게이드 OR RNGD', "ko"),
-    ('백준호 퓨리오사', "ko"),
+    ('furiosa ai OR furiosaai OR "Furiosa AI" chip', "en"),
+    ('퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
 ]
 
 def gnews_url(query: str, lang: str) -> str:
@@ -89,31 +82,6 @@ def _strip_html(s: str) -> str:
     s = html.unescape(s)
     return s.strip()
 
-_BODY_CACHE: dict[str, str] = {}
-
-def fetch_article_body(url: str, min_chars: int = 200) -> str:
-    if not url or not _HAS_TRAFILATURA:
-        return ""
-    if url in _BODY_CACHE:
-        return _BODY_CACHE[url]
-    body = ""
-    try:
-        downloaded = trafilatura.fetch_url(url, no_ssl=True)
-        if downloaded:
-            extracted = trafilatura.extract(
-                downloaded,
-                include_comments=False,
-                include_tables=False,
-                no_fallback=False,
-                favor_precision=True,
-            )
-            if extracted and len(extracted.strip()) >= min_chars:
-                body = extracted.strip()
-    except Exception:
-        body = ""
-    _BODY_CACHE[url] = body
-    return body
-
 def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
     try:
         req = Request(gnews_url(query, lang), headers={"User-Agent": "Mozilla/5.0"})
@@ -131,44 +99,88 @@ def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
             results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": desc})
     return results
 
+def _parse_gdelt_seendate(raw: str) -> datetime.datetime | None:
+    if not raw or len(raw) < 15: return None
+    try:
+        dt = datetime.datetime.strptime(raw, "%Y%m%dT%H%M%SZ")
+        return dt.replace(tzinfo=pytz.utc)
+    except Exception:
+        return None
+
+def _fetch_gdelt(query: str, n: int) -> list[dict]:
+    full_query = f"{query} sourcelang:eng"
+    url = f"https://api.gdeltproject.org/api/v2/doc/doc?query={quote(full_query)}&mode=ArtList&maxrecords={n}&format=json&sort=DateDesc&timespan=30d"
+    req = Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    data = None
+    retry_delays = [2, 5]
+    for attempt in range(len(retry_delays) + 1):
+        try:
+            with urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            break
+        except HTTPError as e:
+            if e.code == 429 and attempt < len(retry_delays):
+                time.sleep(retry_delays[attempt])
+                continue
+            break
+        except Exception:
+            break
+    time.sleep(2)
+    if data is None: return []
+    results = []
+    for item in (data.get("articles") or [])[:n]:
+        title = (item.get("title") or "").strip()
+        link = (item.get("url") or "").strip()
+        pub_dt = _parse_gdelt_seendate(item.get("seendate") or "")
+        if title and link:
+            results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": ""})
+    return results
+
 def _fetch_naver(query: str, n: int) -> list[dict]:
     cid = os.environ.get("NAVER_CLIENT_ID")
     csec = os.environ.get("NAVER_CLIENT_SECRET")
     if not cid or not csec: return []
     naver_q = query.replace(" OR ", " | ")
+    url = f"https://openapi.naver.com/v1/search/news.json?query={quote(naver_q)}&display=100&sort=date"
+    req = Request(url, headers={"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": csec, "User-Agent": "Mozilla/5.0"})
+    try:
+        with urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except Exception:
+        return []
     results = []
-    seen_links = set()
-    # 페이지네이션: start=1, 101, 201, 301, 401 (총 500건까지 가져와 6일 전 기사도 포함되도록)
-    for start in (1, 101, 201, 301, 401):
-        url = f"https://openapi.naver.com/v1/search/news.json?query={quote(naver_q)}&display=100&start={start}&sort=date"
-        req = Request(url, headers={"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": csec, "User-Agent": "Mozilla/5.0"})
-        try:
-            with urlopen(req, timeout=10) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-        except Exception:
-            break
-        items = data.get("items", [])
-        if not items:
-            break
-        for item in items:
-            title = _strip_html(item.get("title", ""))
-            link = (item.get("originallink") or item.get("link") or "").strip()
-            if not (title and link) or link in seen_links:
-                continue
-            seen_links.add(link)
-            desc = _strip_html(item.get("description", ""))
-            pub_dt = parse_pub_datetime(item.get("pubDate") or "")
+    for item in data.get("items", [])[:n]:
+        title = _strip_html(item.get("title", ""))
+        link = (item.get("originallink") or item.get("link") or "").strip()
+        desc = _strip_html(item.get("description", ""))
+        pub_dt = parse_pub_datetime(item.get("pubDate") or "")
+        if title and link:
             results.append({"title": title, "url": link, "pub_dt": pub_dt, "description": desc})
-        if len(items) < 100:
-            break
-    return results[:n]
+    return results
 
 def fetch_articles(query: str, lang: str, n: int = 20) -> list[dict]:
     if lang == "ko":
         items = _fetch_naver(query, n)
         if items: return items
         return _fetch_google(query, lang, n)
-    return _fetch_google(query, lang, n)
+    items = _fetch_gdelt(query, n)
+    if not items:
+        return _fetch_google(query, lang, n)
+    has_empty_desc = any(not (a.get("description") or "").strip() for a in items)
+    if has_empty_desc:
+        rss_items = _fetch_google(query, lang, n)
+        rss_by_norm = {}
+        for r in rss_items:
+            norm = normalize_title(r.get("title", ""))
+            if norm and r.get("description"):
+                rss_by_norm[norm] = r["description"]
+        for a in items:
+            if (a.get("description") or "").strip():
+                continue
+            norm = normalize_title(a.get("title", ""))
+            if norm in rss_by_norm:
+                a["description"] = rss_by_norm[norm]
+    return items
 
 def build_period(now: datetime.datetime) -> str:
     today = now.date()
@@ -257,38 +269,22 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
     except Exception:
         return articles
 
-
 def filter_relevant_by_company(company: str, articles: list[dict], client: "OpenAI | None") -> list[dict]:
-    """
-    회사 관련 기사 필터. 단순 나열/시황 제외하고 나머지는 관대하게 keep.
-    """
     if client is None or not articles: return articles
     numbered_items = []
     for i, a in enumerate(articles):
-        desc = (a.get("description") or "").replace("\n", " ").strip()[:200]
+        desc = (a.get("description") or "").replace("\n", " ").strip()[:150]
         numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
     numbered = "\n".join(numbered_items)
     prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다. BD 및 시장 동향 파악에 유용한 정보인지 판단하세요.
-
-## Keep 기준 (대부분 keep, 다음과 같으면 keep)
-1. '{company}'가 발표/투자/제품/협력 등 행동의 주체
-2. '{company}'가 협력의 주요 당사자 (예: "A사와 {company}, 파트너십")
-3. '{company}'가 투자/펀드의 핵심 대상으로 명시 (예: "{company}에 150억 투자")
-4. '{company}'의 제품, 사업, 인사, 전략을 다룬 기사
-5. 업계 트렌드 기사에서 '{company}'가 의미 있는 비중으로 다뤄진 경우
-
-## 제외 기준 (다음 중 하나라도 명백하면 제외)
-1. 단순 주식 시황, 증시 마감
-2. 기계적 공시
-3. '{company}'가 본문 끝에 한 줄로만 단순 나열된 경우
-   (예: "AI 반도체 시장... NVIDIA, 리벨리온, 퓨리오사 등 다양한 기업 활동")
-
-## 판단 원칙
-**애매하면 keep. 명백히 무관한 것만 제외.**
-
 기사 목록:
 {numbered}
-
+## Keep 기준
+1. '{company}'가 주도적으로 무언가를 한 기사
+2. 업계 트렌드, 시장 분석 중 '{company}'가 의미 있게 언급된 경우
+## 제외 기준
+- 단순 주식 시황, 증시 마감
+- 기계적 공시
 응답 형식 (오직 JSON):
 {{"keep": [0, 2, 5]}}"""
     try:
@@ -310,7 +306,7 @@ def filter_relevant_by_company(company: str, articles: list[dict], client: "Open
 
 def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> list[dict]:
     """
-    Furiosa AI 관련 기사 필터. 단순 한 줄 언급/시황 제외, 나머지는 관대하게 keep.
+    Furiosa AI가 주체로 등장한 기사만 keep. 단순 언급/사이드 등장은 제외.
     """
     if client is None or not articles: return articles
     numbered_items = []
@@ -319,24 +315,24 @@ def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> lis
         numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
     numbered = "\n".join(numbered_items)
     prompt = f"""다음은 'Furiosa AI(퓨리오사AI)' 키워드로 검색된 뉴스 기사 목록입니다.
-Furiosa AI 관련 정보가 의미 있게 담긴 기사인지 판단하세요.
+**Furiosa AI가 주체(주어)로 등장한 기사만** keep 하세요.
 
-## Keep 기준 (대부분 keep, 다음이면 keep)
-1. 제목 또는 요약에 'Furiosa', '퓨리오사'가 등장
-2. Furiosa AI가 발표/투자/제품/협력 등 어떤 형태로든 주요하게 다뤄짐
-3. Furiosa AI와 다른 회사 간 협력 (예: "A사와 퓨리오사AI 협력")
-4. Furiosa AI 제품(NPU, 레니게이드 등)이 다른 솔루션과 결합된 사례
-5. Furiosa AI의 사업/투자/인사/전략 관련 내용
-6. 업계 트렌드/시장 분석에서 Furiosa AI가 의미 있는 비중으로 다뤄진 경우
+## Keep 기준 (이 중 하나라도 명확하면 keep)
+1. 제목에 'Furiosa', '퓨리오사' 등이 직접 등장하고 그것이 기사의 주된 주체
+2. Furiosa AI가 발표/투자/제품/협력 등 행동의 주체로 명시
+3. Furiosa AI의 칩, 사업, 인사, 전략을 핵심으로 다룬 기사
 
-## 제외 기준 (다음 중 하나라도 명백하면 제외)
-1. 단순 주식 시황, 증시 마감
-2. 다른 회사 기사 끝에 "퓨리오사AI 등 ~ 분야 기업도 있다" 식으로 한 줄만 단순 나열
-   (단, 한 문단 이상 비중 있게 다뤄지면 keep)
-3. 완전 무관한 기사가 잘못 검색된 경우
+## 제외 기준 (이 중 하나라도 해당하면 제외)
+1. **다른 회사가 주체이고 Furiosa AI는 본문 중 한 문단 정도로 사이드 언급된 경우**
+   예: "리벨리온이 데이터센터 구축... 한편 퓨리오사AI도 데이터센터에 입주했다"
+   → 주체는 리벨리온, 제외.
+2. 업계 트렌드 기사에서 'NVIDIA, 리벨리온, 퓨리오사' 식으로 나열만 된 경우
+3. 단순 주식 시황, 증시 마감
+4. 정부/협회 정책 발표에서 여러 기업 중 하나로 언급된 경우
 
 ## 판단 원칙
-**애매하면 keep. 명백히 무관하거나 한 줄짜리 단순 나열만 제외.**
+**제목과 요약에서 Furiosa가 주인공인가?**가 핵심 질문.
+애매하면 제외. 보수적으로 판단.
 
 기사 목록:
 {numbered}
@@ -375,27 +371,22 @@ def generate_competitor_summaries(articles_with_company: list[tuple], client: "O
     if client is None or not articles_with_company: return {}
     items_in = []
     for i, (company, a) in enumerate(articles_with_company):
-        body = fetch_article_body(a.get("url", ""))
-        snippet = body if body else (a.get("description") or "")
         items_in.append({
-            "id": i, "company": company, "title": a.get("title", ""), "snippet": snippet[:1500]
+            "id": i, "company": company, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]
         })
     prompt = f"""다음은 AI 반도체 경쟁사 뉴스 기사 목록입니다.
 
 각 기사에 대해 한국어 요약을 만들어 주세요:
-- "summary": 3문장, 사실 위주, 250~350자. 무엇/언제/어떻게를 포함.
+- "summary": 3문장, 사실 위주, 250~350자.
 
-## 절대 금지 표현 (이런 일반론 문장은 쓰지 말 것)
+## 절대 금지 표현
 - "~분야의 경쟁력을 높이는 데 중요한 역할을 할 것이다"
 - "~기술의 발전에 기여할 것으로 기대된다"
-- "~시장에서의 경쟁력을 높이는 데 중요한 역할을 할 것이다"
-- "~산업 전반의 혁신을 촉진할 것으로 기대된다"
 - "기대된다", "전망된다" 같은 막연한 미래 추측
 
 ## 작성 원칙
-1. 제목과 snippet에 있는 사실만 활용. 없는 정보 만들어내지 말 것.
-2. 정보가 부족하면 짧게 1~2문장으로만 요약하고 끝낼 것. 억지로 늘리지 말 것.
-3. 추측 금지. 일반론 절대 금지.
+1. 제목과 snippet에 있는 사실만 활용.
+2. 정보가 부족하면 "본문 정보 부족 — 원문 확인 필요"로 마무리.
 
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
@@ -427,23 +418,13 @@ def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") ->
     if client is None or not articles: return {}
     items_in = []
     for i, a in enumerate(articles):
-        body = fetch_article_body(a.get("url", ""))
-        snippet = body if body else (a.get("description") or "")
-        items_in.append({"id": i, "title": a.get("title", ""), "snippet": snippet[:1500]})
+        items_in.append({"id": i, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:240]})
     prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
 
 각 기사에 대해 한국어 요약을 만들어 주세요:
-- "summary": 3문장, 사실 위주로 핵심 내용을 충분히 풀어쓰기.
+- "summary": 3문장, 사실 위주.
 
-## 절대 금지 표현
-- "~분야의 경쟁력을 높이는 데 중요한 역할을 할 것이다"
-- "~기술의 발전에 기여할 것으로 기대된다"
-- "~산업 전반의 혁신을 촉진할 것으로 기대된다"
-- 막연한 추측/일반론 마무리 문장
-
-## 작성 원칙
-1. 제목과 snippet에 있는 사실만 활용. 없는 정보 만들어내지 말 것.
-2. 정보가 부족하면 짧게 1~2문장으로만 요약하고 끝낼 것. 억지로 늘리지 말 것.
+진부한 일반론 금지. 정보 부족시 "본문 정보 부족 — 원문 확인 필요"로 마무리.
 
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
@@ -477,13 +458,11 @@ def main():
     now_utc = now.astimezone(pytz.utc)
     
     daily_start_kst = kst.localize(datetime.datetime.combine(
-        now.date(),
-        datetime.time(0, 0)
+        now.date(), datetime.time(0, 0)
     ))
     daily_cutoff = daily_start_kst.astimezone(pytz.utc)
     weekly_start_kst = kst.localize(datetime.datetime.combine(
-        now.date() - datetime.timedelta(days=6),
-        datetime.time(0, 0)
+        now.date() - datetime.timedelta(days=6), datetime.time(0, 0)
     ))
     weekly_cutoff = weekly_start_kst.astimezone(pytz.utc)
     
@@ -492,6 +471,7 @@ def main():
     token = os.environ.get("GITHUB_TOKEN")
     client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token) if token else None
 
+    # ── 1. Competitor 뉴스 ──
     COMPETITOR_CUTOFF_DAYS = 30
     COMPETITOR_MAX_ITEMS = 3
     competitor_cutoff = now_utc - datetime.timedelta(days=COMPETITOR_CUTOFF_DAYS)
@@ -521,9 +501,11 @@ def main():
 
     companies_out = [{"name": c["name"], "region": c["region"], "items": [to_output(a, kst, include_summary=True) for a in c["articles"]]} for c in companies_raw]
 
+    # ── 2. Furiosa 뉴스 ──
     all_furiosa = []
     seen_urls, seen_titles = set(), set()
     for query, lang in FURIOSA_QUERIES:
+        before = len(all_furiosa)
         for a in fetch_articles(query, lang, n=100):
             if a["url"] in seen_urls: continue
             norm = normalize_title(a["title"])
@@ -531,29 +513,54 @@ def main():
             seen_urls.add(a["url"])
             if norm: seen_titles.add(norm)
             all_furiosa.append(a)
+        print(f"[furiosa] query='{query[:40]}' lang={lang} → {len(all_furiosa) - before} new (total {len(all_furiosa)})")
 
     def in_window(a: dict, cutoff: datetime.datetime) -> bool:
         return a.get("pub_dt") is not None and a["pub_dt"] >= cutoff
 
     in_weekly_window_raw = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
+    print(f"[furiosa] after weekly window filter: {len(in_weekly_window_raw)}")
+    # 주간 윈도우 안의 모든 제목 출력 (어떤 기사가 들어왔는지)
+    for a in in_weekly_window_raw:
+        pub_str = a['pub_dt'].astimezone(kst).strftime('%m-%d %H:%M') if a.get('pub_dt') else 'no_date'
+        print(f"  [in_window] {pub_str} | {a['title'][:80]}")
+
     if client and in_weekly_window_raw:
         kept_subject = filter_furiosa_subject(in_weekly_window_raw, client)
+        print(f"[furiosa] after filter_furiosa_subject: {len(kept_subject)} (dropped {len(in_weekly_window_raw) - len(kept_subject)})")
+        # 제외된 기사 출력
+        kept_urls_subj = {a["url"] for a in kept_subject}
+        for a in in_weekly_window_raw:
+            if a["url"] not in kept_urls_subj:
+                print(f"  [DROPPED by filter] {a['title'][:80]}")
         kept_subject_urls = {a["url"] for a in kept_subject}
         all_furiosa = [a for a in all_furiosa if a["url"] in kept_subject_urls or not in_window(a, weekly_cutoff)]
 
     in_weekly_window = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
     if client:
         deduped = cluster_articles_by_event(in_weekly_window, client)
+        print(f"[furiosa] after cluster_articles_by_event: {len(deduped)} (dropped {len(in_weekly_window) - len(deduped)})")
         deduped_urls = {a["url"] for a in deduped}
+        # 제외된 기사 출력
+        for a in in_weekly_window:
+            if a["url"] not in deduped_urls:
+                print(f"  [DROPPED by cluster] {a['title'][:80]}")
         all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls or not in_window(a, weekly_cutoff)]
 
     in_weekly_window_2 = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
     kept = dedup_by_keyword_overlap(in_weekly_window_2, min_overlap=3)
+    print(f"[furiosa] after dedup_by_keyword_overlap: {len(kept)} (dropped {len(in_weekly_window_2) - len(kept)})")
+    # 제외된 기사 출력
+    kept_url_set = {a["url"] for a in kept}
+    for a in in_weekly_window_2:
+        if a["url"] not in kept_url_set:
+            print(f"  [DROPPED by dedup] {a['title'][:80]}")
     kept_urls = {a["url"] for a in kept}
     all_furiosa = [a for a in all_furiosa if a["url"] in kept_urls or not in_window(a, weekly_cutoff)]
 
     furiosa_daily_raw = sorted([a for a in all_furiosa if in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)[:5]
     furiosa_weekly_raw = sorted([a for a in all_furiosa if in_window(a, weekly_cutoff) and not in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)
+    print(f"[furiosa] FINAL daily={len(furiosa_daily_raw)}, weekly={len(furiosa_weekly_raw)}")
 
     furiosa_articles = furiosa_daily_raw + furiosa_weekly_raw
     furiosa_summaries = generate_furiosa_summaries(furiosa_articles, client)
