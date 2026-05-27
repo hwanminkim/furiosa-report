@@ -37,7 +37,7 @@ FURIOSA_QUERIES = [
     ('퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
 ]
 
-FURIOSA_ALIASES = ["Furiosa", "퓨리오사", "FuriosaAI", "furiosaai"]
+FURIOSA_ALIASES = ["Furiosa", "퓨리오사", "FuriosaAI", "furiosaai", "백준호"]
 
 def title_contains_alias(title: str, aliases: list[str]) -> bool:
     if not title or not aliases: return False
@@ -411,7 +411,8 @@ def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> lis
     """
     if not articles: return articles
     title_matched = [a for a in articles
-                     if title_contains_alias(a.get("title", ""), FURIOSA_ALIASES)
+                     if (title_contains_alias(a.get("title", ""), FURIOSA_ALIASES) or
+                         title_contains_alias(a.get("description", ""), FURIOSA_ALIASES))
                      and not is_stock_noise(a.get("title", ""))]
     if not title_matched:
         return []
