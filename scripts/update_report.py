@@ -8,8 +8,10 @@ import html
 import json
 import os
 import re
+import threading
 import time
 import xml.etree.ElementTree as ET
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from urllib.error import HTTPError
 from urllib.parse import quote
@@ -103,6 +105,44 @@ def _strip_html(s: str) -> str:
     s = _HTML_TAG_RE.sub("", s)
     s = html.unescape(s)
     return s.strip()
+
+_SCRIPT_STYLE_RE = re.compile(r"<(script|style)[^>]*>.*?</\1>", re.DOTALL | re.IGNORECASE)
+_BODY_WS_RE = re.compile(r"\s+")
+_body_cache: dict[str, str] = {}
+_body_cache_lock = threading.Lock()
+
+def fetch_article_body(url: str, timeout: int = 6, max_chars: int = 1500) -> str:
+    with _body_cache_lock:
+        if url in _body_cache:
+            return _body_cache[url]
+    result = ""
+    try:
+        req = Request(url, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"})
+        with urlopen(req, timeout=timeout) as resp:
+            raw = resp.read(81920).decode("utf-8", errors="ignore")
+        text = _SCRIPT_STYLE_RE.sub(" ", raw)
+        text = _HTML_TAG_RE.sub(" ", text)
+        text = html.unescape(text)
+        text = _BODY_WS_RE.sub(" ", text).strip()
+        result = text[:max_chars]
+    except Exception:
+        pass
+    with _body_cache_lock:
+        _body_cache[url] = result
+    return result
+
+def prefetch_bodies(articles: list[dict], max_workers: int = 10) -> None:
+    urls = [a["url"] for a in articles if a.get("url")]
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = [executor.submit(fetch_article_body, url) for url in urls]
+        for f in as_completed(futures):
+            f.result()
+
+def _article_body_for_prompt(a: dict) -> str:
+    body = fetch_article_body(a.get("url", ""))
+    if body:
+        return body[:1200]
+    return (a.get("description") or "").replace("\n", " ").strip()[:300]
 
 def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
     try:
@@ -350,10 +390,11 @@ def filter_relevant_by_company(company: str, aliases: list[str], articles: list[
         return []
     if client is None:
         return title_matched
+    prefetch_bodies(title_matched)
     numbered_items = []
     for i, a in enumerate(title_matched):
-        desc = (a.get("description") or "").replace("\n", " ").strip()[:200]
-        numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
+        body = _article_body_for_prompt(a)
+        numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    본문: {body}")
     numbered = "\n".join(numbered_items)
     prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다. 각 기사에 대해 '{company}'의 관련도를 1~3점으로 평가하세요.
 
@@ -423,10 +464,11 @@ def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> lis
         return []
     if client is None:
         return title_matched
+    prefetch_bodies(title_matched)
     numbered_items = []
     for i, a in enumerate(title_matched):
-        desc = (a.get("description") or "").replace("\n", " ").strip()[:200]
-        numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    요약: {desc}")
+        body = _article_body_for_prompt(a)
+        numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    본문: {body}")
     numbered = "\n".join(numbered_items)
     prompt = f"""다음은 'Furiosa AI(퓨리오사AI)' 키워드로 검색된 뉴스 기사 목록입니다. 각 기사에 대해 Furiosa AI의 관련도를 1~3점으로 평가하세요.
 
