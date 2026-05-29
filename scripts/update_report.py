@@ -6,6 +6,7 @@ import datetime
 import email.utils
 import html
 import json
+import math
 import os
 import re
 import threading
@@ -22,6 +23,11 @@ from openai import OpenAI
 
 REPO_ROOT = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
+
+FURIOSA_BASE_URL = "https://endpoint.access.furiosa.dev/v1"
+EXAONE_MODEL = "furiosa-ai/EXAONE-4.0-32B-FP8"
+EMBEDDING_MODEL = "furiosa-ai/Qwen3-Embedding-8B"
+SIMILARITY_THRESHOLD = 0.85
 
 COMPANIES = [
     {"name": "NVIDIA", "region": "global", "aliases": ["NVIDIA", "엔비디아"], "queries": [("NVIDIA", "en")]},
@@ -55,6 +61,11 @@ _STOCK_NOISE_PATTERNS = [
     re.compile(r'\b(stock|price)\s+(target|forecast|rating)\b', re.I),
     re.compile(r'\bstake\s+in\b', re.I),
     re.compile(r'\b(NYSE|NASDAQ):', re.I),
+    # 한국 주식/시황 패턴
+    re.compile(r'관련주', re.I),
+    re.compile(r'\[특징주\]'),
+    re.compile(r'상한가|하한가'),
+    re.compile(r'주가\s*(급등|급락|상승|하락|강세|약세)'),
 ]
 
 def is_stock_noise(title: str) -> bool:
@@ -279,34 +290,59 @@ def _extract_keywords(title: str) -> set:
     for w in words:
         lw = w.lower()
         if lw in stopwords: continue
-        # Hangul words: strip particle suffix
         if re.match(r"^[가-힣]+$", lw):
             lw = _normalize_korean(lw)
             if len(lw) < 2: continue
         result.add(lw)
     return result
 
-
-def dedup_by_keyword_overlap(articles: list[dict], min_overlap: int = 3) -> list[dict]:
+def _dedup_by_keyword_overlap(articles: list[dict], min_overlap: int = 3) -> list[dict]:
     if len(articles) < 2:
         return articles
-    sorted_arts = sorted(articles, key=lambda a: a.get("pub_dt") or datetime.datetime.min.replace(tzinfo=pytz.utc))
     kept = []
     kept_keywords = []
-    for a in sorted_arts:
+    for a in articles:
         kw = _extract_keywords(a.get("title", ""))
-        is_dup = False
-        for prev_kw in kept_keywords:
-            if len(kw & prev_kw) >= min_overlap:
-                is_dup = True
-                break
+        is_dup = any(len(kw & prev_kw) >= min_overlap for prev_kw in kept_keywords)
         if not is_dup:
             kept.append(a)
             kept_keywords.append(kw)
     return kept
 
+def _cosine_similarity(a: list[float], b: list[float]) -> float:
+    dot = sum(x * y for x, y in zip(a, b))
+    norm_a = math.sqrt(sum(x * x for x in a))
+    norm_b = math.sqrt(sum(x * x for x in b))
+    if norm_a == 0 or norm_b == 0:
+        return 0.0
+    return dot / (norm_a * norm_b)
 
-def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> list[dict]:
+def _get_embeddings(texts: list[str], client: OpenAI) -> list[list[float]]:
+    resp = client.embeddings.create(model=EMBEDDING_MODEL, input=texts)
+    return [e.embedding for e in resp.data]
+
+def dedup_by_semantic_similarity(articles: list[dict], embedding_client: "OpenAI | None", threshold: float = SIMILARITY_THRESHOLD) -> list[dict]:
+    if len(articles) < 2:
+        return articles
+    sorted_arts = sorted(articles, key=lambda a: a.get("pub_dt") or datetime.datetime.min.replace(tzinfo=pytz.utc))
+    if embedding_client is None:
+        return _dedup_by_keyword_overlap(sorted_arts)
+    titles = [a.get("title", "") for a in sorted_arts]
+    try:
+        embeddings = _get_embeddings(titles, embedding_client)
+    except Exception:
+        return _dedup_by_keyword_overlap(sorted_arts)
+    kept = []
+    kept_embeddings: list[list[float]] = []
+    for a, emb in zip(sorted_arts, embeddings):
+        if any(_cosine_similarity(emb, prev) >= threshold for prev in kept_embeddings):
+            continue
+        kept.append(a)
+        kept_embeddings.append(emb)
+    return kept
+
+
+def cluster_articles_by_event(articles: list[dict], client: "OpenAI | None") -> list[dict]:
     if client is None or len(articles) < 2: return articles
     numbered = "\n".join(f"[{i}] {a['title']}" for i, a in enumerate(articles))
     prompt = f"""다음은 뉴스 제목 목록입니다. 각 줄은 [번호] 제목 형식.
@@ -320,7 +356,7 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
 3. **같은 시점** (보통 같은 날짜이거나 며칠 차이 후속 보도)
 
 예시 (같은 사건):
-- "동서발전, 외산 GPU 의존 탈피...국산 AI 생태계 조성 박차" 
+- "동서발전, 외산 GPU 의존 탈피...국산 AI 생태계 조성 박차"
 - "동서발전, 국산 인공지능 성장 생태계 조성 '박차'"
 - "코난테크놀로지·동서발전·퓨리오사, 국산 AI 인프라 실증 협력"
 → 모두 동서발전-퓨리오사-코난 협약 사건. **같은 클러스터.**
@@ -333,7 +369,7 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
 
 ## 매우 중요: 다음은 절대 같은 사건이 아닙니다
 - 같은 회사 등장하지만 다른 액션: "백준호 대표 인터뷰" vs "퓨리오사 IPO 평가" → 다른 사건
-- 같은 주제이지만 다른 회사: "동서발전 협약" vs "유라클 NPU 연동" → 다른 사건  
+- 같은 주제이지만 다른 회사: "동서발전 협약" vs "유라클 NPU 연동" → 다른 사건
 - 다른 협력: "망고부스트-퓨리오사 협력" vs "유라클-퓨리오사 연동" → 다른 사건
 - 트렌드 기사 vs 구체적 발표: "K-엔비디아 분석" vs "퓨리오사 협약 발표" → 다른 사건
 - 일반 시장 분석 vs 특정 사건: "AI 최적화 기업 주목" vs "동서발전 협약" → 다른 사건
@@ -348,11 +384,11 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
 {{"clusters": [[0, 2], [1], [3, 4, 5]]}}"""
     try:
         resp = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model=EXAONE_MODEL,
             messages=[{"role": "user", "content": prompt}],
             max_tokens=600,
             temperature=0.1,
-            response_format={"type": "json_object"},
+
         )
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
@@ -381,8 +417,6 @@ def cluster_articles_by_event(articles: list[dict], client: OpenAI | None) -> li
 
 def filter_relevant_by_company(company: str, aliases: list[str], articles: list[dict], client: "OpenAI | None") -> list[dict]:
     if not articles: return articles
-    # Hard rule 1: 제목에 회사 alias가 없으면 즉시 제외
-    # Hard rule 2: 영문 주식거래·시황 패턴이면 즉시 제외
     title_matched = [a for a in articles
                      if title_contains_alias(a.get("title", ""), aliases)
                      and not is_stock_noise(a.get("title", ""))]
@@ -405,57 +439,50 @@ def filter_relevant_by_company(company: str, aliases: list[str], articles: list[
 예: "{company}, 신규 계약 체결" / "{company} 신제품 발표" / "{company} 투자 유치" / "{company} 대표 인터뷰"
 
 **2점 — 양측이 함께 능동적 액션을 한 공동 주체 (co-actor)**
-'{company}'와 다른 회사/기관이 **함께 액션을 수행**한 경우만 해당. 회사가 능동적 당사자여야 함.
+'{company}'와 다른 회사/기관이 **함께 액션을 수행**한 경우만 해당.
 예: "삼성-{company} 협력 발표" / "{company}, A사와 MOU 체결" / "A사·B사·{company} 컨소시엄 출범"
 
-**1점 — 단순 언급, 수동적 객체, 사이드 등장 (제외 대상)**
-다음 케이스는 **무조건 1점**:
-- 펀드/투자 기사에서 '{company}'가 *투자 대상* 중 하나로만 언급 (예: "X펀드, A사·B사·{company}에 투자")
-- 트렌드/시장 분석/산업 동향 기사에서 여러 회사 중 하나로 나열 (예: "K-팹리스 기업들이 시장에 진출... A사·B사·{company} 등")
-- 다른 회사가 주체인 기사에 '{company}'가 곁다리로 언급 (예: 노타/딥엑스 기사 끝부분에 "{company} 등도" 식)
-- 시황·증시·주가 기사
-- 행사·포럼·전시회 알림에 '{company}' 임원이 연사 중 한 명으로 등장
+**1점 — 단순 언급 또는 제외 대상**
+아래 중 하나라도 해당하면 **무조건 1점**:
+- 펀드/투자 기사에서 '{company}'가 투자 대상 중 하나로만 언급 (예: "X펀드, A사·B사·{company}에 투자")
+- 트렌드/시장 분석/산업 동향 기사에서 여러 회사 중 하나로 나열 (예: "K-팹리스 기업들... A사·B사·{company} 등")
+- 다른 회사가 주체인 기사에 '{company}'가 곁다리로 언급 (기사 끝에 "~등도" 식)
+- 시황·증시·주가·관련주·특징주 기사 (제목에 '관련주', '특징주', '상한가', '주가 급등' 포함)
+- 행사·포럼·전시회 알림에 '{company}' 임원이 연사 중 한 명으로만 등장
+- 정부 정책/펀드 기사에서 수혜자 목록 중 하나로 언급
 - '{company}' 제품/칩이 다른 솔루션의 부품으로 한 줄 언급
-- 정부 정책/펀드 기사에서 수혜자/대상자로 언급
 
 ## 핵심 원칙
 - 회사가 **능동적 주체(actor)**여야 2점 이상. **수동적 객체(object)**거나 *언급되는 대상*이면 1점.
 - 기사 제목이 다른 회사·주체의 행동을 묘사하면 거의 항상 1점.
-- 트렌드 기사에서 다른 여러 회사와 함께 나열되면 1점.
+- **경쟁사 비교 기사** (예: "A vs B vs {company} 누가 웃나")는 1점. 어느 회사도 액션 주체가 아님.
 - 애매하면 1점.
 
 기사 목록:
 {numbered}
 
-응답 형식 (오직 JSON, 모든 기사에 대해 점수 부여):
+응답 형식 (오직 JSON):
 {{"scores": [{{"id": 0, "score": 3}}, {{"id": 1, "score": 1}}, ...]}}"""
     try:
         resp = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model=EXAONE_MODEL,
             messages=[{"role": "user", "content": prompt}],
             max_tokens=600,
             temperature=0.1,
-            response_format={"type": "json_object"},
         )
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
         scores = data.get("scores", [])
-        kept_indices = []
-        for entry in scores:
-            idx = entry.get("id")
-            score = entry.get("score")
-            if isinstance(idx, int) and 0 <= idx < len(title_matched) and isinstance(score, int) and score >= 2:
-                kept_indices.append(idx)
+        kept_indices = [e["id"] for e in scores
+                        if isinstance(e.get("id"), int) and 0 <= e["id"] < len(title_matched)
+                        and isinstance(e.get("score"), int) and e["score"] >= 2]
         kept_indices.sort()
         return [title_matched[i] for i in kept_indices]
     except Exception:
         return title_matched
 
 def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> list[dict]:
-    """
-    Furiosa AI 기사 필터. 제목 alias 하드 룰 + 3단계 점수제, 2점 이상만 keep.
-    """
     if not articles: return articles
     title_matched = [a for a in articles
                      if title_contains_alias(a.get("title", ""), FURIOSA_ALIASES)
@@ -475,55 +502,52 @@ def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> lis
 ## 점수 기준
 
 **3점 — Furiosa AI가 기사의 주체 (sole actor)**
-Furiosa AI 자체에 대한 액션·평가·분석이 기사의 핵심. 제목이 Furiosa AI를 직접 언급.
-예: "퓨리오사AI, 신규 계약 체결" / "퓨리오사AI 레니게이드 발표" / "퓨리오사AI 투자 유치" / "백준호 대표 인터뷰" / "퓨리오사AI 나스닥行 매력" / "퓨리오사AI 기업가치 평가" / "퓨리오사AI IPO 분석"
-**핵심**: 회사 본질에 대한 매체 분석/평가/IPO 전망 기사는 3점 (일반 시황 기사가 아니라 Furiosa AI 자체에 초점).
+Furiosa AI 자체에 대한 액션·평가·분석이 기사의 핵심.
+예: "퓨리오사AI, 신규 계약 체결" / "퓨리오사AI 레니게이드 발표" / "퓨리오사AI 투자 유치"
+예: "백준호 대표 인터뷰" / "퓨리오사AI 나스닥行 매력" / "퓨리오사AI 기업가치 평가" / "퓨리오사AI IPO 분석"
+**핵심**: 회사 본질에 대한 매체 분석/평가/IPO 전망 기사는 3점.
 
 **2점 — 양측이 함께 능동적 액션을 한 공동 주체 (co-actor)**
-Furiosa AI와 다른 회사/기관이 **함께 발표·연동·도입·채택**한 경우. 본격적인 파트너십·연동·공동 개발·도입 기사가 여기 해당.
-예: "삼성-퓨리오사AI 협력 발표" / "퓨리오사AI, A사와 MOU" / "A사 플랫폼에 퓨리오사AI NPU 연동" / "A사·B사·퓨리오사AI 컨소시엄" / "A사, 퓨리오사 NPU 채택"
-**핵심: 파트너십/연동/도입/채택 발표 기사는 2점.** (양사가 공동 발표하거나, 한쪽이 도입·연동한 사실이 기사 본문의 핵심이면 OK)
-구분: 다른 회사 기사 끝에 곁다리로 "퓨리오사 등도 사용" 식이면 1점.
+Furiosa AI와 다른 회사/기관이 **함께 발표·연동·도입·채택**한 경우.
+예: "삼성-퓨리오사AI 협력 발표" / "퓨리오사AI, A사와 MOU" / "A사 플랫폼에 퓨리오사AI NPU 연동"
+**핵심**: 파트너십/연동/도입/채택 발표 기사는 2점.
 
-**1점 — 단순 언급, 수동적 객체, 사이드 등장 (제외 대상)**
-다음 케이스는 **무조건 1점**:
-- 펀드/투자 기사에서 퓨리오사AI가 *투자 대상* 중 하나로만 언급 (예: "X펀드, A사·B사·퓨리오사AI에 투자")
-- 트렌드/시장 분석/산업 동향 기사에서 여러 회사 중 하나로 나열 (예: "K-팹리스 기업들... 리벨리온·퓨리오사·딥엑스 등")
-- 다른 회사가 주체인 기사에 퓨리오사가 곁다리로 언급 (예: 노타/딥엑스 기사 끝부분에 "퓨리오사AI 등도" 식)
-- 새로운 발표·계약·MOU가 아닌 기존 협력 관계를 배경으로 단순 재언급하는 경우 (예: 다른 회사 기사에서 "퓨리오사AI와 협력 중인 A사" 식)
-- 일반 시황·증시·주가 기사 (예: 코스피/코스닥 마감, 거시 시장 동향) — 단, Furiosa AI 자체에 대한 IPO·기업가치 평가 기사는 3점이므로 구분 주의
-- 행사·포럼·전시회 알림에 백준호 대표가 연사 중 한 명으로 등장 (단순 알림)
-- 정부 정책/펀드 기사에서 수혜자/대상자로 언급
+**1점 — 단순 언급 또는 제외 대상**
+아래 중 하나라도 해당하면 **무조건 1점**:
+- 펀드/투자 기사에서 퓨리오사AI가 투자 대상 중 하나로만 언급 (예: "X펀드, A사·B사·퓨리오사AI에 투자")
+- 트렌드/시장 분석 기사에서 여러 회사 중 하나로 나열 (예: "K-팹리스 기업들... 리벨리온·퓨리오사·딥엑스 등")
+- **경쟁사 비교 기사** (예: "리벨리온 vs 퓨리오사 vs 딥엑스 누가 웃나", "K-AI 반도체 대전") → 1점
+- 다른 회사가 주체인 기사에 퓨리오사가 곁다리로 언급 (기사 끝에 "퓨리오사AI 등도" 식)
+- 시황·증시·주가·관련주·특징주 기사 (제목에 '관련주', '특징주', '상한가', '주가 급등' 포함)
+- 행사·포럼·전시회 알림에 백준호 대표가 연사 중 한 명으로만 등장
+- 정부 정책/펀드 기사에서 수혜자 목록 중 하나로 언급
+- 새로운 발표가 아닌 기존 협력 관계를 배경으로 단순 재언급
 
 ## 핵심 원칙
 - Furiosa AI가 **능동적 주체(actor)**여야 2점 이상. **수동적 객체(object)**거나 *언급되는 대상*이면 1점.
 - 기사 제목이 다른 회사·주체의 행동을 묘사하면 거의 항상 1점.
-- 트렌드 기사에서 다른 여러 회사와 함께 나열되면 1점.
+- 퓨리오사AI가 여러 회사 중 하나로 나열되는 구조면 1점.
 - 애매하면 1점.
 
 기사 목록:
 {numbered}
 
-응답 형식 (오직 JSON, 모든 기사에 대해 점수 부여):
+응답 형식 (오직 JSON):
 {{"scores": [{{"id": 0, "score": 3}}, {{"id": 1, "score": 1}}, ...]}}"""
     try:
         resp = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model=EXAONE_MODEL,
             messages=[{"role": "user", "content": prompt}],
             max_tokens=600,
             temperature=0.1,
-            response_format={"type": "json_object"},
         )
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
         scores = data.get("scores", [])
-        kept_indices = []
-        for entry in scores:
-            idx = entry.get("id")
-            score = entry.get("score")
-            if isinstance(idx, int) and 0 <= idx < len(title_matched) and isinstance(score, int) and score >= 2:
-                kept_indices.append(idx)
+        kept_indices = [e["id"] for e in scores
+                        if isinstance(e.get("id"), int) and 0 <= e["id"] < len(title_matched)
+                        and isinstance(e.get("score"), int) and e["score"] >= 2]
         kept_indices.sort()
         return [title_matched[i] for i in kept_indices]
     except Exception:
@@ -569,11 +593,11 @@ Return JSON ONLY:
 {{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
     try:
         resp = client.chat.completions.create(
-            model="gpt-4o",
+            model=EXAONE_MODEL,
             messages=[{"role": "user", "content": prompt}],
             max_tokens=4000,
             temperature=0.3,
-            response_format={"type": "json_object"},
+
         )
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
@@ -613,11 +637,11 @@ Return JSON ONLY:
 {{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
     try:
         resp = client.chat.completions.create(
-            model="gpt-4o",
+            model=EXAONE_MODEL,
             messages=[{"role": "user", "content": prompt}],
             max_tokens=4000,
             temperature=0.3,
-            response_format={"type": "json_object"},
+
         )
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
@@ -636,7 +660,7 @@ def main():
     kst = pytz.timezone("Asia/Seoul")
     now = datetime.datetime.now(kst)
     now_utc = now.astimezone(pytz.utc)
-    
+
     daily_start_kst = kst.localize(datetime.datetime.combine(
         now.date(), datetime.time(0, 0)
     ))
@@ -645,11 +669,14 @@ def main():
         now.date() - datetime.timedelta(days=6), datetime.time(0, 0)
     ))
     weekly_cutoff = weekly_start_kst.astimezone(pytz.utc)
-    
+
     print(f"[{now.strftime('%Y-%m-%d %H:%M KST')}] Starting report update...")
 
-    token = os.environ.get("GITHUB_TOKEN")
-    client = OpenAI(base_url="https://models.inference.ai.azure.com", api_key=token) if token else None
+    exaone_key = os.environ.get("FURIOSA_EXAONE_API_KEY")
+    embedding_key = os.environ.get("FURIOSA_EMBEDDING_API_KEY")
+
+    exaone_client = OpenAI(base_url=FURIOSA_BASE_URL, api_key=exaone_key) if exaone_key else None
+    embedding_client = OpenAI(base_url=FURIOSA_BASE_URL, api_key=embedding_key) if embedding_key else None
 
     # ── 1. Competitor 뉴스 ──
     COMPETITOR_CUTOFF_DAYS = 30
@@ -666,13 +693,13 @@ def main():
                     seen_urls.add(a["url"])
                     fetched.append(a)
         recent = [a for a in fetched if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
-        relevant = filter_relevant_by_company(co["name"], co["aliases"], recent, client)
-        deduped = cluster_articles_by_event(relevant, client)
+        relevant = filter_relevant_by_company(co["name"], co["aliases"], recent, exaone_client)
+        deduped = cluster_articles_by_event(relevant, exaone_client)
         deduped.sort(key=lambda a: a["pub_dt"], reverse=True)
         companies_raw.append({"name": co["name"], "region": co["region"], "articles": deduped[:COMPETITOR_MAX_ITEMS]})
 
     all_pairs = [(c["name"], a) for c in companies_raw for a in c["articles"]]
-    summaries = generate_competitor_summaries(all_pairs, client)
+    summaries = generate_competitor_summaries(all_pairs, exaone_client)
     for c in companies_raw:
         for a in c["articles"]:
             key = (c["name"], a["url"])
@@ -700,15 +727,13 @@ def main():
 
     in_weekly_window_raw = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
     print(f"[furiosa] after weekly window filter: {len(in_weekly_window_raw)}")
-    # 주간 윈도우 안의 모든 제목 출력 (어떤 기사가 들어왔는지)
     for a in in_weekly_window_raw:
         pub_str = a['pub_dt'].astimezone(kst).strftime('%m-%d %H:%M') if a.get('pub_dt') else 'no_date'
         print(f"  [in_window] {pub_str} | {a['title'][:80]}")
 
-    if client and in_weekly_window_raw:
-        kept_subject = filter_furiosa_subject(in_weekly_window_raw, client)
+    if exaone_client and in_weekly_window_raw:
+        kept_subject = filter_furiosa_subject(in_weekly_window_raw, exaone_client)
         print(f"[furiosa] after filter_furiosa_subject: {len(kept_subject)} (dropped {len(in_weekly_window_raw) - len(kept_subject)})")
-        # 제외된 기사 출력
         kept_urls_subj = {a["url"] for a in kept_subject}
         for a in in_weekly_window_raw:
             if a["url"] not in kept_urls_subj:
@@ -717,20 +742,18 @@ def main():
         all_furiosa = [a for a in all_furiosa if a["url"] in kept_subject_urls or not in_window(a, weekly_cutoff)]
 
     in_weekly_window = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
-    if client:
-        deduped = cluster_articles_by_event(in_weekly_window, client)
+    if exaone_client:
+        deduped = cluster_articles_by_event(in_weekly_window, exaone_client)
         print(f"[furiosa] after cluster_articles_by_event: {len(deduped)} (dropped {len(in_weekly_window) - len(deduped)})")
         deduped_urls = {a["url"] for a in deduped}
-        # 제외된 기사 출력
         for a in in_weekly_window:
             if a["url"] not in deduped_urls:
                 print(f"  [DROPPED by cluster] {a['title'][:80]}")
         all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls or not in_window(a, weekly_cutoff)]
 
     in_weekly_window_2 = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
-    kept = dedup_by_keyword_overlap(in_weekly_window_2, min_overlap=3)
-    print(f"[furiosa] after dedup_by_keyword_overlap: {len(kept)} (dropped {len(in_weekly_window_2) - len(kept)})")
-    # 제외된 기사 출력
+    kept = dedup_by_semantic_similarity(in_weekly_window_2, embedding_client)
+    print(f"[furiosa] after dedup_by_semantic_similarity: {len(kept)} (dropped {len(in_weekly_window_2) - len(kept)})")
     kept_url_set = {a["url"] for a in kept}
     for a in in_weekly_window_2:
         if a["url"] not in kept_url_set:
@@ -743,7 +766,7 @@ def main():
     print(f"[furiosa] FINAL daily={len(furiosa_daily_raw)}, weekly={len(furiosa_weekly_raw)}")
 
     furiosa_articles = furiosa_daily_raw + furiosa_weekly_raw
-    furiosa_summaries = generate_furiosa_summaries(furiosa_articles, client)
+    furiosa_summaries = generate_furiosa_summaries(furiosa_articles, exaone_client)
     for a in furiosa_articles:
         if a["url"] in furiosa_summaries:
             a["summary"] = furiosa_summaries[a["url"]]

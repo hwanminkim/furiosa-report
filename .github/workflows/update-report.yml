@@ -12,7 +12,6 @@ on:
 
 permissions:
   contents: write
-  models: read
 
 jobs:
   update:
@@ -26,7 +25,8 @@ jobs:
         run: pip install openai pytz trafilatura
       - name: Run update script
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FURIOSA_EXAONE_API_KEY: ${{ secrets.FURIOSA_EXAONE_API_KEY }}
+          FURIOSA_EMBEDDING_API_KEY: ${{ secrets.FURIOSA_EMBEDDING_API_KEY }}
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
         run: python scripts/update_report.py
