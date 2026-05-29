@@ -28,6 +28,7 @@ FURIOSA_BASE_URL = "https://endpoint.access.furiosa.dev/v1"
 EXAONE_MODEL = "furiosa-ai/EXAONE-4.0-32B-FP8"
 EMBEDDING_MODEL = "furiosa-ai/Qwen3-Embedding-8B"
 SIMILARITY_THRESHOLD = 0.85
+COMPETITOR_SIMILARITY_THRESHOLD = 0.75
 
 COMPANIES = [
     {"name": "NVIDIA", "region": "global", "aliases": ["NVIDIA", "엔비디아"], "queries": [("NVIDIA", "en")]},
@@ -694,6 +695,7 @@ def main():
                     fetched.append(a)
         recent = [a for a in fetched if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
         relevant = filter_relevant_by_company(co["name"], co["aliases"], recent, exaone_client)
+        relevant = dedup_by_semantic_similarity(relevant, embedding_client, threshold=COMPETITOR_SIMILARITY_THRESHOLD)
         deduped = cluster_articles_by_event(relevant, exaone_client)
         deduped.sort(key=lambda a: a["pub_dt"], reverse=True)
         companies_raw.append({"name": co["name"], "region": co["region"], "articles": deduped[:COMPETITOR_MAX_ITEMS]})
