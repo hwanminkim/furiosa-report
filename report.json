@@ -1,26 +1,26 @@
 {
   "period": "2026-05-24(일) ~ 2026-05-30(토)",
-  "updated_at": "2026-05-30T18:25:48.364315+09:00",
+  "updated_at": "2026-05-30T21:16:21.288090+09:00",
   "furiosa_daily": {},
   "furiosa_weekly": {
     "05-29 (금)": [
       {
-        "title": "[29일 특징주] 국민성장펀드 직접 투자에…퓨리오사AI 관련株 '강세'",
-        "url": "https://www.newsworks.co.kr/news/articleView.html?idxno=842350",
+        "title": "[증권 뉴스브리핑] 국민성장펀드 3만명, 평균 2000만원 가입·퓨리오사A...",
+        "url": "https://www.asiatime.co.kr/article/20260529500380",
         "date": "05-29",
-        "summary": "국민성장펀드의 자금 지원 소식에 퓨리오사AI 관련주가 강세를 보였다. TS인베스트먼트는 전일 대비 352원(29.96%) 상승하며 상한가를 기록했다. 퓨리오사AI 테마주도 동반 상승했다."
+        "summary": "금융위원회는 국민성장펀드 기금운용심의위원회에서 퓨리오사 AI에 3700억원 규모의 직접투자를 승인했다. 국민성장펀드 총 규모는 8000억원 안팎이다. 퓨리오사 AI는 국산 인공지능 반도체 개발기업이다."
       },
       {
         "title": "퓨리오사AI-브로드컴 '맞손'… K-엔비디아 '도전장'",
         "url": "http://www.the-biz.co.kr/news/articleView.html?idxno=721639",
         "date": "05-29",
-        "summary": "퓨리오사AI가 브로드컴과 협력해 차세대 AI 추론 플랫폼 개발에 나선다. 이 협력으로 글로벌 인프라 시장에서의 존재감 확대가 기대된다. 정부는 국민성장펀드를 통해 지원을 강화하고 있다."
+        "summary": "퓨리오사 AI는 미국 브로드컴과 협력해 차세대 AI 추론 플랫폼 개발에 나선다. 이번 협력으로 글로벌 인프라 시장에서의 존재감 확대가 기대된다. 정부는 국민성장펀드를 통해 퓨리오사 AI를 지원하고 있다."
       },
       {
-        "title": "National Growth Fund to invest $535mn in AI startup FuriosaAI",
-        "url": "https://www.mk.co.kr/article/12061076",
+        "title": "엑스페릭스, 퓨리오사AI NPU 기반 AI 인프라 사업 본격 시동",
+        "url": "https://www.financialpost.co.kr/news/articleView.html?idxno=260907",
         "date": "05-29",
-        "summary": "한국의 국민성장펀드가 퓨리오사AI에 약 8000억 원(5355만 달러) 규모의 직접 투자를 진행한다. 이번 투자는 AI 스타트업의 기술 개발을 지원하기 위한 목적이다."
+        "summary": "엑스페릭스는 퓨리오사 AI의 NPU를 기반으로 AI 인프라 사업을 본격화한다. AI 기반 디지털 신원인식 전문기업인 엑스페릭스는 퓨리오사 AI와 공식 협력 관계를 맺었다. 이를 통해 시장 공략을 강화할 계획이다."
       }
     ],
     "05-28 (목)": [
@@ -28,7 +28,7 @@
         "title": "Korean chipmaker Furiosa expands AI push with Broadcom - Tech in Asia",
         "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPQkVWMjhEcG1DX3lMX2otVGlTcVdNR2luaDgwcXg3NG9VZzczRjVlRzluelpOOU1wZ1k3SXBDQ0RJYzBpWkl4aW9ENjFfNUJkY0pjSkdyRFR0ZGJ1SGFQSUE4NW4yc1ZUVmhiVHVITHl4MjE4T1YxbExGczBvTWhNUTliMU1ZRllfT0xzY1ZCaw?oc=5",
         "date": "05-28",
-        "summary": "한국의 반도체 기업 퓨리오사가 브로드컴과 협력해 AI 사업을 확장한다. 이번 협력은 퓨리오사의 AI 기술 경쟁력 강화를 위한 전략이다."
+        "summary": "퓨리오사는 미국의 브로드컴과 협력해 AI 기술 개발을 확대한다. 이번 협력은 퓨리오사의 글로벌 시장 진출을 위한 전략이다. 퓨리오사는 한국의 인공지능 반도체 기업이다."
       }
     ]
   },
@@ -38,22 +38,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Nvidia wants to turn your backyard into mini AI data center : Here how US homeowners could benefit",
-          "url": "https://www.thenews.com.pk/latest/1404154-nvidia-wants-to-turn-your-backyard-into-mini-ai-data-center-here-s-how-us-homeowners-could-benefit",
+          "title": "Nvidia CFO Colette Kress: ‘AI is no longer a nice-to-have’ - Fortune",
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQOUpqMEtpVVlmZHI1R01kZUFteVk4Ym15blFyRklTWE1iMGQtbVFwejBoa1UtajVjU0lCS2NvektlU3JMS2JlTmlMMU5aLVVHb2JjdXdSNHlqbXR5a1Z0dnl0QlJNT1BuX0pXcmFLRVNjYm1URWc1d0hSc1pJenNEM08zUHVSbDRIRzFZZw?oc=5",
           "date": "05-30",
-          "summary": "NVIDIA는 미국 주택 소유자를 위한 미니 AI 데이터 센터로 뒷마당을 변환하는 계획을 발표했다. 이 프로젝트는 AI 기술을 활용해 주택 환경에서도 데이터 처리 능력을 제공할 것으로 보인다."
+          "summary": "NVIDIA의 CFO인 Colette Kress는 AI가 더 이상 선택 사항이 아니라고 강조했다. 이 발언은 AI 기술의 중요성이 증가하고 있음을 시사한다. Fortune 기사에서 이 내용이 보도되었다."
         },
         {
-          "title": "Jim Cramer Says Dell Blowout Quarter Could Mark A Turning Point For AI Stocks Like Nvidia And Intel :  I",
-          "url": "https://www.benzinga.com/markets/tech/26/05/52892441/jim-cramer-says-dells-blowout-quarter-could-mark-a-turning-point-for-ai-stocks-like-nvidia-and-intel-i-wonder-if",
+          "title": "Dell confirms XPS laptop with NVIDIA N1X at Computex - VideoCardz.com",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQTmdNWUZIRnNrcjRCMlVKRjJSUmJqUnFKTHJmb1JzT25mMVNuNXo4NURtMnJmckp2eDJUbUgwRVF5MDhvZ2ZlZTgxeEI4dDdRdTRrRkNUeFpSVmd2S2tOUHZCanpxVXh1aGhKTDFidU5KLS1CWFRYNWtJVFFDOXhpUjV2YWNBWjg?oc=5",
           "date": "05-30",
-          "summary": "Jim Cramer는 Dell의 분기 실적이 AI 관련 주식인 NVIDIA와 Intel의 전환점이 될 수 있다고 분석했다. Dell의 강력한 실적이 AI 주식 시장에 긍정적인 영향을 미칠 것으로 예상된다."
+          "summary": "Dell은 Computex에서 NVIDIA N1X를 탑재한 XPS 노트북을 공개했다. 이는 NVIDIA의 최신 기술이 노트북 시장에 적용되고 있음을 보여준다. VideoCardz.com에서 이 소식을 확인할 수 있다."
         },
         {
-          "title": "Nvidia Joins Microsoft Windows To Tease  New Era of PC",
-          "url": "https://www.pcmag.com/news/nvidia-joins-microsofts-windows-to-tease-new-era-of-pc",
+          "title": "Nvidia Stock Could Rally Again if Huang Delivers on AI Growth Ta - GuruFocus",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPZHVQZ3NBQVdMT1l2TUtSWnhEbHZqX2N1SFVxUEVMU0Y4WTdHMVFCM2c1cFFLNURuN25HSmJud0U4dTAwQXBFZ1I2WlhfMVc0VmE4b0dlMFUyWDR6eHdTd2dKZ1hsazRqU01VckdpeVA1cWZZRTZBLWpVY1NJbWhTN3g5TTdtTlJua0FyS09TaHBQQWlnRTg0WlJ1QUtpVkYtbElXYk5ybGpFZFBs?oc=5",
           "date": "05-30",
-          "summary": "NVIDIA는 Microsoft Windows와 협력해 새로운 PC 시대를 예고했다. 이번 협력은 AI 기술을 PC 시장에 통합하는 중요한 단계로 평가된다."
+          "summary": "NVIDIA 주가는 젠슨 황이 AI 성장 목표를 달성할 경우 다시 상승할 수 있다. 이는 투자자들이 AI 기술 발전에 대한 기대를 반영하고 있음을 나타낸다. GuruFocus에서 이 내용을 보도했다."
         }
       ]
     },
@@ -62,22 +62,10 @@
       "region": "global",
       "items": [
         {
-          "title": "Smallest . ai and Tenstorrent Partnership Democratises Voice AI - 4x reduction in cost through hardware acceleration",
-          "url": "https://aninews.in/news/business/smallestai-and-tenstorrent-partnership-democratises-voice-ai-4x-reduction-in-cost-through-hardware-acceleration20260511114316/",
-          "date": "05-11",
-          "summary": "Tenstorrent는 Smallest.ai와 협력해 음성 AI의 대중화를 추진한다. 하드웨어 가속을 통해 비용을 4배 절감할 수 있는 기술을 제공한다."
-        },
-        {
-          "title": "Tenstorrent Vows to  Crush Everyone  as Galaxy Blackhole Hits 350 Tokens / s on DeepSeek R1 , Undercutting NVIDIA GB300 5x AI TCO",
-          "url": "https://wccftech.com/tenstorrent-vows-to-crush-everyone-galaxy-blackhole-hits-350-tokens-on-deepseek-r1-undercut-nvidia-gb300-ai-tco/",
-          "date": "05-03",
-          "summary": "Tenstorrent는 Galaxy Blackhole이 350 토큰/초를 처리하며 NVIDIA GB300 대비 5배 낮은 AI 총소유비용을 달성했다고 발표했다. 이는 경쟁사 대비 뛰어난 성능을 보여준다."
-        },
-        {
           "title": "MOREH Demonstrates Production - Ready LLM Inference on Tenstorrent Galaxy , Achieving DGX A100 - Class Performance with Improved Cost Efficiency",
           "url": "http://www.prnewswire.com/news-releases/moreh-demonstrates-production-ready-llm-inference-on-tenstorrent-galaxy-achieving-dgx-a100-class-performance-with-improved-cost-efficiency-302760562.html",
           "date": "05-02",
-          "summary": "MOREH는 Tenstorrent Galaxy에서 생산 준비가 된 LLM 추론을 시연했다. DGX A100급 성능을 유지하면서 비용 효율성을 개선한 것으로 확인됐다."
+          "summary": "MOREH는 Tenstorrent Galaxy에서 생산 준비된 LLM 추론을 시연했다. 이 기술은 DGX A100급 성능을 유지하면서 비용 효율성을 개선했다."
         }
       ]
     },
@@ -86,10 +74,16 @@
       "region": "global",
       "items": [
         {
-          "title": "Intel Sambanova deal gets US antitrust clearance",
-          "url": "https://economictimes.indiatimes.com/tech/information-tech/intels-sambanova-deal-gets-us-antitrust-clearance/articleshow/130681546.cms",
-          "date": "05-02",
-          "summary": "Intel의 Sambanova 인수가 미국 반독점 당국의 승인을 받았다. 이는 AI 반도체 시장에서의 Intel의 입지를 강화하는 계기가 될 전망이다."
+          "title": "ChipChats: Delivering Sovereign AI to the EU (Presented by SambaNova and Infercom) - sambanova.ai",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbXl5SEJfZkpBNk9NREpBRUF0c0UyRFZjRms0UVFiMFNjaDI0OFFEelE4R196REZidTNZbkYzdmNPUUNZU1FvYkVzUXpHV29FRU5wam5VczY4LWNIVGxkS19oWGdHSlE1QlZiT1Y4RjFNbFZ1emJZVHFUX3NYenFoVFoteDRXMTVOa3JLNXNBR2JjTS1QNWNxVFl5LVR0TWdDZnc?oc=5",
+          "date": "05-13",
+          "summary": "SambaNova와 Infercom은 EU에 주권 AI를 제공하는 ChipChats를 발표했다. 이 프로젝트는 AI 기술의 지역적 적용을 목표로 한다."
+        },
+        {
+          "title": "Intel's Sambanova deal gets U.S. antitrust clearance - Reuters",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPa25uWU40U1d3S3Z1RElRVjBuQzVXbHVMQzRlelJWdVhPQmlNRzVKaDhfWTdLYjNqcnUySWdWblRZdFdjQzVKVFdwYnFKSnNIMk11dmhBdnpwZlZpLTlyRTlOdkRYUWl6N3Q1TEVrRVBjMkg5Nm5uTW5zM2Q0V3l5bVVEUnZFMkZ6S0lBLUlMd3lQOXRETURZU3VWU3BuNjBoc016Mi1pNzNCRmYzQ0I2b0M0MFE2LXBtbXBFMTRIdUF5Tk0?oc=5",
+          "date": "05-01",
+          "summary": "Intel의 SambaNova 인수 거래가 미국에서 반독점 승인을 받았다. 이는 거래가 공식적으로 진행될 수 있음을 의미한다."
         }
       ]
     },
@@ -101,7 +95,7 @@
           "title": "Cerebras just had the biggest US tech IPO since Snowflake . SpaceX , OpenAI , and Anthropic are next .",
           "url": "https://thenextweb.com/news/cerebras-ipo-spacex-openai-anthropic-listings",
           "date": "05-17",
-          "summary": "Cerebras는 Snowflake 이후 미국 최대 규모의 기술 기업 공개(IPO)를 진행했다. SpaceX, OpenAI, Anthropic 등이 다음 IPO 후보로 거론되고 있다."
+          "summary": "Cerebras는 Snowflake 이후 가장 큰 미국 기술 IPO를 진행했다. SpaceX, OpenAI, Anthropic 등이 다음으로 IPO를 계획 중이다."
         }
       ]
     },
@@ -110,22 +104,22 @@
       "region": "korea",
       "items": [
         {
+          "title": "박성현 리벨리온 대표 “이젠 NPU 시대…K추론으로 엔비디아 독점 깰 것...",
+          "url": "https://www.sedaily.com/article/20049378?ref=naver",
+          "date": "05-28",
+          "summary": "리벨리온의 박성현 대표는 AI 반도체 시장에서 엔비디아의 독점을 깨기 위해 노력하고 있다. 리벨리온은 AI 추론 최적화 NPU 설계 전문 기업이다."
+        },
+        {
+          "title": "[팹리스×대기업] ②리벨리온, 통신·금융 우군과 '비(非)엔비디아' 정조...",
+          "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421351",
+          "date": "05-28",
+          "summary": "리벨리온은 국내외 ICT 대기업과 금융권과 협력하며 '비엔비디아' 생태계를 구축하고 있다. 이는 AI 반도체 시장에서 경쟁력을 강화하기 위한 전략이다."
+        },
+        {
           "title": "[서울포럼 2026] 박성현 리벨리온 대표 “AI 중심축 ‘추론’으로… 역...",
           "url": "https://www.sedaily.com/article/20049104?ref=naver",
           "date": "05-28",
-          "summary": "박성현 리벨리온 대표는 AI 산업의 기하급수적 성장과 자본 유입을 강조했다. 리벨리온은 AI 추론 최적화를 위한 주문형반도체(ASIC) 설계 기업이다."
-        },
-        {
-          "title": "Rebellions CEO: Inference Shift to Open Largest Chip Market in History - Seoul Economic Daily",
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOREFUNDJURTU2WnRETWtIMzdTVTFKM3VQaEhNdzFlQlFfVWN2ak1HQzE3VGpVdUdpd2RrM181dWRCWnp1aExlUGxocDQtdnp1bC1oc1VUVDY3QldmSHhtRlBvMGxza2xQZnVWM1p6UmhRdW03aFJobXlPZWdfQlR4SktBdkphblBEX210cGlocjFqTDRUSnlKX1g1SDh2eUlkdjV1MEpn?oc=5",
-          "date": "05-28",
-          "summary": "Rebellions CEO는 추론 기술의 전환이 역사상 가장 큰 칩 시장을 열 것이라고 언급했다. 이는 AI 반도체 시장의 확장 가능성을 시사한다."
-        },
-        {
-          "title": "상장 속도 늦추는 리벨리온…예심 청구 일정 8월에서 연내로 조정 [시그...",
-          "url": "https://www.sedaily.com/article/20048685?ref=naver",
-          "date": "05-27",
-          "summary": "리벨리온은 상장 시기를 내년으로 연기했다. 예심 청구 일정을 3분기에서 연내로 조정한 것으로 확인됐다."
+          "summary": "박성현 리벨리온 대표는 AI 산업의 성장과 자본 유입을 강조했다. 리벨리온은 AI 추론 최적화 ASIC 설계 기업으로 누적 성과를 내고 있다."
         }
       ]
     },
@@ -134,22 +128,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "DeepX expands AI chip push with robotics partners - Tech in Asia",
-          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPTDBYLXhlWFo4eE8wZW5SZ2VaOFFZenN3TVRCWXc2OE5UTlZKU2V5cnBWYlNZWkNJTGxjQ2UzdWZ4TkptTlVocTZKZGZPN2c4cE5BVVBMY05QNE5iMzRVSy0tZ2YzLXdPOEl2MGxRQ0JFcmp0Y3RIdUhXM1Ryc2s2UVNveGJqY211?oc=5",
+          "title": "[팹리스×대기업]①피지컬 AI 노리는 딥엑스, 현대차 협업 시나리오 2R ...",
+          "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421298",
           "date": "05-26",
-          "summary": "DeepX는 로봇 파트너와 협력해 AI 칩 사업을 확장하고 있다. 이는 AI 기술의 다양한 적용 가능성을 보여준다."
+          "summary": "딥엑스는 현대차와 협력해 온디바이스 AI 반도체 수주를 확대하고 있다. 이는 글로벌 시장에서의 입지를 강화하기 위한 전략이다."
         },
         {
           "title": "딥엑스, 컴퓨텍스 2026서 '피지컬 AI 생태계' 공개",
           "url": "https://www.epnc.co.kr/news/articleView.html?idxno=402148",
           "date": "05-26",
-          "summary": "딥엑스는 컴퓨텍스 2026에서 '피지컬 AI 생태계'를 공개할 예정이다. 로봇, 스마트 인프라 등 다양한 분야에 AI 기술을 적용할 계획이다."
+          "summary": "딥엑스는 컴퓨텍스 2026에서 '피지컬 AI 생태계'를 공개할 예정이다. 이 전시회는 대만 타이베이에서 개최된다."
         },
         {
-          "title": "Geniatech APC888 NXP i.MX 95-powered Edge AI Box PC takes M.2 AI accelerator from Hailo, MemryX, NXP, or DeepX - CNX Software",
-          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPYUhQLURsR2RBOGdFTS1USGVsU2YtNVExQ2lnaDlWWHEzcUdobDZLMzZxNzRTd2p3ZERWWkFlQUtSakU1VnNCU3duWDByeDhVZUV3bW9IYnBobF9VZFFtOWh1aWFTUGFoUkx1dUJ4cGx2Z3g2QW5yY2V3S3FVY2dDdVpjNWRuX2d6aVkwcWwtWFR6eXpvN08wb3Y4Z3JaN1ZmQ1JkWFoyU1NXMTE3NTJCSnFrVTBXcmd4RUVfOGV1ejU0enUyelM4cHdiRlBCQ1RLYTVMdld6emRvMUFESEpWMzhR0gHqAUFVX3lxTFBxQmsxVGZheWJ6b2MzeFBCcmp6bWpWekxZRnUzZVJmTk51UVgtNW5UUTN5Q2o4RTVzOWhaRVZvYzU5QzZSNWMzS09CQWpxY080OFplTGgxbE9TUlBpSGFKU2h2V0UtM252cVlMLVprbmJYMVdxRm1pNTRVSnNySkJCMW5LdFZlamp2ZlRRbXQyd1hNdjdhQUs2ZG4xbTFIalFEcXVLRGpIX3JHS2tPYzVGeTYyQnd4Q3hjTmpCdzI2T05CMFN2M3BPdDJKVUVkaVRaXzh6TUJIVVpzTThRWmRiRVNHWEdwYm0xUQ?oc=5",
-          "date": "05-18",
-          "summary": "Geniatech APC888은 NXP i.MX 95를 기반으로 한 에지 AI 박스 PC다. Hailo, MemryX, NXP, DeepX 등 다양한 M.2 AI 가속기를 지원한다."
+          "title": "[TECH한주] '몸값 1조' 품은 딥엑스, 해외 수주 잭팟…'첫 월별 BEP' 뚫었...",
+          "url": "https://www.epnc.co.kr/news/articleView.html?idxno=402013",
+          "date": "05-21",
+          "summary": "딥엑스는 해외 수주 확대와 첫 월별 BEP 달성을 발표했다. 이는 기업의 성장 가능성을 보여주는 지표다."
         }
       ]
     },
@@ -161,19 +155,19 @@
           "title": "“한투파 리드에 SI도 확보”… ‘AI 반도체’ 하이퍼엑셀, 1500억 투자유...",
           "url": "https://biz.chosun.com/stock/market_trend/2026/05/30/ZZPK23MBUZAHDI6WSVRMTCGUZ4/?utm_source=naver&utm_medium=original&utm_campaign=biz",
           "date": "05-30",
-          "summary": "하이퍼엑셀은 1500억원 규모의 신규 투자 유치를 추진 중이다. 한국투자파트너스 등 기존 투자자들이 후속 투자를 결정한 것으로 파악됐다."
+          "summary": "하이퍼엑셀은 1500억원 규모의 신규 투자유치를 추진 중이다. 한국투자파트너스 등 기존 투자자들이 후속 투자를 결정했다."
         },
         {
           "title": "[기획]이진원 하이퍼엑셀 CTO “단기 과제·실패 용인, AI 반도체 성공 ...",
           "url": "https://www.etnews.com/20260515000265",
           "date": "05-17",
-          "summary": "이진원 하이퍼엑셀 CTO는 한국의 AI 및 반도체 역량을 강조하며 글로벌 시장 주도를 위한 기회가 충분하다고 말했다."
+          "summary": "하이퍼엑셀의 이진원 CTO는 한국의 AI 및 반도체 역량을 강조했다. 이는 글로벌 AI 반도체 시장에서의 경쟁력을 확보하기 위한 노력이다."
         },
         {
           "title": "[더벨]하이퍼엑셀, 차세대 AI 반도체 '카르멘' 개발 착수",
           "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202605111357123800101884",
           "date": "05-13",
-          "summary": "하이퍼엑셀은 차세대 AI 반도체 '카르멘' 개발을 시작했다. AI 발전 속도에 맞춰 2년 주기로 신제품을 출시할 계획이다."
+          "summary": "하이퍼엑셀은 차세대 AI 반도체 '카르멘' 개발을 시작했다. 이는 AI 기술 발전 속도에 맞춘 신제품 출시 전략의 일환이다."
         }
       ]
     },
@@ -185,7 +179,19 @@
           "title": "모빌린트, 2세대 NPU '레귤러스' 양산 초읽기",
           "url": "https://www.thelec.kr/news/articleView.html?idxno=57150",
           "date": "05-26",
-          "summary": "모빌린트는 2세대 NPU '레귤러스'의 양산을 앞두고 있다. 싱글런 생산을 진행하며 실제 양산 직전 단계에 진입한 것으로 확인됐다."
+          "summary": "모빌린트는 2세대 NPU '레귤러스'의 양산을 앞두고 있다. 싱글런 생산을 진행하며 양산 준비를 가속화하고 있다."
+        },
+        {
+          "title": "모빌린트 NPU 솔루션, 조달청 혁신제품 지정…공공 조달 시장 진입",
+          "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=03125846645451544",
+          "date": "05-22",
+          "summary": "모빌린트의 NPU 기반 AI 솔루션이 조달청 혁신제품으로 지정되었다. 이는 공공 조달 시장 진입을 위한 중요한 단계다."
+        },
+        {
+          "title": "국산 소프트웨어·하드웨어 뭉쳤다…노타·모빌린트 '맞손'",
+          "url": "https://zdnet.co.kr/view/?no=20260507123736",
+          "date": "05-07",
+          "summary": "노타와 모빌린트는 온디바이스 AI 상용화 생태계 확장을 위해 협력했다. 이는 AI 최적화 기술 공급을 위한 전략적 파트너십이다."
         }
       ]
     }
