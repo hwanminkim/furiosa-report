@@ -28,7 +28,7 @@ FURIOSA_BASE_URL = "https://endpoint.access.furiosa.dev/v1"
 EXAONE_MODEL = "furiosa-ai/EXAONE-4.0-32B-FP8"
 EMBEDDING_MODEL = "furiosa-ai/Qwen3-Embedding-8B"
 SIMILARITY_THRESHOLD = 0.85
-COMPETITOR_SIMILARITY_THRESHOLD = 0.75
+COMPETITOR_SIMILARITY_THRESHOLD = 0.85
 
 COMPANIES = [
     {"name": "NVIDIA", "region": "global", "aliases": ["NVIDIA", "엔비디아"], "queries": [("NVIDIA", "en")]},
@@ -567,25 +567,28 @@ def to_output(a: dict, kst: pytz.BaseTzInfo, include_summary: bool = False) -> d
 
 def generate_competitor_summaries(articles_with_company: list[tuple], client: "OpenAI | None") -> dict:
     if client is None or not articles_with_company: return {}
+    prefetch_bodies([a for _, a in articles_with_company])
     items_in = []
     for i, (company, a) in enumerate(articles_with_company):
+        body = _article_body_for_prompt(a)
         items_in.append({
-            "id": i, "company": company, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:500]
+            "id": i, "company": company, "title": a.get("title", ""), "snippet": body[:1200]
         })
     prompt = f"""다음은 AI 반도체 경쟁사 뉴스 기사 목록입니다.
 
 각 기사에 대해 한국어 요약을 만들어 주세요:
-- "summary": 3문장, 사실 위주, 250~350자.
+- "summary": 4~5문장, 사실 위주, 350~450자.
+
+## 작성 원칙
+1. 제목과 snippet에 있는 사실만 활용. 핵심 사실(주체, 액션, 협력 대상, 금액·규모·수치, 시점, 목적)을 빠짐없이 담을 것.
+2. 일반론·미사여구로 분량을 채우지 말 것. 사실을 구체적으로 풀어 4~5문장을 채울 것.
+3. 정보가 적더라도 제목과 snippet에서 추출 가능한 사실만으로 자연스러운 요약을 작성. 정보 부족을 언급하지 말 것.
 
 ## 절대 금지 표현
 - "~분야의 경쟁력을 높이는 데 중요한 역할을 할 것이다"
 - "~기술의 발전에 기여할 것으로 기대된다"
 - "기대된다", "전망된다" 같은 막연한 미래 추측
 - "본문 정보 부족", "원문 확인 필요", "추가 정보 필요" 등 정보 부족을 명시하는 문구
-
-## 작성 원칙
-1. 제목과 snippet에 있는 사실만 활용.
-2. 정보가 적더라도 제목과 snippet에서 추출 가능한 사실만으로 자연스러운 3문장 요약을 작성. 정보 부족을 언급하지 말 것.
 
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
@@ -596,7 +599,7 @@ Return JSON ONLY:
         resp = client.chat.completions.create(
             model=EXAONE_MODEL,
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=4000,
+            max_tokens=8000,
             temperature=0.3,
 
         )
@@ -615,21 +618,23 @@ Return JSON ONLY:
 
 def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") -> dict:
     if client is None or not articles: return {}
+    prefetch_bodies(articles)
     items_in = []
     for i, a in enumerate(articles):
-        items_in.append({"id": i, "title": a.get("title", ""), "snippet": (a.get("description") or "")[:500]})
+        body = _article_body_for_prompt(a)
+        items_in.append({"id": i, "title": a.get("title", ""), "snippet": body[:1200]})
     prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
 
 각 기사에 대해 한국어 요약을 만들어 주세요:
-- "summary": 3문장, 사실 위주.
+- "summary": 4~5문장, 사실 위주, 350~450자.
 
-진부한 일반론 금지.
+진부한 일반론 금지. 핵심 사실(주체, 액션, 협력 대상, 금액·규모·수치, 시점, 목적)을 빠짐없이 담을 것. 일반론·미사여구로 분량을 채우지 말고 사실을 구체적으로 풀어 4~5문장을 채울 것.
 
 ## 절대 금지 표현
 - "본문 정보 부족", "원문 확인 필요", "추가 정보 필요" 등 정보 부족을 명시하는 문구
 - "기대된다", "전망된다" 같은 막연한 미래 추측
 
-정보가 적더라도 제목과 snippet에서 추출 가능한 사실만으로 자연스러운 3문장 요약을 작성. 정보 부족을 언급하지 말 것.
+정보가 적더라도 제목과 snippet에서 추출 가능한 사실만으로 자연스러운 요약을 작성. 정보 부족을 언급하지 말 것.
 
 Input articles:
 {json.dumps(items_in, ensure_ascii=False)}
@@ -640,7 +645,7 @@ Return JSON ONLY:
         resp = client.chat.completions.create(
             model=EXAONE_MODEL,
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=4000,
+            max_tokens=8000,
             temperature=0.3,
 
         )
@@ -694,10 +699,29 @@ def main():
                     seen_urls.add(a["url"])
                     fetched.append(a)
         recent = [a for a in fetched if a.get("pub_dt") is not None and a["pub_dt"] >= competitor_cutoff]
+        print(f"[{co['name']}] fetched={len(fetched)}, recent({COMPETITOR_CUTOFF_DAYS}d)={len(recent)}")
+
         relevant = filter_relevant_by_company(co["name"], co["aliases"], recent, exaone_client)
+        print(f"[{co['name']}] after relevance filter: {len(relevant)} (dropped {len(recent) - len(relevant)})")
+
+        before_dedup = relevant
         relevant = dedup_by_semantic_similarity(relevant, embedding_client, threshold=COMPETITOR_SIMILARITY_THRESHOLD)
+        print(f"[{co['name']}] after semantic dedup: {len(relevant)} (dropped {len(before_dedup) - len(relevant)})")
+        dedup_urls = {a["url"] for a in relevant}
+        for a in before_dedup:
+            if a["url"] not in dedup_urls:
+                print(f"  [DROPPED by dedup] {a['title'][:80]}")
+
+        before_cluster = relevant
         deduped = cluster_articles_by_event(relevant, exaone_client)
+        print(f"[{co['name']}] after cluster: {len(deduped)} (dropped {len(before_cluster) - len(deduped)})")
+        cluster_urls = {a["url"] for a in deduped}
+        for a in before_cluster:
+            if a["url"] not in cluster_urls:
+                print(f"  [DROPPED by cluster] {a['title'][:80]}")
+
         deduped.sort(key=lambda a: a["pub_dt"], reverse=True)
+        print(f"[{co['name']}] FINAL: {len(deduped[:COMPETITOR_MAX_ITEMS])} (capped at {COMPETITOR_MAX_ITEMS})")
         companies_raw.append({"name": co["name"], "region": co["region"], "articles": deduped[:COMPETITOR_MAX_ITEMS]})
 
     all_pairs = [(c["name"], a) for c in companies_raw for a in c["articles"]]
