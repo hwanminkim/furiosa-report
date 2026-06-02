@@ -1,55 +1,69 @@
 {
   "period": "2026-05-27(수) ~ 2026-06-02(화)",
-  "updated_at": "2026-06-02T07:38:18.255329+09:00",
+  "updated_at": "2026-06-02T14:01:50.885446+09:00",
   "furiosa_daily": {
     "06-02 (화)": [
       {
-        "title": "[더벨]'국민성장 3700억 발판’ 퓨리오사AI, 프리IPO 1조로 커지나",
-        "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202605290954159440108757",
+        "title": "퓨리오사AI 다음은 누구?…정부 초격차 스타트업 지원 본격화",
+        "url": "https://www.nocutnews.co.kr/news/6526437?utm_source=naver&utm_medium=article&utm_campaign=20260602020019",
         "date": "06-02",
-        "summary": "퓨리오사AI가 기업가치 4조원을 목표로 프리IPO를 통해 1조원 규모의 자금 조달을 추진 중이다. 국민성장펀드가 첨단전략산업기금 3700억원을 직접 투자하기로 결정하면서 기존 8500억원 규모의 프리IPO 계획이 확대될 전망이다."
+        "summary": "중소벤처기업부는 2일 대전 한국과학기술원 문지캠퍼스에서 비수도권 지역의 초격차 스타트업 12개사를 대상으로 현판수여식 및 간담회를 개최했다. 이번 행사는 초격차 스타트업 프로젝트의 일환으로, 선정된 스타트업에는 최대 6억 원의 사업화 자금과 별도로 6억 원의 기술개발 자금이 지원된다. 이 프로젝트는 글로벌 유니콘으로 육성하는 것을 목표로 한다."
+      },
+      {
+        "title": "지미션, 퓨리오사AI와 손잡고 국산 AI 반도체 생태계 확장 나선다",
+        "url": "https://www.venturesquare.net/1088253/",
+        "date": "06-02",
+        "summary": "지미션은 AI 반도체 기업 퓨리오사AI와 협력해 국산 AI 반도체 생태계 확장에 나섰다. 양사는 공공·금융·대기업 분야를 중심으로 국산 NPU 기반 AI 인프라와 솔루션 경쟁력을 강화할 계획이다. 이를 위해 업무협약(MOU)을 체결하고, 제조·금융·공공 특화 AI 서비스 공동 개발 및 기술 협력 등을 추진할 예정이다."
+      },
+      {
+        "title": "\"리벨리온 넘을까\"…퓨리오사AI, 프리IPO 8000억 실탄 확보",
+        "url": "https://www.bloter.net/news/articleView.html?idxno=664174",
+        "date": "06-02",
+        "summary": "퓨리오사AI는 프리IPO를 통해 8000억~8500억 원 규모의 투자를 유치 중이다. 국민성장펀드와 산업은행이 주요 투자자로 참여할 예정이며, 이 자금은 2세대 AI 칩 '레니게라이드(RNGD)' 개발 및 양산에 활용될 계획이다. 이번 투자는 퓨리오사AI의 글로벌 경쟁력 강화를 위한 전략적 자금 조달로 평가된다."
+      },
+      {
+        "title": "리딩투자증권 \"메디아나, 퓨리오사AI와 플랫폼 사업 기대\"",
+        "url": "https://daily.hankooki.com/news/articleView.html?idxno=1372738",
+        "date": "06-02",
+        "summary": "리딩투자증권은 메디아나가 퓨리오사AI와 플랫폼 사업을 협력할 것으로 전망하며, 이에 대한 기대감을 표명했다. 메디아나는 의료기기 및 헬스케어 분야에서 강점을 가진 기업으로, 퓨리오사AI의 AI 반도체 기술과 결합해 새로운 비즈니스 모델을 구축할 가능성이 있다."
       }
     ]
   },
   "furiosa_weekly": {
     "06-01 (월)": [
       {
-        "title": "메디아나·퓨리오사AI 맞손…병원용 '의료 소버린 AI' 시장 공략",
-        "url": "https://www.etnews.com/20260601000428",
-        "date": "06-01",
-        "summary": "메디아나와 퓨리오사AI가 협력해 병원용 '의료 소버린 AI' 시장을 공략한다. 양사는 병원 내 바이탈과 바이오시그널 데이터 기반 의료 AI 플랫폼 구축을 위한 공동기술개발 협약을 체결했다. 퓨리오사AI의 2세대 NPU '레니게이드' 기반 서버와 메디아나의 환자 모니터링 인프라가 결합된다."
-      },
-      {
-        "title": "국민성장펀드, 퓨리오사AI에 8000억 투자 승인",
-        "url": "https://dealsite.co.kr/articles/162787",
-        "date": "06-01",
-        "summary": "국민성장펀드가 퓨리오사AI에 약 8000억원을 투자하기로 승인했다. 첨단전략산업기금 3700억원, 한국산업은행 300억원 등 정책자금 4000억원이 투입되며, 나머지 4000억원은 네이버와 한국투자파트너스로부터 조달될 예정이다."
-      },
-      {
         "title": "엑스페릭스, 퓨리오사AI 총판 계약 기반 AI 인프라 사업 확대",
         "url": "https://www.etoday.co.kr/news/view/2589440",
         "date": "06-01",
-        "summary": "엑스페릭스가 퓨리오사AI와 총판 계약을 체결하고 AI 인프라 사업을 확대한다. 기업과 공공기관을 대상으로 AI 하드웨어부터 솔루션, 운영서비스까지 통합 제공하는 사업모델을 구축할 계획이다."
+        "summary": "엑스페릭스는 퓨리오사AI와 총판 계약을 체결하고 AI 인프라 사업을 확대할 계획이다. 이 계약을 기반으로 기업과 공공기관을 대상으로 AI 하드웨어부터 솔루션, 운영서비스까지 제공하는 통합 사업모델을 구축할 예정이다."
       }
     ],
     "05-29 (금)": [
       {
+        "title": "[증권 뉴스브리핑] 국민성장펀드 3만명, 평균 2000만원 가입·퓨리오사A...",
+        "url": "https://www.asiatime.co.kr/article/20260529500380",
+        "date": "05-29",
+        "summary": "국민성장펀드는 퓨리오사AI에 약 8000억 원 규모의 투자를 결정했다. 이 투자는 국내 AI 반도체 산업의 성장을 지원하고, 퓨리오사AI의 글로벌 경쟁력 강화를 목표로 한다. 투자금의 절반은 첨단전략산업펀드가 담당하며, 나머지는 한국개발은행 등이 참여할 예정이다."
+      },
+      {
         "title": "퓨리오사AI-브로드컴 '맞손'… K-엔비디아 '도전장'",
         "url": "http://www.the-biz.co.kr/news/articleView.html?idxno=721639",
         "date": "05-29",
-        "summary": "퓨리오사AI가 브로드컴과 협력해 차세대 AI 추론 플랫폼 개발에 나선다. 2나노미터 공정 기반 칩렛 구조와 HBM4 메모리를 적용한 고성능 반도체를 개발할 예정이며, 협력 규모는 2000억원대로 추정된다."
+        "summary": "퓨리오사AI는 미국 브로드컴과 협력해 차세대 AI 추론 플랫폼 개발에 나섰다. 이번 협력은 2000억 원 규모로 진행될 예정이며, 퓨리오사AI의 3세대 AI칩 개발 및 양산을 지원할 계획이다. 이 칩은 2나노미터 공정 기반 컴퓨트 다이와 HBM4·HBM4E 고대역폭 메모리를 적용해 대규모 AI 데이터센터 환경에 적합하도록 설계된다."
       },
       {
         "title": "엑스페릭스, 퓨리오사AI NPU 기반 AI 인프라 사업 본격 시동",
         "url": "https://www.financialpost.co.kr/news/articleView.html?idxno=260907",
         "date": "05-29",
-        "summary": "엑스페릭스가 퓨리오사AI의 NPU 기반 AI 인프라 사업을 본격화했다. 기업과 공공기관을 대상으로 AI 하드웨어부터 운영서비스까지 통합 솔루션을 제공하며, 영업력을 강화하고 있다."
-      },
+        "summary": "엑스페릭스는 퓨리오사AI의 NPU 기반 AI 인프라 사업을 본격적으로 추진 중이다. 이 사업은 기업과 공공기관을 대상으로 AI 하드웨어부터 솔루션, 운영서비스까지 제공하는 통합 모델을 구축하는 것을 목표로 한다."
+      }
+    ],
+    "05-28 (목)": [
       {
-        "title": "National Growth Fund to invest $535mn in AI startup FuriosaAI",
-        "url": "https://www.mk.co.kr/article/12061076",
-        "date": "05-29",
-        "summary": "국민성장펀드가 퓨리오사AI에 5350만 달러(약 8000억원)를 투자하기로 결정했다. 첨단전략산업기금 3700억원을 포함한 정책자금이 투입되며, 국내 AI 반도체 산업의 글로벌 경쟁력 강화를 목표로 한다."
+        "title": "FuriosaAI Ditches GPU Playbook For 2nm Broadcom-Built Inference Chip, Claims HBM4/E Bandwidth Beats Even The Most Efficient GPUs - Wccftech",
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPUlBFY2RvSTREZDBGWk8wWWFqUVJRemZVZlVEUllWN2RUaVZyQ1ExanVadVZuOVVmMF9yX3ZGMjBUNG8zdFR2ZnRZSklYRVFBR0VDRy1CUzdFTVJ3WTZhaFZxT1FUSTEtWlZ5Sjg1NWxIaHFROFc0clI3TXlQLTQ2bzg5T3hsTE55MHRuYkN1RS1YSDNNRVJnazYycmZtbzZsWmVsYk5MM2dLNmhwTkNIY1BadWdaXzZUV20za2tqa0lxS1HSAcgBQVVfeXFMTk1JeUw3Y2ZnNDRPYzYxelYySGRodnR1YW03Zy1jdnc3bGxpMXJfWlNQTWRXYncyUnR3MDIxd1h6U0xqdFpuSU1EcHdQSnZPQ19xWnBHS3RyM3BSTER0bHdpc2xuNlRMMzl0dTN6b2tpbzdwaV9IUV9CeEkwWll5Y2JBcDZ1djNQakdheVJZX3p5d0ZrRlZLakM3T0lCVUFlYXFqdFFYUmJSYmloYTNCOUFscW5HNEZFZ1k4ZmEybF9BNDJ6NTFvbGY?oc=5",
+        "date": "05-28",
+        "summary": "퓨리오사AI는 GPU 대신 2나노미터 공정의 브로드컴 기반 추론 칩을 개발해 HBM4/E 고대역폭 메모리를 적용할 계획이다. 이 칩은 기존 GPU보다 높은 대역폭을 제공하며, 대규모 AI 데이터센터 환경에 최적화되어 있다."
       }
     ]
   },
@@ -59,22 +73,22 @@
       "region": "global",
       "items": [
         {
-          "title": "FinancialContent - Why Is Nvidia ( NVDA ) Stock Soaring Today",
-          "url": "https://markets.financialcontent.com/stocks/article/stockstory-2026-6-1-why-is-nvidia-nvda-stock-soaring-today",
+          "title": "Morning Bid: Nvidia chief to Asia: 'We're still supply constrained' - Reuters",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1uVUgwRW5rZ1ZIVmwzbXhQY2VnakRmQWpudEw3RlQyaVM3THB0eUMzeUpBMnZ5aHhFb2Ytc3pnUWZJUWh4TjdSYjl1WWRrYl9lSTR1SE1zN3dmc3d1WThrX2pTaTM0Szlzei1RVHJXMjZsNGNkYkJlam1HQjZMX2c?oc=5",
           "date": "06-02",
-          "summary": "엔비디아의 주가가 6.3% 상승했다. 이는 CEO 젠슨 황이 컴퓨텍스에서 발표한 RTX 스파크와 블랙웰 GPU를 포함한 시스템 온 칩에 대한 소식 때문이다. RTX 스파크는 20코어 암 기반 CPU와 6,144개의 CUDA 코어, 128GB의 통합 메모리, 1 페타플롭스의 AI 성능을 갖추고 있으며, 2026년 가을에 출시될 예정이다."
+          "summary": "엔비디아의 최고경영자(CEO) 젠슨 황은 아시아 방문 중 공급 제약 문제를 언급했다. 그는 현재 공급이 제한적인 상황이 지속되고 있다고 밝혔다."
         },
         {
-          "title": "NVIDIA ( NVDA ): Forecast of $200 Billion Market for CPUs Includes China , Reports CNBC",
-          "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-nvda-forecast-200-billion-115752272.html",
+          "title": "Jim Cramer Can’t Understand Why NVIDIA (NVDA) Won’t Go Up - Yahoo Finance",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPNURLOElmMm45aDVJQjRfSDJCMTdfOVJXTEhmVDkwYkhreTh5NkN5UlNobGlUOGp0UC00ZWk5MmF0Q01lME5ocUVEMDJybXI2R0pKS2wycFZZSXlaYVhkZ09tZnpiOG8tTHV1eXlqMk1SOWV1QXBBLXRfblRId3B5Z25SUW93SnVYY2tFQVM3VE9CSGUzaU1Z?oc=5",
           "date": "06-02",
-          "summary": "엔비디아의 CPU 시장 규모 예측이 2,000억 달러에 이를 것으로 전망된다. 이는 중국을 포함한 글로벌 시장에서의 성장 가능성을 반영한 것이다."
+          "summary": "야후 파이낸스에 따르면, 엔비디아의 주가 상승에 대해 투자 전문가 짐 크래머는 이해할 수 없다고 표현했다."
         },
         {
-          "title": "Jensen Huang Says Nvidia Has Unlocked a New Growth Opportunity the Company Hasnt Gone After Before",
-          "url": "https://www.fool.com/investing/2026/06/01/jensen-huang-says-nvidia-has-unlocked-a-new-growth/?source=iedfolrf0000001",
+          "title": "Arm Holdings (ARM) Notches All-Time High as Nvidia Showcases New Tech - Yahoo Finance",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQVVpkcnZJTkc5NHQ1bG5xdE13ZmhnaVZYbUQ2VVBsY0YzMFBYcFJaVTFRNTVWczhNMm9zZHhreFJjMHZjRndQbVoxSzh0NTNmaGlmWVl6dHBQYnlVb2VmeEIwMHQ4cnZHUmtQOUN5U01HWjM2WkEyOU81LW00aHg0R2RMTS1oZjAyYWlhZHpiT1lYYmNfNmx6VmNR?oc=5",
           "date": "06-02",
-          "summary": "젠슨 황은 엔비디아의 새로운 성장 기회에 대해 언급하며, 회사가 이전에 없었던 분야로 진출하고 있다고 밝혔다."
+          "summary": "암홀드(ARM)는 엔비디아의 새로운 기술 공개로 인해 역대 최고 주가를 기록했다."
         }
       ]
     },
@@ -83,10 +97,10 @@
       "region": "global",
       "items": [
         {
-          "title": "AI Chip Startup Tenstorrent Draws Takeover Interest From Intel, Qualcomm - Bloomberg.com",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPU2xHOXVuS3QydHdycTRteE15WjV3WGRObUpZdnJpTDlfYWhtZ280TUtXa0hBZVBLdldPTlRZdFQ1SzZsdEdwclVNYjUweDRWZUkzSHA2alpfdmd1ZlM3dTdDd3FwdTZtekZGZlhNSms4Y29nMUtEbld6UnlzVTlqblhrNjdQaW1UdWROWHZ1RDJkXzRwcTlSYno5ci1RMlRoSDNWRVlBV1hzNU80R1VTRlBIc05JcTZpTEdycGprYw?oc=5",
-          "date": "05-18",
-          "summary": "텐스터레스트는 인텔과 퀄컴으로부터 인수 제안을 받았다."
+          "title": "Smallest . ai and Tenstorrent Partnership Democratises Voice AI - 4x reduction in cost through hardware acceleration",
+          "url": "https://aninews.in/news/business/smallestai-and-tenstorrent-partnership-democratises-voice-ai-4x-reduction-in-cost-through-hardware-acceleration20260511114316/",
+          "date": "05-11",
+          "summary": "소셜AI와 텐서렌트는 협력을 통해 음성 AI 비용을 4배 절감하는 기술을 개발했다."
         }
       ]
     },
@@ -95,22 +109,16 @@
       "region": "global",
       "items": [
         {
-          "title": "SambaNova’s DataScale Chosen for Key Role in SoftBank’s Generative AI Development - HPCwire",
-          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNVHM3ck9tT1FUck5PdzhURkYyLUtVc0t3bGkwdnV1ZTktYVc2a0dsVTYtZFNOYksxMlNmNHNxWndhTFRBdW5lU0gtQW4xQlRUdXRUcHhTYWRtcy1heGx6blJzdkowZV91RWtxaFRRSUs2dmtQTmF1ZzJiTUJPcXl0TXpWWThfVE9TSnUzaHFKRWVsbDlTTFNCOERPbXljdnR2bml5aENDeXRnQU5QY0hxLUJPU0xXc2hiT3QxcDFKbDE5Y3BXTlFaaQ?oc=5",
-          "date": "05-22",
-          "summary": "삼산역은 데이터스케일의 데이터센터용 AI 칩을 선택했다."
-        },
-        {
           "title": "ChipChats: Delivering Sovereign AI to the EU (Presented by SambaNova and Infercom) - sambanova.ai",
           "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbXl5SEJfZkpBNk9NREpBRUF0c0UyRFZjRms0UVFiMFNjaDI0OFFEelE4R196REZidTNZbkYzdmNPUUNZU1FvYkVzUXpHV29FRU5wam5VczY4LWNIVGxkS19oWGdHSlE1QlZiT1Y4RjFNbFZ1emJZVHFUX3NYenFoVFoteDRXMTVOa3JLNXNBR2JjTS1QNWNxVFl5LVR0TWdDZnc?oc=5",
           "date": "05-13",
-          "summary": "삼산역은 sovereign AI 클라우드를 영국에서 리벨리온과 함께 출시했다."
+          "summary": "SambaNova와 아르길드는 영국에서 주권 AI 클라우드 서비스를 시작했다."
         },
         {
           "title": "Argyll and SambaNova launch sovereign AI cloud in the UK - Data Center Dynamics",
           "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPQlBrVU1uSjNrTFN0c2d6Zll4Z1hZakV3bFg4NTdSRmZaU2lDajJvb1JkbTZhUTYzUGJ3ZmNjSGlyUGk0SDNlMUYyV3QwUFU4N0Vjd3VGOGtBcU1lNE14Z2tMNloycFJJOXV2eDR4djNlX2dWOVdwdmZUY2FvMmgtdk80WnNYVkRfVW4zRTZnUkNFNmh2SE9hZjdkcmZ6RjAySXc?oc=5",
           "date": "05-06",
-          "summary": "시즐과 리벨리온은 국산 NPU 기반의 온프레미스 Agentic AI 추론 서버를 공동 개발하기 위해 MOU를 체결했다."
+          "summary": "SambaNova와 아르길드는 영국에서 주권 AI 클라우드 서비스를 시작했다."
         }
       ]
     },
@@ -119,22 +127,10 @@
       "region": "global",
       "items": [
         {
-          "title": "Cathie Wood is Buying Cerebras Post - IPO : Should You Follow ?",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-buying-cerebras-post-233000002.html",
-          "date": "05-30",
-          "summary": "리벨리온은 AI 추론 최적화 주문형반도체 설계 기업으로, AI 산업의 기하급수적인 성장과 함께 전례 없는 자본과 기회를 끌어들이고 있다."
-        },
-        {
-          "title": "Democratizing Large - Scale AI : Co - Design , Packaging , and the Future of AI Hardware with Andy Hock from Cerebras",
-          "url": "https://www.eejournal.com/fish_fry/democratizing-large-scale-ai-co-design-packaging-and-the-future-of-ai-hardware-with-andy-hock-from-cerebras/",
-          "date": "05-29",
-          "summary": "KB금융은 AI 경쟁력 강화를 위해 리벨리온과 업무협약을 맺었다."
-        },
-        {
-          "title": "Cerebras , Replit , Vercel : The Newly AI Rich Are Worth $59 Billion",
-          "url": "https://www.bloomberg.com:443/features/2026-new-ai-billionaires-list/",
-          "date": "05-28",
-          "summary": "세벨리온의 가치는 590억 달러에 이를 것으로 평가된다."
+          "title": "IPO News - US IPO Week Ahead: AI chipmaker Cerebras leads a roster of 5 major IPOs - renaissancecapital.com",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQNk1TbTNVMW1QM2V2UF83NHBZOGpZUlFNQnh4OGhlRzJHVFA5MHFsMWxZcVBsekpPVUJOamNwaWFCNzdrOHE4M3RkTU00NFlBZ2x2TGZCU0dhSWJMRmxPbmJ6SG1uTmRwdENkeEpSakJ3Q1oyTndoYkNWZVVRNXdQTjRXWGlzRE1CUzFxajl4cXFDZUtPMTV2SWRRM3JMTmRKOGxQanN5SmhiRmpNWWhkMHJORGd4SWFpSV9weDEycE5VcnliOEtv?oc=5",
+          "date": "05-08",
+          "summary": "세레브라스는 미국에서 IPO를 진행하며 AI 반도체 시장에 진출했다."
         }
       ]
     },
@@ -143,22 +139,22 @@
       "region": "korea",
       "items": [
         {
+          "title": "\"리벨리온 넘을까\"…퓨리오사AI, 프리IPO 8000억 실탄 확보",
+          "url": "https://www.bloter.net/news/articleView.html?idxno=664174",
+          "date": "06-02",
+          "summary": "퓨리오사AI는 프리IPO를 통해 8000억~8500억원 규모의 자금을 조달 중이다."
+        },
+        {
           "title": "시즐×리벨리온, 국산 NPU 기반 '온프레미스 Agentic AI 추론 서버' 공동...",
           "url": "https://magazine.hankyung.com/business/article/202606010184b",
           "date": "06-01",
-          "summary": "딥엑스는 컴퓨텍스 2026에서 피지컬 AI 생태계를 공개할 예정이다."
+          "summary": "시즐과 리벨리온은 국산 NPU 기반의 온프레미스 Agentic AI 추론 서버 개발을 위해 MOU를 체결했다."
         },
         {
-          "title": "[서울포럼 2026] 박성현 리벨리온 대표 “AI 중심축 ‘추론’으로… 역...",
-          "url": "https://www.sedaily.com/article/20049104?ref=naver",
+          "title": "[팹리스×대기업] ②리벨리온, 통신·금융 우군과 '비(非)엔비디아' 정조...",
+          "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421351",
           "date": "05-28",
-          "summary": "딥엑스는 현대차와 협업 시나리오 2R을 준비 중이다."
-        },
-        {
-          "title": "KB금융 “AI 경쟁력 강화”… 리벨리온과 업무협약 맺어",
-          "url": "https://www.donga.com/news/Economy/article/all/20260527/134004711/2",
-          "date": "05-28",
-          "summary": "딥엑스는 컴퓨텍스 2026에서 피지컬 AI 솔루션과 글로벌 양산 협력 생태계를 공개할 예정이다."
+          "summary": "리벨리온은 통신 및 금융 분야에서 엔비디아에 대항하는 비(非)엔비디아 전략을 추진 중이다."
         }
       ]
     },
@@ -170,19 +166,19 @@
           "title": "[금융지주X딥엑스] ①VC·PE 대신 금융지주 전면에…'생산적 금융' 실적...",
           "url": "https://www.smarttoday.co.kr/ko-kr/articles/107906",
           "date": "05-29",
-          "summary": "한투파가 리드하는 하이퍼엑셀은 1,500억 원의 투자를 유치했다."
-        },
-        {
-          "title": "[팹리스×대기업]①피지컬 AI 노리는 딥엑스, 현대차 협업 시나리오 2R ...",
-          "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421298",
-          "date": "05-26",
-          "summary": "하이퍼엑셀은 2,000억 원 규모의 시리즈B 투자를 추진 중이며, 목표액을 상향 조정했다."
+          "summary": "딥엑스는 KB, 신한, NH 금융지주와 함께 프리IPO 투자에 참여해 총 3000억원을 투자할 계획이다."
         },
         {
           "title": "딥엑스, 컴퓨텍스 2026서 '피지컬 AI 생태계' 공개",
           "url": "https://www.epnc.co.kr/news/articleView.html?idxno=402148",
           "date": "05-26",
-          "summary": "하이퍼엑셀은 NPU보다 효율이 높은 LPU를 공개했다."
+          "summary": "딥엑스는 컴퓨텍스 2026에서 '피지컬 AI 생태계'를 공개하며 다양한 산업용 AI 솔루션을 선보였다."
+        },
+        {
+          "title": "[Invest]2조 딥엑스 프리IPO에 KB·신한·NH 금융지주 총출동",
+          "url": "https://www.investchosun.com/site/data/html_dir/2026/05/22/2026052280177.html",
+          "date": "05-26",
+          "summary": "딥엑스는 컴퓨텍스 2026에서 '피지컬 AI 생태계'를 공개하며 다양한 산업용 AI 솔루션을 선보였다."
         }
       ]
     },
@@ -194,19 +190,19 @@
           "title": "“한투파 리드에 SI도 확보”… ‘AI 반도체’ 하이퍼엑셀, 1500억 투자유...",
           "url": "https://biz.chosun.com/stock/market_trend/2026/05/30/ZZPK23MBUZAHDI6WSVRMTCGUZ4/?utm_source=naver&utm_medium=original&utm_campaign=biz",
           "date": "05-30",
-          "summary": "모빌린트는 2세대 NPU '레귤러스'의 양산을 앞두고 있다."
+          "summary": "하이퍼엑셀은 한국투자파트너스의 리드로 1500억원 규모의 투자를 유치했다."
         },
         {
-          "title": "[더벨]하이퍼엑셀, 2000억 시리즈B 추진…상업화 기대에 목표액 상향",
-          "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202605061022016040107547",
-          "date": "05-08",
-          "summary": "모빌린트의 NPU 기반 AI 솔루션이 조달청의 혁신제품으로 등록되었다."
+          "title": "[기획]이진원 하이퍼엑셀 CTO “단기 과제·실패 용인, AI 반도체 성공 ...",
+          "url": "https://www.etnews.com/20260515000265",
+          "date": "05-17",
+          "summary": "하이퍼엑셀의 이진원 CTO는 한국의 AI 반도체 시장 성장 가능성에 대해 긍정적으로 평가했다."
         },
         {
-          "title": "\"NPU보다 효율 높은 LPU\"…하이퍼엑셀, 1세대 보드 제품 공개",
-          "url": "https://www.mt.co.kr/future/2026/05/08/2026050715494031442",
-          "date": "05-07",
-          "summary": ""
+          "title": "[더벨]하이퍼엑셀, 차세대 AI 반도체 '카르멘' 개발 착수",
+          "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202605111357123800101884",
+          "date": "05-13",
+          "summary": "하이퍼엑셀은 차세대 AI 반도체 '카르멘' 개발에 착수했다."
         }
       ]
     },
@@ -218,13 +214,19 @@
           "title": "모빌린트, 2세대 NPU '레귤러스' 양산 초읽기",
           "url": "https://www.thelec.kr/news/articleView.html?idxno=57150",
           "date": "05-26",
-          "summary": ""
+          "summary": "모빌린트는 2세대 NPU '레귤러스'의 양산을 앞두고 있다."
         },
         {
-          "title": "모빌린트, NPU 기반 AI 솔루션 조달청 혁신제품 등록",
-          "url": "https://www.epnc.co.kr/news/articleView.html?idxno=402107",
+          "title": "모빌린트 NPU 솔루션, 조달청 혁신제품 지정…공공 조달 시장 진입",
+          "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=03125846645451544",
           "date": "05-22",
-          "summary": ""
+          "summary": "모빌린트의 NPU 솔루션이 조달청의 혁신제품으로 지정되어 공공 조달 시장에 진입했다."
+        },
+        {
+          "title": "노타, 반도체 기업 모빌린트와 AI 최적화 기술 공급 계약",
+          "url": "https://www.fetv.co.kr/news/articleView.html?idxno=301826",
+          "date": "05-07",
+          "summary": "노타는 모빌린트와 AI 최적화 기술 공급 계약을 체결했다."
         }
       ]
     }
