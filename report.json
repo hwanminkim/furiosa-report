@@ -1,6 +1,6 @@
 {
   "period": "2026-06-05(금) ~ 2026-06-11(목)",
-  "updated_at": "2026-06-11T16:09:31.350042+09:00",
+  "updated_at": "2026-06-11T17:56:18.445997+09:00",
   "furiosa_daily": {},
   "furiosa_weekly": {
     "06-10 (수)": [
@@ -8,7 +8,7 @@
         "title": "'엔비디아 대항마' 퓨리오사AI, UAE 무바달라 LOI 제출…과거 무산 이력...",
         "url": "https://www.thepublic.kr/news/articleView.html?idxno=307151",
         "date": "06-10",
-        "summary": "퓨리오사AI가 UAE 국부펀드 무바달라로부터 투자의향서(LOI)를 받아내며 조 단위 몸값을 입증했다. 이번 무바달라의 참여 타진은 정부 주도의 '국민성장펀드' 자금 집행을 이끌어낸 결정적 계기로 작용했다. 국민성장펀드는 지난달 28일 퓨리오사AI에 첨단기금 3,700억 원 규모의 직접투자를 승인한 바 있다. 민간 투자금 확보에 대한 기대가 높아지고 있다."
+        "summary": "퓨리오사AI가 UAE 국부펀드 무바달라로부터 투자의향서(LOI)를 받아내며 조 단위 몸값을 입증했다. 이번 무바달라의 참여 타진은 정부 주도의 '국민성장펀드' 자금 집행을 이끌어낸 결정적 계기가 되었다. 국민성장펀드는 지난달 28일 퓨리오사AI에 첨단기금 3,700억 원 규모의 직접투자를 승인한 바 있다. 이는 민간 투자금 확보에 중요한 전환점이 될 것으로 보인다."
       }
     ],
     "06-06 (토)": [
@@ -16,7 +16,7 @@
         "title": "퓨리오사AI·리벨리온·딥엑스, 실증 넘어 양산 경쟁 본격화···사업화...",
         "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421563",
         "date": "06-06",
-        "summary": "퓨리오사AI, 리벨리온, 딥엑스가 실증 단계를 넘어 양산 경쟁을 본격화하며 사업화 시험대에 올랐다. 이들 기업은 AI 반도체 분야에서 기술 경쟁을 벌이며 시장 선점을 위한 전략을 펼치고 있다. 특히 퓨리오사AI는 글로벌 자본시장에서의 투자 유치와 협력 확대를 통해 경쟁력을 강화하고 있다."
+        "summary": "퓨리오사AI, 리벨리온, 딥엑스가 실증 단계를 넘어 양산 경쟁을 본격화하며 사업화 시험대에 올랐다. 이들 기업은 AI 반도체 분야에서 기술 경쟁을 벌이며 시장 선점을 위한 전략을 펼치고 있다. 특히 퓨리오사AI는 글로벌 자본시장에서의 투자 유치와 기술 협력을 통해 경쟁력을 강화하고 있다."
       }
     ],
     "06-05 (금)": [
@@ -24,19 +24,13 @@
         "title": "메디아나-퓨리오사AI 협력…의료 인공지능 확대",
         "url": "https://www.dailymedi.com/news/news_view.php?wr_id=937105",
         "date": "06-05",
-        "summary": "메디아나와 퓨리오사AI가 협력해 의료 인공지능(AI) 플랫폼 사업을 확대한다. 양측은 환자 바이탈 데이터를 병원 내부에서 직접 처리·분석하는 온프레미스 기반 차세대 의료인프라를 공동 개발할 계획이다. 메디아나의 소프트웨어 기술과 퓨리오사AI의 NPU 기반 AI 서버가 결합되어 패혈증, 심정지 등 위기 상황 예측에 활용될 전망이다."
+        "summary": "메디아나와 퓨리오사AI가 협력해 의료 인공지능(AI) 플랫폼 사업을 확대한다. 양측은 환자 바이탈 데이터를 병원 내부에서 직접 처리·분석하는 온프레미스 기반 차세대 의료인프라를 공동 개발할 계획이다. 메디아나는 이미 국내 다수 병원에 환자감시장치 및 중앙모니터링시스템(CMS)을 공급하며 데이터를 축적해 왔고, 퓨리오사AI의 NPU 기반 AI 서버를 활용해 위기 상황 예측 및 경고 시스템을 강화할 예정이다."
       },
       {
         "title": "퓨리오사AI, 베트남 하이퐁시와 'AI 인프라' 협력…동남아 주도권 경쟁...",
         "url": "https://www.theguru.co.kr/news/article.html?no=102635",
         "date": "06-05",
-        "summary": "퓨리오사AI가 베트남 하이퐁시와 협력해 동남아시아 시장 내 AI 인프라 주도권 확보에 나선다. 이번 협력은 반도체 기술과 베트남의 인프라를 결합한 '기술 동맹'으로, 제조를 넘어 디지털 인프라 분야로의 확장을 의미한다. 퓨리오사AI는 글로벌 데이터센터 구축 등을 통해 동남아 시장에서의 경쟁력을 강화할 계획이다."
-      },
-      {
-        "title": "[150조 국민성장펀드] 1000억 못 모은 퓨리오사에…나랏돈 4000억 집행",
-        "url": "https://dealsite.co.kr/articles/162800",
-        "date": "06-05",
-        "summary": "국민성장펀드가 퓨리오사AI에 4,000억 원을 선집행하기로 결정했다. 이는 민간재원 1대 나랏돈 1이라는 기존 원칙을 깬 조치로, 특혜 논란이 제기되고 있다. 리벨리온이나 업스테이지와 달리 공적자금 집행의 절차와 규모가 일반적인 상식을 벗어났다는 지적이 나오고 있다. 퓨리오사AI는 이번 투자로 AI 반도체 분야에서의 기술 경쟁력을 강화할 전망이다."
+        "summary": "퓨리오사AI가 베트남 하이퐁시와 AI 인프라 구축을 위한 업무협약(MOU)을 체결하며 동남아시아 시장 공략을 가속화했다. 이번 협력은 퓨리오사AI가 베트남 최대 IT 기업 CMC그룹과 데이터센터 중심의 기술 협력을 맺은 데 이어 두 번째로 진행된 것이다. 하이퐁시는 한국 기업들의 전략적 요충지로, 퓨리오사AI는 현지 시장에서의 기술적 밀착을 통해 주도권 확보를 노리고 있다."
       }
     ]
   },
@@ -49,7 +43,7 @@
           "title": "Nvidia , Doosan Group collaborate to advance Physical AI",
           "url": "https://evertiq.com/design/2026-06-11-nvidia-doosan-group-collaborate-to-advance-physical-ai",
           "date": "06-11",
-          "summary": "엔비디아와 두산그룹이 물리적 AI(Physical AI) 발전을 위해 협력하기로 했다. 이번 협력은 엔비디아의 가속 컴퓨팅 플랫폼과 두산그룹의 산업 자동화, 발전, 전자재료 기술을 결합해 차세대 AI 인프라를 지원하는 것이 목표다. 협력 범위는 두산로보틱스, 두산밥캣, 두산에너빌리티, 두산전자재료 BG 등으로 확대된다."
+          "summary": "엔비디아와 두산그룹이 물리적 AI 발전을 위해 협력한다. 엔비디아의 가속 컴퓨팅 플랫폼과 두산그룹의 산업 자동화, 발전, 전자 재료 기술을 결합해 차세대 AI 인프라를 지원할 계획이다. 협력은 두산로�틱스, 두산밥캣, 두산에너빌리티, 두산전자재료BG 등 두산그룹 계열사로 확대된다."
         }
       ]
     },
@@ -58,10 +52,10 @@
       "region": "global",
       "items": [
         {
-          "title": "Tenstorrent Unveils TT-QuietBox(TM) 2, the First RISC-V AI Workstation With a Fully Open-Source Stack to Deliver Teraflop-Class Inference - Observer and Eccentric Newspapers",
-          "url": "https://news.google.com/rss/articles/CBMinAJBVV95cUxOUkRGNUlzNXdUVG5xMThRUmZiLTF1QWJoTmwzaE5PRG9WdHlOQnFDZWRVeXJkSXdlc2ExNkFQS3BqSTFFWi11UGFtMlExVmdfenJCVlhmTDA1d1JFaWlLVWNJeUdBVWFHd2NUMVc1OVJKUEVPbDhkSTRDMUIzdXJfSjA5MFB3WkNzZnVZVXNDRVozbEZNY3FVOTl5LWxIb2hQZ0E1TDZJTko5bU5wbndwY3Z6QUhIY1hxRWt2aWNoY1hUUW5KZC1uazAweTRYMDBxSUh6RXNBOEtKdFZPaGd0YjZBejE2Um9YcDBHS2dQS2RBN1gyLWFQSGhQbDRuWTRQLTBUVElpRl9oelg0eG1XbGJlUTZfRlFTYXgzYQ?oc=5",
-          "date": "06-03",
-          "summary": "텐서렌트가 첫 RISC-V 기반 AI 워크스테이션 TT-QuietBox를 출시했다. 이 제품은 완전히 오픈소스 스택을 탑재해 테라플롭급 추론 성능을 제공한다."
+          "title": "Smallest . ai and Tenstorrent Partnership Democratises Voice AI - 4x reduction in cost through hardware acceleration",
+          "url": "https://www.design-reuse.com/news/202530526-smallest-ai-and-tenstorrent-partnership-democratises-voice-ai-4x-reduction-in-cost-through-hardware-acceleration/",
+          "date": "05-18",
+          "summary": "스몰스트.ai와 텐서플로우가 음성 AI의 비용을 4배 절감하는 협력을 발표했다. 하드웨어 가속을 통해 음성 AI의 비용 효율성을 높이는 것이 목표다."
         }
       ]
     },
@@ -73,7 +67,7 @@
           "title": "SambaNova Challenges Cerebras Strategy",
           "url": "https://www.marketscreener.com/news/sambanova-challenges-cerebras-strategy-ce7f5bd2d081f22c",
           "date": "05-15",
-          "summary": "사바나노바가 세레스 전략에 도전한다는 소식이 전해졌다."
+          "summary": "삼바노바가 세레스의 전략에 도전한다는 기사 제목만 제공되었으며, 추가 정보는 없다."
         }
       ]
     },
@@ -82,10 +76,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Cerebras prices IPO above expected range, as Wall Street braces for AI tsunami - CNBC",
-          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNSDBsVUI5Ykh6NXRVSDNLVUMzODdnbGtpZ0RxQlkxNVpGQzhqSC1QWm5aS2l3cUs0dHhJZ2wybDV6cmtISlhWb2Q3ZGw5eEFwSnAtS0Z1SV9tQWxuOWppNy1mT3R1dDFoM3FnOHNvUEV6RG14c3N2ZlZYNEl3YzhuV1B6dEVURUV2aENZdkw1WldlYWZVQ1lvXy1ZVTBKQUJvWE9vRzVEWjFYUdIBrwFBVV95cUxQQmJETnc0QlQtNzlnR0w1YkZIT1Yybjk3VmRMSFgxamh5U3JtU0JDVVprNjNhUWZIWVdQN09UYWRFdm1lT2pZRlMwWTJKWW82NEtPbVlHWV9rRlhTSUp5VlJFOWxLYTFtRnVMOUtDanFybHBob05XU0F4UUhGa29hWFpRa2Foa2s0U2ZUMHd4UjZWOVA2Z0hmejA5TWl5RE96NEhUNGsybXFxY0k3bmQw?oc=5",
-          "date": "05-13",
-          "summary": "세레스가 상장을 위해 예상 범위를 상회하는 가격으로 주식을 책정했다. 이는 AI 수요 증가에 대한 시장 기대를 반영한 것으로 분석된다."
+          "title": "Better Investment Option: SpaceX or Cerebras? - The Motley Fool",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxORTBCdHBiejhESDZlSTRhLTRuQTNoTVg4c040TW9Edl9SMy1oaWJTZ0dTck5DTE1lYTE2bnh0VlFZYzF5VVI0VGNNUUpzeUVLVS15ZGotdHpsVFY1X09hSjZhb25PN0NVbENWUy1yUFhlQjdRVVdoeGFtYzh4VGUtVmk1cjRwYXJFVXNrZF96SQ?oc=5",
+          "date": "06-01",
+          "summary": "세레스에 대한 기사 제목만 제공되었으며, 추가 정보는 없다."
+        },
+        {
+          "title": "Prediction: This Trend, Launched by Cerebras, Could Supercharge the AI Bull Market This Year - Yahoo Finance",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQOFdKd3pJZnFZLXJ1WmFhU3lZN3dmTmFOWGJUcVByN0k2ZU1VTHZPWDdwNm5Fc3pBN1g1MzkzTUVOdE1wMnNRbzJuaEdnTDA3Q2dUak5JWnpKcndJbWFJRlp0dEhLVnF2S2k3cDRNVjdrRW54V2FsakVUT2ljQlpwMC1fQVViNUF5RVpCUE9ia1hfQkR6MVczc004aFktdnhoSGJ0ZTJycmg?oc=5",
+          "date": "05-30",
+          "summary": "세레스에 대한 기사 제목만 제공되었으며, 추가 정보는 없다."
+        },
+        {
+          "title": "Has the hunt for AI compute uncovered the next Cerebras? - TechCrunch",
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOaFRvbEdFNDN0THo2WFRvcnFiWTA1UUhvSFlqUHhQU2VzM2tpT0xHOVE0bnozc1A4LUhlYnNiS0hRUVRJTFRVLTZSamFGTHpadW5PcnFnR05MOFhzQ2J5dktmQkNPMFF2TEF0bUJJSTllNmVZVi0tbm5lN0czTm9FN3lGRDJmdk5UdEFMWjc2N2JCaW9W?oc=5",
+          "date": "05-28",
+          "summary": "리벨리온 전 외교관 문병준을 중동 사업 전략 고문으로 위촉했다. 중동 및 아랍 문화권 사업을 강화하기 위한 조치다."
         }
       ]
     },
@@ -97,19 +103,19 @@
           "title": "前 외교관이 반도체 스타트업 입사한 이유… 리벨리온, 중동사업 재시동",
           "url": "https://www.sedaily.com/article/20054071?ref=naver",
           "date": "06-11",
-          "summary": "리벨리온의 중동 사업이 재개된다. 전 사우디아라비아 대사대리였던 문병준이 고문으로 위촉되며, 중동 시장 공략이 본격화될 전망이다."
+          "summary": "리벨리온이 컴퓨텍스 2026에서 중동 사업 재개를 발표했다. 중동통 전직 외교관을 영입해 중동 자본 공략을 재개한다."
         },
         {
           "title": "Rebellions Revives Middle East Business with New Advisor - Seoul Economic Daily",
           "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQaTluS0dBbTBpeHowWFl3VkxEamFaRE50ZFRTNFYxVWpVaGlNQVpsQ1kzVk1Vc0VqcVRyYmhkVkxRN2FDNXJianJyU1RfMTBmZ3JENVhtRjVieGt1S2N0TmwtaTl2YUIwWVNxNWdhVGI3TU0tNm8wYno0TlhDbEpRZFQ4WG9jdGpmQTF1d3FrWnMzd1M4d2lYNW1ocWxJSzktWlg0?oc=5",
           "date": "06-10",
-          "summary": "리벨리온이 과기정통부의 'AI 미래 유니콘 기업'에 선정됐다. 이번 선정으로 리벨리온은 해외 진출 등 맞춤형 지원을 받게 된다."
+          "summary": "과기정통부가 'AI 미래 유니콘 기업' 15개사를 선정했다. 리벨리온을 포함한 기업들이 글로벌 ICT 미래 유니콘 육성 프로그램에 참여한다."
         },
         {
           "title": "과기정통부, 'AI 미래 유니콘 기업'에 리벨리온 등 15개사 선정",
           "url": "https://www.newsis.com/view/NISX20260610_0003663376",
           "date": "06-10",
-          "summary": "정부가 'AI 미래 유니콘 기업' 15개사를 확정했다. 리벨리온을 포함한 이들 기업은 글로벌 ICT 시장 진출을 위한 지원을 받는다."
+          "summary": "딥엑스, 퓨리오사AI, 리벨리온이 실증 단계를 넘어 양산 경쟁을 본격화했다. 사업화를 위한 시험대에 오른 상태다."
         }
       ]
     },
@@ -121,19 +127,19 @@
           "title": "[Invest]'넥스트 딥엑스' 찾는 금융권…AI 직접투자 후보군은 벌써 부족",
           "url": "https://www.investchosun.com/site/data/html_dir/2026/06/08/2026060880184.html",
           "date": "06-09",
-          "summary": "금융권이 '넥스트 딥엑스'를 찾는 움직임이 가속화되고 있다. 리벨리온, 업스테이지, 퓨리오사AI, 딥엑스 등이 주요 후보로 거론되지만, 투자 가능한 기업 풀이 제한적이라는 평가도 나온다."
+          "summary": "딥엑스가 엔비디아의 미진한 분야를 공략하며 '피지컬 AI'를 강조했다. 로봇, 드론, 자율주행차 등 실제 물리적 환경에서의 AI 적용을 목표로 한다."
         },
         {
           "title": "퓨리오사AI·리벨리온·딥엑스, 실증 넘어 양산 경쟁 본격화···사업화...",
           "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421563",
           "date": "06-06",
-          "summary": "퓨리오사AI, 리벨리온, 딥엑스가 실증 단계를 넘어 양산 경쟁을 본격화했다. 이들 기업은 AI 반도체 시장에서 사업화를 위한 시험대에 올랐다."
+          "summary": "하이퍼엑셀의 이진원 CTO는 한국의 AI 반도체 역량을 강조하며, 단기 과제와 실패를 용인하는 문화가 성공 요소라고 말했다."
         },
         {
           "title": "\"엔비디아가 못하는 영역 잡는다\" … 딥엑스 '피지컬 AI' 승부수 [컴퓨텍...",
           "url": "https://biz.newdaily.co.kr/site/data/html/2026/06/05/2026060500200.html",
           "date": "06-05",
-          "summary": "딥엑스가 엔비디아의 주력 분야가 아닌 '피지컬 AI' 시장을 공략할 계획이다. 김녹원 대표는 5년 내 새로운 시장이 열릴 것이라며, 로봇, 드론, 자율주행차 등이 해당 분야라고 설명했다."
+          "summary": "모빌린트가 컴퓨텍스 2026에서 대만 AI 생태계와 협력을 확대했다. AI 및 NPU 관련 기술 협력을 위한 MOU를 체결했다."
         }
       ]
     },
@@ -145,7 +151,7 @@
           "title": "[기획]이진원 하이퍼엑셀 CTO “단기 과제·실패 용인, AI 반도체 성공 ...",
           "url": "https://www.etnews.com/20260515000265",
           "date": "05-17",
-          "summary": "이진원 하이퍼엑셀 CTO는 한국이 AI 반도체 시장에서 주도적 역할을 할 수 있다고 강조했다. 단기 과제와 실패를 용인하는 문화가 성공 요소라고 지적했다."
+          "summary": ""
         }
       ]
     },
@@ -154,10 +160,10 @@
       "region": "korea",
       "items": [
         {
-          "title": "모빌린트, COMPUTEX 2026서 대만 기업 3곳과 전략적 MOU 체결",
-          "url": "https://www.hellot.net/news/article.html?no=113062",
+          "title": "모빌린트, COMPUTEX 2026서 대만 AI 생태계와 협력 확대",
+          "url": "http://www.boannews.com/media/view.asp?idx=144023&kind=3",
           "date": "06-09",
-          "summary": "모빌린트가 COMPUTEX 2026에서 대만 기업 3곳과 전략적 MOU를 체결했다. 이번 협약으로 글로벌 산업용 AI 시장 공략이 가속화될 전망이다."
+          "summary": ""
         }
       ]
     }
