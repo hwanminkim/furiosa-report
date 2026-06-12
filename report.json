@@ -1,6 +1,6 @@
 {
   "period": "2026-06-06(토) ~ 2026-06-12(금)",
-  "updated_at": "2026-06-12T17:43:25.388747+09:00",
+  "updated_at": "2026-06-12T20:10:10.312959+09:00",
   "furiosa_daily": {},
   "furiosa_weekly": {
     "06-10 (수)": [
@@ -8,7 +8,7 @@
         "title": "'엔비디아 대항마' 퓨리오사AI, UAE 무바달라 LOI 제출…과거 무산 이력...",
         "url": "https://www.thepublic.kr/news/articleView.html?idxno=307151",
         "date": "06-10",
-        "summary": "퓨리오사AI가 UAE 국부펀드 무바달라로부터 투자의향서(LOI)를 받아냈다. 이번 투자 유치는 정부 주도의 '국민성장펀드' 자금 집행을 이끌어낸 결정적 계기가 됐다. 국민성장펀드는 지난달 28일 퓨리오사AI에 3,700억 원 규모의 직접투자를 승인했으며, 무바달라의 LOI는 한국산업은행 등 정책금융기관의 4,000억 원 선집행을 가능케 한 '마중물' 역할을 했다. 퓨리오사AI는 고대역폭메모리(HBM)를 탑재한 차세대 NPU '레니게이드' 양산을 통해 엔비디아 독점 체제에 도전 중이다. 다만 무바달라의 LOI는 법적 구속력이 없어 최종 투자 여부는 불확실하다."
+        "summary": "퓨리오사AI가 UAE 국부펀드 무바달라로부터 투자의향서(LOI)를 받아내며 조 단위 투자 유치에 성공했다. 이번 LOI는 정부 주도의 '국민성장펀드' 자금 집행을 이끌어낸 결정적 계기로 작용했다. 국민성장펀드는 지난달 28일 퓨리오사AI에 3,700억 원 규모의 직접투자를 승인했으며, 무바달라의 LOI는 정책금융기관의 4,000억 원 선집행을 가능케 한 '마중물' 역할을 했다. 퓨리오사AI는 고대역폭메모리(HBM)를 탑재한 차세대 NPU '레니게이드' 양산을 통해 엔비디아 독점 체제에 도전 중이다. 다만 무바달라의 LOI는 법적 구속력이 없어 최종 투자 여부는 불확실하다."
       }
     ],
     "06-07 (일)": [
@@ -16,7 +16,7 @@
         "title": "'FuriosaAI,' Backed by the National Growth Fund, Valued at 522 Times Reve...",
         "url": "https://it.chosun.com/news/articleView.html?idxno=2023092163405",
         "date": "06-07",
-        "summary": "퓨리오사AI가 국민성장펀드의 800억 원 투자를 승인받았다. 이는 펀드의 세 번째 직접투자로, 누적 기준으로 네 번째 규모의 투자다. 퓨리오사AI의 프리IPO 평가액은 3조 원으로, 투자 후 기업 가치는 3.8조 원에 달한다. 투자는 상환전환우선주(RCPS) 형태로 진행되며, 국민성장펀드는 약 21.1%의 지분을 확보할 전망이다. 퓨리오사AI는 엔비디아 대체용 NPU '레니게이드'를 개발 중이지만, 수익성 미비와 높은 평가액에 대한 논란도 존재한다."
+        "summary": "퓨리오사AI가 국민성장펀드의 800억 원 투자를 승인받으며 3조 원 이상의 기업가치를 인정받았다. 이는 펀드의 세 번째 직접투자로, 리벨리온과 업스테이지 AI에 이어 네 번째로 큰 규모다. 퓨리오사AI는 엔비디아의 GPU를 대체할 고효율 AI 반도체 NPU를 개발 중이며, HBM 기반 2세대 NPU '레니게이드'를 준비 중이다. 투자는 상환전환우선주(RCPS) 형태로 이루어지며, 국민성장펀드는 약 21.1%의 지분을 확보할 전망이다. 다만 회사가 아직 수익을 내지 못하는 상황에서 과도한 평가에 대한 논란도 존재한다."
       }
     ],
     "06-06 (토)": [
@@ -24,7 +24,7 @@
         "title": "퓨리오사AI·리벨리온·딥엑스, 실증 넘어 양산 경쟁 본격화···사업화...",
         "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421563",
         "date": "06-06",
-        "summary": "퓨리오사AI, 리벨리온, 딥엑스 등 국내 AI 반도체 기업들이 실증 단계를 넘어 양산 경쟁에 돌입했다. 퓨리오사AI는 2세대 NPU '레니게이드' 초도 물량 4,000장을 대만 TSMC에서 생산했으며, 연내 2만장 생산을 목표로 한다. 리벨리온은 2027년 상반기 아람코에 '리벨100' 납품을 계획 중이며, 딥엑스는 2나노 공정 기반 'DX-M2'를 2027년 양산할 예정이다. 국내 AI 반도체 기업들은 해외 시장에서 3,000만 달러 이상의 수출 계약을 체결하며 상용화 가능성을 입증했다."
+        "summary": "퓨리오사AI, 리벨리온, 딥엑스 등 국내 AI 반도체 기업들이 실증 단계를 넘어 양산 경쟁에 본격적으로 뛰어들었다. 퓨리오사AI는 2세대 NPU '레니게이드' 초도 물량 4,000장을 TSMC를 통해 생산했으며, 연내 2만장 생산을 목표로 한다. 리벨리온은 2027년 상반기 아람코에 '리벨100'을 납품할 계획이며, 딥엑스는 1세대 칩 'DX-M1'을 이미 양산 중이다. 국내 기업들은 해외 시장에서 3,000만 달러 이상의 수출 계약을 체결하며 상용화 가능성을 입증했다. 생산 리드 타임이 길어 수요 예측에 기반한 선제적 생산 전략이 필요하다는 의견도 제기된다."
       }
     ]
   },
@@ -34,22 +34,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Nvidia (NVDA) Begins Orders for New Vera Processors in China - GuruFocus",
-          "url": "https://www.gurufocus.com/news/8913777/nvidia-nvda-begins-orders-for-new-vera-processors-in-china",
+          "title": "Conflict Minerals Are Allegedly Reaching NVIDIA, Microsoft Supply Chains: Report - Benzinga",
+          "url": "https://www.benzinga.com/markets/commodities/26/06/53161847/conflict-minerals-are-allegedly-reaching-nvidia-microsoft-supply-chains-report",
           "date": "06-12",
-          "summary": "엔비디아(NVDA)가 중국에서 새로운 베라 프로세서 주문을 시작했다. 이는 중국 시장을 겨냥한 새로운 제품 출시의 일환으로 보인다."
+          "summary": "글로벌 감시 단체인 글로벌 위스터의 조사에 따르면, NVIDIA와 마이크로소프트의 공급망에 분쟁 광물인 콜탄이 유입되고 있는 것으로 드러났다. 콜탄은 탄탈럼의 원료로, 고급 컴퓨팅 장비에 필수적인 성분이다. 조사 결과, 윤리적 조달 시스템이 무너지면서 콩고 북키부 지역에서 채굴된 콜탄이 대량으로 유통되고 있다. 이 지역은 전 세계 탄탈럼 수요의 약 15%를 공급하는 전략적 요충지다. M23 반군은 콜탄 밀매로 자금을 조달하며, 2024년 기준 매월 120톤 이상의 콜탄이 르완다를 통해 공식 경로로 유출된 것으로 UN 데이터에 나타났다. 글로벌 위스터는 르완다산 콜탄의 수입 중단과 기업 책임 강화, 르완다에 대한 군사 수출 중단 등을 권고했다."
         },
         {
-          "title": "Exclusive: Nvidia begins Vera CPU sales pitch to Chinese clients, sources say - Reuters",
-          "url": "https://www.reuters.com/world/china/nvidia-begins-vera-cpu-sales-pitch-chinese-clients-sources-say-2026-06-12/",
+          "title": "GeForce NOW annual plans drop to $64.99 and $129.99 in NVIDIA summer sale - TweakTown",
+          "url": "https://www.tweaktown.com/news/112150/geforce-now-annual-plans-drop-to-dollars64-99-and-dollars129-99-in-nvidia-summer-sale/index.html",
           "date": "06-12",
-          "summary": "엔비디아(NVDA)가 중국 고객사를 대상으로 베라 CPU 판매를 시작했다. 이번 판매 활동은 중국 시장에서의 입지를 강화하기 위한 전략으로 해석된다."
+          "summary": "NVIDIA가 여름 세일 기간 동안 GeForce NOW 연간 구독 플랜 가격을 64.99달러와 129.99달러로 인하했다. 이번 할인은 기존 구독 모델의 접근성을 높이기 위한 조치로 보인다."
         },
         {
-          "title": "Desktop GPU shipments hold steady in Q1 2026 with NVIDIA maintaining 90% market share - TweakTown",
-          "url": "https://www.tweaktown.com/news/112161/desktop-gpu-shipments-hold-steady-in-q1-2026-with-nvidia-maintaining-90-percent-market-share/index.html",
+          "title": "Nvidia (NVDA) Partners with Abridge for AI in Healthcare - GuruFocus",
+          "url": "https://www.gurufocus.com/news/8913843/nvidia-nvda-partners-with-abridge-for-ai-in-healthcare",
           "date": "06-12",
-          "summary": "2026년 1분기 데스크톱 GPU 출하량이 안정적이었으며, 엔비디아는 90%의 시장 점유율을 유지했다. 이는 엔비디아의 시장 지배력을 보여주는 지표이다."
+          "summary": "NVIDIA가 AI 의료 솔루션 개발을 위해 Abridge와 협력했다. 이번 파트너십은 AI 기술을 활용한 의료 서비스 혁신을 목표로 한다."
         }
       ]
     },
@@ -61,7 +61,7 @@
           "title": "Tenstorrent Unveils TT-QuietBox(TM) 2, the First RISC-V AI Workstation With a Fully Open-Source Stack to Deliver Teraflop-Class Inference - Observer and Eccentric Newspapers",
           "url": "https://www.hometownlife.com/press-release/story/57648/tenstorrent-unveils-tt-quietboxtm-2-the-first-risc-v-ai-workstation-with-a-fully-open-source-stack-to-deliver-teraflop-class-inference-2/",
           "date": "06-03",
-          "summary": "텐서렌트가 오픈소스 스택을 완전히 탑재한 최초의 RISC-V AI 워크스테이션 TT-QuietBox(TM) 2를 공개했다. 이 제품은 테라플롭급 추론 성능을 제공한다."
+          "summary": "Tenstorrent가 오픈소스 기반의 RISC-V AI 워크스테이션 TT-QuietBox 2를 출시했다. 이 제품은 테라플롭급 AI 추론 성능을 제공하며, 완전한 오픈소스 스택을 지원한다."
         }
       ]
     },
@@ -70,22 +70,10 @@
       "region": "global",
       "items": [
         {
-          "title": "Gemma 4 31B Running Fastest on SambaCloud - sambanova.ai",
-          "url": "https://sambanova.ai/blog/gemma-4-31b-running-fastest-on-sambacloud",
-          "date": "06-11",
-          "summary": "샘바노바의 삼바클라우드에서 구글 딥마인드의 젬마 4 31B 모델이 가장 빠르게 실행된다. 이 모델은 추론, 코딩, 에이전시 워크플로우에 최적화되어 있다."
-        },
-        {
-          "title": "Intel Stock Surges as Analyst Targets Climb: SambaNova, Foxconn Deals Anchor AI Pivot - Tech Times",
-          "url": "https://www.techtimes.com/articles/318008/20260608/intel-stock-surges-analyst-targets-climb-sambanova-foxconn-deals-anchor-ai-pivot.htm",
-          "date": "06-09",
-          "summary": "인텔의 주가가 AI 인프라 수요 증가와 샘바노바, 폭스콘과의 협력 소식으로 8.55% 상승했다. 인텔은 18A 공정 노드의 Xeon 6+ CPU를 출시하며 AI 시장 진출을 가속화하고 있다."
-        },
-        {
-          "title": "SambaNova CEO on IPO prospects: We're excited for what the next 12 months will bring - CNBC",
-          "url": "https://www.cnbc.com/video/2026/06/05/sambanova-ceo-on-ipo-prospects-excited-for-what-next-12-months-brings.html",
-          "date": "06-05",
-          "summary": "SambaNova CEO는 다음 12개월 동안 새로운 도전을 기대하며 IPO 전망에 대해 긍정적인 입장을 밝혔다. 회사는 AI 반도체 분야에서의 성장 가능성을 강조하며, 향후 사업 확장에 대한 기대감을 나타냈다."
+          "title": "SambaNova Challenges Cerebras Strategy",
+          "url": "https://www.marketscreener.com/news/sambanova-challenges-cerebras-strategy-ce7f5bd2d081f22c",
+          "date": "05-15",
+          "summary": "SambaNova가 Cerebras의 전략에 도전하는 움직임을 보였다. 구체적인 내용은 기사에서 확인할 수 없다."
         }
       ]
     },
@@ -94,22 +82,16 @@
       "region": "global",
       "items": [
         {
-          "title": "A $550 Billion Reason to Buy Cerebras Stock",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/550-billion-reason-buy-cerebras-195756329.html",
-          "date": "06-12",
-          "summary": "Cerebras Systems(CBRS)는 IPO 이후 분석사들의 긍정적인 평가를 받으며 주가가 급등했다. Mizuho는 Cerebras가 주도하는 '빠른 추론' 시장이 2030년까지 연간 5500억 달러 규모로 성장할 것으로 전망했다. Cerebras는 Wafer Scale Engine 기술을 기반으로 AI 칩 시장에서 경쟁력을 강화하고 있다."
+          "title": "Cerebras Systems ( NASDAQ : CBRS ) Upgraded at Barclays",
+          "url": "https://www.tickerreport.com/banking-finance/13469103/cerebras-systems-nasdaqcbrs-upgraded-at-barclays.html",
+          "date": "06-10",
+          "summary": "Cerebras Systems가 바클레이즈의 업그레이드 평가를 받았다. 구체적인 평가 내용은 기사에서 확인할 수 없다."
         },
         {
-          "title": "CBRS Stock Watch : Cerebras Soars as Analysts Issue  Buy  Ratings",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/cbrs-stock-watch-cerebras-soars-193150350.html",
-          "date": "06-11",
-          "summary": "Cerebras Systems(CBRS)는 IPO 이후 분석사들의 긍정적인 평가를 받으며 주가가 주목받고 있다. UBS와 Needham 등 주요 증권사들이 CBRS를 '빠른 추론' 시장의 선두주자로 평가하며 매수 권고를 발표했다. Cerebras는 Wafer-Scale Engine 기술로 AI 칩 시장에서 차별화된 경쟁력을 확보하고 있다."
-        },
-        {
-          "title": "Cerebras outpaces Nvidia in video showdown at SuperAI Singapore , making its case against GPU dominance",
-          "url": "https://www.digitimes.com/news/a20260611VL200.html",
-          "date": "06-11",
-          "summary": "Cerebras Systems는 SuperAI 싱가포르 행사에서 Wafer Scale Engine 칩을 공개하며 Nvidia 대비 성능 우위를 강조했다. 행사에서 Cerebras의 칩은 AI 비디오 처리 작업에서 Nvidia보다 뛰어난 성능을 보여주며 AI 반도체 시장에서의 경쟁력을 입증했다."
+          "title": "Cerebras Opened at $350 -- Nearly Double Its IPO Price -- Then Pulled Back 20 % the Next Day . Is Cerebras Stock a Buy or a Trap ?",
+          "url": "https://www.fool.com/investing/2026/06/06/cerebras-opened-at-350-nearly-double-its-ipo-price/?source=iedfolrf0000001",
+          "date": "06-07",
+          "summary": "Cerebras는 5월 14일 공모가 185달러로 상장했으나 다음 날 20% 하락했다. 이 회사는 엔비디아와 달리 거대 칩을 생산하며, 오픈AI와 200억 달러 규모 계약을 체결했다. 아마존 웹서비스와 메타 플랫폼과도 협력 중이다. 2022년 2400만 달러에서 2025년 51억 달러로 매출이 급증할 전망이다."
         }
       ]
     },
@@ -121,19 +103,19 @@
           "title": "삼성전자, 韓 SAFE 포럼 2026에 리벨리온·지멘스 등 주요 연사로 나서",
           "url": "https://www.ajunews.com/view/20260611171219088",
           "date": "06-11",
-          "summary": "삼성전자는 SAFE 포럼 2026에 리벨리온과 지멘스를 주요 연사로 초청해 파운드리 협력 강화를 논의했다. 리벨리온은 삼성 파운드리와의 협력을 확대하며 AI 반도체 시장에서의 입지를 강화하고 있다. 삼성전자는 4나노 공정 기술 경쟁력을 강조해 고객 신뢰를 높이는 전략을 펼쳤다."
-        },
-        {
-          "title": "리벨리온, 30년 외교 베테랑 문병준 전 주사우디 대사대리 영입",
-          "url": "https://www.epnc.co.kr/news/articleView.html?idxno=402900",
-          "date": "06-11",
-          "summary": "리벨리온은 문병준 전 주사우디 대사대리를 중동·북아프리카(MENA) 전략 고문으로 위촉했다. 문 고문은 중동 지역에서의 정부·기업 네트워크를 활용해 리벨리온의 AI 반도체 시장 진출을 지원할 예정이다. 리벨리온은 중동 시장에서의 파트너십 확대와 전략적 협력 모델 발굴에 속도를 낼 계획이다."
+          "summary": "삼성전자는 7월 1일 서울에서 SAFE 포럼 2026을 개최한다. 리벨리온과 지멘스가 주요 연사로 참여해 삼성 파운드리와의 협력 사례를 공유할 예정이다. 리벨리온은 3년 연속 연사로 초청됐으며, AI 반도체 개발 과정에서의 삼성 파운드리 활용 경험을 발표할 계획이다."
         },
         {
           "title": "[Invest]국민성장펀드 투자 받은 리벨리온·퓨리오사AI...힘 실리는 코스...",
           "url": "https://www.investchosun.com/site/data/html_dir/2026/06/10/2026061080180.html",
           "date": "06-11",
-          "summary": "국민성장펀드 투자를 받은 리벨리온과 퓨리오사AI가 기업공개(IPO) 상장 시장을 고민 중이다. 두 회사와 투자자들은 유가증권시장(코스피) 상장을 선호하지만, 거래소와 금융당국은 코스닥 상장을 권유하고 있다. 리벨리온은 연내, 퓨리오사AI는 내년께 상장 예비심사를 청구할 예정이다. 리벨리온은 3월 프리IPO 라운드에서 총 6400억원을 유치했으며, 기업가치는 약 3조4000억원으로 평가받았다. 퓨리오사AI는 지난달 약 8000억원 규모의 직접투자를 결정했고, 기업가치는 약 3조원대로 파악된다. 두 회사 모두 영업적자를 기록하고 있어 코스닥 상장 가능성이 높아지고 있다."
+          "summary": "리벨리온과 퓨리오사AI는 국민성장펀드 투자 후 IPO 시장을 고민 중이다. 두 회사는 코스피 상장을 선호하지만, 거래소와 금융당국은 코스닥 상장을 권유하고 있다. 리벨리온은 3월 프리IPO에서 6400억 원을 유치했으며, 3조4000억 원의 기업가치를 인정받았다."
+        },
+        {
+          "title": "前 외교관이 반도체 스타트업 입사한 이유… 리벨리온, 중동사업 재시동",
+          "url": "https://www.sedaily.com/article/20054071?ref=naver",
+          "date": "06-11",
+          "summary": "리벨리온은 중동 사업 재시동을 위해 문병준 전 사우디아라비아 대사대리를 고문으로 위촉했다. 이는 미국과 이란 전쟁으로 차질을 빚었던 중동 사업을 재개하기 위한 조치로 보인다."
         }
       ]
     },
@@ -142,22 +124,22 @@
       "region": "korea",
       "items": [
         {
+          "title": "[Invest]'넥스트 딥엑스' 찾는 금융권…AI 직접투자 후보군은 벌써 부족",
+          "url": "https://www.investchosun.com/site/data/html_dir/2026/06/08/2026060880184.html",
+          "date": "06-09",
+          "summary": "금융권은 AI 기업 투자 후보군으로 리벨리온, 업스테이지, 퓨리오사AI, 딥엑스 등을 고려 중이다. 국민성장펀드의 AI 투자는 정책 명분과 대규모 자금 집행 여력이 확인된 기업을 중심으로 진행되고 있다. 직접투자 부담으로 인해 공동투자나 간접투자 방식이 더 현실적이라는 분석도 나온다."
+        },
+        {
           "title": "퓨리오사AI·리벨리온·딥엑스, 실증 넘어 양산 경쟁 본격화···사업화...",
           "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421563",
           "date": "06-06",
-          "summary": "퓨리오사AI, 리벨리온, 딥엑스 등 국내 AI 반도체 기업들이 실증 단계를 넘어 본격적인 양산 경쟁에 돌입했다. 퓨리오사AI는 2세대 칩 '레니게이드'를 TSMC에서 초도 물량 4000장 양산했고, 약 130억원 규모의 구매주문을 확보했다. 리벨리온은 삼성전자 파운드리를 통해 2세대 칩 '리벨100'의 양산을 준비 중이며, 2027년 상반기까지 사우디 아람코에 납품할 계획이다. 딥엑스는 1세대 칩 'DX-M1'을 양산 중이며, 2세대 칩 'DX-M2'는 2027년 양산을 목표로 개발 중이다. 국내 AI 반도체 기업들은 다양한 산업 현장에 적용되며 상용화 가능성을 입증하고 있다."
+          "summary": "퓨리오사AI, 리벨리온, 딥엑스 등 국내 AI 반도체 기업들이 실증 단계를 넘어 양산 경쟁에 돌입했다. 퓨리오사AI는 2세대 칩 '레니게이드'를 TSMC를 통해 양산 중이며, 리벨리온은 2세대 칩 '리벨100'을 삼성전자 파운드리를 통해 양산할 계획이다. 딥엑스는 2나노 공정을 적용한 2세대 칩 'DX-M2'를 2027년 양산 목표로 개발 중이다."
         },
         {
           "title": "\"엔비디아가 못하는 영역 잡는다\" … 딥엑스 '피지컬 AI' 승부수 [컴퓨텍...",
           "url": "https://biz.newdaily.co.kr/site/data/html/2026/06/05/2026060500200.html",
           "date": "06-05",
-          "summary": "딥엑스의 김녹원 대표는 대만 컴퓨텍스 2026에서 2나노 공정을 적용한 차세대 칩 'DX-M2'의 양산 계획을 밝혔다. 김 대표는 2년 내 매출이 100배 증가할 것이라고 전망하며, 삼성 2나노 공정에서 수율 70% 이상을 달성하겠다고 자신했다. 딥엑스는 애플 아이폰 NPU 개발 경험을 가진 핵심 인력을 바탕으로 시장에서 작동하는 '양산형 반도체 기업'을 지향하고 있다. 회사는 글로벌 반도체 유통사와 전략적 총판 계약을 체결해 글로벌 시장 진출 속도를 높이고 있다."
-        },
-        {
-          "title": "[인터뷰]김녹원 딥엑스 대표 \"삼성 2나노 수율 70% 자신…4년 내 매출 10...",
-          "url": "https://view.asiae.co.kr/article/2026060508461141987",
-          "date": "06-05",
-          "summary": "딥엑스의 김녹원 대표는 대만 컴퓨텍스 2026에서 2나노 공정을 적용한 차세대 칩 'DX-M2'의 양산 계획을 밝혔다. 김 대표는 2년 내 매출이 100배 증가할 것이라고 전망하며, 삼성 2나노 공정에서 수율 70% 이상을 달성하겠다고 자신했다. 딥엑스는 애플 아이폰 NPU 개발 경험을 가진 핵심 인력을 바탕으로 시장에서 작동하는 '양산형 반도체 기업'을 지향하고 있다. 회사는 글로벌 반도체 유통사와 전략적 총판 계약을 체결해 글로벌 시장 진출 속도를 높이고 있다."
+          "summary": "딥엑스가 엔비디아와 차별화된 '피지컬 AI' 기술을 강조하며 시장 공략에 나섰다. 이 기술은 엔비디아의 주력 분야와 다른 영역에 집중하고 있다. 딥엑스는 컴퓨텍 등과 협력해 AI 반도체 시장에서 경쟁력을 확보하려는 전략을 펼치고 있다."
         }
       ]
     },
@@ -169,13 +151,13 @@
           "title": "“한투파 리드에 SI도 확보”… ‘AI 반도체’ 하이퍼엑셀, 1500억 투자유...",
           "url": "https://biz.chosun.com/stock/market_trend/2026/05/30/ZZPK23MBUZAHDI6WSVRMTCGUZ4/?utm_source=naver&utm_medium=original&utm_campaign=biz",
           "date": "05-30",
-          "summary": "하이퍼엑셀이 1500억 원 규모의 투자유치를 진행 중이다. 한투파가 리드하고 SI도 확보한 이번 투자유치는 하이퍼엑셀의 성장을 위한 중요한 자금 조달로 평가된다."
+          "summary": "하이퍼엑셀이 AI 반도체 개발을 위해 1500억 원 규모의 투자를 유치했다. 한투파 리드와 SI가 참여한 이번 투자는 회사의 기술 개발과 시장 진출을 지원하기 위한 것이다. 하이퍼엑셀은 AI 반도체 시장에서의 입지를 강화하기 위해 지속적인 투자를 진행하고 있다."
         },
         {
           "title": "하이퍼엑셀, 차세대 인공지능 칩 '카르멘' 개발 착수",
           "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421214",
           "date": "05-21",
-          "summary": "하이퍼엑셀이 차세대 추론용 인공지능(AI) 반도체 ‘카르멘’ 개발에 착수했다. 데이터센터향을 타겟으로 2028년 개념검증(PoC)을 거쳐 2029년초 대량 양산을 목표로 한다. 해당 칩엔 3D IC, 고대역폭플래시(HBF) 등 반도체 신기술 도입도 검토 중인 것으로 전해진다."
+          "summary": "하이퍼엑셀이 차세대 AI 반도체 '카르멘' 개발에 착수했다. 이 칩은 2028년 개념검증(PoC)을 거쳐 2029년 초 대량 양산을 목표로 한다. 3D IC와 고대역폭플래시(HBF) 등 신기술 도입을 검토 중이며, 데이터센터와 온디바이스 시장을 겨냥하고 있다."
         }
       ]
     },
@@ -187,7 +169,7 @@
           "title": "모빌린트, COMPUTEX 2026서 대만 AI 생태계와 협력 확대",
           "url": "http://www.boannews.com/media/view.asp?idx=144023&kind=3",
           "date": "06-09",
-          "summary": "모빌린트는 2026년 COMPUTEX에서 대만 AI 생태계와 협력을 확대할 계획이다. 이번 행사에서 AI 및 6G 기술 관련 협력 MOU를 체결할 예정이며, DFI와의 협력을 통해 AI 기술 발전을 추진한다. 또한 NEXCOBOT, Lanner, XSLAB, Aetina 등과의 협력도 강화할 계획이다. 모빌린트는 AI 및 NPU 기술을 중심으로 한 다양한 협력 관계를 구축하며, 대만의 AI 생태계 활성화에 기여할 것으로 보인다."
+          "summary": "모빌린트가 2026년 COMPUTEX에서 대만의 AI 생태계와 협력을 확대할 계획이다. 이번 행사에서는 AI 기술과 관련된 다양한 파트너십과 협약이 체결될 예정이다. 모빌린트는 AI 기술 발전을 위한 글로벌 협력 강화에 주력하고 있다."
         }
       ]
     }
