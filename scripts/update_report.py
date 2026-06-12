@@ -15,7 +15,7 @@ import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from urllib.error import HTTPError
-from urllib.parse import quote
+from urllib.parse import quote, urlencode
 from urllib.request import urlopen, Request
 
 import pytz
@@ -118,25 +118,95 @@ def _strip_html(s: str) -> str:
     s = html.unescape(s)
     return s.strip()
 
-_SCRIPT_STYLE_RE = re.compile(r"<(script|style)[^>]*>.*?</\1>", re.DOTALL | re.IGNORECASE)
+_SCRIPT_STYLE_RE = re.compile(r"<(script|style|noscript)[^>]*>.*?</\1>", re.DOTALL | re.IGNORECASE)
 _BODY_WS_RE = re.compile(r"\s+")
+_PARAGRAPH_RE = re.compile(r"<p\b[^>]*>(.*?)</p>", re.DOTALL | re.IGNORECASE)
+_BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+               "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36")
 _body_cache: dict[str, str] = {}
 _body_cache_lock = threading.Lock()
+_gnews_url_cache: dict[str, str] = {}
+_gnews_url_lock = threading.Lock()
 
-def fetch_article_body(url: str, timeout: int = 6, max_chars: int = 1500) -> str:
+
+def resolve_google_news_url(url: str) -> str:
+    """Resolve a news.google.com/rss/articles/... redirect to the real article URL.
+
+    Google News no longer embeds the source URL in the path; it must be fetched
+    via the internal batchexecute endpoint using the page's id/timestamp/signature.
+    Returns the original url on any failure.
+    """
+    if "news.google.com" not in url:
+        return url
+    with _gnews_url_lock:
+        if url in _gnews_url_cache:
+            return _gnews_url_cache[url]
+    resolved = url
+    try:
+        req = Request(url, headers={"User-Agent": _BROWSER_UA})
+        with urlopen(req, timeout=10) as resp:
+            page = resp.read().decode("utf-8", errors="ignore")
+        aid = re.search(r'data-n-a-id="([^"]+)"', page)
+        sig = re.search(r'data-n-a-sg="([^"]+)"', page)
+        ts  = re.search(r'data-n-a-ts="([^"]+)"', page)
+        if aid and sig and ts:
+            inner = ('["garturlreq",[["X","X",["X","X"],null,null,1,1,"US:en",null,1,'
+                     'null,null,null,null,null,0,1],"X","X",1,[1,1,1],1,1,null,0,0,null,0],'
+                     f'"{aid.group(1)}",{ts.group(1)},"{sig.group(1)}"]')
+            body = urlencode({"f.req": json.dumps([[["Fbv4je", inner]]])})
+            req2 = Request("https://news.google.com/_/DotsSplashUi/data/batchexecute",
+                           data=body.encode(),
+                           headers={"User-Agent": _BROWSER_UA,
+                                    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"})
+            with urlopen(req2, timeout=10) as resp2:
+                txt = resp2.read().decode("utf-8", errors="ignore")
+            m = re.search(r'\[\\"garturlres\\",\\"(.*?)\\"', txt)
+            if m:
+                resolved = m.group(1).encode().decode("unicode_escape")
+    except Exception:
+        pass
+    with _gnews_url_lock:
+        _gnews_url_cache[url] = resolved
+    return resolved
+
+
+def resolve_article_urls(articles: list[dict], max_workers: int = 10) -> None:
+    """Resolve google-news redirect URLs in-place for the given articles."""
+    targets = [a for a in articles if a.get("url") and "news.google.com" in a["url"]]
+    if not targets:
+        return
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(resolve_google_news_url, a["url"]): a for a in targets}
+        for f in as_completed(futures):
+            a = futures[f]
+            try:
+                a["url"] = f.result()
+            except Exception:
+                pass
+
+
+def fetch_article_body(url: str, timeout: int = 8, max_chars: int = 4000) -> str:
     with _body_cache_lock:
         if url in _body_cache:
             return _body_cache[url]
     result = ""
     try:
-        req = Request(url, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"})
+        req = Request(url, headers={"User-Agent": _BROWSER_UA})
         with urlopen(req, timeout=timeout) as resp:
-            raw = resp.read(81920).decode("utf-8", errors="ignore")
-        text = _SCRIPT_STYLE_RE.sub(" ", raw)
-        text = _HTML_TAG_RE.sub(" ", text)
-        text = html.unescape(text)
-        text = _BODY_WS_RE.sub(" ", text).strip()
-        result = text[:max_chars]
+            raw = resp.read(500000).decode("utf-8", errors="ignore")
+        raw = _SCRIPT_STYLE_RE.sub(" ", raw)
+        # Prefer real article text: join <p> paragraphs, skipping short nav snippets.
+        paragraphs = []
+        for m in _PARAGRAPH_RE.finditer(raw):
+            t = _BODY_WS_RE.sub(" ", html.unescape(_HTML_TAG_RE.sub(" ", m.group(1)))).strip()
+            if len(t) >= 40:
+                paragraphs.append(t)
+        para_text = " ".join(paragraphs)
+        if len(para_text) >= 200:
+            result = para_text[:max_chars]
+        else:
+            text = _BODY_WS_RE.sub(" ", html.unescape(_HTML_TAG_RE.sub(" ", raw))).strip()
+            result = text[:max_chars]
     except Exception:
         pass
     with _body_cache_lock:
@@ -153,8 +223,8 @@ def prefetch_bodies(articles: list[dict], max_workers: int = 10) -> None:
 def _article_body_for_prompt(a: dict) -> str:
     body = fetch_article_body(a.get("url", ""))
     if body:
-        return body[:1200]
-    return (a.get("description") or "").replace("\n", " ").strip()[:300]
+        return body[:3000]
+    return (a.get("description") or "").replace("\n", " ").strip()[:500]
 
 def _fetch_google(query: str, lang: str, n: int) -> list[dict]:
     try:
@@ -572,7 +642,7 @@ def generate_competitor_summaries(articles_with_company: list[tuple], client: "O
     for i, (company, a) in enumerate(articles_with_company):
         body = _article_body_for_prompt(a)
         items_in.append({
-            "id": i, "company": company, "title": a.get("title", ""), "snippet": body[:1200]
+            "id": i, "company": company, "title": a.get("title", ""), "snippet": body[:3000]
         })
     prompt = f"""다음은 AI 반도체 경쟁사 뉴스 기사 목록입니다.
 
@@ -622,7 +692,7 @@ def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") ->
     items_in = []
     for i, a in enumerate(articles):
         body = _article_body_for_prompt(a)
-        items_in.append({"id": i, "title": a.get("title", ""), "snippet": body[:1200]})
+        items_in.append({"id": i, "title": a.get("title", ""), "snippet": body[:3000]})
     prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
 
 각 기사에 대해 한국어 요약을 만들어 주세요:
@@ -725,6 +795,7 @@ def main():
         companies_raw.append({"name": co["name"], "region": co["region"], "articles": deduped[:COMPETITOR_MAX_ITEMS]})
 
     all_pairs = [(c["name"], a) for c in companies_raw for a in c["articles"]]
+    resolve_article_urls([a for _, a in all_pairs])  # google-news redirects → real article URLs
     summaries = generate_competitor_summaries(all_pairs, exaone_client)
     for c in companies_raw:
         for a in c["articles"]:
@@ -792,6 +863,7 @@ def main():
     print(f"[furiosa] FINAL daily={len(furiosa_daily_raw)}, weekly={len(furiosa_weekly_raw)}")
 
     furiosa_articles = furiosa_daily_raw + furiosa_weekly_raw
+    resolve_article_urls(furiosa_articles)  # google-news redirects → real article URLs
     furiosa_summaries = generate_furiosa_summaries(furiosa_articles, exaone_client)
     for a in furiosa_articles:
         if a["url"] in furiosa_summaries:
