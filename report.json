@@ -1,6 +1,6 @@
 {
   "period": "2026-06-06(토) ~ 2026-06-12(금)",
-  "updated_at": "2026-06-12T09:42:27.939001+09:00",
+  "updated_at": "2026-06-12T14:06:41.150733+09:00",
   "furiosa_daily": {},
   "furiosa_weekly": {
     "06-10 (수)": [
@@ -8,7 +8,7 @@
         "title": "'엔비디아 대항마' 퓨리오사AI, UAE 무바달라 LOI 제출…과거 무산 이력...",
         "url": "https://www.thepublic.kr/news/articleView.html?idxno=307151",
         "date": "06-10",
-        "summary": "퓨리오사AI가 UAE 국부펀드 무바달라로부터 투자의향서(LOI)를 받아냈으며, 이는 3,700억 원 규모의 국민성장펀드 직접투자 승인의 결정적 계기로 작용했다. 무바달라의 LOI는 법적 구속력이 없어 최종 투자 여부는 불확실하나, 한국산업은행 등 정책금융기관의 4,000억 원 선집행을 가능케 한 것으로 분석된다. 퓨리오사AI는 엔비디아 대항마로 고대역폭메모리(HBM) 탑재 차세대 NPU '레니게이드' 양산을 준비 중이며, 정부는 외산 빅테크 의존도 탈피를 위해 '소버린 AI' 육성에 박차를 가하고 있다."
+        "summary": "퓨리오사AI가 UAE 국부펀드 무바달라로부터 투자의향서(LOI)를 받아내며 조 단위 투자 유치에 성공했다. 무바달라의 참여는 정부 주도의 '국민성장펀드' 자금 집행을 이끌어낸 결정적 계기로 작용했다. 국민성장펀드는 퓨리오사AI에 3,700억 원 규모의 직접투자를 승인했으며, 무바달라의 LOI는 정책금융기관의 4,000억 원 선집행을 가능케 한 '마중물' 역할을 했다. 퓨리오사AI는 고대역폭메모리(HBM)를 탑재한 차세대 NPU '레니게이드' 양산을 통해 엔비디아 독점 체제에 도전 중이다. 다만 무바달라의 LOI는 법적 구속력이 없어 최종 투자 여부는 불확실한 상태다."
       }
     ],
     "06-07 (일)": [
@@ -16,7 +16,15 @@
         "title": "'FuriosaAI,' Backed by the National Growth Fund, Valued at 522 Times Reve...",
         "url": "https://it.chosun.com/news/articleView.html?idxno=2023092163405",
         "date": "06-07",
-        "summary": "국민성장펀드가 퓨리오사AI에 800억 원을 투자하며, 이는 해당 기업의 340억 원 총 누적 투자금을 크게 상회하는 규모다. 퓨리오사AI는 AI 반도체 시장에서 엔비디아 GPU 대체를 목표로 HBM 기반 NPU '레네기드'를 개발 중이며, 정부는 이를 '소버린 AI' 육성의 핵심 사례로 평가했다. 투자 금액은 상환권과 전환권이 부여된 RCPS 형태로 이루어졌으며, 퓨리오사AI의 기업가치는 약 3조 원으로 평가됐다. 다만, 실적 부진과 상장 불확실성에도 불구하고 높은 평가액을 적용해 논란이 제기되고 있다."
+        "summary": "퓨리오사AI가 국민성장펀드의 800억 원 투자를 승인받으며 기업가치 3조 원을 인정받았다. 이는 펀드의 세 번째 직접투자로, 리벨리온(640억 원)과 업스테이지 AI(560억 원)에 이어 네 번째 규모다. 퓨리오사AI는 엔비디아 대항마로 HBM 기반 NPU '레니게이드'를 개발 중이며, FSC는 해당 기업이 글로벌 시장에서 경쟁력을 가질 것으로 평가했다. 투자는 상환권이 있는 전환우선주(RCPS) 형태로 진행되며, 국민성장펀드는 약 21.1%의 지분을 확보할 전망이다. 다만 기업의 수익성 부족과 과도한 평가액에 대한 논란도 제기되고 있다."
+      }
+    ],
+    "06-06 (토)": [
+      {
+        "title": "퓨리오사AI·리벨리온·딥엑스, 실증 넘어 양산 경쟁 본격화···사업화...",
+        "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421563",
+        "date": "06-06",
+        "summary": "퓨리오사AI, 리벨리온, 딥엑스 등 국내 AI 반도체 기업들이 실증 단계를 넘어 양산 경쟁에 본격 돌입했다. 퓨리오사AI는 2세대 NPU '레니게이드' 초도 물량 4,000장을 TSMC에서 생산했으며, LG AI연구원 등에 공급할 예정이다. 리벨리온은 삼성전자 파운드리를 통해 2세대 칩 '리벨100' 양산을 준비 중이며, 2027년 아람코에 납품할 계획이다. 딥엑스는 1세대 칩 'DX-M2'를 2027년 양산 목표로 개발 중이며, 8개국 기업으로부터 27건의 구매 주문을 확보했다. 국산 AI 반도체의 상용화 확대에 따라 산업 생태계 조성이 가속화될 전망이다."
       }
     ]
   },
@@ -26,22 +34,22 @@
       "region": "global",
       "items": [
         {
+          "title": "Desktop GPU shipments hold steady in Q1 2026 with NVIDIA maintaining 90% market share - TweakTown",
+          "url": "https://www.tweaktown.com/news/112161/desktop-gpu-shipments-hold-steady-in-q1-2026-with-nvidia-maintaining-90-percent-market-share/index.html",
+          "date": "06-12",
+          "summary": "NVIDIA의 데스크톱 GPU 출하량이 2026년 1분기 동안 안정적으로 유지되었으며, 시장 점유율 90%를 유지했다. 이는 NVIDIA의 강력한 시장 지배력을 보여주는 결과로, AI 및 고성능 컴퓨팅 수요 증가와 맞물려 지속적인 성장을 이끌고 있다."
+        },
+        {
+          "title": "Beyond Nvidia: The stocks powering the AI value chain - Moomoo",
+          "url": "https://www.moomoo.com/community/feed/beyond-nvidia-the-stocks-powering-the-ai-value-chain-116735139905546",
+          "date": "06-12",
+          "summary": "Moomoo는 AI 밸류 체인을 주도하는 기업들의 투자 상품과 서비스를 제공하고 있다. 해당 서비스는 미국 시장에서만 $0 수수료 거래가 가능하며, 옵션 거래 시 발생할 수 있는 리스크에 대한 경고 문구가 포함되어 있다."
+        },
+        {
           "title": "A Look At Coherent (COHR) Valuation As NVIDIA Investment And AI Demand Reshape Growth And Supply Chain Risks - simplywall.st",
           "url": "https://simplywall.st/stocks/us/tech/nyse-cohr/coherent/news/a-look-at-coherent-cohr-valuation-as-nvidia-investment-and-a",
           "date": "06-12",
-          "summary": "Coherent (COHR) has regained focus following strong AI data center demand, upbeat financial guidance, and a US$2 billion investment from NVIDIA. Despite a recent 7-day share price decline of 13.82%, the stock shows strong momentum with a 90-day return of 49.77% and a 1-year total shareholder return of 349.14%. The company's valuation is currently around US$69.4 billion, trading 4.7% below the average analyst price target. Coherent's growth is driven by demand for advanced optical transceivers and photonics components in AI datacenter infrastructure. The stock's fair value is estimated at $380.62, slightly above its last close of $363.58, indicating a tight valuation debate around AI-driven growth."
-        },
-        {
-          "title": "NVIDIA’s Outlook Gains Momentum: Stock Price to Follow - MarketBeat",
-          "url": "https://www.marketbeat.com/originals/nvidias-outlook-gains-momentum-stock-price-to-follow/",
-          "date": "06-12",
-          "summary": "NVIDIA's (NVDA) outlook has strengthened, with signs pointing to higher prices in early June. The company's future looks bright, supported by demand evidenced by Nebius Group's $2.275 billion investment in next-gen facilities using NVIDIA's Vera Rubin products and a partnership with SK Telecom to build an AI-capable cloud in South Korea. NVIDIA's CEO, Jensen Huang, emphasized the importance of telecom networks as national AI infrastructure, valued at $2.25 trillion globally. Analysts at Wedbush and UBS expect rising GPU demand and capacity constraints to drive continued strength. The consensus price target forecasts a 50% upside, with some analysts projecting prices as high as $500, representing a 150% upside from critical support levels."
-        },
-        {
-          "title": "Nvidia hires veteran lobbyist Bruce Andrews to head government affairs, sources say - Yahoo Finance",
-          "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-hires-veteran-lobbyist-bruce-222031958.html",
-          "date": "06-12",
-          "summary": "NVIDIA has hired veteran lobbyist Bruce Andrews to head its government affairs office in Washington, D.C., as the company seeks to maintain its influence amid renewed scrutiny of its ties to China. Andrews previously served as Intel's government affairs chief and was a Commerce Department official during the Obama administration. NVIDIA has received licenses to sell its less advanced H200 chips to China, though no deliveries have been made yet. The company's CEO, Jensen Huang, has argued that selling hardware to China is crucial to avoid losing out to non-American competitors. Andrews will report to NVIDIA's general counsel, Tim Teter, under the title of Chief External Affairs Officer."
+          "summary": "Coherent(COHR)는 NVIDIA의 20억 달러 투자와 AI 데이터센터 수요 증가로 주목받고 있다. 최근 주가는 7일간 13.82% 하락했으나, 90일간 49.77% 상승하며 강력한 모멘텀을 보이고 있다. AI 광학 및 공급망 리스크에 대한 평가가 진행 중이다."
         }
       ]
     },
@@ -50,10 +58,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Smallest . ai and Tenstorrent Partnership Democratises Voice AI - 4x reduction in cost through hardware acceleration",
-          "url": "https://www.design-reuse.com/news/202530526-smallest-ai-and-tenstorrent-partnership-democratises-voice-ai-4x-reduction-in-cost-through-hardware-acceleration/",
-          "date": "05-18",
-          "summary": "Smallest.ai has partnered with Tenstorrent to run its Lightning V2 text-to-speech model on Tenstorrent hardware, achieving a 3.6x reduction in infrastructure costs with higher throughputs and faster response times. This partnership marks the first production-grade TTS system to match the cost of text tokens without audio quality degradation. Tenstorrent's architecture, designed for low-latency inference, moves data directly between compute cores on-chip, eliminating bottlenecks. The collaboration enables enterprises to deploy voice AI at scale with significantly lower costs, leveraging BlockFloat8 precision for optimal performance."
+          "title": "Tenstorrent Unveils TT-QuietBox(TM) 2, the First RISC-V AI Workstation With a Fully Open-Source Stack to Deliver Teraflop-Class Inference - Observer and Eccentric Newspapers",
+          "url": "https://www.hometownlife.com/press-release/story/57648/tenstorrent-unveils-tt-quietboxtm-2-the-first-risc-v-ai-workstation-with-a-fully-open-source-stack-to-deliver-teraflop-class-inference-2/",
+          "date": "06-03",
+          "summary": "Tenstorrent는 최초의 완전 오픈소스 RISC-V AI 워크스테이션인 TT-QuietBox(TM) 2를 공개했다. 이 제품은 테라플롭급 추론 성능을 제공하며, AI 개발 및 배포를 위한 새로운 표준을 제시한다."
+        },
+        {
+          "title": "Tenstorrent - 2026 Funding Rounds & List of Investors - Tracxn",
+          "url": "https://tracxn.com/d/companies/tenstorrent/__p54YXQoDh79n2Cg0a71HzwpVoEx1MJmN5NLVmq-dRbE/funding-and-investors",
+          "date": "05-22",
+          "summary": "Tenstorrent는 2026년까지의 펀딩 라운드와 투자자 목록을 공개했다. 이는 회사의 성장 전략과 주요 이해관계자를 파악하는 데 중요한 자료로 활용될 수 있다."
+        },
+        {
+          "title": "Daily Brief United States: Flex, Ashtead, SpaceX, Amkor Technology, NVIDIA Corp, Tenstorrent, Lincoln International, enGene Therapeutics, Crude Oil, Arthur J Gallagher & Co and more - Smartkarma",
+          "url": "https://www.smartkarma.com/home/daily-briefs/daily-brief-united-states-flex-ashtead-spacex-amkor-technology-nvidia-corp-tenstorrent-lincoln-international-engene-therapeutics-crude-oil-arthur-j-gallagher-co-and-more/",
+          "date": "05-21",
+          "summary": "미국 일일 브리핑에는 Tenstorrent를 포함한 Flex, Ashtead, SpaceX, Amkor Technology, NVIDIA Corp 등 주요 기업들이 언급되었다. 이는 글로벌 시장 동향과 주요 기업들의 움직임을 파악하는 데 도움이 된다."
         }
       ]
     },
@@ -65,19 +85,19 @@
           "title": "Argyll launches UK sovereign AI cloud with SambaNova - IT Brief UK",
           "url": "https://itbrief.co.uk/story/argyll-launches-uk-sovereign-ai-cloud-with-sambanova",
           "date": "06-11",
-          "summary": "Argyll Data Development has launched a UK sovereign AI inference cloud using SambaNova's hardware, making it available entirely within the UK. The service targets organizations requiring AI inference within UK regulatory jurisdiction and supports open-source models like Minimax, delivering speeds of up to 400 tokens per second. The platform operates in existing UK data centers without liquid cooling or specialist power infrastructure, addressing energy efficiency concerns. Argyll claims its approach avoids trade-offs between performance, model quality, and cost, positioning the service for large-scale agentic AI deployments."
+          "summary": "Argyll Data Development launched a UK sovereign AI inference cloud using SambaNova's hardware, marking the first general availability cloud service in the UK. The platform operates within existing UK data centers without requiring liquid cooling or specialized power infrastructure. Aimed at organizations seeking AI inference within UK regulatory jurisdiction, the service supports open-source models like Minimax and delivers speeds up to 400 tokens per second. It is designed for large-scale agentic AI deployments and avoids trade-offs between performance, model quality, and cost. The collaboration provides British businesses access to SambaNova's inference systems without relying on foreign infrastructure."
+        },
+        {
+          "title": "Gemma 4 31B Running Fastest on SambaCloud - sambanova.ai",
+          "url": "https://sambanova.ai/blog/gemma-4-31b-running-fastest-on-sambacloud",
+          "date": "06-11",
+          "summary": "Gemma 4 31B, Google DeepMind's largest dense open model, runs fastest on SambaCloud, outperforming other providers by over 30%. The model excels in reasoning, coding, and agentic workflows, scoring 89.2% on AIME 2026 and 80.0% on LiveCodeBench v6. SambaCloud offers low-latency performance, native function-calling, and structured JSON output, making it suitable for autonomous agents and multi-agent frameworks. The model supports configurable thinking modes for deep deliberation or fast turnaround, enhancing its adaptability for various workloads."
         },
         {
           "title": "Intel Stock Surges as Analyst Targets Climb: SambaNova, Foxconn Deals Anchor AI Pivot - Tech Times",
           "url": "https://www.techtimes.com/articles/318008/20260608/intel-stock-surges-analyst-targets-climb-sambanova-foxconn-deals-anchor-ai-pivot.htm",
           "date": "06-09",
-          "summary": "Intel (INTC) surged 8.55% after analyst price-target increases and AI-infrastructure deals repositioned the company as a credible contender in data-center build-out. Wells Fargo, Barclays, and Mizuho raised their targets to $110, $100, and $128, respectively, citing stronger AI data-center demand and agentic AI workloads. Intel's pivot includes partnerships with SambaNova and Foxconn, alongside its Xeon 6 Plus Clearwater Forest CPUs on the 18A node and the Crescent Island inference accelerator. These moves aim to compete on cost and performance, extending a roadmap that justifies an AI-style valuation despite lagging financials."
-        },
-        {
-          "title": "Intel Computex 2026 Keynote Rodrigo Liang SambaNova - ServeTheHome",
-          "url": "https://www.servethehome.com/intel-computex-2026-keynote-live-coverage/intel-computex-2026-keynote-rodrigo-liang-sambanova/",
-          "date": "06-02",
-          "summary": "인텔은 2026 컴퓨텍스 키노트에서 새 AI 반도체 기술을 공개했다. 새 기술은 AI 서버 시스템과 가속기를 포함하며, 인텔은 이 행사를 통해 AI 및 데이터센터 솔루션의 경쟁력을 강조했다."
+          "summary": "Intel's stock surged 8.55% after analyst target increases and AI-infrastructure deals repositioned it as a credible AI contender. Wells Fargo, Barclays, and Mizuho raised their targets to $110, $100, and $128, respectively, citing strong AI data-center demand. Intel's pivot includes partnerships with SambaNova for reconfigurable dataflow units and its first data-center CPUs on the 18A node. The Xeon 6 Plus Clearwater Forest and Crescent Island inference accelerator aim to compete on cost and performance, extending its AI roadmap despite financials lagging behind the narrative."
         }
       ]
     },
@@ -86,22 +106,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Cerebras outpaces Nvidia in video showdown at SuperAI Singapore , making its case against GPU dominance",
-          "url": "https://www.digitimes.com/news/a20260611VL200.html",
-          "date": "06-11",
-          "summary": "세레브로스의 앤디 호크 최고전략책임자는 슈퍼AI 싱가포르 행사에서 회사의 웨이퍼 스케일 엔진 칩을 공개하며, GPU 대비 우수한 성능을 강조했다. 이 행사는 1만 명 이상의 참석자를 모았다."
+          "title": "Wall Street Finally Weighs In On Cerebras After Its IPO - Finimize",
+          "url": "https://finimize.com/content/wall-street-finally-weighs-in-on-cerebras-after-its-ipo",
+          "date": "06-08",
+          "summary": "Cerebras shares rose after nine Wall Street banks initiated coverage, praising its wafer-scale AI chips. Analysts highlighted demand for fast, reasoning-intensive AI, with Citigroup setting a $340 price target. The post-IPO quiet period ended, allowing research publication and institutional trading, which could stabilize the stock after its volatile debut. Cerebras' unique approach involves dinner plate-sized chips for efficient AI processing, differentiating it from smaller, clustered alternatives."
         },
         {
-          "title": "Cerebras Systems Sets Date of First - Quarter 2026 Financial Results",
-          "url": "https://www.manilatimes.net/2026/06/10/tmt-newswire/globenewswire/cerebras-systems-sets-date-of-first-quarter-2026-financial-results/2362158",
-          "date": "06-10",
-          "summary": "세레브로스는 2026년 1분기 실적을 6월 23일 발표할 예정이다. 회사는 세계 최고속 AI 인프라를 개발 중이며, 웨이퍼 스케일 엔진 3(WSE-3)은 기존 GPU 대비 58배 큰 규모와 15배 빠른 성능을 자랑한다."
+          "title": "Prediction: This Trend, Launched by Cerebras, Could Supercharge the AI Bull Market This Year - Yahoo Finance",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/prediction-trend-launched-cerebras-could-092500816.html",
+          "date": "05-30",
+          "summary": "Cerebras' IPO could supercharge the AI bull market, following its $5.5 billion raise and 68% first-day gain. The trend of young AI companies going public, like Cerebras and upcoming SpaceX, attracts investors seeking the next AI winners. Cerebras' wafer-scale chips offer an alternative to clustered GPUs, potentially driving further AI innovation and market growth."
         },
         {
-          "title": "Democratizing Large - Scale AI : Co - Design , Packaging , and the Future of AI Hardware with Andy Hock from Cerebras",
-          "url": "https://www.eejournal.com/fish_fry/democratizing-large-scale-ai-co-design-packaging-and-the-future-of-ai-hardware-with-andy-hock-from-cerebras/",
-          "date": "05-29",
-          "summary": "세레브로스의 앤디 호크 최고전략책임자는 웨이버 스케일 엔진(WSE)의 혁신적 기술과 대규모 AI 모델의 지연 시간 및 에너지 효율성 문제 해결 방안을 논의했다. WSE는 dinner-plate 크기의 단일 실리콘 칩으로, 기존 칩 대비 50배 이상 크다."
+          "title": "Has the hunt for AI compute uncovered the next Cerebras? - TechCrunch",
+          "url": "https://techcrunch.com/2026/05/28/has-the-hunt-for-ai-compute-uncovered-the-next-cerebras/",
+          "date": "05-28",
+          "summary": "General Compute, a new inference neocloud, addresses AI compute challenges by using SambaNova's SN50 chips, which outperform GPUs with 600-700 tokens per second. The air-cooled, low-power chips can be deployed in existing data centers or repurposed crypto-mining facilities. The company raised $15 million, aiming to be the first neocloud leveraging these chips for scalable AI inference without infrastructure overhauls."
         }
       ]
     },
@@ -110,22 +130,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "前 외교관이 반도체 스타트업 입사한 이유… 리벨리온, 중동사업 재시동",
-          "url": "https://www.sedaily.com/article/20054071?ref=naver",
+          "title": "삼성전자, 韓 SAFE 포럼 2026에 리벨리온·지멘스 등 주요 연사로 나서",
+          "url": "https://www.ajunews.com/view/20260611171219088",
           "date": "06-11",
-          "summary": "리벨리온은 중동 사업 재개를 위해 문병준 전 사우디 대사대리를 고문으로 영입했다. 회사는 사우디에서 2세대 신경망처리장치(NPU) 제품 '리벨 100'을 소개하며 중동 시장 공략을 강화하고 있다."
+          "summary": "삼성전자가 2026년 SAFE 포럼에서 리벨리온과 지멘스를 주요 연사로 초청해 파운드리 협력 성과를 공유한다. 박현현 리벨리온 대표는 3년 연속 연사로 참여하며, AI 반도체 개발 과정에서의 삼성 파운드리 활용 경험을 발표할 예정이다. 삼성전자는 4나노미터 공정의 기술 경쟁력과 양산 역량을 강조해 고객 신뢰를 높일 계획이다."
         },
         {
-          "title": "과기정통부, 'AI 미래 유니콘 기업'에 리벨리온 등 15개사 선정",
-          "url": "https://www.newsis.com/view/NISX20260610_0003663376",
-          "date": "06-10",
-          "summary": "과학기술정보통신부는 리벨리온을 포함한 15개 기업을 'AI 미래 유니콘 기업'으로 선정했다. 이 프로그램은 해외 진출 지원과 금융 보증 등을 통해 기업의 성장을 돕는다."
+          "title": "리벨리온, 중동 사업 재개…사우디 정조준",
+          "url": "https://www.sedaily.com/article/20054385?ref=naver",
+          "date": "06-11",
+          "summary": "리벨리온이 중동 사업 재개를 위해 문병준 전 주사우디아라비아 대사대리를 중동·북아프리카 전략 고문으로 위촉했다. 문 고문은 중동 정부 및 기업 네트워크를 기반으로 리벨리온의 AI 반도체 시장 진출을 지원할 예정이다. 리벨리온은 사우디에서 2세대 NPU 제품 '리벨 100'을 소개하며 현지 파트너십 확대에 나섰다."
         },
         {
-          "title": "[기획] 리벨리온에 몰린 금융권 자금…생산적 금융 사례? 정책 압박 산물...",
-          "url": "https://www.sentv.co.kr/article/view/sentv202605290001",
-          "date": "06-09",
-          "summary": "금융권의 자금과 협업 수요가 인공지능(AI) 반도체 기업 리벨리온으로 집중되고 있다. 국민성장펀드, 미래에스트그룹, KB금융 계열, NH농협금융 계열 등이 투자와 협업에 참여했다. 리벨리온은 올해 프리IPO 과정에서 국민성장펀드 2500억원, 산업은행 500억원 등 총 6400억원 규모의 투자를 유치했으며, 기업가치는 3조원대로 평가받았다. 금융권은 리벨리온을 생산적 금융의 대표 사례로 평가하는 반면, 후기 투자 단계에서의 생산적 금융 적용에 대한 논란도 제기되고 있다."
+          "title": "리벨리온, 30년 외교 베테랑 문병준 전 주사우디 대사대리 영입",
+          "url": "https://www.epnc.co.kr/news/articleView.html?idxno=402900",
+          "date": "06-11",
+          "summary": "리벨리온이 문병준 전 주사우디아라비아 대사대리를 중동·북아프리카 전략 고문으로 영입해 중동 시장 공략을 강화한다. 문 고문은 중동 정부 및 기업과의 네트워크를 활용해 리벨리온의 AI 반도체 기술을 현지에 알릴 계획이다. 리벨리온은 사우디에서 현지 법인을 운영하며 아람코와의 협력도 진행 중이다."
         }
       ]
     },
@@ -137,19 +157,19 @@
           "title": "[Invest]'넥스트 딥엑스' 찾는 금융권…AI 직접투자 후보군은 벌써 부족",
           "url": "https://www.investchosun.com/site/data/html_dir/2026/06/08/2026060880184.html",
           "date": "06-09",
-          "summary": "국민성장펀드의 AI 투자 테마 확대로 금융권의 AI 기업 찾기가 빨라지고 있다. 리벨리온, 업스테이지, 퓨리오사AI에 이어 딥엑스가 투자 후보군에 포함되었다. 딥엑스는 6000억원 안팎의 프리IPO 라운드를 추진 중이며, KB금융, 신한금융, NH금융 등 주요 금융지주가 공동 앵커 역할을 맡을 방안을 검토 중이다. 금융권은 대표 후보군 외의 기업에 대한 직접투자 부담으로 공동투자나 간접투자를 고려하고 있다."
+          "summary": "금융권이 AI 기업 투자를 확대하며 리벨리온, 업스테이지, 퓨리오사AI, 딥엑스 등이 주요 후보군으로 부상했다. 이들 기업은 정책 명분과 대규모 자금 집행 여력이 확인되어 직접투자 대상으로 검토되고 있다. 그러나 대표 후보군 외에는 규모와 수익성 검증 부담으로 투자 가능성이 제한적이라는 평가도 나온다."
         },
         {
-          "title": "[인터뷰]김녹원 딥엑스 대표 \"삼성 2나노 수율 70% 자신…4년 내 매출 10...",
-          "url": "https://view.asiae.co.kr/article/2026060508461141987",
+          "title": "퓨리오사AI·리벨리온·딥엑스, 실증 넘어 양산 경쟁 본격화···사업화...",
+          "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421563",
+          "date": "06-06",
+          "summary": "퓨리오사AI, 리벨리온, 딥엑스 등 국내 AI 반도체 기업들이 실증 단계를 넘어 양산 경쟁에 돌입했다. 퓨리오사AI는 2세대 칩 '레니게이드'를 TSMC를 통해 양산 중이며, 리벨리온은 삼성전자 파운드리를 통해 '리벨 100' 양산을 준비 중이다. 딥엑스는 2나노 공정을 적용한 'DX-M2' 개발을 진행 중이다."
+        },
+        {
+          "title": "\"엔비디아가 못하는 영역 잡는다\" … 딥엑스 '피지컬 AI' 승부수 [컴퓨텍...",
+          "url": "https://biz.newdaily.co.kr/site/data/html/2026/06/05/2026060500200.html",
           "date": "06-05",
-          "summary": "김녹원 딥엑스 대표는 대만 '컴퓨텍스 2026'에서 딥엑스의 AI 반도체 기술력을 과시했다. 딥엑스는 데이터센터용이 아닌 엣지용 NPU 칩 'DX-M1'을 양산 중이며, 내년에는 삼성전자 2나노 공정을 적용한 'DX-M2' 양산을 계획하고 있다. 딥엑스는 지난해 연간 매출 33억원에서 올해 1분기 수주 금액 100억원을 돌파하며 실적 성장 속도가 빠르다. 김 대표는 4년 내 매출 100배 성장을 목표로 하고 있다."
-        },
-        {
-          "title": "한미반도체·딥엑스, 컴퓨텍스서 AI 공급망 확장…대만서 빛난 韓기업 ...",
-          "url": "https://www.etoday.co.kr/news/view/2590556",
-          "date": "06-04",
-          "summary": "한미반도체와 딥엑스가 컴퓨텍스 2026에서 AI 공급망 확대를 위해 기술력을 선보였다. 한미반도체는 고대역폭메모리(HBM4) 생산용 'TC 본더 4'와 차세대 패키징 장비를 공개했다. 딥엑스는 피지컬 AI 전략을 제시하며 어드밴텍, MSI 등 30여 글로벌 파트너와 함께 AI 생태계를 확장 중이다. 삼성전자와 SK하이닉스도 HBM5와 HBM4E 등 차세대 메모리 기술을 전시했다."
+          "summary": "딥엑스가 엔비디아와 차별화된 '피지컬 AI' 기술로 시장 공략에 나섰다. 딥엑스는 1세대 칩 'DX-M1'을 양산 중이며, 2세대 칩 'DX-M2'는 2027년 삼성전자 2나노 공정으로 양산될 예정이다. 딥엑스는 글로벌 시장에서 27건의 구매 주문을 확보하며 경쟁력을 입증하고 있다."
         }
       ]
     },
@@ -161,13 +181,13 @@
           "title": "“한투파 리드에 SI도 확보”… ‘AI 반도체’ 하이퍼엑셀, 1500억 투자유...",
           "url": "https://biz.chosun.com/stock/market_trend/2026/05/30/ZZPK23MBUZAHDI6WSVRMTCGUZ4/?utm_source=naver&utm_medium=original&utm_campaign=biz",
           "date": "05-30",
-          "summary": "하이퍼엑셀이 1500억원 규모의 투자유치를 진행 중이다. 한투파가 리드에 SI도 확보한 것으로 알려졌다."
+          "summary": "하이퍼엑셀은 AI 반도체 개발을 위해 1500억 원 규모의 투자를 유치했다. 한투파 리드에 SI도 확보하며 투자 유치가 순조롭게 진행 중이다. 이 회사는 차세대 AI 반도체 개발에 주력하고 있다."
         },
         {
           "title": "하이퍼엑셀, 차세대 인공지능 칩 '카르멘' 개발 착수",
           "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421214",
           "date": "05-21",
-          "summary": "하이퍼엑셀이 차세대 추론용 AI 반도체 '카르멘' 개발에 착수했다. 2028년 개념검증(PoC)을 거쳐 2029년 초 대량 양산을 목표로 하며, 3D IC와 고대역폭플래시(HBF) 등 신기술 도입을 검토 중이다. 카르멘은 데이터센터향으로 출시된 후 온디바이스향 신제품 '카르멘-엣지' 개발도 계획되어 있다."
+          "summary": "하이퍼엑셀은 차세대 추론용 AI 반도체 '카르멘' 개발에 착수했다. 데이터센터용으로 2028년 개념검증(PoC)을 거쳐 2029년 초 대량 양산을 목표로 한다. 3D IC와 고대역폭플래시(HBF) 등 신기술 도입을 검토 중이다."
         }
       ]
     },
@@ -176,10 +196,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "모빌린트, COMPUTEX 2026서 대만 AI 생태계와 협력 확대",
-          "url": "http://www.boannews.com/media/view.asp?idx=144023&kind=3",
+          "title": "Mobilint Signs MOUs With Three Taiwanese Firms at Computex 2026 - thelec.net",
+          "url": "https://www.thelec.net/news/articleView.html?idxno\\u003d11182",
+          "date": "06-10",
+          "summary": "모빌린트는 컴퓨텍스 2026에서 대만 기업 3곳과 전략적 업무협약(MOU)을 체결했다. AI 도입이 가속화되는 산업용 컴퓨팅, 로보틱스, 머신비전 분야에서 글로벌 사업 기회를 발굴하기 위한 협력이다."
+        },
+        {
+          "title": "모빌린트, 컴퓨텍스서 대만 기업 3곳과 MOU…\"산업용 AI 시장 공략\"",
+          "url": "https://zdnet.co.kr/view/?no=20260609094345",
           "date": "06-09",
-          "summary": "모빌린트는 2026년 COMPUTEX에서 대만 AI 생태계와 협력을 확대할 계획이다. AI 및 반도체 분야에서의 협력을 위해 DFI와 MOU를 체결했으며, AI 기술 및 NPU(Neural Processing Unit) 관련 논의를 진행했다. 또한 NEXCOBOT, Lanner, XSLAB, Aetina 등과의 협력도 강화할 예정이다. 이번 행사에서는 AI 기술의 최신 동향과 적용 사례를 공유하며, AI 생태계 확장을 위한 다양한 전략을 발표할 계획이다."
+          "summary": "모빌린트는 컴퓨텍스에서 대만 기업 3곳과 MOU를 체결해 산업용 AI 시장 공략에 나섰다. DFI, 넥스코봇, 탑메저와 협력해 AI 반도체 기반 시스템 및 솔루션을 공동 개발하고 글로벌 시장에서 사업 기회를 확대할 계획이다."
+        },
+        {
+          "title": "모빌린트 NPU 품은 인텔리빅스, ‘소버린 AI’ 실현 나선다",
+          "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=05572726645478440",
+          "date": "06-04",
+          "summary": "모빌린트의 NPU를 품은 인텔리빅스는 국산 반도체 기반 '소버린 AI' 구현에 나섰다. 산불 조기경보 및 자율형 재난관제 시스템을 실제 현장에 적용해 AI 반도체 자립화 가능성을 입증했다. 2000개 CCTV 채널에 적용된 사례도 있다."
         }
       ]
     }
