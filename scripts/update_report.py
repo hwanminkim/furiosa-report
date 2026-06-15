@@ -677,6 +677,8 @@ Return JSON ONLY:
                 temperature=0.3,
             )
             raw = resp.choices[0].message.content or ""
+            fr = resp.choices[0].finish_reason
+            print(f"[DEBUG competitor summary] finish_reason={fr} raw_len={len(raw)} raw_head={raw[:200]!r}")
             m = re.search(r"\{[\s\S]*\}", raw)
             data = json.loads(m.group() if m else raw)
             for entry in data.get("items", []):
@@ -684,7 +686,10 @@ Return JSON ONLY:
                 if not isinstance(idx, int) or not (0 <= idx < len(chunk)): continue
                 company, a = chunk[idx]
                 out[(company, a["url"])] = (entry.get("summary") or "").strip()
-        except Exception:
+        except Exception as e:
+            import traceback
+            print(f"[DEBUG competitor summary FAILED] {type(e).__name__}: {e}")
+            traceback.print_exc()
             continue
     return out
 
@@ -722,6 +727,8 @@ Return JSON ONLY:
 
         )
         raw = resp.choices[0].message.content or ""
+        fr = resp.choices[0].finish_reason
+        print(f"[DEBUG furiosa summary] finish_reason={fr} raw_len={len(raw)} raw_head={raw[:200]!r}")
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
         out: dict = {}
@@ -731,7 +738,10 @@ Return JSON ONLY:
             a = articles[idx]
             out[a["url"]] = (entry.get("summary") or "").strip()
         return out
-    except Exception:
+    except Exception as e:
+        import traceback
+        print(f"[DEBUG furiosa summary FAILED] {type(e).__name__}: {e}")
+        traceback.print_exc()
         return {}
 
 def main():
