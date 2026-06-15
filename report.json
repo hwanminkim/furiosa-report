@@ -1,6 +1,6 @@
 {
   "period": "2026-06-09(화) ~ 2026-06-15(월)",
-  "updated_at": "2026-06-15T13:52:44.503315+09:00",
+  "updated_at": "2026-06-15T14:29:54.714437+09:00",
   "furiosa_daily": {},
   "furiosa_weekly": {
     "06-11 (목)": [
@@ -38,20 +38,20 @@
       "region": "global",
       "items": [
         {
-          "title": "Exclusive | Nvidia Is Developing an AI Healthcare Model With Startup Abridge - WSJ",
-          "url": "https://www.wsj.com/cio-journal/nvidia-is-developing-an-ai-healthcare-model-with-startup-abridge-6db38c1b",
+          "title": "NVIDIA Courts China with New Vera AI CPU Launch Pitch",
+          "url": "https://techstory.in/nvidia-courts-china-with-new-vera-ai-cpu-launch-pitch/",
           "date": "06-15",
           "summary": ""
         },
         {
-          "title": "SK Hynix readies HBM4 packaging push as Nvidia demand grows - digitimes",
-          "url": "https://www.digitimes.com/news/a20260615VL201/sk-hynix-nvidia-hbm4-demand-packaging-equipment.html",
+          "title": "Jim Cramer Asserts NVIDIA ( NVDA ), Not SpaceX , Is The  Key  To The Market",
+          "url": "https://www.insidermonkey.com/blog/jim-cramer-asserts-nvidia-nvda-not-spacex-is-the-key-to-the-market-1780923/",
           "date": "06-15",
           "summary": ""
         },
         {
-          "title": "Nvidia (NVDA) Stock After New SharonAI Data Center Deal Is The AI Leader Still Undervalued - simplywall.st",
-          "url": "https://simplywall.st/stocks/us/semiconductors/nasdaq-nvda/nvidia/news/nvidia-nvda-stock-after-new-sharonai-data-center-deal-is-the",
+          "title": "NVIDIA ( NVDA ): AI Factory Demand Shows How Growth Can Stay High Without Balance Sheet Strain",
+          "url": "https://www.insidermonkey.com/blog/nvidia-nvda-ai-factory-demand-shows-how-growth-can-stay-high-without-balance-sheet-strain-1781644/",
           "date": "06-15",
           "summary": ""
         }
@@ -62,21 +62,9 @@
       "region": "global",
       "items": [
         {
-          "title": "Tenstorrent Unveils TT-QuietBox(TM) 2, the First RISC-V AI Workstation With a Fully Open-Source Stack to Deliver Teraflop-Class Inference - Observer and Eccentric Newspapers",
-          "url": "https://www.hometownlife.com/press-release/story/57648/tenstorrent-unveils-tt-quietboxtm-2-the-first-risc-v-ai-workstation-with-a-fully-open-source-stack-to-deliver-teraflop-class-inference-2/",
-          "date": "06-03",
-          "summary": ""
-        },
-        {
-          "title": "Tenstorrent - 2026 Funding Rounds & List of Investors - Tracxn",
-          "url": "https://tracxn.com/d/companies/tenstorrent/__p54YXQoDh79n2Cg0a71HzwpVoEx1MJmN5NLVmq-dRbE/funding-and-investors",
-          "date": "05-22",
-          "summary": ""
-        },
-        {
-          "title": "Intel Joins Race To Buy AI Startup Tenstorrent: Report - Sahm",
-          "url": "https://www.sahmcapital.com/news/content/intel-joins-race-to-buy-ai-startup-tenstorrent-report-2026-05-22",
-          "date": "05-22",
+          "title": "Smallest . ai and Tenstorrent Partnership Democratises Voice AI - 4x reduction in cost through hardware acceleration",
+          "url": "https://www.design-reuse.com/news/202530526-smallest-ai-and-tenstorrent-partnership-democratises-voice-ai-4x-reduction-in-cost-through-hardware-acceleration/",
+          "date": "05-18",
           "summary": ""
         }
       ]
