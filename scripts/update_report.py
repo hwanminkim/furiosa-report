@@ -778,6 +778,18 @@ def _probe(client):
             + _json.dumps([one], ensure_ascii=False)
             + '\nReturn JSON ONLY:\n{"items": [{"id": 0, "summary": "..."}]}'}], 2048),
     ]
+    # 0) 엔드포인트가 서빙 중인 모델 목록
+    try:
+        models = [m.id for m in client.models.list().data]
+        print(f"[PROBE models] {models}")
+    except Exception as e:
+        print(f"[PROBE models] EXC {type(e).__name__}: {e}")
+    # 0b) 레거시 completions (채팅 템플릿 우회)
+    try:
+        rc = client.completions.create(model=EXAONE_MODEL, prompt="안녕하세요는", max_tokens=30, temperature=0.3)
+        print(f"[PROBE legacy_completion] fr={rc.choices[0].finish_reason} text={rc.choices[0].text[:120]!r}")
+    except Exception as e:
+        print(f"[PROBE legacy_completion] EXC {type(e).__name__}: {e}")
     for name, msgs, mt in variants:
         kw = {"model": EXAONE_MODEL, "messages": msgs, "max_tokens": mt, "temperature": 0.3}
         if name.endswith("temp0"): kw["temperature"] = 0.0
@@ -787,6 +799,15 @@ def _probe(client):
             print(f"[PROBE {name}] fr={r.choices[0].finish_reason} ctoks={r.usage.completion_tokens} len={len(c)} head={c[:120]!r}")
         except Exception as e:
             print(f"[PROBE {name}] EXC {type(e).__name__}: {e}")
+    # 5) min_tokens 강제로 생성 유도 (vLLM extra_body)
+    try:
+        r = client.chat.completions.create(model=EXAONE_MODEL,
+            messages=[{"role": "user", "content": "안녕하세요라고만 답해줘."}],
+            max_tokens=50, temperature=0.3, extra_body={"min_tokens": 5})
+        c = r.choices[0].message.content or ""
+        print(f"[PROBE 07_min_tokens] fr={r.choices[0].finish_reason} ctoks={r.usage.completion_tokens} head={c[:120]!r}")
+    except Exception as e:
+        print(f"[PROBE 07_min_tokens] EXC {type(e).__name__}: {e}")
 
 def main():
     kst = pytz.timezone("Asia/Seoul")
