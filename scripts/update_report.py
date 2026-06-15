@@ -638,91 +638,75 @@ def to_output(a: dict, kst: pytz.BaseTzInfo, include_summary: bool = False) -> d
         out["summary"] = a.get("summary", "")
     return out
 
+_SUMMARY_RULES = """## 작성 원칙
+1. 제목과 본문에 있는 사실만 활용. 핵심 사실(주체, 액션, 협력 대상, 금액·규모·수치, 시점, 목적)을 빠짐없이 담을 것.
+2. 일반론·미사여구로 분량을 채우지 말 것. 사실을 구체적으로 풀어 4~5문장을 채울 것.
+3. 정보가 적더라도 제목과 본문에서 추출 가능한 사실만으로 자연스러운 요약을 작성. 정보 부족을 언급하지 말 것.
+
+## 절대 금지 표현
+- "~경쟁력을 높이는 데 중요한 역할을 할 것이다", "~발전에 기여할 것으로 기대된다"
+- "기대된다", "전망된다" 같은 막연한 미래 추측
+- "본문 정보 부족", "원문 확인 필요", "추가 정보 필요" 등 정보 부족을 명시하는 문구"""
+
+def _summarize_one(client: OpenAI, title: str, body: str, subject: str) -> str:
+    """기사 1건을 한국어로 요약. 실패 시 빈 문자열."""
+    prompt = f"""다음은 {subject} 관련 뉴스 기사입니다. 한국어 요약을 만들어 주세요.
+- 4~5문장, 사실 위주, 350~450자. **반드시 한국어로 작성** (영어 금지).
+
+{_SUMMARY_RULES}
+
+제목: {title}
+본문: {body[:3000]}
+
+Return JSON ONLY:
+{{"summary": "..."}}"""
+    try:
+        raw = exaone_complete(client, prompt, max_tokens=1500, temperature=0.3)
+        m = re.search(r"\{[\s\S]*\}", raw)
+        data = json.loads(m.group() if m else raw)
+        return (data.get("summary") or "").strip()
+    except Exception:
+        return ""
+
 def generate_competitor_summaries(articles_with_company: list[tuple], client: "OpenAI | None") -> dict:
     if client is None or not articles_with_company: return {}
     prefetch_bodies([a for _, a in articles_with_company])
     out: dict = {}
-    CHUNK = 6  # keep each call's output well under max_tokens to avoid truncation
-    for start in range(0, len(articles_with_company), CHUNK):
-        chunk = articles_with_company[start:start + CHUNK]
-        items_in = []
-        for offset, (company, a) in enumerate(chunk):
-            body = _article_body_for_prompt(a)
-            items_in.append({
-                "id": offset, "company": company, "title": a.get("title", ""), "snippet": body[:3000]
-            })
-        prompt = f"""다음은 AI 반도체 경쟁사 뉴스 기사 목록입니다.
-
-각 기사에 대해 한국어 요약을 만들어 주세요:
-- "summary": 4~5문장, 사실 위주, 350~450자.
-
-## 작성 원칙
-1. 제목과 snippet에 있는 사실만 활용. 핵심 사실(주체, 액션, 협력 대상, 금액·규모·수치, 시점, 목적)을 빠짐없이 담을 것.
-2. 일반론·미사여구로 분량을 채우지 말 것. 사실을 구체적으로 풀어 4~5문장을 채울 것.
-3. 정보가 적더라도 제목과 snippet에서 추출 가능한 사실만으로 자연스러운 요약을 작성. 정보 부족을 언급하지 말 것.
-
-## 절대 금지 표현
-- "~분야의 경쟁력을 높이는 데 중요한 역할을 할 것이다"
-- "~기술의 발전에 기여할 것으로 기대된다"
-- "기대된다", "전망된다" 같은 막연한 미래 추측
-- "본문 정보 부족", "원문 확인 필요", "추가 정보 필요" 등 정보 부족을 명시하는 문구
-
-Input articles:
-{json.dumps(items_in, ensure_ascii=False)}
-
-Return JSON ONLY:
-{{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
-        try:
-            raw = exaone_complete(client, prompt, max_tokens=8000, temperature=0.3)
-            m = re.search(r"\{[\s\S]*\}", raw)
-            data = json.loads(m.group() if m else raw)
-            for entry in data.get("items", []):
-                idx = entry.get("id")
-                if not isinstance(idx, int) or not (0 <= idx < len(chunk)): continue
-                company, a = chunk[idx]
-                out[(company, a["url"])] = (entry.get("summary") or "").strip()
-        except Exception:
-            continue
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        futures = {
+            executor.submit(_summarize_one, client, a.get("title", ""),
+                            _article_body_for_prompt(a), f"AI 반도체 경쟁사 '{company}'"): (company, a)
+            for company, a in articles_with_company
+        }
+        for f in as_completed(futures):
+            company, a = futures[f]
+            try:
+                s = f.result()
+            except Exception:
+                s = ""
+            if s:
+                out[(company, a["url"])] = s
     return out
 
 def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") -> dict:
     if client is None or not articles: return {}
     prefetch_bodies(articles)
-    items_in = []
-    for i, a in enumerate(articles):
-        body = _article_body_for_prompt(a)
-        items_in.append({"id": i, "title": a.get("title", ""), "snippet": body[:3000]})
-    prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
-
-각 기사에 대해 한국어 요약을 만들어 주세요:
-- "summary": 4~5문장, 사실 위주, 350~450자.
-
-진부한 일반론 금지. 핵심 사실(주체, 액션, 협력 대상, 금액·규모·수치, 시점, 목적)을 빠짐없이 담을 것. 일반론·미사여구로 분량을 채우지 말고 사실을 구체적으로 풀어 4~5문장을 채울 것.
-
-## 절대 금지 표현
-- "본문 정보 부족", "원문 확인 필요", "추가 정보 필요" 등 정보 부족을 명시하는 문구
-- "기대된다", "전망된다" 같은 막연한 미래 추측
-
-정보가 적더라도 제목과 snippet에서 추출 가능한 사실만으로 자연스러운 요약을 작성. 정보 부족을 언급하지 말 것.
-
-Input articles:
-{json.dumps(items_in, ensure_ascii=False)}
-
-Return JSON ONLY:
-{{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
-    try:
-        raw = exaone_complete(client, prompt, max_tokens=8000, temperature=0.3)
-        m = re.search(r"\{[\s\S]*\}", raw)
-        data = json.loads(m.group() if m else raw)
-        out: dict = {}
-        for entry in data.get("items", []):
-            idx = entry.get("id")
-            if not isinstance(idx, int) or not (0 <= idx < len(articles)): continue
-            a = articles[idx]
-            out[a["url"]] = (entry.get("summary") or "").strip()
-        return out
-    except Exception:
-        return {}
+    out: dict = {}
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        futures = {
+            executor.submit(_summarize_one, client, a.get("title", ""),
+                            _article_body_for_prompt(a), "Furiosa AI(퓨리오사AI)"): a
+            for a in articles
+        }
+        for f in as_completed(futures):
+            a = futures[f]
+            try:
+                s = f.result()
+            except Exception:
+                s = ""
+            if s:
+                out[a["url"]] = s
+    return out
 
 def main():
     kst = pytz.timezone("Asia/Seoul")
