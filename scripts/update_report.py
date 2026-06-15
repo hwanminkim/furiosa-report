@@ -392,6 +392,23 @@ def _get_embeddings(texts: list[str], client: OpenAI) -> list[list[float]]:
     resp = client.embeddings.create(model=EMBEDDING_MODEL, input=texts)
     return [e.embedding for e in resp.data]
 
+# NOTE: 엔드포인트의 EXAONE chat-completions가 빈 응답(0 토큰)을 반환하는 문제로,
+# 레거시 completions API에 EXAONE 채팅 템플릿을 직접 적용해 우회한다.
+# (chat template이 정상 복구되면 client.chat.completions.create 로 되돌려도 됨)
+_EXAONE_STOP = ["[|endofturn|]", "[|user|]", "[|system|]"]
+
+def exaone_complete(client: OpenAI, prompt: str, max_tokens: int, temperature: float) -> str:
+    """단일 user 프롬프트를 EXAONE 채팅 포맷으로 감싸 레거시 completions로 호출."""
+    formatted = f"[|user|]\n{prompt}[|endofturn|]\n[|assistant|]\n"
+    resp = client.completions.create(
+        model=EXAONE_MODEL,
+        prompt=formatted,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        stop=_EXAONE_STOP,
+    )
+    return resp.choices[0].text or ""
+
 def dedup_by_semantic_similarity(articles: list[dict], embedding_client: "OpenAI | None", threshold: float = SIMILARITY_THRESHOLD) -> list[dict]:
     if len(articles) < 2:
         return articles
@@ -454,14 +471,7 @@ def cluster_articles_by_event(articles: list[dict], client: "OpenAI | None") -> 
 응답 형식 (오직 JSON):
 {{"clusters": [[0, 2], [1], [3, 4, 5]]}}"""
     try:
-        resp = client.chat.completions.create(
-            model=EXAONE_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=600,
-            temperature=0.1,
-
-        )
-        raw = resp.choices[0].message.content or ""
+        raw = exaone_complete(client, prompt, max_tokens=600, temperature=0.1)
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
         clusters = data.get("clusters", [])
@@ -535,13 +545,7 @@ def filter_relevant_by_company(company: str, aliases: list[str], articles: list[
 응답 형식 (오직 JSON):
 {{"scores": [{{"id": 0, "score": 3}}, {{"id": 1, "score": 1}}, ...]}}"""
     try:
-        resp = client.chat.completions.create(
-            model=EXAONE_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=600,
-            temperature=0.1,
-        )
-        raw = resp.choices[0].message.content or ""
+        raw = exaone_complete(client, prompt, max_tokens=600, temperature=0.1)
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
         scores = data.get("scores", [])
@@ -606,13 +610,7 @@ Furiosa AI와 다른 회사/기관이 **함께 발표·연동·도입·채택**�
 응답 형식 (오직 JSON):
 {{"scores": [{{"id": 0, "score": 3}}, {{"id": 1, "score": 1}}, ...]}}"""
     try:
-        resp = client.chat.completions.create(
-            model=EXAONE_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=600,
-            temperature=0.1,
-        )
-        raw = resp.choices[0].message.content or ""
+        raw = exaone_complete(client, prompt, max_tokens=600, temperature=0.1)
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
         scores = data.get("scores", [])
@@ -670,13 +668,7 @@ Input articles:
 Return JSON ONLY:
 {{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
         try:
-            resp = client.chat.completions.create(
-                model=EXAONE_MODEL,
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=8000,
-                temperature=0.3,
-            )
-            raw = resp.choices[0].message.content or ""
+            raw = exaone_complete(client, prompt, max_tokens=8000, temperature=0.3)
             m = re.search(r"\{[\s\S]*\}", raw)
             data = json.loads(m.group() if m else raw)
             for entry in data.get("items", []):
@@ -714,14 +706,7 @@ Input articles:
 Return JSON ONLY:
 {{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
     try:
-        resp = client.chat.completions.create(
-            model=EXAONE_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=8000,
-            temperature=0.3,
-
-        )
-        raw = resp.choices[0].message.content or ""
+        raw = exaone_complete(client, prompt, max_tokens=8000, temperature=0.3)
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
         out: dict = {}
