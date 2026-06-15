@@ -397,9 +397,14 @@ def _get_embeddings(texts: list[str], client: OpenAI) -> list[list[float]]:
 # (chat template이 정상 복구되면 client.chat.completions.create 로 되돌려도 됨)
 _EXAONE_STOP = ["[|endofturn|]", "[|user|]", "[|system|]"]
 
-def exaone_complete(client: OpenAI, prompt: str, max_tokens: int, temperature: float) -> str:
-    """단일 user 프롬프트를 EXAONE 채팅 포맷으로 감싸 레거시 completions로 호출."""
-    formatted = f"[|user|]\n{prompt}[|endofturn|]\n[|assistant|]\n"
+def exaone_complete(client: OpenAI, prompt: str, max_tokens: int, temperature: float,
+                    prefill: str = "{") -> str:
+    """단일 user 프롬프트를 EXAONE 채팅 포맷으로 감싸 레거시 completions로 호출.
+
+    모든 호출부가 JSON 오브젝트를 기대하므로 assistant 턴을 '{'로 prefill 하여
+    모델이 잡설 없이 JSON부터 바로 출력하도록 강제한다(토큰 절약 + 파싱 안정).
+    """
+    formatted = f"[|user|]\n{prompt}[|endofturn|]\n[|assistant|]\n{prefill}"
     resp = client.completions.create(
         model=EXAONE_MODEL,
         prompt=formatted,
@@ -407,7 +412,7 @@ def exaone_complete(client: OpenAI, prompt: str, max_tokens: int, temperature: f
         temperature=temperature,
         stop=_EXAONE_STOP,
     )
-    return resp.choices[0].text or ""
+    return prefill + (resp.choices[0].text or "")
 
 def dedup_by_semantic_similarity(articles: list[dict], embedding_client: "OpenAI | None", threshold: float = SIMILARITY_THRESHOLD) -> list[dict]:
     if len(articles) < 2:
