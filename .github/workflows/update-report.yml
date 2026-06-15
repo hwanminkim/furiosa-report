@@ -33,23 +33,25 @@ jobs:
       - name: Verify summaries (temp)
         run: |
           python3 - <<'PY'
-          import json
+          import json, re
           d = json.load(open('report.json'))
-          tot = fil = 0
-          sample = None
+          def has_ko(s): return bool(re.search(r'[가-힣]', s or ''))
+          tot=fil=ko=0
+          allitems=[]
           for c in d.get('companies', []):
-              for it in c['items']:
-                  tot += 1
-                  if (it.get('summary') or '').strip():
-                      fil += 1
-                      if not sample: sample = (it['title'][:50], it['summary'][:160])
+              for it in c['items']: allitems.append(it)
           for g in ('furiosa_daily','furiosa_weekly'):
               for k,v in d.get(g,{}).items():
-                  for it in v:
-                      tot += 1
-                      if (it.get('summary') or '').strip(): fil += 1
-          print(f"[VERIFY] summaries filled = {fil}/{tot}")
-          print(f"[VERIFY] sample = {sample}")
+                  for it in v: allitems.append(it)
+          for it in allitems:
+              tot+=1; s=(it.get('summary') or '').strip()
+              if s: fil+=1
+              if has_ko(s): ko+=1
+          print(f"[VERIFY] filled={fil}/{tot}  korean={ko}/{tot}")
+          for it in allitems:
+              s=(it.get('summary') or '').strip()
+              tag = 'EMPTY' if not s else ('KO' if has_ko(s) else 'EN!')
+              print(f"[VERIFY] {tag} | {it['title'][:45]} | {s[:70]}")
           PY
       - name: Commit and push if changed
         run: |
