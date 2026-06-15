@@ -1,6 +1,6 @@
 {
   "period": "2026-06-09(화) ~ 2026-06-15(월)",
-  "updated_at": "2026-06-15T14:29:54.714437+09:00",
+  "updated_at": "2026-06-15T16:41:11.336194+09:00",
   "furiosa_daily": {},
   "furiosa_weekly": {
     "06-11 (목)": [
@@ -38,6 +38,12 @@
       "region": "global",
       "items": [
         {
+          "title": "Nvidia Hires Intel Former Top Lobbyist as AI Chip Wars Heat Up in Washington",
+          "url": "https://memeburn.com/nvidia-hires-intels-former-top-lobbyist-as-ai-chip-wars-heat-up-in-washington/",
+          "date": "06-15",
+          "summary": ""
+        },
+        {
           "title": "NVIDIA Courts China with New Vera AI CPU Launch Pitch",
           "url": "https://techstory.in/nvidia-courts-china-with-new-vera-ai-cpu-launch-pitch/",
           "date": "06-15",
@@ -48,12 +54,6 @@
           "url": "https://www.insidermonkey.com/blog/jim-cramer-asserts-nvidia-nvda-not-spacex-is-the-key-to-the-market-1780923/",
           "date": "06-15",
           "summary": ""
-        },
-        {
-          "title": "NVIDIA ( NVDA ): AI Factory Demand Shows How Growth Can Stay High Without Balance Sheet Strain",
-          "url": "https://www.insidermonkey.com/blog/nvidia-nvda-ai-factory-demand-shows-how-growth-can-stay-high-without-balance-sheet-strain-1781644/",
-          "date": "06-15",
-          "summary": ""
         }
       ]
     },
@@ -62,9 +62,21 @@
       "region": "global",
       "items": [
         {
-          "title": "Smallest . ai and Tenstorrent Partnership Democratises Voice AI - 4x reduction in cost through hardware acceleration",
-          "url": "https://www.design-reuse.com/news/202530526-smallest-ai-and-tenstorrent-partnership-democratises-voice-ai-4x-reduction-in-cost-through-hardware-acceleration/",
-          "date": "05-18",
+          "title": "Tenstorrent Unveils TT-QuietBox(TM) 2, the First RISC-V AI Workstation With a Fully Open-Source Stack to Deliver Teraflop-Class Inference - Observer and Eccentric Newspapers",
+          "url": "https://www.hometownlife.com/press-release/story/57648/tenstorrent-unveils-tt-quietboxtm-2-the-first-risc-v-ai-workstation-with-a-fully-open-source-stack-to-deliver-teraflop-class-inference-2/",
+          "date": "06-03",
+          "summary": ""
+        },
+        {
+          "title": "Tenstorrent - 2026 Funding Rounds & List of Investors - Tracxn",
+          "url": "https://tracxn.com/d/companies/tenstorrent/__p54YXQoDh79n2Cg0a71HzwpVoEx1MJmN5NLVmq-dRbE/funding-and-investors",
+          "date": "05-22",
+          "summary": ""
+        },
+        {
+          "title": "Intel Joins Race To Buy AI Startup Tenstorrent: Report - Sahm",
+          "url": "https://www.sahmcapital.com/news/content/intel-joins-race-to-buy-ai-startup-tenstorrent-report-2026-05-22",
+          "date": "05-22",
           "summary": ""
         }
       ]
@@ -128,15 +140,15 @@
           "summary": ""
         },
         {
-          "title": "Rebellions Hires Former Acting Ambassador to Saudi Arabia as Middle East Adviser - thelec.net",
-          "url": "https://www.thelec.net/news/articleView.html?idxno\\u003d11274",
+          "title": "New Book :  Slave Rebellions and the Making of the Modern Prison  – Repeating Islands",
+          "url": "https://repeatingislands.com/2026/06/12/new-book-slave-rebellions-and-the-making-of-the-modern-prison/",
           "date": "06-12",
           "summary": ""
         },
         {
-          "title": "Former SK Sapeon Executives Launch New AI Startups After Rebellions Merger - thelec.net",
-          "url": "https://www.thelec.net/news/articleView.html?idxno\\u003d11269",
-          "date": "06-12",
+          "title": "삼성전자, 韓 SAFE 포럼 2026에 리벨리온·지멘스 등 주요 연사로 나서",
+          "url": "https://www.ajunews.com/view/20260611171219088",
+          "date": "06-11",
           "summary": ""
         }
       ]
@@ -170,12 +182,6 @@
       "region": "korea",
       "items": [
         {
-          "title": "Korea Investment Partners leads HyperAccel’s 150b won raise as SI joins - CHOSUNBIZ - Chosunbiz",
-          "url": "https://biz.chosun.com/en/en-finance/2026/05/30/XETOSMEFMFH7RMESNO2PAGU42U/",
-          "date": "05-30",
-          "summary": ""
-        },
-        {
           "title": "“한투파 리드에 SI도 확보”… ‘AI 반도체’ 하이퍼엑셀, 1500억 투자유...",
           "url": "https://biz.chosun.com/stock/market_trend/2026/05/30/ZZPK23MBUZAHDI6WSVRMTCGUZ4/?utm_source=naver&utm_medium=original&utm_campaign=biz",
           "date": "05-30",
@@ -185,6 +191,12 @@
           "title": "하이퍼엑셀, 차세대 인공지능 칩 '카르멘' 개발 착수",
           "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421214",
           "date": "05-21",
+          "summary": ""
+        },
+        {
+          "title": "[기획]이진원 하이퍼엑셀 CTO “단기 과제·실패 용인, AI 반도체 성공 ...",
+          "url": "https://www.etnews.com/20260515000265",
+          "date": "05-17",
           "summary": ""
         }
       ]
