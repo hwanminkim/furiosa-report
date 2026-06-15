@@ -726,9 +726,23 @@ Return JSON ONLY:
             temperature=0.3,
 
         )
-        raw = resp.choices[0].message.content or ""
+        msg = resp.choices[0].message
+        raw = msg.content or ""
         fr = resp.choices[0].finish_reason
-        print(f"[DEBUG furiosa summary] finish_reason={fr} raw_len={len(raw)} raw_head={raw[:200]!r}")
+        reasoning = getattr(msg, "reasoning_content", None)
+        print(f"[DEBUG furiosa summary] finish_reason={fr} raw_len={len(raw)} reasoning_len={len(reasoning) if reasoning else 0}")
+        print(f"[DEBUG furiosa msg dump] {msg.model_dump() if hasattr(msg,'model_dump') else msg!r}")
+        print(f"[DEBUG furiosa usage] {resp.usage}")
+        if not raw.strip():
+            print("[DEBUG furiosa] content empty → retry max_tokens=2048")
+            resp2 = client.chat.completions.create(
+                model=EXAONE_MODEL,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=2048,
+                temperature=0.3,
+            )
+            raw2 = resp2.choices[0].message.content or ""
+            print(f"[DEBUG furiosa retry2048] fr={resp2.choices[0].finish_reason} raw_len={len(raw2)} head={raw2[:200]!r}")
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
         out: dict = {}
