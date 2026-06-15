@@ -30,6 +30,27 @@ jobs:
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
         run: python scripts/update_report.py
+      - name: Verify summaries (temp)
+        run: |
+          python3 - <<'PY'
+          import json
+          d = json.load(open('report.json'))
+          tot = fil = 0
+          sample = None
+          for c in d.get('companies', []):
+              for it in c['items']:
+                  tot += 1
+                  if (it.get('summary') or '').strip():
+                      fil += 1
+                      if not sample: sample = (it['title'][:50], it['summary'][:160])
+          for g in ('furiosa_daily','furiosa_weekly'):
+              for k,v in d.get(g,{}).items():
+                  for it in v:
+                      tot += 1
+                      if (it.get('summary') or '').strip(): fil += 1
+          print(f"[VERIFY] summaries filled = {fil}/{tot}")
+          print(f"[VERIFY] sample = {sample}")
+          PY
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
