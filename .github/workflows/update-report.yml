@@ -25,6 +25,7 @@ jobs:
         run: pip install openai pytz trafilatura
       - name: Run update script
         env:
+          PROBE_ONLY: "1"
           FURIOSA_EXAONE_API_KEY: ${{ secrets.FURIOSA_EXAONE_API_KEY }}
           FURIOSA_EMBEDDING_API_KEY: ${{ secrets.FURIOSA_EMBEDDING_API_KEY }}
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}

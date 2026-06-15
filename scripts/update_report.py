@@ -758,10 +758,45 @@ Return JSON ONLY:
         traceback.print_exc()
         return {}
 
+def _probe(client):
+    """임시 진단: EXAONE 빈출력 원인 변형 테스트."""
+    import json as _json
+    one = {"id": 0, "title": "퓨리오사AI, 신규 계약 체결",
+           "snippet": "퓨리오사AI가 데이터센터 고객사와 NPU 공급 계약을 맺었다. 규모는 100억원이다."}
+    variants = [
+        ("01_trivial", [{"role": "user", "content": "안녕하세요라고만 답해줘."}], 50),
+        ("02_json_simple", [{"role": "user", "content": '아래 형식으로만 답해. JSON ONLY: {"x": 1}'}], 100),
+        ("03_summary_plain", [{"role": "user", "content": f"다음 기사를 한국어 3문장으로 요약해줘. 제목: {one['title']} 본문: {one['snippet']}"}], 500),
+        ("04_summary_json_1item", [{"role": "user", "content":
+            '다음 기사를 한국어로 요약하세요.\nInput articles:\n'
+            + _json.dumps([one], ensure_ascii=False)
+            + '\nReturn JSON ONLY:\n{"items": [{"id": 0, "summary": "..."}]}'}], 2048),
+        ("05_with_system", [{"role": "system", "content": "당신은 한국어 뉴스 요약가입니다."},
+                            {"role": "user", "content": f"이 기사를 3문장으로 요약: {one['title']} / {one['snippet']}"}], 500),
+        ("06_summary_json_temp0", [{"role": "user", "content":
+            '다음 기사를 한국어로 요약하세요.\nInput articles:\n'
+            + _json.dumps([one], ensure_ascii=False)
+            + '\nReturn JSON ONLY:\n{"items": [{"id": 0, "summary": "..."}]}'}], 2048),
+    ]
+    for name, msgs, mt in variants:
+        kw = {"model": EXAONE_MODEL, "messages": msgs, "max_tokens": mt, "temperature": 0.3}
+        if name.endswith("temp0"): kw["temperature"] = 0.0
+        try:
+            r = client.chat.completions.create(**kw)
+            c = r.choices[0].message.content or ""
+            print(f"[PROBE {name}] fr={r.choices[0].finish_reason} ctoks={r.usage.completion_tokens} len={len(c)} head={c[:120]!r}")
+        except Exception as e:
+            print(f"[PROBE {name}] EXC {type(e).__name__}: {e}")
+
 def main():
     kst = pytz.timezone("Asia/Seoul")
     now = datetime.datetime.now(kst)
     now_utc = now.astimezone(pytz.utc)
+
+    if os.environ.get("PROBE_ONLY") == "1":
+        _ek = os.environ.get("FURIOSA_EXAONE_API_KEY")
+        _probe(OpenAI(base_url=FURIOSA_BASE_URL, api_key=_ek))
+        return
 
     daily_start_kst = kst.localize(datetime.datetime.combine(
         now.date(), datetime.time(0, 0)
