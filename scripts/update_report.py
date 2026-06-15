@@ -799,20 +799,22 @@ def _probe(client):
             print(f"[PROBE {name}] fr={r.choices[0].finish_reason} ctoks={r.usage.completion_tokens} len={len(c)} head={c[:120]!r}")
         except Exception as e:
             print(f"[PROBE {name}] EXC {type(e).__name__}: {e}")
-    # 5) chat_template_kwargs thinking 토글 변형
-    msg1 = [{"role": "user", "content": "안녕하세요라고만 한국어로 답해줘."}]
-    for tname, body in [
-        ("07_think_false", {"chat_template_kwargs": {"enable_thinking": False}}),
-        ("08_think_true", {"chat_template_kwargs": {"enable_thinking": True}}),
-        ("09_thinking_false", {"chat_template_kwargs": {"thinking": False}}),
-        ("10_add_gen_false", {"add_generation_prompt": True}),
-        ("11_min_tokens", {"min_tokens": 5}),
-    ]:
+    # 레거시 completions + 수동 EXAONE 채팅 템플릿으로 JSON instruction 검증
+    json_task = ('다음 기사를 한국어 3문장으로 요약하세요.\n'
+                 '제목: 퓨리오사AI, 데이터센터 고객사와 NPU 공급 계약 체결\n'
+                 '본문: 퓨리오사AI가 국내 데이터센터 업체와 100억원 규모의 NPU 공급 계약을 맺었다. 올해 4분기부터 납품한다.\n'
+                 'Return JSON ONLY: {"summary": "..."}')
+    templates = {
+        "T1_exaone_endofturn": f"[|system|]\n당신은 한국어 뉴스 요약가입니다.[|endofturn|]\n[|user|]\n{json_task}[|endofturn|]\n[|assistant|]\n",
+        "T2_exaone_nosys": f"[|user|]\n{json_task}[|endofturn|]\n[|assistant|]\n",
+        "T3_plain_instruct": f"{json_task}\n\n답변:\n",
+    }
+    for tname, ptext in templates.items():
         try:
-            r = client.chat.completions.create(model=EXAONE_MODEL, messages=msg1,
-                max_tokens=50, temperature=0.3, extra_body=body)
-            c = r.choices[0].message.content or ""
-            print(f"[PROBE {tname}] fr={r.choices[0].finish_reason} ctoks={r.usage.completion_tokens} head={c[:120]!r}")
+            rc = client.completions.create(model=EXAONE_MODEL, prompt=ptext,
+                max_tokens=400, temperature=0.3, stop=["[|endofturn|]", "[|user|]"])
+            t = rc.choices[0].text or ""
+            print(f"[PROBE {tname}] fr={rc.choices[0].finish_reason} len={len(t)} text={t[:250]!r}")
         except Exception as e:
             print(f"[PROBE {tname}] EXC {type(e).__name__}: {str(e)[:160]}")
 
