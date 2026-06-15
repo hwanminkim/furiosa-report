@@ -799,15 +799,22 @@ def _probe(client):
             print(f"[PROBE {name}] fr={r.choices[0].finish_reason} ctoks={r.usage.completion_tokens} len={len(c)} head={c[:120]!r}")
         except Exception as e:
             print(f"[PROBE {name}] EXC {type(e).__name__}: {e}")
-    # 5) min_tokens 강제로 생성 유도 (vLLM extra_body)
-    try:
-        r = client.chat.completions.create(model=EXAONE_MODEL,
-            messages=[{"role": "user", "content": "안녕하세요라고만 답해줘."}],
-            max_tokens=50, temperature=0.3, extra_body={"min_tokens": 5})
-        c = r.choices[0].message.content or ""
-        print(f"[PROBE 07_min_tokens] fr={r.choices[0].finish_reason} ctoks={r.usage.completion_tokens} head={c[:120]!r}")
-    except Exception as e:
-        print(f"[PROBE 07_min_tokens] EXC {type(e).__name__}: {e}")
+    # 5) chat_template_kwargs thinking 토글 변형
+    msg1 = [{"role": "user", "content": "안녕하세요라고만 한국어로 답해줘."}]
+    for tname, body in [
+        ("07_think_false", {"chat_template_kwargs": {"enable_thinking": False}}),
+        ("08_think_true", {"chat_template_kwargs": {"enable_thinking": True}}),
+        ("09_thinking_false", {"chat_template_kwargs": {"thinking": False}}),
+        ("10_add_gen_false", {"add_generation_prompt": True}),
+        ("11_min_tokens", {"min_tokens": 5}),
+    ]:
+        try:
+            r = client.chat.completions.create(model=EXAONE_MODEL, messages=msg1,
+                max_tokens=50, temperature=0.3, extra_body=body)
+            c = r.choices[0].message.content or ""
+            print(f"[PROBE {tname}] fr={r.choices[0].finish_reason} ctoks={r.usage.completion_tokens} head={c[:120]!r}")
+        except Exception as e:
+            print(f"[PROBE {tname}] EXC {type(e).__name__}: {str(e)[:160]}")
 
 def main():
     kst = pytz.timezone("Asia/Seoul")
