@@ -1,6 +1,6 @@
 {
   "period": "2026-06-12(금) ~ 2026-06-18(목)",
-  "updated_at": "2026-06-18T07:15:19.247684+09:00",
+  "updated_at": "2026-06-18T14:04:27.774861+09:00",
   "furiosa_daily": {},
   "furiosa_weekly": {},
   "companies": [
@@ -9,29 +9,36 @@
       "region": "global",
       "items": [
         {
-          "title": "Nvidia CEO: Society needs to change with advent of AI - The Hill",
-          "url": "https://thehill.com/policy/technology/5928431-nvidia-jensen-huang-ai-society/",
+          "title": "Netlist sues Samsung, targets Google and Nvidia in new AI memory patent fight - Seeking Alpha",
+          "url": "https://seekingalpha.com/news/4604639-netlist-sues-samsung-targets-google-and-nvidia-in-new-ai-memory-patent-fight",
           "date": "06-18",
-          "summary": "NVIDIA의 CEO는 AI의 등장으로 사회가 변화해야 한다고 강조했다. AI 기술의 발전이 사회 전반에 미치는 영향과 필요한 변화에 대해 언급했다."
+          "summary": "넷리스트가 삼성과 구글, 엔비디아를 상대로 AI 메모리 특허 소송을 제기했다. 이 소송은 AI 메모리 기술 분야에서의 권리 주장을 위한 것으로, 넷리스트는 해당 기술의 독점적 사용을 요구하고 있다."
         },
         {
-          "title": "This Nvidia-Backed Company Is Bringing Artificial Intelligence (AI) Into the Physical World. Its Stock Could Jump 3x - The Motley Fool",
-          "url": "https://www.fool.com/investing/2026/06/17/this-nvidia-backed-company-is-bringing-artificial/",
+          "title": "Exclusive: Winbond NOR flash reportedly enters Nvidia supply chain - digitimes",
+          "url": "https://www.digitimes.com/news/a20260618PD216/flash-winbond-nvidia-supply-chain-demand.html",
           "date": "06-18",
-          "summary": "NVIDIA는 AI 및 고성능 컴퓨팅 데이터 센터를 설계하는 네비우스 그룹에 20억 달러를 투자했다. 네비우스는 AI 애플리케이션 개발 및 배포를 위한 소프트웨어 스택을 제공하며, 2026년 1분기 매출은 전년 대비 8배 증가한 3억 9900만 달러를 기록했다. 네비우스의 AI 클라우드 사업은 같은 기간 3억 9000만 달러의 매출을 올렸다."
+          "summary": "윈본드의 NOR 플래시가 엔비디아의 공급망에 처음으로 진입했다. 이는 AI 서버 수요 증가와 엔비디아의 차세대 베라 루빈 플랫폼의 2026년 하반기 대량 출하 준비와 관련이 있다."
         },
         {
-          "title": "Databricks and NVIDIA: Building for the Agentic Era - Databricks",
-          "url": "https://www.databricks.com/blog/databricks-and-nvidia-building-agentic-era",
+          "title": "HPE Private Cloud AI Enables Agentic AI Production with NVIDIA Integration - The Fast Mode",
+          "url": "https://www.thefastmode.com/technology-solutions/49130-hpe-private-cloud-ai-enables-agentic-ai-production-with-nvidia-integration",
           "date": "06-18",
-          "summary": "데이터브릭스와 NVIDIA는 에이전시 시대를 대비한 협력을 진행 중이다. 이 협력은 AI 및 고성능 컴퓨팅 분야에서의 기술 발전과 데이터 센터 구축을 목표로 한다."
+          "summary": "HPE는 엔비디아와의 통합을 통해 에이전틱 AI 생산을 가능하게 하는 프라이빗 클라우드 AI를 발표했다. 이 솔루션은 보안, 거버넌스, 제어를 강화하며, 엔비디아의 에이전트 툴킷 소프트웨어를 활용해 에이전트 행동을 모니터링하고 정책을 시행한다."
         }
       ]
     },
     {
       "name": "Tenstorrent",
       "region": "global",
-      "items": []
+      "items": [
+        {
+          "title": "Qualcomm in Talks to Acquire AI Chip Startup Tenstorrent for Up to $10 Billion , Reuters Reports",
+          "url": "https://www.insidermonkey.com/blog/qualcomm-in-talks-to-acquire-ai-chip-startup-tenstorrent-for-up-to-10-billion-reuters-reports-1783966/",
+          "date": "06-18",
+          "summary": "퀄컴이 AI 칩 스타트업 텐스터렌트를 최대 100억 달러에 인수하기 위한 협상을 진행 중이다. 텐스터렌트는 전 애플 칩 디자이너 짐 켈러가 설립한 회사로, AI 모델 훈련 및 애플리케이션 실행을 위한 가속기를 개발하고 있다."
+        }
+      ]
     },
     {
       "name": "SambaNova",
@@ -41,14 +48,21 @@
           "title": "SambaNova Names Engineering and Finance Leaders to Accelerate Growth as Customer Demand Surges",
           "url": "https://www.finanznachrichten.de/nachrichten-2026-06/68754350-sambanova-names-engineering-and-finance-leaders-to-accelerate-growth-as-customer-demand-surges-004.htm",
           "date": "06-12",
-          "summary": "SambaNova는 매트 파필드를 최고 재무 책임자로, 리치 헤턴을 소프트웨어 총괄 임원으로 임명했다. 이는 프리미엄 추론 및 에이전시 AI에 대한 수요 증가에 대응하기 위한 조치이다. 매트 파필드는 코히어런트와 시냅릭스에서 재무 리더십을 발휘한 경험이 있으며, 리치 헤턴은 AWS와 시스코에서 소프트웨어 및 엔지니어링 조직을 이끈 경험이 있다."
+          "summary": "샘바노바는 매트 패드필드를 최고재무책임자로, 리치 헤이턴을 소프트웨어 수석부사장으로 임명했다. 이는 프리미엄 추론 및 에이전틱 AI에 대한 고객 수요 증가에 대응하기 위한 것이다."
         }
       ]
     },
     {
       "name": "Cerebras",
       "region": "global",
-      "items": []
+      "items": [
+        {
+          "title": "Aeluma ( NASDAQ : ALMU ) & Cerebras Systems ( NASDAQ : CBRS ) Head - To - Head Contrast",
+          "url": "https://www.dailypolitical.com/2026/06/11/aeluma-nasdaqalmu-cerebras-systems-nasdaqcbrs-head-to-head-contrast.html",
+          "date": "06-12",
+          "summary": "세레bras 시스템과 Aeluma는 각각 AI 인프라 및 제조 분야에서 경쟁하고 있다. 세레bras는 더 높은 수익과 이익을 기록하며, 분석가들로부터 더 높은 평가를 받고 있다."
+        }
+      ]
     },
     {
       "name": "Rebellions",
@@ -58,7 +72,19 @@
           "title": "'K-엔비디아' 리벨리온…'풀스택 AI'로 글로벌 경쟁력 입증 [2026 디지털...",
           "url": "https://www.news1.kr/industry/sb-founded/6198128",
           "date": "06-18",
-          "summary": "리벨리온은 AI 추론에 최적화된 NPU를 설계하는 팹리스 반도체 기업으로, 2026 대한민국 디지털성장기업대상에서 수상했다. 2020년 9월 설립된 리벨리온은 AI 기술을 통해 글로벌 경쟁력을 입증하고 있다."
+          "summary": "리벨리온은 인공지능(AI) 추론에 최적화된 NPU(신경망처리장치)를 설계·개발하는 팹리스 반도체 기업으로, 2020년 9월 설립되었다. 뉴스1이 주최한 '2026 대한민국 디지털성장기업대상'에서 수상하며 글로벌 경쟁력을 입증했다."
+        },
+        {
+          "title": "리벨리온·퓨리오사AI 등 K-반도체 글로벌 잭팟…'실패 감수 국가 R&D'가...",
+          "url": "https://www.widedaily.com/news/articleView.html?idxno=295932",
+          "date": "06-17",
+          "summary": "정부는 인공지능(AI) 반도체와 소프트웨어 분야에 2조원을 투자해 국내 스타트업들이 글로벌 시장에서 성과를 거두도록 지원했다. 리벨리온과 퓨리오사AI는 각각 6400억원과 8000억원의 투자를 유치하며 엔비디아 대항마로 성장했다."
+        },
+        {
+          "title": "미래에셋생명, 보험자산·PI 분리 운용 본격화…리벨리온 투자 첫 적용",
+          "url": "https://www.ezyeconomy.com/news/articleView.html?idxno=236388",
+          "date": "06-15",
+          "summary": "미래에셋생명은 보험자산과 PI(자기자본투자)를 분리 운용하는 새로운 체계를 도입했다. 이에 따라 리벨리온에 투자하며, 보험계약자 자산과 투자자산을 구분해 운용하는 방식을 채택했다."
         }
       ]
     },
@@ -70,19 +96,19 @@
           "title": "한국정보공학 \"딥엑스 NPU 탑재 HPE 서버로 비전 AI 시장 진입 장벽 허문...",
           "url": "https://www.epnc.co.kr/news/articleView.html?idxno=403123",
           "date": "06-17",
-          "summary": "한국정보공학은 HPE 서버에 딥엑스의 초저전력 NPU를 탑재한 솔루션을 제시하며 비전 AI 시장 진입 장벽을 낮췄다. 이 솔루션은 기존 GPU 서버 대비 연간 전력 소모량을 86% 줄이고, 초기 도입 비용을 30~50% 절감할 수 있다. 또한, 확장성과 편의성을 높여 서버 1대당 최대 256채널까지 확장 가능하다."
+          "summary": "한국정보공학은 HPE 서버에 딥엑스의 초저전력 NPU를 탑재한 솔루션을 제시하며 비전 AI 시장 진입 장벽을 낮췄다. 이 솔루션은 기존 GPU 서버 대비 연간 전력 소모량을 86% 줄이고, 초기 도입 비용을 최대 90% 절감할 수 있다."
         },
         {
           "title": "[Invest]'넥스트 딥엑스' 찾는 금융권…AI 직접투자 후보군은 벌써 부족",
           "url": "https://www.investchosun.com/site/data/html_dir/2026/06/08/2026060880184.html",
           "date": "06-09",
-          "summary": "금융권이 AI 반도체 기업에 대한 투자를 확대하고 있다. 리벨리온, 업스테이지, 퓨리오사AI, 딥엑스 등이 주요 후보군으로 꼽히며, 국민성장펀드는 이들 기업에 대규모 투자를 진행했다. 딥엑스는 6000억원 규모의 프리IPO 라운드를 추진 중이며, 주요 금융지주가 공동 앵커 역할을 검토 중이다. 금융권은 직접투자보다 공동투자나 간접투자를 선호하는 경향이 있다."
+          "summary": "금융권은 국민성장펀드를 통해 AI 기업에 직접투자를 확대하고 있다. 리벨리온, 업스테이지, 퓨리오사AI, 딥엑스 등이 대표 후보군으로 꼽히며, 이들 기업은 대규모 투자를 유치하며 성장 가능성을 입증했다."
         },
         {
-          "title": "[인터뷰]김녹원 딥엑스 대표 \"삼성 2나노 수율 70% 자신…4년 내 매출 10...",
-          "url": "https://view.asiae.co.kr/article/2026060508461141987",
-          "date": "06-05",
-          "summary": "딥엑스의 김녹원 대표는 삼성 2나노 공정에서 수율 70% 이상을 달성하겠다고 밝혔다. 딥엑스는 엣지용 NPU 칩 'DX-M1'을 양산 중이며, 내년에는 2나노 공정을 적용한 'DX-M2'를 출시할 계획이다. 회사는 지난해 매출 33억원에서 올해 1분기 수주 금액만 100억원을 넘어섰으며, 4년 내 매출 100배 성장을 목표로 하고 있다. 딥엑스는 애플 출신 인력을 중심으로 기술 개발을 진행 중이다."
+          "title": "퓨리오사AI·리벨리온·딥엑스, 실증 넘어 양산 경쟁 본격화···사업화...",
+          "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421563",
+          "date": "06-06",
+          "summary": "퓨리오사AI, 리벨리온, 딥엑스 등 국내 AI 반도체 기업들이 실증 단계를 넘어 양산 경쟁에 돌입했다. 퓨리오사AI는 2세대 칩 '레니게이드'를 TSMC에서 양산 중이며, 리벨리온은 2027년 상반기부터 사우디 아람코에 칩을 납품할 계획이다."
         }
       ]
     },
@@ -94,13 +120,13 @@
           "title": "“한투파 리드에 SI도 확보”… ‘AI 반도체’ 하이퍼엑셀, 1500억 투자유...",
           "url": "https://biz.chosun.com/stock/market_trend/2026/05/30/ZZPK23MBUZAHDI6WSVRMTCGUZ4/?utm_source=naver&utm_medium=original&utm_campaign=biz",
           "date": "05-30",
-          "summary": "하이퍼엑셀은 1500억원 규모의 투자유치를 진행 중이며, 한투파가 리드하고 SI도 확보했다. 회사는 차세대 AI 반도체 '카르멘' 개발에 착수했으며, 2028년 개념검증(PoC)을 거쳐 2029년 초 대량 양산을 목표로 한다. 카르멘 칩에는 3D IC, 고대역폭플래시(HBF) 등 신기술 도입이 검토되고 있다. 하이퍼엑셀은 데이터센터향 칩 생산을 삼성전자 4나노 파운드리에 맡기고 있다."
+          "summary": "하이퍼엑셀은 AI 반도체 개발을 위해 1500억 원의 투자를 유치했다. 이번 투자는 한국투자증권과 미래에셋증권이 주도했으며, 회사는 차세대 AI 반도체 '카르멘' 개발을 가속화할 계획이다. 카르멘은 2028년 개념검증(PoC)을 거쳐 2029년 초 대량 양산을 목표로 한다. 이 칩은 3D IC, 고대역폭플래시(HBF) 등 신기술 도입을 검토 중이며, 데이터센터와 온디바이스 시장을 겨냥하고 있다."
         },
         {
           "title": "하이퍼엑셀, 차세대 인공지능 칩 '카르멘' 개발 착수",
           "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421214",
           "date": "05-21",
-          "summary": "하이퍼엑셀은 차세대 추론용 AI 반도체 '카르멘' 개발을 시작했다. 2028년 개념검증(PoC)을 거쳐 2029년 초 대량 양산을 목표로 하며, 3D IC, 고대역폭플래시(HBF) 등 신기술 도입이 검토되고 있다. 회사는 데이터센터향 칩 생산을 삼성전자 4나노 파운드리에 맡기고 있으며, 내년 상반기까지 칩 디자인을 확정할 계획이다. 카르멘 이후에는 온디바이스향 신제품 '카르멘-엣지' 개발도 진행할 예정이다."
+          "summary": "하이퍼엑셀은 차세대 AI 반도체 '카르멘' 개발에 착수했다. 이 칩은 데이터센터와 온디바이스 시장을 타겟으로 하며, 2028년 개념검증(PoC)을 거쳐 2029년 초 대량 양산을 목표로 한다. 카르멘은 3D IC, HBF 등 신기술 도입을 검토 중이며, 데이터센터향 칩은 삼성전자 4나노 파운드리에 생산될 예정이다. 회사는 매년 주문형 반도체(ASIC) 제품을 출시할 계획을 가지고 있다."
         }
       ]
     },
@@ -112,7 +138,13 @@
           "title": "모빌린트, COMPUTEX 2026서 대만 기업 3곳과 전략적 MOU 체결",
           "url": "https://www.hellot.net/news/article.html?no=113062",
           "date": "06-09",
-          "summary": "모빌린트는 COMPUTEX 2026에서 대만 기업 3곳과 전략적 MOU를 체결했다. 협력 파트너로는 산업용 임베디드 컴퓨팅 분야 글로벌 기업 DFI, 산업용 로봇 및 모션 제어 전문기업 NEXCOBOT, 산업용 측정·비전 솔루션 전문기업 TOP MEASURE가 포함된다. 모빌린트는 AI 반도체 기반 솔루션의 실제 적용 가능성을 선보였으며, 다양한 공동 데모를 통해 기술을 시연했다."
+          "summary": "모빌린트는 COMPUTEX 2026에서 대만 기업 3곳과 전략적 MOU를 체결했다. 협력 대상은 산업용 임베디드 컴퓨팅 분야의 DFI, 로보틱스 및 모션 제어 전문기업 NEXCOBOT, 산업용 측정·비전 솔루션 전문기업 TOP MEASURE이다. 모빌린트는 AI 반도체 기반 솔루션의 실제 적용 가능성을 보여주기 위해 다양한 공동 데모를 선보였다."
+        },
+        {
+          "title": "모빌린트 NPU 품은 인텔리빅스, ‘소버린 AI’ 실현 나선다",
+          "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=05572726645478440",
+          "date": "06-04",
+          "summary": "모빌린트와 인텔리빅스는 국산 NPU를 활용한 '소버린 AI' 구현에 나섰다. 양사는 산불 조기경보 및 자율형 재난관제 시스템을 실제 현장에 적용해 AI 반도체 자립화 가능성을 입증했다. 이 시스템은 2000개 CCTV 채널에 적용되었으며, 생성형 AI 기반 차세대 관제 플랫폼 'Gen AMS'를 통해 재난·안전 이벤트를 실시간 분석하고 자동 보고서를 생성한다."
         }
       ]
     }
