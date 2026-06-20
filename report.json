@@ -1,13 +1,13 @@
 {
   "period": "2026-06-14(일) ~ 2026-06-20(토)",
-  "updated_at": "2026-06-20T16:59:26.412835+09:00",
+  "updated_at": "2026-06-20T19:14:21.561560+09:00",
   "furiosa_daily": {
     "06-20 (토)": [
       {
         "title": "정부 'AI 국가대표' 키운다...국민성장펀드, 퓨리오사AI에 8000억 베팅",
         "url": "http://www.fnnews.com/news/202606200837079700",
         "date": "06-20",
-        "summary": "국민성장펀드가 인공지능 반도체 설계기업 퓨리오사AI에 8000억원 규모 투자를 승인했다. 이 중 3700억원은 첨단전략산업기금 직접투자로, 한국산업은행 300억원을 포함한 정책자금 4000억원이 투입된다. 나머지 4000억원은 민간 자금 유치로 조달될 예정이다. 퓨리오사AI는 확보한 자금으로 2세대 NPU '레니게이드' 생산 확대와 3세대 NPU '스토크' 개발에 집중할 계획이다. 정부는 AI와 반도체를 국가 전략산업으로 육성하기 위해 관련 기업 지원을 확대하고 있다."
+        "summary": "국민성장펀드가 퓨리오사AI에 8000억원 규모 투자를 승인하며 정부의 AI 반도체 육성 전략이 본격화됐다. 이 중 3700억원은 첨단전략산업기금 직접투자, 4000억원은 정책자금으로 투입되며 나머지 4000억원은 민간 자금으로 조달될 예정이다. 퓨리오사AI는 확보한 자금으로 2세대 NPU '레니게이드' 생산 확대와 3세대 NPU '스토크' 개발에 집중할 계획이다. 이 회사는 2021년 국내 최초 서버용 NPU '워보이'를 출시했으며, 2024년 HBM 적용 고성능 AI 추론용 NPU 레니게이드를 선보였다. 퓨리오사AI는 현재 투자 전 기업가치 약 3조원으로 평가되며, 민간 투자 유치 완료 시 투자 후 기업가치는 3조8000억원에 달할 전망이다."
       }
     ]
   },
@@ -18,22 +18,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Key facts: NVIDIA speeds AI chip cycles; prices $25B bonds - TradingView",
-          "url": "https://www.tradingview.com/news/tradingview:07b480722e01c:0-key-facts-nvidia-speeds-ai-chip-cycles-prices-25b-bonds/",
-          "date": "06-20",
-          "summary": "NVIDIA가 AI 반도체 개발 주기를 단축하고 250억 달러 규모의 채권을 발행했다. 이는 ICE 데이터 서비스와 팩트셋의 시장 데이터를 기반으로 한 정보로, 2026년 팩트셋 리서치 시스템즈와 미국 은행가 협회의 저작권이 적용된다. SEC 제출 서류 및 기타 문서는 쿼터의 제공을 받았다."
+          "title": "Nvidia Stock vs. Micron Stock: Wall Street Says Buy One and Sell the Other - Yahoo Finance",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-stock-vs-micron-stock-093200197.html",
+          "date": "06-18",
+          "summary": "NVIDIA's stock (NASDAQ: NVDA) has surged 1,940% since January 2023, driven by strong demand for AI infrastructure. The company dominates AI accelerator sales with nearly 90% market share, powered by its Grace Blackwell superchip. Wall Street analysts predict a 44% upside from its current price of $208, with a median target of $300. Meanwhile, Micron Technology (NASDAQ: MU) has risen 1,320% but faces a 8% downside prediction. NVIDIA's Q1 revenue grew 85% to $81.6 billion, with non-GAAP net income up 140%. The company's next-gen Vera Rubin chip, 10 times more efficient than Grace Blackwell, is set to ship later this year."
         },
         {
-          "title": "NVIDIA Releases JetPack 7.2 with NemoClaw Support - Let's Data Science",
-          "url": "https://letsdatascience.com/news/nvidia-releases-jetpack-72-with-nemoclaw-support-a20d72d2",
-          "date": "06-20",
-          "summary": "NVIDIA가 2026년 6월 1일 GTC 타이페이에서 Jetson 엣지 AI 플랫폼 업데이트인 JetPack 7.2를 발표했다. 이 업데이트에는 NemoClaw 오픈소스 엔터프라이즈 AI 에이전트 블루프린트의 원클릭 배포, 로봇공학 및 자동화 워크플로우를 위한 Jetson 에이전트 기술 라이브러리, Orin용 CUDA 13, Jetson Thor용 Multi-Instance GPU(MIG) 지원, Jetson AGX Orin 32GB의 '슈퍼 모드'가 포함된다. 슈퍼 모드는 AI 처리량을 200 TOPS에서 241 TOPS로 증가시킨다."
+          "title": "1 Unstoppable Stock to Buy Before it Soars 848% to Join Nvidia in the $5 Trillion Club, According to 1 Wall Street Analyst - Yahoo Finance",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/1-unstoppable-stock-buy-soars-182137867.html",
+          "date": "06-18",
+          "summary": "NVIDIA's $5 trillion market cap stems from its early leadership in AI GPUs. Investors are now eyeing Intel (NASDAQ: INTC) as the next AI winner, with the stock surging 483% in 2026. Intel's CEO Lip-Bu Tan has refocused the company on AI and foundry operations, securing deals with Apple, Alphabet, and Elon Musk's Terafab project. Intel's Q1 revenue rose 7% to $13.6 billion, with adjusted EPS up 123%. One Wall Street analyst predicts Intel could eventually join NVIDIA in the $5 trillion club."
         },
         {
-          "title": "Agentic AI And The Next Layer Of The Trade: Beyond Nvidia - Forbes",
-          "url": "https://www.forbes.com/sites/jasonkirsch/2026/06/20/agentic-ai-and-the-next-layer-of-the-trade-beyond-nvidia/",
-          "date": "06-20",
-          "summary": "Forbes 기사는 NVIDIA를 넘어 Agentic AI의 다음 단계에 대해 다루고 있다. NVIDIA GTC 2026에서 1조 달러 규모의 AI 수익 목표를 발표했으며, AI 기술과 인재 확보를 위한 반도체 기업들의 경쟁이 치열해지고 있다. Intel과 Qualcomm이 AI 칩 스타트업 Tenstorrent에 대한 전략적 관심을 보이고 있다."
+          "title": "Bad News for NVIDIA, Amazon, and Microsoft: There’s No Longer Enough Cash for AI - 24/7 Wall St.",
+          "url": "https://247wallst.com/investing/2026/06/17/bad-news-for-nvidia-amazon-and-microsoft-theres-no-longer-enough-cash-for-ai/",
+          "date": "06-18",
+          "summary": "AI capex is growing at 70% annually, outpacing cash flow growth at 23%, pushing hyperscalers like Amazon, Microsoft, and NVIDIA into negative free cash flow by Q3 2026. Amazon spent $44 billion on Q1 capex against $26 billion in operating cash flow, causing its stock to fall 8%. Alphabet raised $84.75 billion in an equity offering, while Meta considered a share sale to fund $125 billion in AI capex. Oracle reported negative $24 billion in free cash flow, and Microsoft created a $100 billion off-balance-sheet vehicle for AI infrastructure."
         }
       ]
     },
@@ -42,22 +42,10 @@
       "region": "global",
       "items": [
         {
-          "title": "Tenstorrent - 2026 Funding Rounds & List of Investors - Tracxn",
-          "url": "https://tracxn.com/d/companies/tenstorrent/__p54YXQoDh79n2Cg0a71HzwpVoEx1MJmN5NLVmq-dRbE/funding-and-investors",
-          "date": "06-06",
-          "summary": "Tenstorrent의 2026년 투자 라운드 및 투자자 목록이 Tracxn에 공개되었다."
-        },
-        {
-          "title": "Tenstorrent Unveils TT-QuietBox(TM) 2, the First RISC-V AI Workstation With a Fully Open-Source Stack to Deliver Teraflop-Class Inference - Observer and Eccentric Newspapers",
-          "url": "https://www.hometownlife.com/press-release/story/57648/tenstorrent-unveils-tt-quietboxtm-2-the-first-risc-v-ai-workstation-with-a-fully-open-source-stack-to-deliver-teraflop-class-inference-2/",
-          "date": "06-03",
-          "summary": "Tenstorrent가 완전히 오픈소스 스택을 갖춘 최초의 RISC-V AI 워크스테이션인 TT-QuietBox™ 2를 발표했다. 이 제품은 테라플롭급 추론 성능을 제공한다."
-        },
-        {
-          "title": "Intel Joins Race To Buy AI Startup Tenstorrent: Report - Sahm",
-          "url": "https://www.sahmcapital.com/news/content/intel-joins-race-to-buy-ai-startup-tenstorrent-report-2026-05-22",
-          "date": "05-22",
-          "summary": "Intel이 AI 칩 스타트업 Tenstorrent에 대한 전략적 관심을 보이고 있다. Bloomberg에 따르면, Tenstorrent는 Intel과 Qualcomm과의 논의를 진행 중이며, 평가액은 50억 달러를 넘는 것으로 알려졌다. Tenstorrent는 새로운 자금 조달 라운드를 추진하면서 AI 기술과 인재 확보를 위한 경쟁에 참여하고 있다."
+          "title": "Qualcomm Pursues Tenstorrent at Up to $10 Billion : RISC - V Bet on Nvidia Blind Spot",
+          "url": "https://www.techtimes.com/articles/318559/20260617/qualcomm-pursues-tenstorrent-10-billion-risc-v-bet-nvidias-blind-spot.htm",
+          "date": "06-18",
+          "summary": "Qualcomm is in advanced talks to acquire AI chip startup Tenstorrent for $8 billion to $10 billion. The deal would give Qualcomm a RISC-V-based AI accelerator to compete with NVIDIA's GPU stacks. Tenstorrent's Galaxy Blackhole AI compute platform reached general availability in April 2026, attracting interest from Intel. Qualcomm's shares rose 4% on the news, and the acquisition aligns with its strategy to expand into data center revenue."
         }
       ]
     },
@@ -69,7 +57,7 @@
           "title": "SambaNova Names Engineering and Finance Leaders to Accelerate Growth as Customer Demand Surges",
           "url": "https://www.finanznachrichten.de/nachrichten-2026-06/68754350-sambanova-names-engineering-and-finance-leaders-to-accelerate-growth-as-customer-demand-surges-004.htm",
           "date": "06-12",
-          "summary": "SambaNova는 AI 인프라 분야에서 매트 패드필드를 최고재무책임자(CFO), 리치 헤턴을 소프트웨어 총괄 부사장으로 임명했다. 이는 프리미엄 추론 및 에이전시 AI에 대한 수요 증가로 인해 회사가 새로운 성장 단계에 접어들면서 이루어진 결정이다. 매트 패드필드는 코히어런트에서 그룹 부사장을 역임한 경험을 바탕으로 재무 인프라를 구축할 예정이며, 리치 헤턴은 AWS에서 소프트웨어 개발을 주도한 경험을 살려 소프트웨어 플랫폼을 가속화할 계획이다. Rodrigo Liang CEO는 이번 인사가 회사의 성장과 기술 우위를 공고히 할 것이라고 강조했다."
+          "summary": "SambaNova appointed Matt Padfield as CFO and Rich Heaton as Executive VP of Software to accelerate growth amid surging demand for AI inference chips. Padfield brings finance experience from Coherent and Synaptics, while Heaton joins from AWS, where he led the Neuron SDK organization. CEO Rodrigo Liang emphasized the need for leaders who can scale with the company's momentum in premium inference and agentic AI."
         }
       ]
     },
@@ -78,22 +66,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Reviewing Cerebras Systems ( NASDAQ : CBRS ) & Ambiq Micro ( NYSE : AMBQ )",
-          "url": "https://www.themarketsdaily.com/2026/06/12/reviewing-cerebras-systems-nasdaqcbrs-ambiq-micro-nyseambq.html",
-          "date": "06-12",
-          "summary": "Cerebras Systems와 Ambiq Micro의 비교 분석 결과, Cerebras Systems가 더 높은 매출과 수익성을 보이며 분석가와 기관 투자자들로부터 더 많은 지지를 받고 있는 것으로 나타났다. Cerebras Systems의 목표 주가는 294달러로 29.77%의 상승 가능성이 예상되는 반면, Ambiq Micro는 52.8달러로 37.03%의 하락 가능성이 제기되었다. Cerebras Systems는 웨이퍼 스케일 프로세서인 Wafer-Scale Engine(WSE)을 통해 GPU 대비 15배 빠른 추론 성능을 제공하며, AI 시장에서의 기술적 우위를 강조하고 있다."
+          "title": "Cerebras Has Fallen 39% From Its Peak. With Earnings Days Away, Is the AI Chipmaker Finally Cheap? - TIKR.com",
+          "url": "https://www.tikr.com/blog/cerebras-has-fallen-39-from-its-peak-with-earnings-days-away-is-the-ai-chipmaker-finally-cheap",
+          "date": "06-20",
+          "summary": "Cerebras Systems (NASDAQ: CBRS) stock fell 39% from its IPO peak but rebounded 9.85% after analyst coverage began. The company ships wafer-scale AI silicon for inference, with contracts from OpenAI and Amazon. Despite a 64 times forward revenue valuation, Cerebras' Wafer-Scale Engine outperforms NVIDIA GPUs in inference speed. Q1 earnings are due June 23, with the stock trading at $234.71."
         },
         {
-          "title": "Cerebras outpaces Nvidia in video showdown at SuperAI Singapore , making its case against GPU dominance",
-          "url": "https://www.digitimes.com/news/a20260611VL200.html",
-          "date": "06-11",
-          "summary": "Cerebras Systems는 슈퍼AI 싱가포르 행사에서 Wafer Scale Engine 칩을 공개하며 NVIDIA의 GPU 대비 성능 우위를 강조했다. 앤디 호크 최고전략책임자는 행사에서 직접 칩을 전시하며 AI 분야에서의 속도와 효율성 경쟁력을 과시했다. Cerebras의 WSE는 NVIDIA B200 칩 대비 58배 큰 크기와 2,625배 높은 메모리 대역폭을 자랑하며, AI 작업의 처리 속도를 혁신적으로 개선했다."
+          "title": "Cerebras Systems Tokenized Stock (Ondo) (CBRSON) Price Prediction June 2026: Forecast Amid Fresh Listing Momentum - WEEX",
+          "url": "https://www.weex.com/wiki/article/cerebras-systems-tokenized-stock-ondo-cbrson-price-prediction-june-2026-forecast-amid-fresh-listing-momentum-gfko0k7hehglxdxfwx8by2ks",
+          "date": "06-19",
+          "summary": "Cerebras Systems의 토큰화 주식(CBRSON)이 2026년 6월 18일 WEEX에 상장되었다. 상장 당시 가격은 33.20달러로, 24시간 거래량은 680만 달러, 시가총액은 1,920만 달러였다. 이 토큰은 Cerebras의 AI 컴퓨팅 플랫폼 노출을 제공하며, 블록체인 기술을 활용한 주식 거래를 가능하게 한다."
         },
         {
-          "title": "Cerebras Systems ( NASDAQ : CBRS ) Upgraded at Barclays",
-          "url": "https://www.tickerreport.com/banking-finance/13469103/cerebras-systems-nasdaqcbrs-upgraded-at-barclays.html",
-          "date": "06-10",
-          "summary": "바클레이즈는 Cerebras Systems의 주가를 상향 조정하며 투자 의견을 강화했다. 이는 회사의 기술적 혁신과 AI 시장에서의 성장 가능성을 반영한 것으로 분석된다."
+          "title": "Cloud growth to power two-thirds of Cerebras revenue in 2026 - S&P Global",
+          "url": "https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/06/cloud-growth-to-power-two-thirds-of-cerebras-revenue-in-2026",
+          "date": "06-19",
+          "summary": "Cerebras의 2026년 매출 중 2/3가 클라우드 성장에 의해 주도될 것으로 예상된다."
         }
       ]
     },
@@ -102,22 +90,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "Shinde on rebellions: This is just the trailer, picture abhi baki hai - The Times of India",
-          "url": "https://timesofindia.indiatimes.com/city/mumbai/shinde-on-rebellions-this-is-just-the-trailer-picture-abhi-baki-hai/articleshow/131864483.cms",
-          "date": "06-20",
-          "summary": "Maharashtra 주정부의 Eknath Shinde 부지사는 6명의 반체제 Shiv Sena 의원들의 이탈 사건을 언급하며 '이것은 단지 예고편일 뿐'이라고 경고했다. 그는 반체제 의원들이 법적 문제를 피하기 위해 당 행사에 참석하지 않았다고 지적하며, 향후 추가 조치가 있을 것임을 암시했다. Shinde는 반체제 움직임에 대해 '개들이 짖지만 호랑이는 혼자 사냥한다'며 강경 대응을 예고했다."
+          "title": "'K-엔비디아' 리벨리온…'풀스택 AI'로 글로벌 경쟁력 입증 [2026 디지털...",
+          "url": "https://www.news1.kr/industry/sb-founded/6198128",
+          "date": "06-18",
+          "summary": "리벨리온은 인공지능(AI) 추론에 최적화된 NPU를 설계 및 개발하는 팹리스 반도체 기업으로, 2020년 9월 설립되었다."
         },
         {
-          "title": "Amid rebellions in Opp'n parties, NDA inches towards 2/3rd majority needed for Delimitation | Bill fell short of special majority last time | Inshorts - Inshorts",
-          "url": "https://inshorts.com/en/news/amid-rebellions-in-opp-n-parties--nda-inches-towards-2-3rd-majority-needed-for-delimitation-1781781668345",
-          "date": "06-18",
-          "summary": "야당 정당들의 반체제 움직임 속에서 NDA(국민민주연합)는 362석의 3분의 2 과반수에 근접한 293석을 확보하며 Delimitation Bill 통과를 위한 발판을 마련했다. 20명의 TMC 의원과 6명의 Shiv Sena(UBT) 의원, SP 의원들의 탈당이 예상되며, BJP는 DMK와의 협상도 진행 중이다. 이는 정부가 선거구 재편을 위한 법적 절차를 진행하는 데 결정적 역할을 할 전망이다."
+          "title": "[주간스타트업동향] 리벨리온, 전 주사우디 대사대리 문병준 MENA 전략 고...",
+          "url": "https://it.donga.com/109039/",
+          "date": "06-17",
+          "summary": "리벨리온은 전 주사우디 대사대리 문병준을 중동·북아프리카(MENA) 전략 고문으로 위촉했다. 문 고문은 중동 지역에서 AI 인프라 주도권 확보를 위한 전략적 협력 모델 발굴에 속도를 낼 계획이다."
         },
         {
-          "title": "Amid TMC, Shiv Sena (UBT) rebellions, the numbers that could benefit NDA in Parliament | India News - Hindustan Times",
-          "url": "https://www.hindustantimes.com/india-news/amid-tmc-shiv-sena-ubt-rebellions-the-numbers-that-could-benefit-nda-in-parliament-101781773753913.html",
-          "date": "06-18",
-          "summary": "최근 정치적 변화로 인해 Trinamool Congress(TMC)와 Shiv Sena(UBT)의 반란이 발생하면서 BJP 주도의 National Democratic Alliance(NDA)에 대한 논의가 활발해졌다. 헌법 개정을 위한 3분의 2 이상의 의석 확보가 필요한 상황에서 NDA는 현재 Lok Sabha에서 293석을 차지하고 있으며, TMC와 Shiv Sena(UBT)의 반란 의원들이 합류할 경우 316석까지 늘어날 전망이다. 그러나 여전히 360석에 도달하기에는 40석 이상 부족한 상황이다. Rajya Sabha에서는 NDA가 149석을 차지하고 있으며, 최근 선거와 보궐 선거를 통해 158석까지 늘어날 것으로 예상된다. 이는 3분의 2 이상의 의석인 164석에 근접한 수치이다."
+          "title": "리벨리온·퓨리오사AI 등 K-반도체 글로벌 잭팟…'실패 감수 국가 R&D'가...",
+          "url": "https://www.widedaily.com/news/articleView.html?idxno=295932",
+          "date": "06-17",
+          "summary": "정부의 2조원 예산 투자로 AI 반도체와 소프트웨어 분야에서 성과가 나타났다. 리벨리온과 퓨리오사AI는 각각 6400억원과 8000억원의 투자를 유치했으며, 딥엑스는 8개국에 수출했다."
         }
       ]
     },
@@ -126,22 +114,10 @@
       "region": "korea",
       "items": [
         {
-          "title": "한국정보공학 \"딥엑스 NPU 탑재 HPE 서버로 비전 AI 시장 진입 장벽 허문...",
-          "url": "https://www.epnc.co.kr/news/articleView.html?idxno=403123",
+          "title": "한국정보공학, 딥엑스와 비전AI 시장 공략…HPE 서버 기반 NPU 솔루션 공...",
+          "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=03650646645482704",
           "date": "06-17",
-          "summary": "한국정보공학은 HPE 서버에 딥엑스의 초저전력 NPU를 탑재한 솔루션을 제시하며 비전 AI 시장 진입 장벽을 낮추는 실질적인 하드웨어 아키텍처를 선보였다. 이 솔루션은 LPDDR5 컨트롤러를 내장해 시스템 병목 현상을 차단하고, 기존 GPU 대비 연간 전력 소모량을 약 86% 줄여 유지 비용을 낮춘다. 또한, 동급 GPU 대비 30~50% 저렴한 칩 단가와 인프라 장비 수량 최소화로 초기 도입 비용을 낮추고, 전력 등 운영비를 포함한 총소유비용(TCO)을 최대 90%까지 절감할 수 있다. 이와 함께 확장성과 편의성도 뛰어나 PCIe 폼팩터 규격의 카드 장착만으로 서버 1대당 최대 256채널까지 확장 가능하다."
-        },
-        {
-          "title": "[Invest]'넥스트 딥엑스' 찾는 금융권…AI 직접투자 후보군은 벌써 부족",
-          "url": "https://www.investchosun.com/site/data/html_dir/2026/06/08/2026060880184.html",
-          "date": "06-09",
-          "summary": "금융권은 국민성장펀드의 AI 투자 테마에 맞춰 리벨리온, 업스테이지, 퓨리오사AI, 딥엑스 등 대규모 투자 가능한 AI 기업을 찾고 있다. 이들 기업은 정책 명분과 기술력, 대규모 자금 집행 여력을 갖추고 있어 금융권의 관심을 받고 있다. 그러나 대표 후보군을 제외하면 직접투자 대상으로 삼을 만한 기업이 많지 않아, 금융권은 공동투자나 간접투자 방식을 고려하고 있다. 또한, AI 서비스 기업들도 금융권의 관심을 받고 있으며, 뤼튼테크놀로지스는 금융그룹 계열 벤처캐피탈 주관으로 IR을 진행한 것으로 파악되었다."
-        },
-        {
-          "title": "퓨리오사AI·리벨리온·딥엑스, 실증 넘어 양산 경쟁 본격화···사업화...",
-          "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421563",
-          "date": "06-06",
-          "summary": "퓨리오사AI, 리벨리온, 딥엑스 등 국내 AI 반도체 기업들이 실증 단계를 넘어 본격적인 양산 경쟁에 돌입했다. 퓨리오사AI는 2023년 1세대 칩 '워보이' 양산을 시작으로, 2024년 2세대 칩 '레니게이드' 양산을 본격화하고 있다. 리벨리온은 2세대 칩 '리벨100'의 양산을 준비 중이며, 2027년 상반기부터 사우디 국영 석유회사 아람코에 납품할 계획이다. 딥엑스는 1세대 칩 'DX-M1'을 양산 중이며, 2027년 2세대 칩 'DX-M2' 양산을 목표로 하고 있다. 이들 기업은 국내외 시장에서 수출 계약을 따내며 상용화 가능성을 입증하고 있다."
+          "summary": "한국정보공학은 딥엑스의 NPU를 탑재한 비전AI 인프라 솔루션을 공개했다. 이 솔루션은 GPU 대비 전력 소비를 86% 줄이고, 총소유비용(TCO)을 최대 90%까지 절감할 수 있다."
         }
       ]
     },
@@ -153,7 +129,7 @@
           "title": "“한투파 리드에 SI도 확보”… ‘AI 반도체’ 하이퍼엑셀, 1500억 투자유...",
           "url": "https://biz.chosun.com/stock/market_trend/2026/05/30/ZZPK23MBUZAHDI6WSVRMTCGUZ4/?utm_source=naver&utm_medium=original&utm_campaign=biz",
           "date": "05-30",
-          "summary": "AI 반도체 기업 하이퍼엑셀이 1500억 원 규모의 투자유치를 진행 중이며, 한국투자파트너스가 리드하고 SI도 확보한 것으로 알려졌다."
+          "summary": "AI 반도체 기업 하이퍼엑셀이 한국투자파트너스 리드로 SI 확보에 성공하며 1500억 원 규모의 투자유치를 진행 중이다. 이번 투자유치는 AI 반도체 사업 확장을 위한 자금 조달 목적으로 진행되고 있다."
         }
       ]
     },
@@ -165,13 +141,7 @@
           "title": "모빌린트, 컴퓨텍스서 대만 기업들과 잇단 협력…산업용 AI 공략 가속",
           "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=03201286645480080",
           "date": "06-09",
-          "summary": "AI 반도체 전문기업 모빌린트가 컴퓨텍스 2026에서 대만 기업들과 전략적 업무협약(MOU)을 체결하며 글로벌 산업용 AI 시장 공략에 속도를 내고 있다. 모빌린트는 디에프아이, 넥스코봇, 탑 메저 등과 협력해 산업용 AI 시스템, 로보틱스, AI 비전 기반 검사 솔루션 등을 공동 개발할 계획이다. 이를 통해 모빌린트의 NPU가 다양한 하드웨어 환경에서 안정적으로 구동될 수 있음을 입증했다."
-        },
-        {
-          "title": "모빌린트 NPU 품은 인텔리빅스, ‘소버린 AI’ 실현 나선다",
-          "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=05572726645478440",
-          "date": "06-04",
-          "summary": "모빌린트와 인텔리빅스가 협력해 국산 NPU 기반 '소버린 AI' 구현에 나섰다. 모빌린트의 NPU 칩 '애리스'와 '레귤러스'를 적용한 온디바이스 AI 기반 안전관제 기술을 공개했다. 이 기술은 산불 조기경보 및 자율형 재난관제 시스템에 활용되며, 2,000개 CCTV 채널에 적용해 상용화에 성공했다. 생성형 AI 기반 차세대 관제 플랫폼 'Gen AMS'는 재난·안전 이벤트를 실시간 분석하고 보고서 작성까지 자동 수행한다. 이번 실증사업은 국산 AI 반도체의 공공 안전 분야 적용 가능성을 입증했다."
+          "summary": "AI 반도체 전문기업 모빌린트가 컴퓨텍스 2026에서 대만 기업 디에프아이, 넥스코봇, 탑 메저와 전략적 업무협약(MOU)을 체결했다. 이들 기업과 협력해 산업용 AI 솔루션 개발 및 글로벌 시장 공략을 가속화할 계획이다."
         }
       ]
     }
