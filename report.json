@@ -1,6 +1,6 @@
 {
   "period": "2026-06-15(월) ~ 2026-06-21(일)",
-  "updated_at": "2026-06-21T16:12:00.944820+09:00",
+  "updated_at": "2026-06-21T17:42:26.437018+09:00",
   "furiosa_daily": {},
   "furiosa_weekly": {
     "06-20 (토)": [
@@ -8,7 +8,7 @@
         "title": "정부 'AI 국가대표' 키운다...국민성장펀드, 퓨리오사AI에 8000억 베팅",
         "url": "http://www.fnnews.com/news/202606200837079700",
         "date": "06-20",
-        "summary": "국민성장펀드가 퓨리오사AI에 8000억원 규모 투자를 승인하며 정부의 AI 반도체 육성 전략이 본격화됐다. 이 중 3700억원은 첨단전략산업기금 직접투자로, 한국산업은행 300억원을 포함한 정책자금 4000억원이 투입된다. 나머지 4000억원은 민간 자금으로 조달될 예정이다. 퓨리오사AI는 확보한 자금으로 2세대 NPU '레니게이드' 생산 확대와 3세대 NPU '스토크' 개발에 집중할 계획이다. 국내에서는 LG AI연구원과 삼성SDS가 퓨리오사AI의 기술을 적용한 사례가 확인됐다."
+        "summary": "국민성장펀드가 인공지능 반도체 설계기업 퓨리오사AI에 8000억원 규모 투자를 승인했다. 이 중 3700억원은 첨단전략산업기금 직접투자로, 한국산업은행 300억원을 포함한 정책자금 4000억원이 투입된다. 나머지 4000억원은 민간 자금으로 조달될 예정이다. 퓨리오사AI는 확보한 자금으로 2세대 NPU '레니게이드' 생산 확대와 3세대 NPU '스토크' 개발에 집중할 계획이다. 정부는 AI와 반도체를 국가 전략산업으로 육성하기 위해 관련 기업 지원을 확대하고 있다."
       }
     ]
   },
@@ -18,22 +18,16 @@
       "region": "global",
       "items": [
         {
-          "title": "Open - Source NVIDIA NVK Vulkan Driver Receives DLSS Support In Mesa 26 . 2",
-          "url": "https://wccftech.com/open-source-nvidia-nvk-vulkan-driver-receives-dlss-support-in-mesa-26-2/",
-          "date": "06-21",
-          "summary": "NVIDIA의 오픈소스 Vulkan 드라이버인 NVK가 Mesa 26.2 업데이트를 통해 DLSS 기술을 지원하게 되었다. 이로 인해 Linux 기반 Vulkan 게임에서 AI 기반 업스케일링이 가능해졌다. NVK는 NVIDIA GPU용 커뮤니티 개발 Vulkan 드라이버로, 2022년 도입 이후 NVIDIA의 독점 드라이버 대체를 목표로 했다. DLSS는 Tensor 코어를 활용해 저해상도 렌더링 후 고해상도로 이미지를 재구성하는 기술이다. 이번 업데이트로 Linux 게이머들은 NVIDIA의 폐쇄형 드라이버 없이도 DLSS를 사용할 수 있게 되었다."
-        },
-        {
           "title": "Amazon Plans Broader Push for Trainium AI Chips , Taking Aim at Nvidia Dominance",
           "url": "https://techstory.in/amazon-plans-broader-push-for-trainium-ai-chips-taking-aim-at-nvidias-dominance/",
           "date": "06-21",
-          "summary": "아마존이 AI 칩인 Trainium의 직접 판매를 검토하며 NVIDIA에 대항할 계획이다. Trainium 칩은 원래 AWS를 통해 제공되었으나, 이제는 클라우드 외부 판매도 고려 중이다. 이는 AI 하드웨어 시장에서 NVIDIA의 GPU 독점에 도전하는 전략이다. 아마존은 Trainium이 비용 효율적이며 대규모 AI 모델 훈련에 적합하다고 강조했다. AI 인프라 수요 증가로 인해 기업들이 자체 칩 개발에 나서면서 시장 경쟁이 가속화되고 있다."
+          "summary": "아마존이 자체 개발한 AI 칩인 Trainium을 클라우드 서비스 외에 직접 판매할 계획을 검토 중이다. 이는 AI 하드웨어 시장에서 엔비디아의 주도권에 도전하기 위한 전략으로, 생성형 AI 모델과 대규모 머신러닝 애플리케이션 수요 증가에 대응하기 위한 것이다. Trainium 칩은 AWS에서 개발되어 고객에게 고가의 타사 AI 프로세서 대안을 제공하기 위해 설계되었으며, 현재는 AWS 클라우드 서비스를 통해 제공되고 있다. 아마존의 이번 전략적 전환은 AI 생태계에서의 영향력 확대와 클라우드 컴퓨팅 이상의 수익 창출을 목표로 한다."
         },
         {
-          "title": "The Most Important Nvidia Product Isnt a Chip . It This .",
-          "url": "https://www.fool.com/investing/2026/06/20/most-important-nvidia-product-isnt-chip-cuda-ai/?source=iedfolrf0000001",
-          "date": "06-21",
-          "summary": "NVIDIA의 가장 중요한 자산은 칩이 아닌 CUDA 소프트웨어 플랫폼이다. CUDA는 개발자들이 NVIDIA 하드웨어에서 효율적으로 소프트웨어를 작성할 수 있게 해주며, 네트워크 효과로 인해 생태계 전환 비용이 높다. 경쟁사가 더 빠르거나 저렴한 칩을 개발하더라도 CUDA 생태계를 대체하기는 어렵다. 이로 인해 NVIDIA는 AI 시장에서 높은 점유율과 수익률을 유지하고 있다. 투자자들은 NVIDIA의 하드웨어뿐만 아니라 소프트웨어 생태계의 가치도 고려해야 한다."
+          "title": "Nvidia Jensen Huang says AI will create jobs like Industrial Revolution",
+          "url": "https://www.foxnews.com/media/jensen-huang-says-ai-reshape-work-like-industrial-revolution-us-should-absolutely-lead",
+          "date": "06-20",
+          "summary": "엔비디아의 CEO 젠슨 황은 AI가 산업 혁명처럼 일자리를 창출하고 작업 방식을 변화시킬 것이라고 예측했다. 그는 AI 기술이 모든 사람에게 접근 가능하며, 다양한 분야에서 작업자의 능력을 향상시키는 도구로 작용할 것이라고 강조했다. 황은 AI 인프라 확장으로 인해 전기공, 용접공, 건설 노동자 등 숙련된 인력에 대한 수요가 급증하고 있다고 지적했으며, AI를 두려워하지 않고 활용할 것을 젊은 세대에게 권장했다. 또한, AI가 기술적 전문성 없이도 복잡한 시스템과 상호작용할 수 있게 해주는 점을 강조했다."
         }
       ]
     },
@@ -42,10 +36,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Qualcomm Pursues Tenstorrent at Up to $10 Billion : RISC - V Bet on Nvidia Blind Spot",
-          "url": "https://www.techtimes.com/articles/318559/20260617/qualcomm-pursues-tenstorrent-10-billion-risc-v-bet-nvidias-blind-spot.htm",
-          "date": "06-18",
-          "summary": "퀄컴이 AI 칩 스타트업 Tenstorrent를 최대 100억 달러에 인수를 검토 중이다. Tenstorrent는 RISC-V 기반 AI 액셀러레이터로, NVIDIA의 GPU 스택을 능가하는 추론 작업 성능을 목표로 한다. 이 인수는 퀄컴의 데이터센터 전략 강화와 RISC-V 생태계 확장에 기여할 전망이다. Jim Keller가 이끄는 Tenstorrent는 기술적 우수성으로 인해 인텔의 관심도 받은 바 있다. 인수가 완료될 경우 퀄컴 역사상 최대 규모의 거래가 될 것이다."
+          "title": "Tenstorrent - 2026 Funding Rounds & List of Investors - Tracxn",
+          "url": "https://tracxn.com/d/companies/tenstorrent/__p54YXQoDh79n2Cg0a71HzwpVoEx1MJmN5NLVmq-dRbE/funding-and-investors",
+          "date": "06-06",
+          "summary": "텐스터렌트는 2026년까지의 투자 라운드와 투자자 목록을 공개했다."
+        },
+        {
+          "title": "Tenstorrent Unveils TT-QuietBox(TM) 2, the First RISC-V AI Workstation With a Fully Open-Source Stack to Deliver Teraflop-Class Inference - Observer and Eccentric Newspapers",
+          "url": "https://www.hometownlife.com/press-release/story/57648/tenstorrent-unveils-tt-quietboxtm-2-the-first-risc-v-ai-workstation-with-a-fully-open-source-stack-to-deliver-teraflop-class-inference-2/",
+          "date": "06-03",
+          "summary": "텐스터렌트는 최초의 완전 오픈소스 스택을 갖춘 RISC-V AI 워크스테이션인 TT-QuietBox™ 2를 발표했다. 이 제품은 테라플롭급 추론 성능을 제공하며, AI 워크로드에 최적화된 오픈소스 솔루션으로 설계되었다."
+        },
+        {
+          "title": "AI chip startup Tenstorrent draws takeover interest from Intel, Qualcomm - MSN",
+          "url": "https://www.msn.com/en-us/money/technology/ai-chip-startup-tenstorrent-draws-takeover-interest-from-intel-qualcomm/ar-AA23vmF4",
+          "date": "05-30",
+          "summary": "AI 칩 스타트업 텐스터렌트에 인텔과 퀄컴이 인수 관심을 보였다."
         }
       ]
     },
@@ -54,10 +60,22 @@
       "region": "global",
       "items": [
         {
-          "title": "SambaNova Names Engineering and Finance Leaders to Accelerate Growth as Customer Demand Surges",
-          "url": "https://www.finanznachrichten.de/nachrichten-2026-06/68754350-sambanova-names-engineering-and-finance-leaders-to-accelerate-growth-as-customer-demand-surges-004.htm",
+          "title": "SambaNova Names Engineering and Finance Leaders to Accelerate Growth as Customer Demand Surges - Business Wire",
+          "url": "https://www.businesswire.com/news/home/20260612257950/en/SambaNova-Names-Engineering-and-Finance-Leaders-to-Accelerate-Growth-as-Customer-Demand-Surges",
           "date": "06-12",
-          "summary": "SambaNova가 성장 가속화를 위해 매트 패드필드를 CFO로, 리치 헤턴을 소프트웨어 부문 부사장으로 영입했다. 이는 프리미엄 추론 및 에이전시 AI 수요 증가에 대응하기 위한 전략이다. 매트 패드필드는 코히어런트와 시냅틱스에서 재무 리더십을 발휘한 경험이 있으며, 리치 헤턴은 AWS에서 Neuron SDK 조직을 설립한 바 있다. SambaNova는 엔터프라이즈 AI 배포 확대를 위해 소프트웨어 플랫폼 강화에 주력할 계획이다."
+          "summary": "샘바노바는 고객 수요 증가에 대응해 성장을 가속화하기 위해 엔지니어링 및 재무 리더를 임명했다."
+        },
+        {
+          "title": "Beyond the Hype: SambaNova Re-engineers for the Age of Agentic AI - BriefGlance",
+          "url": "https://briefglance.com/articles/beyond-the-hype-sambanova-re-engineers-for-the-age-of-agentic-ai",
+          "date": "06-12",
+          "summary": "SambaNova는 AI 인프라 기업으로서 전략적 전환을 위해 매트 파필드를 최고재무책임자(CFO), 리치 헤턴을 소프트웨어 부문 부사장으로 임명했다. 파필드는 반도체 업계에서 10억 달러 이상의 M&A 경험을 보유하며, 헤턴은 AWS에서 AI 소프트웨어 조직을 설립한 경력이 있다. 이번 인사는 SambaNova가 기업용 AI 시장에서 프리미엄 추론 및 에이전티브 AI에 집중하겠다는 전략적 의도를 반영한다. CEO Rodrigo Liang은 이번 전환을 '중요한 전환점'으로 규정하며, 기존 벤처 기업에서 상업적 운영 기업으로의 변화를 강조했다."
+        },
+        {
+          "title": "Intel Stock Surges as Analyst Targets Climb: SambaNova, Foxconn Deals Anchor AI Pivot - Tech Times",
+          "url": "https://www.techtimes.com/articles/318008/20260608/intel-stock-surges-analyst-targets-climb-sambanova-foxconn-deals-anchor-ai-pivot.htm",
+          "date": "06-08",
+          "summary": "인텔은 AI 인프라 수요 증가와 SambaNova, 폭스콘과의 협력 소식에 힘입어 2026년 6월 8일 주가가 8.55% 상승했다. 웰스파고, 바클레이즈, 미즈호 등 증권사들이 목표 주가를 상향 조정하며 AI 데이터센터 시장에서의 인텔의 경쟁력을 긍정적으로 평가했다. 인텔은 Computex 2026에서 18A 공정 기반의 Xeon 6+ CPU와 Crescent Island 추론 가속기를 공개하며 AI 인프라 제공업체로의 전환을 선언했다. 또한 폭스콘과 협력해 AI 데이터센터 솔루션을 공동 개발할 계획이다."
         }
       ]
     },
@@ -66,10 +84,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Cerebras vs. Nvidia: Which AI Stock Is the Smarter Buy Right Now? - Yahoo Finance",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/cerebras-vs-nvidia-ai-stock-102500955.html",
-          "date": "05-23",
-          "summary": "세레bras의 IPO 성적이 AI 주식에 대한 투자자들의 기대감을 확인시켜 주었다. 세레bras의 대형 웨이퍼 기술은 NVIDIA보다 효율적일 수 있다는 주장이 있으나, 장기적 영향은 아직 불확실하다. 반면 NVIDIA는 AI 데이터센터 시장에서 86%의 점유율을 차지하며 베라 Rubin 플랫폼으로 기술 혁신을 주도하고 있다. 투자자들은 NVIDIA의 생태계 강점과 세레bras의 잠재력을 비교해 판단해야 한다."
+          "title": "Cerebras vs . SpaceX : Which Is the Better AI IPO Stock to Buy and Hold for the Next 10 Years ?",
+          "url": "https://finance.yahoo.com/technology/ai/articles/cerebras-vs-spacex-better-ai-124300908.html",
+          "date": "06-20",
+          "summary": "Cerebras Systems(CBRS)와 SpaceX(SPCX)는 2026년 가장 주목받는 AI 관련 기업이지만, Cerebras는 AI 전용 칩 생산업체로, SpaceX는 로켓 및 위성 인터넷 기업으로 성격이 다르다. Cerebras의 웨이퍼 스케일 엔진은 AI 추론 및 훈련 작업에서 GPU 대비 월등한 성능을 제공하며, OpenAI와 100억 달러 이상의 계약을 체결했다. 반면 Jim Cramer는 Cerebras의 주가가 여전히 고평가됐다고 지적하며, AI 시장에서 더 큰 잠재력을 가진 기업이 있다고 분석했다."
+        },
+        {
+          "title": "Jim Cramer on Cerebras :  Even After the Pullback , This One Too Rich for Me",
+          "url": "https://www.insidermonkey.com/blog/jim-cramer-on-cerebras-even-after-the-pullback-this-ones-too-rich-for-me-1783487/",
+          "date": "06-18",
+          "summary": "Jim Cramer는 Mad Money에서 Cerebras Systems(CBRS)의 주가가 여전히 고평가됐다고 평가했다. Cerebras는 AI 추론용 초고속 반도체를 생산하지만, 2026년 IPO 이후 주가가 68% 급등한 후 33% 하락하며 투자자들에게 손실을 안겼다. Cramer는 Cerebras 대신 로봇공학 기업이 AI 시장에서 더 큰 성장 잠재력을 가질 것이라고 주장했다."
+        },
+        {
+          "title": "MINEBEA MITSUMI ( OTCMKTS : MNBEY ) versus Cerebras Systems ( NASDAQ : CBRS ) Financial Analysis",
+          "url": "https://www.tickerreport.com/banking-finance/13475578/minebea-mitsumi-otcmktsmnbey-versus-cerebras-systems-nasdaqcbrs-financial-analysis.html",
+          "date": "06-15",
+          "summary": "Cerebras Systems(CBRS)와 MINEBEA MITSUMI(MNBEY)의 재무 분석에서 CBRS는 더 높은 분석가 목표 주가와 잠재적 상승률을 보였다. Cerebras의 웨이퍼 스케일 프로세서는 AI 작업에서 GPU 대비 15배 빠른 성능을 제공하며, OpenAI와의 대규모 계약으로 성장 가능성을 입증했다. 반면 MINEBEA MITSUMI는 더 높은 수익과 이익을 기록했지만, AI 인프라 분야에서의 경쟁력은 Cerebras에 비해 낮은 것으로 평가된다."
         }
       ]
     },
@@ -78,10 +108,10 @@
       "region": "korea",
       "items": [
         {
-          "title": "[주간스타트업동향] 리벨리온, 전 주사우디 대사대리 문병준 MENA 전략 고...",
-          "url": "https://it.donga.com/109039/",
+          "title": "리벨리온, 2026 디지털성장기업대상 디지털상생임팩트상",
+          "url": "https://www.news1.kr/photos/7963777",
           "date": "06-17",
-          "summary": "리벨리온은 문병준 전 주사우디 대사대리를 중동·북아프리카(MENA) 전략 고문으로 위촉했다. 문 고문은 중동 외교 전문가로, 리벨리온은 이번 위촉을 통해 중동 지역 파트너십 확대와 전략적 협력 모델 발굴에 속도를 낼 계획이다."
+          "summary": "리벨리온은 2026년 6월 17일 뉴스1 대한민국 디지털성장기업대상에서 디지털상생임팩트상을 수상했다. 배유미 리벨리온 이사는 이 상을 통해 기업의 디지털 혁신과 글로벌 성장 전략을 인정받았다. 시상식은 '힘, 디지털 혁신으로 글로벌 성장 잇다'를 주제로 진행됐다."
         }
       ]
     },
@@ -93,19 +123,19 @@
           "title": "한국정보공학 \"딥엑스 NPU 탑재 HPE 서버로 비전 AI 시장 진입 장벽 허문...",
           "url": "https://www.epnc.co.kr/news/articleView.html?idxno=403123",
           "date": "06-17",
-          "summary": "딥엑스는 삼성전자 2나노 공정을 적용한 차세대 칩 'DX-M1' 양산을 준비 중이며, 2023년 9배 증가할 것으로 예상되는 AI 글로벌 시장을 겨냥하고 있다. 김녹원 대표는 4년 내 매출 100배 성장을 목표로 하고 있다."
+          "summary": "한국정보공학은 HPE 서버에 딥엑스의 초저전력 NPU를 탑재한 솔루션을 제시하며 비전 AI 시장 진입 장벽을 낮췄다. 이 솔루션은 연간 전력 소모량을 약 86% 줄이고, 초기 도입 비용을 대폭 절감하며 총소유비용(TCO)을 최대 90%까지 낮춘다. 또한, PCIe 폼팩터 규격의 카드 장착만으로 서버 1대당 최대 256채널까지 확장 가능해 플러그앤플레이 방식의 턴키 도입을 지원한다."
+        },
+        {
+          "title": "[Invest]'넥스트 딥엑스' 찾는 금융권…AI 직접투자 후보군은 벌써 부족",
+          "url": "https://www.investchosun.com/site/data/html_dir/2026/06/08/2026060880184.html",
+          "date": "06-09",
+          "summary": "금융권은 국민성장펀드를 통해 AI 반도체 기업에 직접투자를 확대하고 있다. 리벨리온, 업스테이지, 퓨리오사AI, 딥엑스 등이 대표 후보군으로 꼽히며, 이들 기업은 정책 명분과 대규모 자금 집행 여력을 갖추고 있다. 금융권은 직접투자에 부담을 느껴 공동투자나 간접투자 방식을 선호하는 추세이며, AI 서비스 기업으로 투자 관심이 확대되고 있다."
         },
         {
           "title": "[인터뷰]김녹원 딥엑스 대표 \"삼성 2나노 수율 70% 자신…4년 내 매출 10...",
           "url": "https://view.asiae.co.kr/article/2026060508461141987",
           "date": "06-05",
-          "summary": "딥엑스는 컴퓨텍스 2026에서 단독 전시관을 운영하며 피지컬 AI 전략을 제시했다. 로봇, 스마트팩토리, 지능형 영상보안 등 산업 현장에 적용 가능한 솔루션을 소개했으며, 30여 글로벌 파트너와 함께 피지컬 AI 생태계를 선보였다."
-        },
-        {
-          "title": "한미반도체·딥엑스, 컴퓨텍스서 AI 공급망 확장…대만서 빛난 韓기업 ...",
-          "url": "https://www.etoday.co.kr/news/view/2590556",
-          "date": "06-04",
-          "summary": "딥엑스와 한미반도체는 컴퓨텍스 2026에서 AI 공급망 확대를 위한 전략을 발표했다. 딥엑스는 피지컬 AI 솔루션을, 한미반도체는 고대역폭메모리(HBM) 생산용 장비를 선보이며 글로벌 AI 반도체 공급망 내 핵심 파트너로서 입지를 강화했다."
+          "summary": "김녹원 딥엑스 대표는 삼성 2나노 공정에서 70% 이상의 수율을 달성할 것이라고 자신했다. 딥엑스의 DX-M1 칩은 5나노 공정 기반으로 초당 최대 25조 번 연산(25TOPS)을 수행하며, 내년에는 2나노 공정을 적용한 DX-M2 양산에 나선다. 딥엑스는 지난해 연간 매출 33억원에서 올해 1분기 수주 금액만 100억원을 돌파하며 빠른 성장을 보이고 있다."
         }
       ]
     },
@@ -117,7 +147,7 @@
           "title": "“한투파 리드에 SI도 확보”… ‘AI 반도체’ 하이퍼엑셀, 1500억 투자유...",
           "url": "https://biz.chosun.com/stock/market_trend/2026/05/30/ZZPK23MBUZAHDI6WSVRMTCGUZ4/?utm_source=naver&utm_medium=original&utm_campaign=biz",
           "date": "05-30",
-          "summary": "하이퍼엑셀은 1500억 원 규모의 투자유치를 진행 중이며, 한투파 리드에 SI도 확보했다. 이는 AI 반도체 시장에서의 경쟁력 강화를 위한 전략적 투자로 분석된다."
+          "summary": "하이퍼엑셀은 한국투자파트너스의 리드로 1500억 원 규모의 투자유치를 진행 중이다. 이는 AI 반도체 분야에서의 성장 가능성을 인정받은 결과로, 투자 유치가 성공하면 하이퍼엑셀의 기술 개발과 시장 진출에 힘을 실어줄 전망이다."
         }
       ]
     },
@@ -126,10 +156,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "모빌린트, 컴퓨텍스서 대만 기업들과 잇단 협력…산업용 AI 공략 가속",
-          "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=03201286645480080",
+          "title": "Mobilint Signs MOUs With Three Taiwanese Firms at Computex 2026 - thelec.net",
+          "url": "https://www.thelec.net/news/articleView.html?idxno\\u003d11182",
+          "date": "06-10",
+          "summary": "모빌린트는 COMPUTEX 2026에서 대만 기업 3곳과 전략적 MOU를 체결했다. 협력 분야는 산업용 컴퓨팅, 로보틱스, 머신비전으로, 모빌린트의 AI 반도체 기반 솔루션의 실제 적용 가능성을 선보였다. 이번 협력은 글로벌 산업용 AI 시장 공략을 가속화하기 위한 전략적 파트너십이다."
+        },
+        {
+          "title": "모빌린트, COMPUTEX 2026서 대만 기업 3곳과 전략적 MOU 체결",
+          "url": "https://www.hellot.net/news/article.html?no=113062",
           "date": "06-09",
-          "summary": "모빌린트는 컴퓨텍스 2026에서 대만 기업들과 전략적 업무협약(MOU)을 체결했다. 산업용 컴퓨팅, 로보틱스, 머신비전 분야의 대만 대표 기업들과 협력해 글로벌 산업용 AI 시장 공략에 속도를 내고 있다."
+          "summary": "모빌린트는 COMPUTEX 2026에서 대만 기업 DFI, NEXCOBOT, TOP MEASURE와 전략적 MOU를 체결했다. 이들 기업과의 협력을 통해 산업용 AI 솔루션 공동 개발 및 글로벌 시장 확대를 추진할 예정이다. 모빌린트는 다양한 라이브 데모를 통해 자사 NPU의 실제 산업 현장 적용 사례를 소개했다."
+        },
+        {
+          "title": "모빌린트 NPU 품은 인텔리빅스, ‘소버린 AI’ 실현 나선다",
+          "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=05572726645478440",
+          "date": "06-04",
+          "summary": "국산 AI 반도체 설계 전문기업 모빌린트와 안전 AI 딥테크 기업 인텔리빅스가 협력해 국산 NPU 기반 '소버린 AI' 구현에 나섰다. 인텔리빅스는 모빌린트의 NPU 칩 '애리스'와 '레귤러스'를 적용한 온디바이스 AI 기반 안전관제 기술을 공개했다. 이 기술은 산불 조기경보 및 자율형 재난관제 시스템에 적용되어 2,000개 CCTV 채널에서 실증됐다. 생성형 AI 기반 차세대 관제 플랫폼 'Gen AMS'는 재난·안전 이벤트를 실시간 분석하고 보고서 작성까지 자동 수행한다. 이번 사례는 국산 AI 반도체의 공공 안전 분야 적용 가능성을 입증했다."
         }
       ]
     }
