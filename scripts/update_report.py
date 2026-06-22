@@ -511,143 +511,100 @@ def cluster_articles_by_event(articles: list[dict], client: "OpenAI | None") -> 
     except Exception:
         return articles
 
-def filter_relevant_by_company(company: str, aliases: list[str], articles: list[dict], client: "OpenAI | None") -> list[dict]:
-    if not articles: return articles
-    title_matched = [a for a in articles
-                     if title_contains_alias(a.get("title", ""), aliases)
-                     and not is_stock_noise(a.get("title", ""))]
-    if not title_matched:
-        return []
-    if client is None:
-        return title_matched
-    prefetch_bodies(title_matched)
-    numbered_items = []
-    for i, a in enumerate(title_matched):
-        body = _article_body_for_prompt(a)
-        numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    본문: {body}")
-    numbered = "\n".join(numbered_items)
-    prompt = f"""다음은 '{company}' 관련 뉴스 검색 결과입니다. 각 기사에 대해 '{company}'의 관련도를 1~3점으로 평가하세요.
+RELEVANCE_THRESHOLD = 4  # 0~3점은 리포트 제외, 4~10점만 기재 대상
 
-## 점수 기준
+def _passes_relevance_gate(a: dict, aliases: list[str]) -> bool:
+    # 제목뿐 아니라 RSS 요약 스니펫까지 보고 게이트 통과 여부 판단.
+    # (제목에 회사명이 없어도 본문/요약에서 비중 있게 다뤄지면 LLM 채점 단계로 넘긴다)
+    text = (a.get("title", "") + " " + (a.get("description") or "")).strip()
+    return title_contains_alias(text, aliases) and not is_stock_noise(a.get("title", ""))
 
-**3점 — 회사가 기사의 주체 (sole actor)**
-'{company}'가 직접 한 액션이 기사의 핵심. 제목이 회사의 행동을 묘사.
-예: "{company}, 신규 계약 체결" / "{company} 신제품 발표" / "{company} 투자 유치" / "{company} 대표 인터뷰"
 
-**2점 — 양측이 함께 능동적 액션을 한 공동 주체 (co-actor)**
-'{company}'와 다른 회사/기관이 **함께 액션을 수행**한 경우만 해당.
-예: "삼성-{company} 협력 발표" / "{company}, A사와 MOU 체결" / "A사·B사·{company} 컨소시엄 출범"
+def _relevance_prompt(subject: str, numbered: str) -> str:
+    return f"""다음은 '{subject}' 관련 뉴스 검색 결과입니다. 당신은 '{subject}'의 경쟁 동향을 추적하는 BD(사업개발) 담당자를 위해, 각 기사가 동향 리포트에 실릴 가치가 있는지 0~10점으로 평가합니다.
 
-**1점 — 단순 언급 또는 제외 대상**
-아래 중 하나라도 해당하면 **무조건 1점**:
-- 펀드/투자 기사에서 '{company}'가 투자 대상 중 하나로만 언급 (예: "X펀드, A사·B사·{company}에 투자")
-- 트렌드/시장 분석/산업 동향 기사에서 여러 회사 중 하나로 나열 (예: "K-팹리스 기업들... A사·B사·{company} 등")
-- 다른 회사가 주체인 기사에 '{company}'가 곁다리로 언급 (기사 끝에 "~등도" 식)
-- 시황·증시·주가·관련주·특징주 기사 (제목에 '관련주', '특징주', '상한가', '주가 급등' 포함)
-- 행사·포럼·전시회 알림에 '{company}' 임원이 연사 중 한 명으로만 등장
-- 정부 정책/펀드 기사에서 수혜자 목록 중 하나로 언급
-- '{company}' 제품/칩이 다른 솔루션의 부품으로 한 줄 언급
+핵심 질문: "이 기사가 '{subject}'의 사업·기술·시장 동향을 이해하는 데 의미 있는 시그널인가?"
 
-## 핵심 원칙
-- 회사가 **능동적 주체(actor)**여야 2점 이상. **수동적 객체(object)**거나 *언급되는 대상*이면 1점.
-- 기사 제목이 다른 회사·주체의 행동을 묘사하면 거의 항상 1점.
-- **경쟁사 비교 기사** (예: "A vs B vs {company} 누가 웃나")는 1점. 어느 회사도 액션 주체가 아님.
-- 애매하면 1점.
+## 점수 가이드 (딱 떨어지는 규칙이 아니라 연속적인 판단입니다. 경계는 유연하게.)
+- **7~10** — '{subject}'가 기사의 핵심. 직접 한 발표·계약·투자·제품 출시, 또는 '{subject}' 자체에 대한 심층 분석·기업가치·IPO 전망. **제목에 회사명이 없어도 본문에서 핵심으로 다뤄지면 이 구간.**
+- **4~6** — '{subject}'가 다른 주체와 함께한 협력·MOU·연동·도입·채택, 또는 비중 있게 다뤄지지만 단독 주인공은 아닌 경우.
+- **0~3** — 여러 회사 중 하나로 나열되거나 곁다리 언급, 펀드/정책 수혜자 목록, 경쟁사 비교 기사, 단순 시황·주가·관련주·특징주, 제품이 부품으로 한 줄 언급 → 리포트 제외.
+
+## 판단 원칙
+- "회사가 문법상 주체(actor)냐 객체냐"를 기계적으로 따지지 말 것. 기준은 **BD 담당자에게 유용한 시그널인가**이다.
+- 제목에 회사명이 없어도 본문에서 비중 있게 다뤄지면 그 비중대로 평가하라.
+- 각 기사마다 **먼저 한 줄 이유(reason)를 쓰고, 그 근거에 따라 점수**를 매겨라.
+- 확신이 안 서면 무작정 낮추지 말고 중간(4~6)에 둘 것.
 
 기사 목록:
 {numbered}
 
 응답 형식 (오직 JSON):
-{{"scores": [{{"id": 0, "score": 3}}, {{"id": 1, "score": 1}}, ...]}}"""
+{{"scores": [{{"id": 0, "reason": "한 줄 이유", "score": 8}}, ...]}}"""
+
+
+def score_relevance(subject: str, aliases: list[str], articles: list[dict], client: "OpenAI | None") -> list[dict]:
+    """게이트를 통과한 기사에 LLM 관련도 점수(0~10)를 a['relevance']로 부여하고
+    THRESHOLD 이상만 반환한다. client가 없으면 게이트 통과분에 중립 점수(5)를 준다."""
+    if not articles:
+        return []
+    gated = [a for a in articles if _passes_relevance_gate(a, aliases)]
+    if not gated:
+        return []
+    if client is None:
+        for a in gated:
+            a["relevance"] = 5
+        return gated
+    prefetch_bodies(gated)
+    numbered = "\n".join(
+        f"[{i}] 제목: {a.get('title', '')}\n    본문: {_article_body_for_prompt(a)}"
+        for i, a in enumerate(gated)
+    )
     try:
         resp = client.chat.completions.create(
             model=EXAONE_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=600,
+            messages=[{"role": "user", "content": _relevance_prompt(subject, numbered)}],
+            max_tokens=1500,
             temperature=0.1,
         )
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
         data = json.loads(m.group() if m else raw)
-        scores = data.get("scores", [])
-        kept_indices = [e["id"] for e in scores
-                        if isinstance(e.get("id"), int) and 0 <= e["id"] < len(title_matched)
-                        and isinstance(e.get("score"), int) and e["score"] >= 2]
-        kept_indices.sort()
-        return [title_matched[i] for i in kept_indices]
+        by_id = {}
+        for e in data.get("scores", []):
+            if isinstance(e.get("id"), int) and 0 <= e["id"] < len(gated) and isinstance(e.get("score"), (int, float)):
+                by_id[e["id"]] = int(e["score"])
     except Exception:
-        return title_matched
+        # 채점 자체가 실패하면 과도한 탈락을 막기 위해 게이트 통과분을 중립 점수로 유지
+        for a in gated:
+            a["relevance"] = 5
+        return gated
+    kept = []
+    for i, a in enumerate(gated):
+        score = by_id.get(i, 5)  # 응답에서 누락된 id는 중립 처리
+        a["relevance"] = score
+        if score >= RELEVANCE_THRESHOLD:
+            kept.append(a)
+    return kept
+
+
+def tiered_pick(articles: list[dict], n: int) -> list[dict]:
+    """7~10점을 날짜순으로 먼저 채우고, n개에 못 미치면 4~6점으로 보충한다."""
+    def by_date(items: list[dict]) -> list[dict]:
+        return sorted(items, key=lambda a: a.get("pub_dt") or datetime.datetime.min.replace(tzinfo=pytz.utc), reverse=True)
+    high = by_date([a for a in articles if a.get("relevance", 0) >= 7])
+    mid = by_date([a for a in articles if 4 <= a.get("relevance", 0) <= 6])
+    picked = high[:n]
+    if len(picked) < n:
+        picked += mid[:n - len(picked)]
+    return picked
+
+
+def filter_relevant_by_company(company: str, aliases: list[str], articles: list[dict], client: "OpenAI | None") -> list[dict]:
+    return score_relevance(company, aliases, articles, client)
 
 def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> list[dict]:
-    if not articles: return articles
-    title_matched = [a for a in articles
-                     if title_contains_alias(a.get("title", ""), FURIOSA_ALIASES)
-                     and not is_stock_noise(a.get("title", ""))]
-    if not title_matched:
-        return []
-    if client is None:
-        return title_matched
-    prefetch_bodies(title_matched)
-    numbered_items = []
-    for i, a in enumerate(title_matched):
-        body = _article_body_for_prompt(a)
-        numbered_items.append(f"[{i}] 제목: {a.get('title', '')}\n    본문: {body}")
-    numbered = "\n".join(numbered_items)
-    prompt = f"""다음은 'Furiosa AI(퓨리오사AI)' 키워드로 검색된 뉴스 기사 목록입니다. 각 기사에 대해 Furiosa AI의 관련도를 1~3점으로 평가하세요.
-
-## 점수 기준
-
-**3점 — Furiosa AI가 기사의 주체 (sole actor)**
-Furiosa AI 자체에 대한 액션·평가·분석이 기사의 핵심.
-예: "퓨리오사AI, 신규 계약 체결" / "퓨리오사AI 레니게이드 발표" / "퓨리오사AI 투자 유치"
-예: "백준호 대표 인터뷰" / "퓨리오사AI 나스닥行 매력" / "퓨리오사AI 기업가치 평가" / "퓨리오사AI IPO 분석"
-**핵심**: 회사 본질에 대한 매체 분석/평가/IPO 전망 기사는 3점.
-
-**2점 — 양측이 함께 능동적 액션을 한 공동 주체 (co-actor)**
-Furiosa AI와 다른 회사/기관이 **함께 발표·연동·도입·채택**한 경우.
-예: "삼성-퓨리오사AI 협력 발표" / "퓨리오사AI, A사와 MOU" / "A사 플랫폼에 퓨리오사AI NPU 연동"
-**핵심**: 파트너십/연동/도입/채택 발표 기사는 2점.
-
-**1점 — 단순 언급 또는 제외 대상**
-아래 중 하나라도 해당하면 **무조건 1점**:
-- 펀드/투자 기사에서 퓨리오사AI가 투자 대상 중 하나로만 언급 (예: "X펀드, A사·B사·퓨리오사AI에 투자")
-- 트렌드/시장 분석 기사에서 여러 회사 중 하나로 나열 (예: "K-팹리스 기업들... 리벨리온·퓨리오사·딥엑스 등")
-- **경쟁사 비교 기사** (예: "리벨리온 vs 퓨리오사 vs 딥엑스 누가 웃나", "K-AI 반도체 대전") → 1점
-- 다른 회사가 주체인 기사에 퓨리오사가 곁다리로 언급 (기사 끝에 "퓨리오사AI 등도" 식)
-- 시황·증시·주가·관련주·특징주 기사 (제목에 '관련주', '특징주', '상한가', '주가 급등' 포함)
-- 행사·포럼·전시회 알림에 백준호 대표가 연사 중 한 명으로만 등장
-- 정부 정책/펀드 기사에서 수혜자 목록 중 하나로 언급
-- 새로운 발표가 아닌 기존 협력 관계를 배경으로 단순 재언급
-
-## 핵심 원칙
-- Furiosa AI가 **능동적 주체(actor)**여야 2점 이상. **수동적 객체(object)**거나 *언급되는 대상*이면 1점.
-- 기사 제목이 다른 회사·주체의 행동을 묘사하면 거의 항상 1점.
-- 퓨리오사AI가 여러 회사 중 하나로 나열되는 구조면 1점.
-- 애매하면 1점.
-
-기사 목록:
-{numbered}
-
-응답 형식 (오직 JSON):
-{{"scores": [{{"id": 0, "score": 3}}, {{"id": 1, "score": 1}}, ...]}}"""
-    try:
-        resp = client.chat.completions.create(
-            model=EXAONE_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=600,
-            temperature=0.1,
-        )
-        raw = resp.choices[0].message.content or ""
-        m = re.search(r"\{[\s\S]*\}", raw)
-        data = json.loads(m.group() if m else raw)
-        scores = data.get("scores", [])
-        kept_indices = [e["id"] for e in scores
-                        if isinstance(e.get("id"), int) and 0 <= e["id"] < len(title_matched)
-                        and isinstance(e.get("score"), int) and e["score"] >= 2]
-        kept_indices.sort()
-        return [title_matched[i] for i in kept_indices]
-    except Exception:
-        return title_matched
+    return score_relevance("Furiosa AI(퓨리오사AI)", FURIOSA_ALIASES, articles, client)
 
 
 def to_output(a: dict, kst: pytz.BaseTzInfo, include_summary: bool = False) -> dict:
@@ -817,9 +774,9 @@ def main():
             if a["url"] not in cluster_urls:
                 print(f"  [DROPPED by cluster] {a['title'][:80]}")
 
-        deduped.sort(key=lambda a: a["pub_dt"], reverse=True)
-        print(f"[{co['name']}] FINAL: {len(deduped[:COMPETITOR_MAX_ITEMS])} (capped at {COMPETITOR_MAX_ITEMS})")
-        companies_raw.append({"name": co["name"], "region": co["region"], "articles": deduped[:COMPETITOR_MAX_ITEMS]})
+        picked = tiered_pick(deduped, COMPETITOR_MAX_ITEMS)
+        print(f"[{co['name']}] FINAL: {len(picked)} (capped at {COMPETITOR_MAX_ITEMS}, 7~10점 우선 → 4~6점 보충)")
+        companies_raw.append({"name": co["name"], "region": co["region"], "articles": picked})
 
     all_pairs = [(c["name"], a) for c in companies_raw for a in c["articles"]]
     resolve_article_urls([a for _, a in all_pairs])  # google-news redirects → real article URLs
@@ -885,9 +842,16 @@ def main():
     kept_urls = {a["url"] for a in kept}
     all_furiosa = [a for a in all_furiosa if a["url"] in kept_urls or not in_window(a, weekly_cutoff)]
 
-    furiosa_daily_raw = sorted([a for a in all_furiosa if in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)[:5]
-    furiosa_weekly_raw = sorted([a for a in all_furiosa if in_window(a, weekly_cutoff) and not in_window(a, daily_cutoff)], key=lambda x: x["pub_dt"], reverse=True)
-    print(f"[furiosa] FINAL daily={len(furiosa_daily_raw)}, weekly={len(furiosa_weekly_raw)}")
+    # 일간 5칸: 7~10점 기사를 날짜순으로 먼저 채우고, 5개에 못 미치면 4~6점으로 보충.
+    daily_pool = [a for a in all_furiosa if in_window(a, daily_cutoff)]
+    furiosa_daily_raw = sorted(tiered_pick(daily_pool, 5), key=lambda x: x["pub_dt"], reverse=True)
+    daily_picked_urls = {a["url"] for a in furiosa_daily_raw}
+    furiosa_weekly_raw = sorted(
+        [a for a in all_furiosa
+         if in_window(a, weekly_cutoff) and not in_window(a, daily_cutoff)
+         and a["url"] not in daily_picked_urls],
+        key=lambda x: x["pub_dt"], reverse=True)
+    print(f"[furiosa] FINAL daily={len(furiosa_daily_raw)} (7~10 우선 → 4~6 보충), weekly={len(furiosa_weekly_raw)}")
 
     furiosa_articles = furiosa_daily_raw + furiosa_weekly_raw
     resolve_article_urls(furiosa_articles)  # google-news redirects → real article URLs
