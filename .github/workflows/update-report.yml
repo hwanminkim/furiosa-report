@@ -3,9 +3,16 @@ name: Update Highlights
 on:
   schedule:
     - cron: '20 20 * * *' # 20:20 UTC = 05:20 KST
+    # ── 아침 KST 공백 보강 (GitHub cron이 정각/:20에 잘 밀려서 off-peak 분으로 중복 배치) ──
+    - cron: '43 22 * * *' # 22:43 UTC = 07:43 KST
     - cron: '20 0 * * *'  # 00:20 UTC = 09:20 KST
+    - cron: '11 0 * * *'  # 00:11 UTC = 09:11 KST
+    - cron: '47 1 * * *'  # 01:47 UTC = 10:47 KST
     - cron: '20 2 * * *'  # 02:20 UTC = 11:20 KST
+    - cron: '11 3 * * *'  # 03:11 UTC = 12:11 KST
     - cron: '20 4 * * *'  # 04:20 UTC = 13:20 KST
+    - cron: '47 4 * * *'  # 04:47 UTC = 13:47 KST
+    # ── 오후/저녁 (기존) ──
     - cron: '20 7 * * *'  # 07:20 UTC = 16:20 KST
     - cron: '20 11 * * *' # 11:20 UTC = 20:20 KST
   workflow_dispatch:
