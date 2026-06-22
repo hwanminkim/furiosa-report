@@ -21,6 +21,11 @@ from urllib.request import urlopen, Request
 import pytz
 from openai import OpenAI
 
+try:
+    import trafilatura
+except ImportError:
+    trafilatura = None
+
 REPO_ROOT = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
 
@@ -185,6 +190,21 @@ def resolve_article_urls(articles: list[dict], max_workers: int = 10) -> None:
                 pass
 
 
+def _extract_body_regex(raw: str, max_chars: int) -> str:
+    """Fallback body extraction: join <p> paragraphs, skipping short nav snippets."""
+    raw = _SCRIPT_STYLE_RE.sub(" ", raw)
+    paragraphs = []
+    for m in _PARAGRAPH_RE.finditer(raw):
+        t = _BODY_WS_RE.sub(" ", html.unescape(_HTML_TAG_RE.sub(" ", m.group(1)))).strip()
+        if len(t) >= 40:
+            paragraphs.append(t)
+    para_text = " ".join(paragraphs)
+    if len(para_text) >= 200:
+        return para_text[:max_chars]
+    text = _BODY_WS_RE.sub(" ", html.unescape(_HTML_TAG_RE.sub(" ", raw))).strip()
+    return text[:max_chars]
+
+
 def fetch_article_body(url: str, timeout: int = 8, max_chars: int = 4000) -> str:
     with _body_cache_lock:
         if url in _body_cache:
@@ -194,19 +214,24 @@ def fetch_article_body(url: str, timeout: int = 8, max_chars: int = 4000) -> str
         req = Request(url, headers={"User-Agent": _BROWSER_UA})
         with urlopen(req, timeout=timeout) as resp:
             raw = resp.read(500000).decode("utf-8", errors="ignore")
-        raw = _SCRIPT_STYLE_RE.sub(" ", raw)
-        # Prefer real article text: join <p> paragraphs, skipping short nav snippets.
-        paragraphs = []
-        for m in _PARAGRAPH_RE.finditer(raw):
-            t = _BODY_WS_RE.sub(" ", html.unescape(_HTML_TAG_RE.sub(" ", m.group(1)))).strip()
-            if len(t) >= 40:
-                paragraphs.append(t)
-        para_text = " ".join(paragraphs)
-        if len(para_text) >= 200:
-            result = para_text[:max_chars]
-        else:
-            text = _BODY_WS_RE.sub(" ", html.unescape(_HTML_TAG_RE.sub(" ", raw))).strip()
-            result = text[:max_chars]
+        # Prefer trafilatura's main-content extraction (strips nav/ads/boilerplate).
+        if trafilatura is not None:
+            try:
+                extracted = trafilatura.extract(
+                    raw,
+                    include_comments=False,
+                    include_tables=False,
+                    no_fallback=False,
+                )
+                if extracted:
+                    extracted = _BODY_WS_RE.sub(" ", extracted).strip()
+                    if len(extracted) >= 200:
+                        result = extracted[:max_chars]
+            except Exception:
+                result = ""
+        # Fall back to the regex <p>-join when trafilatura is unavailable or too thin.
+        if not result:
+            result = _extract_body_regex(raw, max_chars)
     except Exception:
         pass
     with _body_cache_lock:
