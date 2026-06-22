@@ -556,32 +556,33 @@ def score_relevance(subject: str, aliases: list[str], articles: list[dict], clie
             a["relevance"] = 5
         return gated
     prefetch_bodies(gated)
-    numbered = "\n".join(
-        f"[{i}] 제목: {a.get('title', '')}\n    본문: {_article_body_for_prompt(a)}"
-        for i, a in enumerate(gated)
-    )
-    try:
-        resp = client.chat.completions.create(
-            model=EXAONE_MODEL,
-            messages=[{"role": "user", "content": _relevance_prompt(subject, numbered)}],
-            max_tokens=1500,
-            temperature=0.1,
+    # 한 번에 너무 많이 채점시키면 응답 JSON이 잘려 점수가 누락(→중립 통과)되므로 작게 끊는다.
+    CHUNK = 15
+    by_id = {}
+    for start in range(0, len(gated), CHUNK):
+        chunk = gated[start:start + CHUNK]
+        numbered = "\n".join(
+            f"[{j}] 제목: {a.get('title', '')}\n    본문: {_article_body_for_prompt(a)}"
+            for j, a in enumerate(chunk)
         )
-        raw = resp.choices[0].message.content or ""
-        m = re.search(r"\{[\s\S]*\}", raw)
-        data = json.loads(m.group() if m else raw)
-        by_id = {}
-        for e in data.get("scores", []):
-            if isinstance(e.get("id"), int) and 0 <= e["id"] < len(gated) and isinstance(e.get("score"), (int, float)):
-                by_id[e["id"]] = int(e["score"])
-    except Exception:
-        # 채점 자체가 실패하면 과도한 탈락을 막기 위해 게이트 통과분을 중립 점수로 유지
-        for a in gated:
-            a["relevance"] = 5
-        return gated
+        try:
+            resp = client.chat.completions.create(
+                model=EXAONE_MODEL,
+                messages=[{"role": "user", "content": _relevance_prompt(subject, numbered)}],
+                max_tokens=2000,
+                temperature=0.1,
+            )
+            raw = resp.choices[0].message.content or ""
+            m = re.search(r"\{[\s\S]*\}", raw)
+            data = json.loads(m.group() if m else raw)
+            for e in data.get("scores", []):
+                if isinstance(e.get("id"), int) and 0 <= e["id"] < len(chunk) and isinstance(e.get("score"), (int, float)):
+                    by_id[start + e["id"]] = int(e["score"])  # 청크 내 id(0-base) → 전역 id
+        except Exception:
+            continue  # 이 청크 채점 실패분은 아래에서 중립(5) 처리
     kept = []
     for i, a in enumerate(gated):
-        score = by_id.get(i, 5)  # 응답에서 누락된 id는 중립 처리
+        score = by_id.get(i, 5)  # 채점 누락 시 중립 처리
         a["relevance"] = score
         if score >= RELEVANCE_THRESHOLD:
             kept.append(a)
@@ -673,11 +674,15 @@ Return JSON ONLY:
 def generate_furiosa_summaries(articles: list[dict], client: "OpenAI | None") -> dict:
     if client is None or not articles: return {}
     prefetch_bodies(articles)
-    items_in = []
-    for i, a in enumerate(articles):
-        body = _article_body_for_prompt(a)
-        items_in.append({"id": i, "title": a.get("title", ""), "snippet": body[:3000]})
-    prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
+    out: dict = {}
+    CHUNK = 6  # 한 호출 출력이 max_tokens를 넘겨 잘리면 요약이 통째로 비므로 작게 끊는다
+    for start in range(0, len(articles), CHUNK):
+        chunk = articles[start:start + CHUNK]
+        items_in = []
+        for offset, a in enumerate(chunk):
+            body = _article_body_for_prompt(a)
+            items_in.append({"id": offset, "title": a.get("title", ""), "snippet": body[:3000]})
+        prompt = f"""다음은 Furiosa AI 관련 뉴스 기사 목록입니다.
 
 각 기사에 대해 한국어 요약을 만들어 주세요:
 - "summary": 4~5문장, 사실 위주, 350~450자.
@@ -695,26 +700,24 @@ Input articles:
 
 Return JSON ONLY:
 {{"items": [{{"id": 0, "summary": "..."}}, ...]}}"""
-    try:
-        resp = client.chat.completions.create(
-            model=EXAONE_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=8000,
-            temperature=0.3,
-
-        )
-        raw = resp.choices[0].message.content or ""
-        m = re.search(r"\{[\s\S]*\}", raw)
-        data = json.loads(m.group() if m else raw)
-        out: dict = {}
-        for entry in data.get("items", []):
-            idx = entry.get("id")
-            if not isinstance(idx, int) or not (0 <= idx < len(articles)): continue
-            a = articles[idx]
-            out[a["url"]] = (entry.get("summary") or "").strip()
-        return out
-    except Exception:
-        return {}
+        try:
+            resp = client.chat.completions.create(
+                model=EXAONE_MODEL,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=8000,
+                temperature=0.3,
+            )
+            raw = resp.choices[0].message.content or ""
+            m = re.search(r"\{[\s\S]*\}", raw)
+            data = json.loads(m.group() if m else raw)
+            for entry in data.get("items", []):
+                idx = entry.get("id")
+                if not isinstance(idx, int) or not (0 <= idx < len(chunk)): continue
+                a = chunk[idx]
+                out[a["url"]] = (entry.get("summary") or "").strip()
+        except Exception:
+            continue
+    return out
 
 def main():
     kst = pytz.timezone("Asia/Seoul")
