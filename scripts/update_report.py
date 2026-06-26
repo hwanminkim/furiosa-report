@@ -623,15 +623,13 @@ def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> lis
     return score_relevance("Furiosa AI(퓨리오사AI)", FURIOSA_ALIASES, articles, client)
 
 
-def to_output(a: dict, kst: pytz.BaseTzInfo, include_summary: bool = False) -> dict:
-    out = {
+def to_output(a: dict, kst: pytz.BaseTzInfo) -> dict:
+    return {
         "title": a["title"],
         "url": a["url"],
         "date": format_date_kst(a.get("pub_dt"), kst),
+        "summary": a.get("summary", ""),
     }
-    if include_summary:
-        out["summary"] = a.get("summary", "")
-    return out
 
 def generate_competitor_summaries(articles_with_company: list[tuple], client: "OpenAI | None") -> dict:
     if client is None or not articles_with_company: return {}
@@ -805,7 +803,7 @@ def main():
             if key in summaries:
                 a["summary"] = summaries[key]
 
-    companies_out = [{"name": c["name"], "region": c["region"], "items": [to_output(a, kst, include_summary=True) for a in c["articles"]]} for c in companies_raw]
+    companies_out = [{"name": c["name"], "region": c["region"], "items": [to_output(a, kst) for a in c["articles"]]} for c in companies_raw]
 
     # ── 2. Furiosa 뉴스 ──
     all_furiosa = []
@@ -883,7 +881,7 @@ def main():
         date_key = format_date_with_weekday(a.get("pub_dt"), kst)
         if date_key not in furiosa_daily_group:
             furiosa_daily_group[date_key] = []
-        furiosa_daily_group[date_key].append(to_output(a, kst, include_summary=True))
+        furiosa_daily_group[date_key].append(to_output(a, kst))
 
     furiosa_weekly_group = {}
     daily_count = {}
@@ -892,7 +890,7 @@ def main():
         if daily_count.get(date_key, 0) < 3:
             if date_key not in furiosa_weekly_group:
                 furiosa_weekly_group[date_key] = []
-            furiosa_weekly_group[date_key].append(to_output(a, kst, include_summary=True))
+            furiosa_weekly_group[date_key].append(to_output(a, kst))
             daily_count[date_key] = daily_count.get(date_key, 0) + 1
 
     report = {
@@ -905,7 +903,7 @@ def main():
 
     with open(REPORT_PATH, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
-    print(f"Done. Update completed.")
+    print("Done. Update completed.")
 
 if __name__ == "__main__":
     main()
