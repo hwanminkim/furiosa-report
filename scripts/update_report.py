@@ -496,6 +496,9 @@ def cluster_articles_by_event(articles: list[dict], client: "OpenAI | None") -> 
 
 ## 판단 원칙
 **애매하면 다른 사건으로 분리.** 같은 사건은 확실할 때만 묶기. 무리한 클러스터링 금지.
+**대부분의 기사는 단독 클러스터(자기 혼자)가 정상입니다.** 제목이 거의 동일하거나
+명백히 같은 발표를 다룬 경우에만 묶고, 주제·키워드가 비슷하다는 이유로 묶지 마세요.
+(예: 'ETRI-퓨리오사 NPU센터'와 '메가존 NPU 운영'은 NPU가 겹쳐도 다른 사건 → 분리)
 
 제목 목록:
 {numbered}
@@ -506,9 +509,8 @@ def cluster_articles_by_event(articles: list[dict], client: "OpenAI | None") -> 
         resp = client.chat.completions.create(
             model=EXAONE_MODEL,
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=600,
+            max_tokens=3000,  # 항목이 많을 때 출력이 잘려 과병합되지 않도록 충분히 확보
             temperature=0.1,
-
         )
         raw = resp.choices[0].message.content or ""
         m = re.search(r"\{[\s\S]*\}", raw)
