@@ -15,7 +15,7 @@ import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from urllib.error import HTTPError
-from urllib.parse import quote, urlencode
+from urllib.parse import quote, urlencode, urlparse
 from urllib.request import urlopen, Request
 
 import pytz
@@ -52,6 +52,18 @@ FURIOSA_QUERIES = [
 ]
 
 FURIOSA_ALIASES = ["Furiosa", "퓨리오사", "FuriosaAI", "furiosaai", "백준호"]
+
+# AI 반도체 일반 동향 (KSIA 데일리뉴스 스타일: 제목+출처+날짜+링크, 요약 없음)
+AI_SEMI_QUERIES = [
+    ("AI 반도체", "ko"),
+    ("AI 가속기 OR NPU", "ko"),
+    ("AI 추론 반도체 OR 추론 칩", "ko"),
+    ("온디바이스 AI 반도체", "ko"),
+    ("HBM", "ko"),
+    ("AI chip OR AI accelerator", "en"),
+    ("AI inference chip OR NPU", "en"),
+]
+AI_SEMI_MAX_PER_DAY = 12  # 하루당 최대 표시 건수
 
 def title_contains_alias(title: str, aliases: list[str]) -> bool:
     if not title or not aliases: return False
@@ -732,6 +744,51 @@ Return JSON ONLY:
             continue
     return out
 
+def _source_label(a: dict) -> str:
+    """기사 출처 라벨: 구글뉴스 제목의 ' - 매체명' 접미를 우선, 없으면 URL 도메인."""
+    m = re.search(r"\s[-–—|·]\s([^-–—|·]{2,40})$", a.get("title", ""))
+    if m:
+        return m.group(1).strip()
+    host = urlparse(a.get("url", "")).netloc
+    return host[4:] if host.startswith("www.") else host
+
+
+def collect_ai_semi_news(cutoff: datetime.datetime, kst: pytz.BaseTzInfo) -> dict:
+    """AI 반도체 일반 동향 뉴스를 수집해 날짜별로 묶어 반환 (LLM 미사용, 가볍게)."""
+    seen_urls, seen_titles, arts = set(), set(), []
+    for query, lang in AI_SEMI_QUERIES:
+        for a in fetch_articles(query, lang, n=50):
+            url = a.get("url")
+            if not url or url in seen_urls:
+                continue
+            if a.get("pub_dt") is None or a["pub_dt"] < cutoff:
+                continue
+            if is_stock_noise(a.get("title", "")):
+                continue
+            norm = normalize_title(a.get("title", ""))
+            if norm and norm in seen_titles:
+                continue
+            seen_urls.add(url)
+            if norm:
+                seen_titles.add(norm)
+            arts.append(a)
+    resolve_article_urls(arts)  # google-news redirect → 실제 기사 URL
+    arts.sort(key=lambda x: x["pub_dt"], reverse=True)
+    grouped, per_day = {}, {}
+    for a in arts:
+        date_key = format_date_with_weekday(a["pub_dt"], kst)
+        if per_day.get(date_key, 0) >= AI_SEMI_MAX_PER_DAY:
+            continue
+        grouped.setdefault(date_key, []).append({
+            "title": a["title"],
+            "url": a["url"],
+            "date": format_date_kst(a["pub_dt"], kst),
+            "source": _source_label(a),
+        })
+        per_day[date_key] = per_day.get(date_key, 0) + 1
+    return grouped
+
+
 def main():
     kst = pytz.timezone("Asia/Seoul")
     now = datetime.datetime.now(kst)
@@ -893,12 +950,17 @@ def main():
             furiosa_weekly_group[date_key].append(to_output(a, kst))
             daily_count[date_key] = daily_count.get(date_key, 0) + 1
 
+    # ── 3. AI 반도체 일반 동향 (KSIA 스타일, 요약 없음) ──
+    ai_semi_news = collect_ai_semi_news(weekly_cutoff, kst)
+    print(f"[ai_semi] groups={len(ai_semi_news)}, total={sum(len(v) for v in ai_semi_news.values())}")
+
     report = {
         "period": build_period(now),
         "updated_at": now.isoformat(),
         "furiosa_daily": furiosa_daily_group,
         "furiosa_weekly": furiosa_weekly_group,
         "companies": companies_out,
+        "ai_semi_news": ai_semi_news,
     }
 
     with open(REPORT_PATH, "w", encoding="utf-8") as f:

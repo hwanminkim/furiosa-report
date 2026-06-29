@@ -226,6 +226,9 @@ h1 { font-size: 1.7rem; }
 <div id="companies-korea"></div>
 <div class="section-label" style="margin-top:28px;">회사별 동향 — Global</div>
 <div id="companies-global"></div>
+
+<div class="section-label" style="margin-top:28px;">AI 반도체 동향 <span style="font-weight:400;color:var(--text-label);font-size:0.8rem;">· 국내·글로벌 기사 모음</span></div>
+<div id="ai-semi-news" class="trend-scroll-box"></div>
 </main>
 </div>
 
@@ -424,6 +427,36 @@ function renderGroupedArticles(groupedItems, containerId, todayHeader) {
     });
 }
 
+// AI 반도체 동향: 요약 없이 제목→외부링크 + 출처 (KSIA 데일리뉴스 스타일)
+function renderLinkList(groupedItems, containerId) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = '';
+    if (!groupedItems || Object.keys(groupedItems).length === 0) {
+        el.innerHTML = '<div class="empty-note">No Update</div>';
+        return;
+    }
+    Object.entries(groupedItems).forEach(([dateKey, articles]) => {
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'date-group';
+        const header = document.createElement('div');
+        header.className = 'sticky-date-header';
+        header.textContent = dateKey;
+        groupDiv.appendChild(header);
+        articles.forEach(item => {
+            const a = document.createElement('a');
+            a.className = 'hl-card linked furiosa-card';
+            a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+            a.style.display = 'block';
+            a.style.textDecoration = 'none';
+            const src = item.source ? ` <span style="color:var(--text-label);font-size:0.8rem;">— ${escapeHtml(item.source)}</span>` : '';
+            a.innerHTML = `<span class="hl-card-text">${escapeHtml(item.title)}${src}</span>`;
+            groupDiv.appendChild(a);
+        });
+        el.appendChild(groupDiv);
+    });
+}
+
 // 오늘 KST 날짜를 "MM-DD (요일)" 포맷으로 — 일간 빈 상태일 때 헤더용
 function todayKstHeader() {
     const now = new Date();
@@ -442,6 +475,7 @@ if (d.period) document.getElementById('meta').textContent = d.period + ' · Furi
 
 renderGroupedArticles(d.furiosa_daily, 'furiosa-daily', todayKstHeader());
 renderGroupedArticles(d.furiosa_weekly, 'furiosa-weekly');
+renderLinkList(d.ai_semi_news, 'ai-semi-news');
 
 // 일간 footer: 건수 + 업데이트 시각
 const footerEl = document.getElementById('daily-footer');
