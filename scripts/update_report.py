@@ -51,15 +51,17 @@ FURIOSA_QUERIES = [
     ('퓨리오사ai OR 퓨리오사AI OR FuriosaAI', "ko"),
 ]
 
-FURIOSA_ALIASES = ["Furiosa", "퓨리오사", "FuriosaAI", "furiosaai", "백준호"]
+FURIOSA_ALIASES = ["Furiosa", "퓨리오사", "FuriosaAI", "furiosaai", "백준호",
+                   "레니게이드", "워보이", "스토크", "RNGD"]  # 회사명 + 제품명(본문 게이트용)
 
 # AI 반도체 일반 동향 (KSIA 데일리뉴스 스타일: 제목+출처+날짜+링크, 요약 없음)
 AI_SEMI_QUERIES = [
     ("AI 반도체", "ko"),
-    ("AI 가속기 OR NPU", "ko"),
+    ("AI 가속기 OR NPU 칩", "ko"),
     ("AI 추론 반도체 OR 추론 칩", "ko"),
     ("온디바이스 AI 반도체", "ko"),
-    ("HBM", "ko"),
+    ("HBM AI 반도체", "ko"),
+    ("AI 파운드리 OR 팹리스 반도체", "ko"),
     ("AI chip OR AI accelerator", "en"),
     ("AI inference chip OR NPU", "en"),
 ]
@@ -535,10 +537,13 @@ def cluster_articles_by_event(articles: list[dict], client: "OpenAI | None") -> 
 
 RELEVANCE_THRESHOLD = 4  # 0~3점은 리포트 제외, 4~10점만 기재 대상
 
-def _passes_relevance_gate(a: dict, aliases: list[str]) -> bool:
-    # 제목뿐 아니라 RSS 요약 스니펫까지 보고 게이트 통과 여부 판단.
-    # (제목에 회사명이 없어도 본문/요약에서 비중 있게 다뤄지면 LLM 채점 단계로 넘긴다)
-    text = (a.get("title", "") + " " + (a.get("description") or "")).strip()
+def _passes_relevance_gate(a: dict, aliases: list[str], include_body: bool = False) -> bool:
+    # 제목 + RSS 요약 스니펫(+ 선택적으로 본문)에서 별칭을 찾아 게이트 통과 여부 판단.
+    # include_body=True면 본문까지 본다 — 제목·스니펫엔 없고 본문에만 언급된 기사를 구제.
+    # (본문은 캐시 가정: 호출 전에 prefetch_bodies로 미리 받아둘 것)
+    text = a.get("title", "") + " " + (a.get("description") or "")
+    if include_body:
+        text += " " + fetch_article_body(a.get("url", ""))
     return title_contains_alias(text, aliases) and not is_stock_noise(a.get("title", ""))
 
 
@@ -565,12 +570,15 @@ def _relevance_prompt(subject: str, numbered: str) -> str:
 {{"scores": [{{"id": 0, "reason": "한 줄 이유", "score": 8}}, ...]}}"""
 
 
-def score_relevance(subject: str, aliases: list[str], articles: list[dict], client: "OpenAI | None") -> list[dict]:
+def score_relevance(subject: str, aliases: list[str], articles: list[dict], client: "OpenAI | None", body_gate: bool = False) -> list[dict]:
     """게이트를 통과한 기사에 LLM 관련도 점수(0~10)를 a['relevance']로 부여하고
-    THRESHOLD 이상만 반환한다. client가 없으면 게이트 통과분에 중립 점수(5)를 준다."""
+    THRESHOLD 이상만 반환한다. client가 없으면 게이트 통과분에 중립 점수(5)를 준다.
+    body_gate=True면 본문까지 보고 게이트 (제목·스니펫엔 없고 본문에만 언급된 기사 구제)."""
     if not articles:
         return []
-    gated = [a for a in articles if _passes_relevance_gate(a, aliases)]
+    if body_gate:
+        prefetch_bodies(articles)  # 본문 게이트를 위해 후보 본문 미리 수집(캐시)
+    gated = [a for a in articles if _passes_relevance_gate(a, aliases, include_body=body_gate)]
     if not gated:
         return []
     if client is None:
@@ -632,7 +640,8 @@ def filter_relevant_by_company(company: str, aliases: list[str], articles: list[
     return score_relevance(company, aliases, articles, client)
 
 def filter_furiosa_subject(articles: list[dict], client: "OpenAI | None") -> list[dict]:
-    return score_relevance("Furiosa AI(퓨리오사AI)", FURIOSA_ALIASES, articles, client)
+    # 퓨리오사는 회사 1개라 본문 게이트 비용이 작음 → 본문 언급 기사까지 구제
+    return score_relevance("Furiosa AI(퓨리오사AI)", FURIOSA_ALIASES, articles, client, body_gate=True)
 
 
 def to_output(a: dict, kst: pytz.BaseTzInfo) -> dict:
@@ -755,8 +764,46 @@ def _source_label(a: dict) -> str:
     return host[4:] if host.startswith("www.") else host
 
 
-def collect_ai_semi_news(cutoff: datetime.datetime, kst: pytz.BaseTzInfo) -> dict:
-    """AI 반도체 일반 동향 뉴스를 수집해 날짜별로 묶어 반환 (LLM 미사용, 가볍게)."""
+def filter_ai_semi_relevant(articles: list[dict], client: "OpenAI | None") -> list[dict]:
+    """제목 기준으로 'AI 반도체' 동향 뉴스만 LLM(yes/no)으로 선별. 정치·증시·일반
+    AI 소프트웨어·게임 등 잡음 제거. client 없으면 그대로 통과(필터 생략)."""
+    if client is None or not articles:
+        return articles
+    keep = {}
+    CHUNK = 20
+    for start in range(0, len(articles), CHUNK):
+        chunk = articles[start:start + CHUNK]
+        numbered = "\n".join(f"[{j}] {a.get('title', '')}" for j, a in enumerate(chunk))
+        prompt = f"""다음은 뉴스 제목 목록이다. 각 제목이 'AI 반도체'(NPU·AI 가속기·추론칩·팹리스·파운드리·HBM·온디바이스 AI 등 반도체 하드웨어/제조/기업/기술/시장) 동향과 직접 관련된 뉴스인지 판단하라.
+
+- keep=1 (포함): AI 반도체 칩·하드웨어·제조·장비·기업·투자·기술·공급망 뉴스.
+- keep=0 (제외): 정치/선거/지역행사/인사, 증시·주가·관련주·시황, 반도체와 무관한 AI 소프트웨어·모델·서비스·앱, 게임·콘텐츠, 일반 경제, 단순 행사/홍보.
+
+제목 목록:
+{numbered}
+
+JSON만 응답: {{"items": [{{"id": 0, "keep": 1}}, ...]}}"""
+        data = {}
+        try:
+            resp = client.chat.completions.create(
+                model=EXAONE_MODEL,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=1200,
+                temperature=0.1,
+            )
+            raw = resp.choices[0].message.content or ""
+            m = re.search(r"\{[\s\S]*\}", raw)
+            data = json.loads(m.group() if m else raw)
+        except Exception:
+            continue  # 이 청크 실패분은 기본 통과(아래 default 1)
+        for e in data.get("items", []):
+            if isinstance(e.get("id"), int) and 0 <= e["id"] < len(chunk):
+                keep[start + e["id"]] = e.get("keep", 1)
+    return [a for i, a in enumerate(articles) if keep.get(i, 1) == 1]
+
+
+def collect_ai_semi_news(cutoff: datetime.datetime, kst: pytz.BaseTzInfo, client: "OpenAI | None" = None) -> dict:
+    """AI 반도체 일반 동향 뉴스를 수집해 날짜별로 묶어 반환 (요약 없음, KSIA 스타일)."""
     seen_urls, seen_titles, arts = set(), set(), []
     for query, lang in AI_SEMI_QUERIES:
         for a in fetch_articles(query, lang, n=50):
@@ -778,6 +825,10 @@ def collect_ai_semi_news(cutoff: datetime.datetime, kst: pytz.BaseTzInfo) -> dic
     arts.sort(key=lambda x: x["pub_dt"], reverse=True)
     # 같은 사건·다른 매체 중복 병합 (LLM 없이 제목 키워드 겹침으로) — 최신 건 유지
     arts = _dedup_by_keyword_overlap(arts)
+    # AI 반도체 동향과 무관한 잡음(정치·증시·AI소프트웨어 등) LLM으로 제거
+    before = len(arts)
+    arts = filter_ai_semi_relevant(arts, client)
+    print(f"[ai_semi] relevance filter: {len(arts)} (dropped {before - len(arts)})")
     grouped, per_day = {}, {}
     for a in arts:
         date_key = format_date_with_weekday(a["pub_dt"], kst)
@@ -955,7 +1006,7 @@ def main():
             daily_count[date_key] = daily_count.get(date_key, 0) + 1
 
     # ── 3. AI 반도체 일반 동향 (KSIA 스타일, 요약 없음) ──
-    ai_semi_news = collect_ai_semi_news(weekly_cutoff, kst)
+    ai_semi_news = collect_ai_semi_news(weekly_cutoff, kst, exaone_client)
     print(f"[ai_semi] groups={len(ai_semi_news)}, total={sum(len(v) for v in ai_semi_news.values())}")
 
     report = {
