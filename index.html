@@ -227,8 +227,10 @@ h1 { font-size: 1.7rem; }
 <div class="section-label" style="margin-top:28px;">회사별 동향 — Global</div>
 <div id="companies-global"></div>
 
+<section id="ai-semi">
 <div class="section-label" style="margin-top:28px;">AI 반도체 동향 <span style="font-weight:400;color:var(--text-label);font-size:0.8rem;">· 국내·글로벌 기사 모음</span></div>
 <div id="ai-semi-news" class="trend-scroll-box"></div>
+</section>
 </main>
 </div>
 
@@ -317,7 +319,7 @@ document.getElementById('companies-global').innerHTML = COMPANIES.global.map(c =
 document.getElementById('companies-korea').innerHTML = COMPANIES.korea.map(c => renderCompany(c, [])).join('');
 
 const sidebar = document.getElementById('sidebar');
-sidebar.innerHTML = `<div class="sidebar-item" data-target="highlights" style="margin-bottom:4px;"><span class="sidebar-dot"></span>Furiosa 동향</div><hr class="sidebar-divider"><div class="sidebar-label">Korea</div>${COMPANIES.korea.map(c => `<div class="sidebar-item" data-target="co-${c.name}"><span class="sidebar-dot"></span>${c.name}</div>`).join('')}<hr class="sidebar-divider"><div class="sidebar-label">Global</div>${COMPANIES.global.map(c => `<div class="sidebar-item" data-target="co-${c.name}"><span class="sidebar-dot"></span>${c.name}</div>`).join('')}`;
+sidebar.innerHTML = `<div class="sidebar-item" data-target="highlights" style="margin-bottom:4px;"><span class="sidebar-dot"></span>Furiosa 동향</div><hr class="sidebar-divider"><div class="sidebar-label">Korea</div>${COMPANIES.korea.map(c => `<div class="sidebar-item" data-target="co-${c.name}"><span class="sidebar-dot"></span>${c.name}</div>`).join('')}<hr class="sidebar-divider"><div class="sidebar-label">Global</div>${COMPANIES.global.map(c => `<div class="sidebar-item" data-target="co-${c.name}"><span class="sidebar-dot"></span>${c.name}</div>`).join('')}<hr class="sidebar-divider"><div class="sidebar-item" data-target="ai-semi"><span class="sidebar-dot"></span>AI 반도체 동향</div>`;
 
 const mainContent = document.getElementById('main-content');
 function setActiveSidebarItem(targetId) { sidebar.querySelectorAll('.sidebar-item').forEach(i => i.classList.toggle('active', i.dataset.target === targetId)); }
@@ -376,6 +378,8 @@ if (visible[0]) setActiveSidebarItem(visible[0].target.id);
 document.querySelectorAll('.company').forEach(el => observer.observe(el));
 const highlightsEl = document.getElementById('highlights');
 if (highlightsEl) observer.observe(highlightsEl);
+const aiSemiEl = document.getElementById('ai-semi');
+if (aiSemiEl) observer.observe(aiSemiEl);
 
 function escapeHtml(s) { return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
 
