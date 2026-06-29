@@ -1,48 +1,61 @@
 {
   "period": "2026-06-23(화) ~ 2026-06-29(월)",
-  "updated_at": "2026-06-29T13:52:24.738616+09:00",
-  "furiosa_daily": {},
+  "updated_at": "2026-06-29T14:51:35.510851+09:00",
+  "furiosa_daily": {
+    "06-29 (월)": [
+      {
+        "title": "이재용·최태원 양옆에 앉힌 李…메가프로젝트 '원팀' 강조",
+        "url": "https://www.hankyung.com/article/2026062943057",
+        "date": "06-29",
+        "summary": "이재명 대통령은 반도체, 피지컬 AI, 인공지능(AI) 데이터센터를 대한민국 미래 성장동력으로 육성하는 '3대 메가프로젝트'를 발표했다. 이 프로젝트는 AI 중심 국가전략의 일환으로, 산업 인프라 확충과 AI 생태계 구축을 통해 초격차 경쟁력을 확보하겠다는 목표를 담고 있다. 정부는 용인·평택 반도체 클러스터 완성과 함께 서남권 등 새로운 반도체 생산거점 확대를 추진하며, AI 데이터센터 전국 구축과 2000조원 규모의 투자 청사진을 제시했다. 주요 기업들과의 협력을 통해 국가균형발전과 산업육성을 동시에 추진한다는 방침이다."
+      },
+      {
+        "title": "\"AI 초격차 승부\"…반도체·데이터센터 3대 메가프로젝트 시동",
+        "url": "https://www.mstoday.co.kr/news/articleView.html?idxno=101988",
+        "date": "06-29",
+        "summary": "이재명 대통령은 반도체와 피지컬 AI, AI 데이터센터를 대한민국의 미래 성장동력으로 삼는 '3대 메가프로젝트'를 발표했다. 이 프로젝트는 AI 생태계 구축과 산업 인프라 확충을 통해 초격차 경쟁력을 확보하는 것을 목표로 한다. 정부는 용인·평택 반도체 클러스터 완성과 함께 서남권 등 새로운 생산거점 확대를 추진하며, AI 데이터센터 전국 구축과 2000조원 규모의 투자 계획을 발표했다. 삼성전자, SK하이닉스 등 주요 기업들의 대규모 투자가 예상되며, 국가균형발전을 위한 지방 투자 확대도 강조되었다."
+      },
+      {
+        "title": "위지윅스튜디오·퓨리오사AI, 신규사업 공동발굴 MOU",
+        "url": "https://www.junggi.co.kr/news/articleView.html?idxno=36938",
+        "date": "06-29",
+        "summary": "위지윅스튜디오와 퓨리오사AI는 전략적 업무협약(MOU)을 체결하고, AI 반도체와 콘텐츠 제작 역량을 결합해 미디어 산업에 특화된 AI 활용 모델을 구축하기로 했다. 양사는 AI 반도체 기반 콘텐츠 제작 인프라 활용 및 실증, AI 기반 콘텐츠 제작·운영·유통 분야 협력, 신규 사업 기회 공동 발굴 등을 협력 분야로 정했다. 이번 협력은 국산 AI 반도체의 산업 적용 사례 확보와 콘텐츠 제작 효율화를 목표로 한다."
+      },
+      {
+        "title": "Tổng thống Lee Jae-myung chủ trì “Hội nghị báo cáo quốc dân v",
+        "url": "https://vn.asiatoday.co.kr/view.php?key=20260629000911523",
+        "date": "06-29",
+        "summary": "이재명 대통령은 반도체, 피지컬 AI, AI 데이터센터를 대한민국의 미래 성장동력으로 삼는 '3대 메가프로젝트'를 발표했다. 이 프로젝트는 AI 생태계 구축과 산업 인프라 확충을 통해 초격차 경쟁력을 확보하는 것을 목표로 한다. 정부는 용인·평택 반도체 클러스터 완성과 함께 서남권 등 새로운 생산거점 확대를 추진하며, AI 데이터센터 전국 구축과 2000조원 규모의 투자 계획을 발표했다. 삼성전자, SK하이닉스 등 주요 기업들의 대규모 투자가 예상되며, 국가균형발전을 위한 지방 투자 확대도 강조되었다."
+      },
+      {
+        "title": "코스닥 우울한 30살… ETF에도 밀려 시총 비중 27년 만에 최저",
+        "url": "https://www.seoul.co.kr/news/economy/securities/2026/06/29/20260629030002?wlog_tag3=naver",
+        "date": "06-29",
+        "summary": "코스닥 시장이 출범 30주년을 맞아 시가총액 비중이 27년 만에 최저 수준으로 떨어졌다. 대형 반도체주와 관련 ETF에 자금이 몰리며 코스닥 소외 현상이 심화되었다. 삼성전자와 SK하이닉스의 시가총액 비중이 각각 28.83%, 27.67%로 합산 56.49%에 달했다. 정부와 한국거래소는 하반기 코스닥 시장 재편을 위해 상장폐지 기준 강화와 승강제 도입을 추진할 예정이다."
+      }
+    ]
+  },
   "furiosa_weekly": {
     "06-28 (일)": [
-      {
-        "title": "[코스닥 출범 30년③] 승강제, 코스닥 부활 신호탄 될까",
-        "url": "https://www.econovill.com/news/articleView.html?idxno=743676",
-        "date": "06-28",
-        "summary": "코스닥 출범 30주년을 맞아 정부와 한국거래소가 시장 체질 개선을 위해 동전주 퇴출, 저PBR 기업 공개, 승강제 도입 등을 추진한다. 동전주 퇴출은 7월부터 주가 30거래일 연속 1000원 미만인 기업을 관리종목 지정 후 상장폐지 절차를 진행하며, 현재 180개 종목이 해당된다. 저PBR 기업 공개는 업종별 PBR 하위 20% 기업 명단을 공개해 기업 가치 제고를 유도한다. 승강제 도입은 우량기업 중심 시장 구축을 목표로 하며, 기관과 연기금 자금 유입 확대를 기대하고 있다."
-      },
       {
         "title": "칩부터 현장까지…노타, AI 최적화로 상반기 174억원 수주",
         "url": "https://www.venturesquare.net/1093982/",
         "date": "06-28",
-        "summary": "노타는 2023년 상반기 AI 최적화 기술 수주로 174억원을 기록했다. 2분기 수주액은 61억원으로 전년 동기 대비 120% 증가했으며, AI 모델 최적화 플랫폼 '넷츠프레소'는 184% 성장했다. 모빌린트와 라이선스 계약을 체결해 삼성전자, 퓨리오사AI, Arm 등과 협력 생태계를 확장했다. AI 비전 솔루션 'NVA'는 제조, 산업안전, 공공안전 분야에서 1.8배 성장하며 현장 적용 사례를 확대했다."
-      }
-    ],
-    "06-27 (토)": [
-      {
-        "title": "[바이오 핫클릭] 국민성장펀드, 리가켐에 5000억 직접투자",
-        "url": "http://www.the-biz.co.kr/news/articleView.html?idxno=723315",
-        "date": "06-27",
-        "summary": "국민성장펀드는 리가켐바이오에 5000억원을 직접 투자한다. 투자금은 ADC 기반 신약 개발과 후기 임상, 신규 플랫폼 확보에 사용되며, 2500억원은 첨단전략산업기금이 지원하고 나머지는 대주주와 국내 기관투자자가 투자한다. 리가켐바이오는 2006년 설립된 ADC 신약개발 기업으로, 15건의 기술이전과 9조6000억원 규모의 실적을 보유하고 있다. 이번 투자는 후기 임상개발과 신규 모달리티 확보를 위한 장기 전략 자금으로 활용될 예정이다."
+        "summary": "AI 모델 최적화 기업 노타는 올해 상반기 약 174억원의 수주를 기록하며 전년 동기 대비 120% 증가한 성과를 달성했다. AI 최적화 플랫폼 '넷츠프레소'와 AI 비전 솔루션 'NVA'가 주요 성장 동력으로 작용했다. 노타는 모빌린트와 라이선스 계약을 체결하며 반도체 및 하드웨어 파트너 생태계를 확대했고, 제조, 산업안전, 공공안전 분야에서 NVA 솔루션 적용 사례를 확대했다. 온디바이스 AI와 피지컬 AI 시장 성장에 따른 추론 최적화 기술의 중요성이 부각되면서 사업 영역을 확장 중이다."
       }
     ],
     "06-26 (금)": [
       {
-        "title": "[게시판] 노타, 2분기 수주 61억으로 전년 2배 증가 등 단신",
-        "url": "https://www.aitimes.com/news/articleView.html?idxno=212141",
+        "title": "Korea's chip fund makes first biotech bet, backing LigaChem with $323 mil...",
+        "url": "https://www.koreabiomed.com/news/articleView.html?idxno=32207",
         "date": "06-26",
-        "summary": "노타는 2023년 2분기 수주액 61억원을 기록해 전년 동기 대비 2배 이상 성장했으며, 상반기 누적 수주액은 174억원이다. AI 모델 최적화 플랫폼 '넷츠프레소'는 184% 성장했고, 모빌린트와 라이선스 계약을 체결해 삼성전자, 퓨리오사AI, Arm 등과 협력했다. 비전 에이전트 솔루션 'NVA'는 제조·안전·공공안전 분야에서 1.8배 성장하며 현장 수요를 반영했다."
+        "summary": "한국 정부는 반도체 및 AI 기업에 대한 대규모 투자를 진행해왔으며, 이번에는 생명과학 분야로 투자 영역을 확대했다. LigaChem Biosciences는 한국의 국가성장펀드로부터 5000억 원(약 3억 2300만 달러)을 투자받아 첫 생명과학 기업으로 선정됐다. 이 투자는 항체-약물 접합체(ADC) 플랫폼을 기반으로 한 임상 시험을 진행하는 데 사용될 예정이다. 투자금은 전환우선주(CPS) 3300억 원과 전환사채(CB) 1700억 원으로 구성되며, 한국개발은행(KDB)과 오리온 홀딩스 등이 주요 투자자로 참여했다. LigaChem은 현재 8개의 글로벌 임상 시험을 진행 중이며, 향후 3~5개의 신규 프로그램을 매년 임상 단계에 진입시킬 계획이다."
       },
       {
-        "title": "백세시대 광장",
-        "url": "https://www.100ssd.co.kr/news/articleView.html?idxno=210570",
+        "title": "위밋모빌리티, AI 응용제품 신속 상용화 지원사업 선정… 제조 현장 피...",
+        "url": "https://magazine.hankyung.com/business/article/202606269840b",
         "date": "06-26",
-        "summary": "퓨리오사AI의 백준호 대표이사는 도산아카데미 스마트포럼에서 '한국 NPU의 도전과 비전' 주제로 강연했다. 강연에서는 AI 네이티브 팩토리 구현을 위한 핵심 과제로 제조 데이터 자산화, 물리 기반 데이터 생성 기술, 설명 가능한 AI(XAI), 제조 파운데이션 모델(MFM) 개발 등을 제시했다."
-      },
-      {
-        "title": "위밋모빌리티, AI 응용제품 상용화 사업 선정",
-        "url": "http://www.hansbiz.co.kr/news/articleView.html?idxno=846700",
-        "date": "06-26",
-        "summary": "위밋모빌리티는 과학기술정보통신부와 정보통신산업진흥원(NIPA)의 '2026년 AI 응용제품 신속 상용화 지원사업'에 주관기업으로 선정됐다. 이번 과제는 제조 현장의 자재 이동과 안전관리를 위한 피지컬 AI 제품 실증에 초점을 맞추며, 위밋모빌리티는 물류 최적화 알고리즘과 피지컬 AI 제품의 안전관리 오케스트레이션을 총괄한다. 컨소시엄에는 데이터플로, 바로AI, 벽산이 참여하며, 국산 NPU '퓨리오사AI 레니게이드'를 활용해 무인 지게차 작업 스케줄링 최적화를 검증할 계획이다."
+        "summary": "위밋모빌리티는 국토교통부의 AI 응용제품 신속 상용화 지원사업에 선정되어 제조 현장의 물류 효율화를 위한 피지컬 AI 제품 실증을 추진한다. 이 사업은 자재 이동 및 공급 과정의 비효율과 안전 리스크를 줄이기 위해 진행되며, 위밋모빌리티의 최적화 플랫폼 'ROOUTY'를 적용한다. 컨소시엄에는 데이터플로, 바로AI, 벽산이 참여하며, 바로AI의 국산 NPU '퓨리오사AI 레니게이드'를 활용한 현장 연산 환경 지원이 포함된다. 이번 실증은 무인 지게차의 작업 스케줄링 최적화 및 위험 상황 회피 기술을 검증하는 데 중점을 둔다. 향후 철강, 조선 등 다양한 산업군으로 적용 범위를 확대할 계획이다."
       }
     ],
     "06-25 (목)": [
@@ -50,19 +63,7 @@
         "title": "[게시판] 메가존클라우드, NIPA 국산 AI 반도체 인프라 실증 사업 참여 ...",
         "url": "https://www.aitimes.com/news/articleView.html?idxno=212120",
         "date": "06-25",
-        "summary": "메가존클라우드는 과학기술정보통신부와 정보통신산업진흥원(NIPA)의 'AI컴퓨팅 실증 인프라 고도화' 사업에 참여해 국산 AI 반도체 기반 대규모 AI 인프라 구축 및 LLM 기반 서비스와 GPU·NPU 혼용 환경 실증을 목표로 한다. 컨소시엄에는 퓨리오사AI, 리벨리온, NHN클라우드 등이 포함됐다. 또한, 메가존클라우드는 클라우드 보안 기업 위즈와 파트너십을 체결해 클라우드 네이티브 보안 환경을 고도화했으며, 니어스랩은 코스닥 상장 예비심사 승인을 받아 연내 상장을 계획 중이다."
-      },
-      {
-        "title": "[#클라우드 월드] 웹케시 '자사주 30억' 취득·LG CNS '에이전틱 AI ERP' 출...",
-        "url": "https://www.newsworks.co.kr/news/articleView.html?idxno=845112",
-        "date": "06-25",
-        "summary": "웹케시는 주주가치 제고를 위해 30억 원 규모의 자기주식 추가 취득을 결정했으며, LG CNS는 에이전틱 AI를 탑재한 ERP 테스트 자동화 솔루션을 출시해 글로벌 시장 공략을 가속화했다. 와이즈넛은 공공 AI 박람회에서 공공기관 맞춤형 AI 에이전트 솔루션을 선보였고, 포티투마루는 산업융합형 멀티모달 생성 인공지능 선도인재양성 워크숍을 개최했다. 씽크포비엘은 국립군산대 재학생을 대상으로 AI 신뢰성 교육을 실시하며 지역 인재 양성에 기여하고 있다."
-      },
-      {
-        "title": "남부대 앵커사업단, AI+산업기술 실증포럼 개최",
-        "url": "https://www.namdonews.com/news/articleView.html?idxno=914780",
-        "date": "06-25",
-        "summary": "남부대학교 앵커사업단은 AI 기반 산업기술 실증과 기술사업화 협력 확대를 위해 'AI+산업기술 실증 포럼'을 개최했다. 포럼은 제주 호텔레오에서 24일부터 26일까지 진행되며, AI 실증 사례 공유와 산학연관 협력 체계 강화를 목표로 한다. 앤틀러글로벌투자법인, 퓨리오사AI, 한중과학기술서비스협회 등 국내외 기관이 참여했으며, 광주지역 혁신기관들과 함께 AI 실증 생태계 구축 방안을 논의했다."
+        "summary": "메가존클라우드는 과학기술정보통신부와 정보통신산업진흥원(NIPA)의 'AI컴퓨팅 실증 인프라 고도화' 사업에 참여한다. 이 사업은 국산 AI 반도체 기반의 대규모 인프라 구축과 LLM 기반 서비스, GPU·NPU 혼용 환경 실증을 목표로 한다. 메가존클라우드는 인프라 통합 운영자 자격으로 퓨리오사AI, 리벨리온, NHN클라우드 등과 컨소시엄을 구성했다. 또한, 베스핀글로벌은 클라우드 보안 기업 위즈와 파트너십을 체결해 고도화된 클라우드 네이티브 보안 환경을 제공한다. 니어스랩은 코스닥 상장 예비심사 승인을 받았으며, 유베이스 그룹은 뉴빌리티와 협력해 피지컬 AI 기반 로봇 운영 서비스를 확장한다. 스토리카는 AI 인플루언서 마케팅 솔루션으로 시드 투자를 유치했다."
       }
     ],
     "06-24 (수)": [
@@ -70,39 +71,7 @@
         "title": "[인터뷰] 퇴임 앞둔 강기정 시장 “‘고생하셨어요’ 시민 한마디에 모...",
         "url": "http://www.mdilbo.com/detail/0kIA7d/756625",
         "date": "06-24",
-        "summary": "강기정 광주시장은 퇴임을 앞두고 삼성, SK그룹의 반도체 투자 전망에 대해 기대감을 나타냈다. 30일에는 AI데이터센터, 반도체 전·후공정, 팹리스가 광주에 집약되는 종합선물세트가 발표될 예정이다. 강 시장은 임기 동안 공약 이행률 100점을 달성했으며, 깨끗한 시정 운영에 자부심을 느낀다고 밝혔다. 향후에는 자숙하며 성장할 시간을 가질 계획이다."
-      },
-      {
-        "title": "[도산아카데미] 퓨리오사AI 백준호 대표, 내달 3일 NPU 산업 전략 강연",
-        "url": "https://www.etnews.com/20260624000258",
-        "date": "06-24",
-        "summary": "퓨리오사AI 백준호 대표는 도산아카데미에서 '한국 NPU의 도전과 비전'을 주제로 강연한다. NPU의 중요성과 한국 AI 반도체 산업의 현황, 기술적 과제와 산업적 가능성을 설명할 예정이다. 강연은 7월 3일 서울 강서구 시스원 마곡 사옥 세미나실에서 진행되며, 온·오프라인으로 참석이 가능하다."
-      },
-      {
-        "title": "정답 없는 거래의 해법을 찾다…신산업 M&A의 숨은 설계자들",
-        "url": "https://biz.heraldcorp.com/article/10786519?ref=naver",
-        "date": "06-24",
-        "summary": "법무법인 지평의 서동천, 고효정, 천영석 변호사는 신산업 M&A 자문에서 맞춤형 구조 설계와 이해관계 조율의 중요성을 강조했다. 서동천 변호사는 낙월해상풍력 프로젝트에서 지분구조 설계를 통해 이해관계를 조율했으며, 고효정 변호사는 퓨리오사AI와 메타의 협상에서 비재무적 가치의 중요성을 설명했다. 천영석 변호사는 구조 꿰뚫는 시야가 중요하다고 강조했다."
-      }
-    ],
-    "06-23 (화)": [
-      {
-        "title": "[VC펀드 줌인] '3470억 홈런펀드' 절반 채운 DSC…퓨리오사AI·반도체 투...",
-        "url": "https://www.topdaily.kr/articles/110664",
-        "date": "06-23",
-        "summary": "DSC인베스트먼트는 3470억원 규모의 홈런펀드 제2호를 통해 퓨리오사AI에 50억원, 제주반도체에 50억원, 인텍플러스에 30억원을 투자했다. 이 펀드는 초기·스케일업 투자와 메자닌 투자를 중심으로 운용되며, 내년 상반기 투자를 마무리하고 하반기 신규 펀드 결성을 계획 중이다."
-      },
-      {
-        "title": "몸집 불린 우리투자증권, 11위권 도약에도 자본 효율성 '숙제'",
-        "url": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=696003",
-        "date": "06-23",
-        "summary": "우리투자증권은 우리금융지주의 대규모 자본 확충으로 업계 11위권에 진입했으나, 1분기 순이익이 140억원으로 주요 지주계열 증권사들에 비해 낮은 실적을 기록했다. 이에 따라 자기자본이익률(ROE)이 2%대로 추정되며, 판매관리비 증가와 초기 비용 부담이 수익성 압박 요인으로 작용하고 있다. 우리금융은 인공지능(AI) 반도체 기업 퓨리오사 AI 투자 등 생산적 금융 부문에서의 역할 확대를 강조하며, 2030년까지 종투사 지정 요건 충족 및 ROE 10% 달성을 목표로 하고 있다."
-      },
-      {
-        "title": "[AI 3대 강국, 인프라는 준비됐나④] 엔비디아 의존의 덫",
-        "url": "https://www.ebn.co.kr/news/articleView.html?idxno=1713545",
-        "date": "06-23",
-        "summary": "AI 패권 경쟁 속에서 한국의 엔비디아 종속 우려가 커지고 있다. 삼성전자와 SK하이닉스가 HBM 시장을 주도하고 있으나, 엔비디아가 HBM4부터 로직 다이 설계에 개입하며 국내 제조사들의 의존도가 심화되고 있다. 이에 따라 국산 NPU 생태계 육성과 정부 차원의 투자가 시급하다는 지적이 나오고 있다. 리벨리온과 퓨리오사AI 등 국산 AI 반도체 기업들이 글로벌 시장에서 성과를 내며 추론용 시장에서 경쟁력을 보이고 있으나, 엔비디아의 소프트웨어 플랫폼과 인프라 지배력 확대는 여전히 과제로 남아 있다."
+        "summary": "강기정 광주시장은 퇴임을 앞두고 AI 및 반도체 투자 확대에 대한 기대감을 나타냈다. 삼성·SK그룹의 대규모 투자로 AI 데이터센터와 반도체 전·후공정, 팹리스 설계가 광주에 집중될 전망이다. 강 시장은 임기 동안 공약 이행률 100%를 달성했으며, 깨끗한 시정 운영에 자부심을 느낀다고 밝혔다. 향후에는 자숙하며 시민들의 피드백을 반영할 계획이다. 또한, '에이모 시티' 프로젝트와 반도체 삼각 축(팹, 후공정, 팹리스) 구축을 통해 광주의 미래 산업 생태계를 준비했다고 강조했다. 강 시장은 스타벅스 역사 왜곡 논란에 대해 분노했지만, 시민 이익 관점에서 접근해야 한다고 주장했다."
       }
     ]
   },
@@ -112,22 +81,22 @@
       "region": "global",
       "items": [
         {
+          "title": "nvidia : Nvidia AI chip sales in China stall , as local chipmakers like Huawei take the lead",
+          "url": "https://economictimes.indiatimes.com/tech/technology/nvidias-ai-chip-sales-in-china-stall-as-local-chipmakers-like-huawei-take-the-lead/articleshow/132063107.cms",
+          "date": "06-29",
+          "summary": "엔비디아가 중국 시장에서 AI 칩 판매가 부진한 가운데 화웨이 등 현지 기업이 시장을 선점하고 있다. 미국의 수출 규제로 엔비디아의 H200 AI 칩 판매가 중단되자 중국 정부는 화웨이 등 자국 기업의 칩 사용을 장려했다. 엔비디아는 30년간 중국에서 95%의 시장 점유율을 유지했으나, 현재는 화웨이에 밀려 40% 수준으로 떨어졌다. 베르킨 보고서에 따르면 화웨이의 시장 점유율은 50%까지 성장할 전망이다. 엔비디아는 AI 칩 분야에서 중국 기업들과의 경쟁이 치열해짐을 인정하며, 미국의 기술 수출 제한과 자국 기술 산업 보호 정책이 영향을 미쳤다고 분석했다."
+        },
+        {
           "title": "Nvidia Next $1 Trillion Opportunity May Have Nothing to Do With GPUs",
           "url": "https://www.fool.com/investing/2026/06/28/nvidias-next-1-trillion-opportunity-may-have-nothi/?source=iedfolrf0000001",
           "date": "06-29",
-          "summary": "엔비디아는 챗GPT 출시 이후 AI 애플리케이션 개발을 위한 GPU 수요 급증으로 시가총액 4.7조 달러를 기록하며 세계 최대 기업으로 부상했다. 그러나 GPU 외에도 AI 네트워킹 분야에서 다음 성장 동력을 모색 중이다. 엔비디아는 AI 데이터센터 내 GPU 클러스터 연결을 위한 고대역폭·저지연 네트워킹 솔루션인 InfiniBand 플랫폼과 Spectrum-X 이더넷 스위치를 보유하며, BlueField DPU로 네트워킹 작업을 CPU·GPU에서 분리한다. 최근 코히어런트와 루멘텀에 각각 20억 달러를 투자해 AI 네트워킹 시장에서의 입지를 강화하고 있다."
+          "summary": "엔비디아의 다음 1조 달러 기회는 GPU가 아닌 AI 네트워킹 분야에 있을 것으로 전망된다. 엔비디아는 AI 개발을 위한 고성능 네트워킹 기술인 인피니밴드 플랫폼과 스펙트럼-X 이더넷 스위치를 보유하고 있다. 또한 블루필드 데이터 처리 장치(DPU)를 통해 네트워킹 및 보안 작업을 CPU와 GPU에서 분리해 효율성을 높였다. 엔비디아는 코히어런트와 루멘텀에 각각 20억 달러를 투자하며 AI 네트워킹 분야에서의 입지를 강화하고 있다."
         },
         {
           "title": "Is Micron Stock the New Nvidia ? | The Motley Fool",
           "url": "https://www.fool.com/investing/2026/06/28/is-micron-stock-the-new-nvidia/",
           "date": "06-29",
-          "summary": "엔비디아의 AI 시장 선점 효과로 주가가 3년간 1,100% 이상 급등한 가운데, 마이크론도 AI 메모리 수요 증가로 유사한 성장 가능성을 보이고 있다. 마이크론은 DRAM·NAND·HBM 메모리 공급업체로, AI 에이전트 확산에 따른 메모리 수요 증가가 예상된다. 최근 분기 매출 410억 달러·순이익 280억 달러를 기록하며 전년 대비 23배 이상 성장했고, 공급 부족으로 인해 경쟁 압력이 낮은 상황이다. AI 인프라 핵심 부품 공급자로서 엔비디아와 유사한 성장 궤적을 그릴 것으로 평가된다."
-        },
-        {
-          "title": "1 Nvidia - Backed AI Infrastructure Stock to Buy Hand Over Fist Right Now",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/1-nvidia-backed-ai-infrastructure-155000823.html",
-          "date": "06-29",
-          "summary": "엔비디아는 노키아와 10억 달러 규모의 6G 통신·AI 플랫폼 협력을 진행 중이다. 이 프로젝트는 모바일 네트워크를 데이터센터 수준으로 업그레이드하는 AI-RAN 기술을 포함하며, 엔비디아의 AI 칩과 노키아의 스위치·광학 기술이 결합된다. 노키아 주가는 파트너십 발표 후 133% 급등했으며, 2027년부터 6G 네트워크 구축에 따른 수익이 본격화될 전망이다. 현재 노키아는 데이터센터 수요 증가로 연간 네트워크 인프라 매출 성장률을 12~14%로 상향 조정한 상태다."
+          "summary": "미크론 테크놀로지가 엔비디아와 유사한 AI 성장 스토리를 만들고 있다. 미크론은 AI에 필수적인 메모리와 저장 솔루션을 제공하며, 최근 분기 매출이 410억 달러로 급증했고 순이익은 280억 달러를 기록했다. AI 수요로 인해 공급이 부족한 상황에서 미크론은 경쟁사 대비 성장 가능성이 높다. 엔비디아와 마찬가지로 미크론도 AI 에이전트와 같은 차세대 기술 수요 증가에 따른 메모리 수요 확대가 예상된다."
         }
       ]
     },
@@ -136,10 +105,16 @@
       "region": "global",
       "items": [
         {
-          "title": "Qualcomm CEO Reveals 40+ AI Devices For A Post - App Future Stock Gains 4 % As $10 Billion Tenstorrent D",
-          "url": "https://www.benzinga.com/markets/tech/26/06/53216208/qualcomms-ceo-reveals-40-ai-devices-for-a-post-app-future-stock-gains-4-as-10-billion-tenstorrent-deal-rumours-swirl",
-          "date": "06-16",
-          "summary": "퀄컴은 스마트폰 이후 차세대 AI 디바이스로 스마트 글라스·귀걸이·핀 등 40여 종의 소형 AI 하드웨어를 개발 중이다. 크리스티아노 아몬 CEO는 AI 에이전트가 앱을 대체해 사용자 의도를 직접 실행하는 형태로 진화할 것이라고 전망했다. 이를 위해 저전력·고성능 칩 개발에 주력하고 있으며, 텐스터렌트와의 협력도 강화하고 있다. 최근 틱톡 모회사 바이트댄스에 AI 데이터센터용 ASIC 공급 계약을 체결한 바 있다."
+          "title": "Jim Keller Says Cerebras IPO Was Helpful As Tenstorrent Set To  Beat Them on Everything , Confirms Meeting With Intel & Qualcomm CEOs  Hoping To Get A Big Deal",
+          "url": "https://wccftech.com/jim-keller-cerebras-ipo-was-helpful-tenstorrent-to-beat-them-on-everything/",
+          "date": "06-28",
+          "summary": "텐스터렌트의 CEO 짐 켈러가 세레bras의 IPO를 환영하면서도 텐스터렌트가 모든 면에서 세레bras를 제칠 것이라고 주장했다. 텐스터렌트의 블랙홀 갤럭시 서버는 엔비디아 GB300보다 5배 낮은 TCO로 AI 시장을 위협할 수 있는 성능을 보였다. 켈러는 텐스터렌트의 KV 캐시 처리 방식이 경쟁사보다 간단하면서도 효율적이라고 강조했다. 또한 텐스터렌트는 퀄컴과 인텔의 CEO와 만나 RISC-V CPU IP 관련 대형 거래를 모색 중이다."
+        },
+        {
+          "title": "Qualcomm in Talks to Acquire AI Chip Startup Tenstorrent for Up to $10 Billion , Reuters Reports",
+          "url": "https://www.insidermonkey.com/blog/qualcomm-in-talks-to-acquire-ai-chip-startup-tenstorrent-for-up-to-10-billion-reuters-reports-1783966/",
+          "date": "06-18",
+          "summary": "퀄컴이 AI 칩 스타트업 텐스터렌트를 최대 100억 달러에 인수하기 위해 협상 중이라는 소식이 전해졌다. 텐스터렌트는 블랙홀 갤럭시 서버로 AI 시장에서 강력한 경쟁력을 보이고 있으며, 퀄컴은 RISC-V CPU IP를 확보하기 위해 인수를 추진하는 것으로 알려졌다. 텐스터렌트는 이미 인텔과 퀄컴의 CEO와 만나 대형 거래 가능성을 논의한 바 있다."
         }
       ]
     },
@@ -148,22 +123,22 @@
       "region": "global",
       "items": [
         {
-          "title": "SambaNova Secures Up to $1 Billion Funding Round Amid AI Chip De - GuruFocus",
-          "url": "https://www.gurufocus.com/news/8931519/sambanova-secures-up-to-1-billion-funding-round-amid-ai-chip-demand?mobile\\u003dtrue",
-          "date": "06-25",
-          "summary": "AI 칩 전문기업 삼바노바는 추론용 반도체 수요 증가에 힘입어 최대 10억 달러 규모의 투자 유치를 진행 중이다. 인텔 CEO 립-부 탄이 이사회 멤버로 참여하며, 이번 펀딩으로 기업 가치 100억 달러를 목표로 하고 있다."
+          "title": "SambaNova Price, SAMBA Price, Live Charts, and Marketcap - Coinbase Germany - Coinbase",
+          "url": "https://www.coinbase.com/en-de/price/sambanova-solana-3a2lys6skxn78pdvszb4jwnu4st3c5hsnd1hsnitfmjv-token",
+          "date": "06-27",
+          "summary": "샘바나노바의 주가와 시가총액 등 시장 데이터가 부족한 상태다. 코인마켓캡 등 제3자 데이터를 참조하고 있으나 정확성을 보장하지 않는다. 샘바나노바는 999만 SAMBA 토큰의 총 공급량을 보유하고 있지만, 추가 정보가 충분하지 않아 투자 판단에 도움이 되는 자료가 부족하다."
         },
         {
-          "title": "SambaNova targets US$10B valuation as demand rises for cheaper AI inference - digitimes",
-          "url": "https://www.digitimes.com/news/a20260625VL216/ai-inference-chips-demand-funding-nvidia.html",
-          "date": "06-25",
-          "summary": "삼바노바는 AI 추론 워크로드 증가에 대응해 8억~10억 달러 규모의 펀딩 라운드를 준비 중이다. 인텔의 립-부 탄 회장이 참여하는 이번 투자로 기업 가치는 100억 달러까지 상승할 전망이다."
+          "title": "Intel Stock Surges as Analyst Targets Climb: SambaNova, Foxconn Deals Anchor AI Pivot - Tech Times",
+          "url": "https://www.techtimes.com/articles/318008/20260608/intel-stock-surges-analyst-targets-climb-sambanova-foxconn-deals-anchor-ai-pivot.htm",
+          "date": "06-08",
+          "summary": "인텔 주가는 6월 8일 월요일 8.55% 상승했으며, AI 인프라 거래와 분석가들의 목표가 상향 조정이 주요 원인이다. 인텔은 Computex 2026에서 Xeon 6+ 'Clearwater Forest' CPU와 SambaNova의 재구성 가능 데이터플로우 유닛을 결합한 풀스택 AI 인프라 제공자로 전환했다. 인텔의 18A 노드 CPU는 288개의 효율 코어를 제공하며, 2026년 말까지 출시될 예정이다. 인텔은 또한 저비용 추론 가속기인 Crescent Island와 Nvidia, AMD와 경쟁할 고성능 AI 칩을 개발 중이다."
         },
         {
-          "title": "Backed by Intel, AI chip startup SambaNova may reach a $10 billion valuation, surging fivefold in four months. - 富途牛牛",
-          "url": "https://news.futunn.com/en/post/75066278/backed-by-intel-ai-chip-startup-sambanova-may-reach-a",
-          "date": "06-25",
-          "summary": "인텔의 지원을 받은 AI 반도체 스타트업 삼바노바가 4개월 만에 기업 가치가 5배 증가해 100억 달러를 돌파할 전망이다. 이는 삼바노바의 빠른 성장과 시장에서의 주목을 반영한다."
+          "title": "SambaNova CEO on IPO prospects: We're excited for what the next 12 months will bring - CNBC",
+          "url": "https://www.cnbc.com/video/2026/06/05/sambanova-ceo-on-ipo-prospects-excited-for-what-next-12-months-brings.html",
+          "date": "06-04",
+          "summary": "SambaNova의 CEO는 IPO 전망에 대해 12개월 내 긍정적인 전망을 밝혔다. 회사는 AI 데이터플로우 유닛을 활용해 인텔과 협력하며, AI 인프라 시장에서의 성장 가능성을 강조했다."
         }
       ]
     },
@@ -172,22 +147,22 @@
       "region": "global",
       "items": [
         {
-          "title": "Jim Keller Says Cerebras IPO Was Helpful As Tenstorrent Set To  Beat Them on Everything , Confirms Meeting With Intel & Qualcomm CEOs  Hoping To Get A Big Deal",
-          "url": "https://wccftech.com/jim-keller-cerebras-ipo-was-helpful-tenstorrent-to-beat-them-on-everything/",
-          "date": "06-28",
-          "summary": "텐서레이트의 CEO 짐 켈러는 Cerebras의 IPO를 긍정적으로 평가하면서도, 텐서레이트의 블랙홀 갈락시 서버가 NVIDIA의 GB300보다 최대 5배 더 나은 TCO를 제공할 것이라고 주장했다. 또한, 짐 켈러는 인텔과 퀄컴의 CEO들과 만나 큰 거래를 기대하고 있다."
+          "title": "Cerebras tops $193M revenue as OpenAI deal tops $20B - Stock Titan",
+          "url": "https://www.stocktitan.net/news/CBRS/cerebras-systems-announces-strong-first-quarter-2026-r7otc36byypc.html",
+          "date": "06-24",
+          "summary": "Cerebras는 2026년 1분기 매출 1억 9340만 달러를 기록했으며, OpenAI와 200억 달러 이상의 거래를 체결했다. AWS와의 파트너십도 발표했으며, 64억 달러의 IPO를 통해 자금을 조달했다. 2026년 연간 매출 전망은 8억 5500만~8억 6500만 달러로 전년 대비 69% 증가할 것으로 예상된다."
         },
         {
-          "title": "Baystreet . ca - Cerebras Sinks , Alphabet Replaces Verizon , and More",
-          "url": "http://baystreet.ca/articles/stockstowatch/121833/Cerebras-Sinks-Alphabet-Replaces-Verizon-and-More",
-          "date": "06-27",
-          "summary": "Cerebras는 2026년 5월 14일 상장된 후 주가가 10% 이상 하락할 전망이다. 1분기 매출은 전년 대비 94.4% 증가했지만, GAAP 이익은 -0.22달러로 적자를 기록했다. 2분기 매출 성장률은 88%로 예상된다."
+          "title": "Cloud growth to power two-thirds of Cerebras revenue in 2026 - S&P Global",
+          "url": "https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/06/cloud-growth-to-power-two-thirds-of-cerebras-revenue-in-2026",
+          "date": "06-19",
+          "summary": "Cerebras는 2026년 매출의 3분의 2가 클라우드 서비스에서 발생할 것으로 예상된다. 이는 클라우드 기반 AI 서비스의 성장 가능성을 반영한다."
         },
         {
-          "title": "ARK Invest ( NASDAQ : ARKK ) Snaps Up $49 Million In Amazon , Tesla , Alphabet , Palantir , CoreWeave And Cerebras",
-          "url": "https://www.foreignpolicyjournal.com/2026/06/24/ark-invest-nasdaq-arkk-snaps-up-49-million-in-amazon-tesla-alphabet-palantir-coreweave-and-cerebras/",
-          "date": "06-25",
-          "summary": "ARK Invest는 아마존, 테슬라, 알파벳, 팔란티어, 코어위브, Cerebras 등 6개 기업에 4900만 달러를 투자했다. 이는 ARK의 기술 중심 투자 전략을 반영하며, 특히 AI 관련 기업에 대한 관심을 보여준다."
+          "title": "Which is faster: Gemini 3.5 Flash or Kimi K2.6 on Cerebras - Cerebras",
+          "url": "https://www.cerebras.ai/blog/which-is-faster-gemini-3-5-flash-or-kimi-k2-6-on-cerebras",
+          "date": "06-05",
+          "summary": "Cerebras의 Kimi K2.6 모델은 Google의 Gemini 3.5 Flash보다 5.4배 빠른 추론 속도를 보였다. Cerebras의 웨이퍼 스케일 엔진은 모델 전체를 온칩에 저장해 외부 메모리 접근 없이 빠른 처리를 가능하게 한다."
         }
       ]
     },
@@ -196,22 +171,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "SK AI 위원장 “자강 안하면 미래 없다...AI 3강 도울 것”",
-          "url": "https://www.sedaily.com/article/20060851?ref=naver",
-          "date": "06-28",
-          "summary": "SK AI 위원장은 AI 경쟁에서 자강과 협력의 중요성을 강조했다. 미국의 앤스로픽 모델 수출 차단 사태를 계기로 소버린 AI 구축의 필요성을 언급하며, K-AI 얼라이언스를 통해 모델과 애플리케이션 지원을 확대할 계획이다."
+          "title": "배경훈 \"피지컬AI, 향후 3년이 골든타임…주력 산업 생산성 20% 높일 것\"",
+          "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4422359",
+          "date": "06-29",
+          "summary": "배경훈 부총리는 피지컬 AI를 대한민국의 핵심 전략 산업으로 육성하겠다고 발표했다. 2029년까지 8.4GW 규모의 AI 데이터센터를 구축할 계획이며, 2035년까지 추가로 10GW를 조성할 예정이다. 피지컬 AI는 제조업 생산성을 20% 이상 향상시키고, 사회 전반에 걸쳐 적용될 예정이다."
         },
         {
-          "title": "[봇규의 헬로BOT] 피지컬 AI, ‘몸을 가진 AI’에서 대한민국 산업의 '작...",
-          "url": "https://www.hellot.net/news/article.html?no=113420",
-          "date": "06-26",
-          "summary": "피지컬 AI는 AI가 물리적 환경을 직접 학습하고 적응하는 기술로, 로봇, AI 반도체, 통신 플랫폼 등 다양한 분야에서 활용된다. 산업 현장에서는 데이터 자산화와 에지 컴퓨팅 기반 추론이 중요하며, 현장 실증과 실행 체계가 필수적이다."
+          "title": "[AI픽] K-AI, 방송부터 공공까지 현장 안착…소버린 AI도 성과",
+          "url": "https://www.yna.co.kr/view/AKR20260629044500017?input=1195m",
+          "date": "06-29",
+          "summary": "과학기술정보통신부는 국내 AI 기업들의 현장 적용 사례를 공개했다. NC AI는 MBC와 협력해 방송 콘텐츠 후반 제작에 멀티모달 기술을 도입해 수작업 비효율을 줄이고 작업 공정을 단축할 계획이다. 업스테이지는 조달청과 공공 업무용 '생성형 AI 업무 지원 서비스' 공급 계약을 맺어 한글 문서 처리 기술을 제공한다. KT는 경기도청에 '경기 생성형 AI 플랫폼 구축' 사업을 추진하며 독자 AI 모델 '믿음 2.0'을 도입했다. SK텔레콤과 리벨리온은 SKT의 AI 모델 'A.X K1'을 리벨리온 서버에서 성공적으로 구동했으며, 국산 AI 반도체 '리벨100'을 활용해 초거대 모델 운영 가능성을 확인했다."
         },
         {
-          "title": "메가존클라우드, 국산 NPU AI 인프라 통합 운영 맡는다",
-          "url": "https://www.ziksir.com/news/articleView.html?idxno=138077",
-          "date": "06-25",
-          "summary": "메가존클라우드는 국산 NPU AI반도체 기반 클라우드 인프라 실증 사업에 2년 연속 참여한다. 과학기술정보통신부와 정보통신산업진흥원이 주관하는 'AI컴퓨팅 실증 인프라 고도화' 사업에서 인프라 통합 운영자로 선정되었다. 이 사업은 국산 AI반도체 기반 대규모 AI 인프라 구축과 LLM 기반 서비스 실증을 목표로 하며, 2025년부터 2027년까지 3년간 진행된다. 메가존클라우드는 NPU 자원할당·통합 관리 모니터링 소프트웨어 개발, 멀티클라우드 기반 NPU 자원할당과 모니터링 소프트웨어 연계, AI컴퓨팅 인프라 통합 운영·관제, 사용자 환경 구축 등을 수행할 예정이다."
+          "title": "[출근길 포인트] 李대통령, 오늘 삼전닉스와 '메가투자' 공개…이재용·...",
+          "url": "https://www.pointdaily.co.kr/news/articleView.html?idxno=309872",
+          "date": "06-29",
+          "summary": "이재명 대통령 주재로 열린 '대한민국 대도약 3대 메가프로젝트 국민보고회'에서 삼성전자와 SK하이닉스의 대규모 투자계획이 발표됐다. 이 프로젝트는 반도체 팹과 AI 데이터센터, 피지컬AI·로봇 등 첨단전략산업을 지역 거점으로 육성하는 것을 목표로 한다. 삼성바이오로직스 노조는 초기업 노조에서 탈퇴해 독자 노선을 진행할 예정이다. 금융위원회는 29일부터 다음달 3일까지 청년미래적금 가입 신청을 받는다. SK AI위원회는 K-AI 얼라이언스가 50개 멤버사로 확대되며 글로벌 AI 플랫폼 본격화를 발표했다. 한화그룹은 청년 취업을 돕는 직무교육 '내일아카데미'를 개설해 조선, 방산 등 주요 계열사들이 참여한다."
         }
       ]
     },
@@ -220,22 +195,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "2026 대한민국 고속성장 스타트업 50",
-          "url": "https://www.forbeskorea.co.kr/news/articleView.html?idxno=402216",
-          "date": "06-29",
-          "summary": "2026 대한민국 고속성장 스타트업 50에 딥엑스와 리벨리온이 포함되었다. 이 리스트는 성장성, 투자 유치 실적, 성장률 등을 기준으로 선정되었으며, 누적 투자 유치 총액은 3조2485억원, 평균 매출액은 약 476억원이다. 딥엑스는 NPU 설계 전문 팹리스 기업으로, 리벨리온은 AI 반도체 설계 기업이다. 이들은 글로벌 시장 공략과 흑자 기반의 기업공개(IPO) 추진을 공통 목표로 삼고 있다."
+          "title": "Deepx's AI Chip Targets Cameras - TechInsights",
+          "url": "https://www.techinsights.com/blog/deepxs-ai-chip-targets-cameras",
+          "date": "06-20",
+          "summary": "딥엑스는 컴퓨터 비전 애플리케이션을 대상으로 하는 AI 칩을 발표했다. 이 칩은 28nm SoC로 저엔드 보안 카메라용이며, 1H24년에 출하될 예정이다. 딥엑스는 2019년 설립되어 2500만 달러의 자금을 11개 투자자로부터 조달했으며, 삼성은 5nm 기술을 제공해 지원한다. 딥엑스의 칩은 스마트 카메라, 네트워크 연결형 비디오 레코더, 자동차, 로봇 시장을 대상으로 한다. 딥엑스는 컴퓨텍스 2026에서 한미반도체, 파두와 함께 AI 공급망 확대를 위한 기술을 선보였다."
         },
         {
-          "title": "딥엑스·리벨리온, 엔비디아 맞서 AI 반도체 '생태계 전쟁' 나선다",
-          "url": "https://www.econovill.com/news/articleView.html?idxno=743685",
-          "date": "06-28",
-          "summary": "딥엑스와 리벨리온이 엔비디아에 맞서 AI 반도체 생태계 전쟁에 나섰다. 두 기업은 NPU 칩의 성능 경쟁을 넘어 소프트웨어와 개발자 생태계 확장에 주력하고 있다. 딥엑스는 라즈베리 파이 같은 글로벌 개발자 플랫폼과 협력해 엣지·피지컬 AI 시장을 공략하고, 리벨리온은 국산 소프트웨어 기업·대기업과 협력해 공공·민간 AX 시장을 공략할 계획이다. 딥엑스는 라즈베리 파이 5용 AI 가속 프로세서 모듈을 공개했으며, 리벨리온은 CCK솔루션과 협력해 AI 풀스택 솔루션을 개발·사업화할 예정이다."
+          "title": "한미반도체·딥엑스, 컴퓨텍스서 AI 공급망 확장…대만서 빛난 韓기업 ...",
+          "url": "https://www.etoday.co.kr/news/view/2590556",
+          "date": "06-04",
+          "summary": "딥엑스는 컴퓨텍스 2026에서 AAEON과 글로벌 엣지 AI 대량 생산 파트너십을 체결했다. 이 협약은 3년간 지속되며, 딥엑스의 AI 반도체(NPU)가 AAEON의 산업용 컴퓨터, 싱글 보드 컴퓨터, 엣지 게이트웨이에 통합될 예정이다. 대상 분야는 스마트 팩토리, 로봇, 스마트 시티 등이다. 딥엑스는 AI 반도체 칩셋과 최적화된 컴파일러 및 SDK를 제공하며, AAEON은 하드웨어 설계와 제품 라인업 개발을 담당한다."
         },
         {
-          "title": "DEEPX and Sixfab Launch  DEEPX AI HAT  to Drive Edge Physical AI on Raspberry Pi",
-          "url": "https://www.manilatimes.net/2026/06/26/tmt-newswire/pr-newswire/deepx-and-sixfab-launch-deepx-ai-hat-to-drive-edge-physical-ai-on-raspberry-pi/2373509",
-          "date": "06-26",
-          "summary": "DEEPX와 Sixfab이 라즈베리 파이 생태계를 위한 DEEPX AI HAT을 출시했다. 이 제품은 고성능, 저전력 AI 가속을 제공하며, 클라우드 의존 없이 실시간 추론이 가능하다. DEEPX는 전 세계 개발자와 메이커를 대상으로 스타터 키트와 SDK를 제공해 엣지 AI 개발 진입 장벽을 낮추고 있다. DEEPX는 라즈베리 파이의 범용성과 자사의 초저전력 NPU를 결합해 피지컬 AI의 민주화를 추진할 계획이다."
+          "title": "DEEPX Signs Global Edge AI Mass Production Partnership with AAEON at COMPUTEX TAIPEI 2026 - PR Newswire",
+          "url": "https://www.prnewswire.com/news-releases/deepx-signs-global-edge-ai-mass-production-partnership-with-aaeon-at-computex-taipei-2026-302788287.html",
+          "date": "06-02",
+          "summary": "딥엑스는 컴퓨텍스 2026에서 AAEON과 3년간의 대량 생산 협력 MOU를 체결했다. 이 협약은 딥엑스의 AI 반도체(NPU)를 AAEON의 산업용 컴퓨터, 싱글 보드 컴퓨터, 엣지 게이트웨이에 통합하는 것을 목표로 한다. 대상 분야는 스마트 팩토리, 로봇, 스마트 시티 등이다. 딥엑스는 AI 반도체 칩셋과 최적화된 컴파일러 및 SDK를 제공하며, AAEON은 하드웨어 설계와 제품 라인업 개발을 담당한다."
         }
       ]
     },
@@ -244,22 +219,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "스타트업포럼, '피지컬 AI 협의회' 출범...\"로봇·자율주행 생태계 키운...",
-          "url": "https://www.aitimes.com/news/articleView.html?idxno=212230",
+          "title": "미리 보는 '일렉트로니카 상하이'…韓 부품사 프리미엄 시험대",
+          "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=678730",
           "date": "06-29",
-          "summary": "코리아스타트업포럼이 피지컬 AI 산업협의회를 출범시켰다. 협의회에는 11개 기업이 참여하며, 초대 협의회장은 황희승 브레인커머스 대표가 맡았다. 협의회는 산업계 의견 수렴, 정책 제언, 기술 실증 확대, 글로벌 진출 지원 등을 통해 국내 피지컬 AI 생태계 활성화를 목표로 한다. 로봇·자율주행·스마트 제조·물류 자동화 등 분야에서 피지컬 AI 활용 사례를 확산할 계획이다."
+          "summary": "일렉트로니카 상하이 2026은 아시아 최대 전자부품 전시회로, 7월 1일부터 3일까지 상하이 신국제엑스포센터에서 열린다. 전시회는 피지컬 AI, 데이터센터, 친환경차, 자율주행, 에너지저장장치, 3세대 전력반도체, 커넥터 등 14개 분야를 다룬다. 글로벌 공급망의 방향을 읽을 수 있는 중요한 자리로, 한국 기업들도 다수 참가해 경쟁력을 선보인다. 특히 자동차 전장 분야에서 고속·고전압에 대응하는 차량용 커넥터와 전력전자, 열관리 기술이 강조된다."
         },
         {
-          "title": "SK, K-AI 얼라이언스 글로벌 협력망 확장…회원사 50곳 체제로",
-          "url": "http://www.press9.kr/news/articleView.html?idxno=78508",
+          "title": "코리아스타트업포럼, '피지컬 AI 협의회' 공식 출범",
+          "url": "https://view.asiae.co.kr/article/2026062909313748311",
+          "date": "06-29",
+          "summary": "코리아스타트업포럼(코스포)은 피지컬 AI 산업 육성과 생태계 활성화를 위한 '피지컬 AI 산업협의회'를 공식 출범했다. 협의회에는 리얼월드, 메가존클라우드, 베어로보틱스 등 11개 기업이 참여했다. 협의회는 피지컬 AI 산업 활성화를 위한 정책 제언, 규제 개선, 산업 간 협력 확대, 기술 실증(PoC) 기회 발굴, 투자 및 사업화 연계, 글로벌 시장 진출 지원 등을 계획하고 있다. 초대 협의회장은 황희승 브레인커머스 대표가 맡는다."
+        },
+        {
+          "title": "K-AI 얼라이언스, 50개 멤버사로 확대…SK 글로벌 AI 플랫폼 본격화",
+          "url": "https://www.yna.co.kr/view/PYH20260628024400013?input=1196m",
           "date": "06-28",
-          "summary": "SK그룹의 K-AI 얼라이언스가 회원사 50곳으로 확대되며 글로벌 협력망을 강화했다. SK AI위원회는 'K-AI Alliance 2.0' 전략을 공개하고, 기술 개발, 사업 검증, 해외 진출 지원 등을 강화할 계획이다. 행사에서는 글로벌 투자자와 빅테크 관계자들이 참여해 AI 산업 동향과 협력 가능성을 논의했다. K-AI 얼라이언스는 AI 풀스택 생태계 구축을 통해 글로벌 AI 시장에서의 경쟁력을 강화할 전망이다."
-        },
-        {
-          "title": "[AI 게임혁명③] GPU가 필수인 AI 투자, 누구를 살찌우나…인프라 기업의...",
-          "url": "https://www.ebn.co.kr/news/articleView.html?idxno=1714082",
-          "date": "06-26",
-          "summary": "AI 시대에 게임산업의 수익 지형도가 변화하며, GPU와 데이터센터를 보유한 기업들이 더 큰 수혜를 누리는 구조가 형성되고 있다. 넥슨, 크래프톤, 엔씨 등 국내 주요 게임사들은 AI를 차세대 성장동력으로 삼아 대규모 투자를 진행 중이지만, 고성능 GPU와 클라우드 인프라는 글로벌 기업에 의존하고 있다. 이에 따라 AI 운영 효율성이 새로운 경쟁력으로 부상했으며, 게임사들은 데이터 활용, AI 모델 사업화, AI 인프라 생태계 구축 등 다양한 전략을 추진하고 있다. 엔비디아는 AI 인프라 시장을 주도하며 차세대 플랫폼 발표로 추론 성능과 비용 효율을 강조했다."
+          "summary": "SK AI위원회는 K-AI 얼라이언스의 연례행사인 '유나이트 2026'을 미국 실리콘밸리에서 개최했다. 이번 행사에는 SK 유영상 AI위원장, 조셉 배코 프라임마스 총괄임원, 김주영 하이퍼엑셀 대표 등이 참석했다. K-AI 얼라이언스는 50개 멤버사로 확대되며, SK의 글로벌 AI 플랫폼 본격화가 기대된다."
         }
       ]
     },
@@ -268,22 +243,22 @@
       "region": "korea",
       "items": [
         {
-          "title": "세미파이브, 첫 해외 양산 매출 발생",
-          "url": "https://www.thelec.kr/news/articleView.html?idxno=58687",
+          "title": "ETRI 호남권연구본부, AI 반도체 팹리스 실무형 인재 양성…내달 국산 N...",
+          "url": "https://www.etnews.com/20260629000025",
+          "date": "06-29",
+          "summary": "한국전자통신연구원(ETRI) 호남권연구본부는 국산 NPU 탑재 μDC 시제품을 활용해 AI 반도체 팹리스 실무형 인재 양성을 위해 퓨리오사AI·모빌린트와 협약을 체결했다. 9월부터 기업별 SDK 기반 실무 교육을 본격 운영할 예정이며, 올해 전문인력 20명 양성을 목표로 하고 있다."
+        },
+        {
+          "title": "[봇규의 헬로BOT] 피지컬 AI, ‘몸을 가진 AI’에서 대한민국 산업의 '작...",
+          "url": "https://www.hellot.net/news/article.html?no=113420",
           "date": "06-26",
-          "summary": "세미파이브가 일본 AI 반도체 고객으로부터 110억원 규모의 양산 공급 주문을 확보하며 설립 이후 첫 해외 양산 매출을 기록했다. 해당 제품은 고성능 컴퓨팅(HPC)용 AI 반도체로, 세미파이브는 고객 맞춤형 칩 설계를 지원하는 ASIC 업체다. 회사는 일본에서 복수 ASIC 설계 고객을 확보했으며, 향후 추가 양산 매출을 기대하고 있다. 올해 매출 목표는 2000억원으로, 북미와 일본 등 해외 시장 공략을 강화할 계획이다."
+          "summary": "피지컬 AI는 인공지능(AI)이 물리적 환경을 직접 학습·적응해 로봇·설비·시스템이 실제 공간에서 자율적으로 문제를 해결하도록 구현하는 기술이다. 최근 '피지컬 AI 프론티어 강국 신기술 전략 포럼'에서 로봇 행동 데이터, 월드 모델, 디지털 트윈, 온디바이스 AI, AI 반도체 등이 핵심 기술로 논의되었다. LG전자와 디에이치오토리드는 각각 피지컬 AI 로봇 기술 체계와 실증 사례를 제시하며, 산업 현장의 문제 해결을 위한 생존 전략으로서의 중요성을 강조했다."
         },
         {
-          "title": "[ABC방송이 리더에게 묻는다=홍진배 IITP 원장] \"대한민국은 AI 풀스택 국...",
-          "url": "https://www.ajunews.com/view/20260609164651524",
-          "date": "06-13",
-          "summary": "홍진배 IITP 원장은 대한민국이 AI 패권 경쟁에서 충분히 승산이 있다고 평가하며, AI 모델, 반도체, 데이터, 네트워크, 인재 등 풀스택 생태계 구축의 중요성을 강조했다. AI 경쟁은 모델 경쟁이 아닌 생태계 경쟁이며, 한국은 AI 반도체와 네트워크 강점을 바탕으로 글로벌 경쟁력을 확보할 수 있다고 분석했다. IITP는 AI 반도체 NPU, CXL, DPU, PIM 등 핵심 기술 개발을 지원하며, 뉴로모픽 반도체 등 미래 기술에도 주목하고 있다."
-        },
-        {
-          "title": "교보증권, 포트폴리오 고도화ㆍ수익기반 확대... 종투사 진입 총력전 나...",
-          "url": "https://www.etoday.co.kr/news/view/2592735",
-          "date": "06-11",
-          "summary": "교보증권은 종합금융투자사업자(종투사) 진입을 위해 STO, VC, WM 신사업을 확대하고 있다. 최근 우리투자증권의 유상증자로 자기자본 순위가 11위로 하락한 가운데, 디지털 자산 기반 투자상품 발굴과 글로벌 파트너십 확대를 추진 중이다. SBI디지털마켓츠, 람다256 등과 협력해 STO 사업 네트워크를 확장하고, AI 반도체 기업 퓨리오사AI, 모빌린트 등에 투자하며 혁신 생태계 조성에 나서고 있다. 자산관리 부문에서는 HNW 시장 공략을 강화하고 있다."
+          "title": "노타, AI 최적화 바람 타고 상반기 수주 174억 돌파…전년비 2배 ↑",
+          "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=04388646645485656",
+          "date": "06-26",
+          "summary": "노타는 올해 상반기 수주액 174억 원을 기록하며 전년 대비 2배 이상 성장했다. 2분기 수주액은 약 61억 원으로, 전년 동기 대비 120% 증가했다. 이는 피지컬 AI와 온디바이스 AI 확산으로 AI 추론 효율성에 대한 수요가 증가한 결과다. 노타는 AI 최적화 플랫폼과 NVA 솔루션을 통해 다양한 산업 현장에서의 적용성을 입증하며 사업을 확장하고 있다."
         }
       ]
     }
@@ -291,76 +266,76 @@
   "ai_semi_news": {
     "06-29 (월)": [
       {
-        "title": "\"AI 생태계, 병목이 나타나는 지점에 투자 기회 있다\"",
-        "url": "https://www.cnbizm.com/news/articleView.html?idxno=306939",
-        "date": "06-29",
-        "source": "cnbizm.com"
-      },
-      {
-        "title": "[속보] 李 \"반도체·AI 압도적 경쟁력 확보…'성장 과실' 국민 골고루\"",
-        "url": "http://www.inews24.com/view/1980584",
+        "title": "[메가프로젝트]이재용 \"반도체 새 단지, 광주로 계획…HBM 팹은 천안·온...",
+        "url": "http://www.inews24.com/view/1980623",
         "date": "06-29",
         "source": "inews24.com"
       },
       {
-        "title": "인천 남동구, 뿌리산업 인력난 해소 위한 채용박람회 마무리",
-        "url": "https://www.kmaeil.com/news/articleView.html?idxno=643762",
+        "title": "반도체·AI 전국으로 넓힌다…李대통령 “초격차 산업강국 도약”",
+        "url": "https://www.thepowernews.co.kr/view.php?ud=202606291511586762de3f0aa1be_7",
         "date": "06-29",
-        "source": "kmaeil.com"
+        "source": "thepowernews.co.kr"
       },
       {
-        "title": "신한금융, 기보·서울대병원과 K-바이오 글로벌 진출 지원 '맞손'… 금융...",
-        "url": "https://www.lcnews.co.kr/news/articleView.html?idxno=204138",
+        "title": "[속보] SK 최태원 회장, \"반도체 사업에 총 1천100조 투자\"...서남권에 4...",
+        "url": "https://www.livebiz.today/news/articleView.html?idxno=202945",
         "date": "06-29",
-        "source": "lcnews.co.kr"
+        "source": "livebiz.today"
       },
       {
-        "title": "추미애, 민선 9기 재정개혁 시동…재정혁신TF·경기미래투자공사 추진",
-        "url": "https://www.kyeonggi.com/article/20260629580244",
+        "title": "[아주사설]800조 반도체 시대, 다음은 피지컬AI다",
+        "url": "https://www.ajunews.com/view/20260629143622984",
         "date": "06-29",
-        "source": "kyeonggi.com"
+        "source": "ajunews.com"
       },
       {
-        "title": "‘인간 대체’ 아닌 ‘초생산성 파트너’...스마트마인드AI가 제시한 AI...",
-        "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=03981926645486640",
+        "title": "[뉴스현장] 3대 메가프로젝트 공개…'호남 반도체' 청사진",
+        "url": "http://www.yonhapnewstv.co.kr/news/MYH20260629151458N4i",
         "date": "06-29",
-        "source": "edaily.co.kr"
+        "source": "yonhapnewstv.co.kr"
       },
       {
-        "title": "위지윅스튜디오-퓨리오사AI, 신규 사업 기회 찾는다",
-        "url": "https://zdnet.co.kr/view/?no=20260629141159",
+        "title": "[머니톡스] 야심찬 대도약 메가프로젝트…한반도 공장이 성공하려면",
+        "url": "https://www.yna.co.kr/view/AKR20260629068600546?input=1195m",
         "date": "06-29",
-        "source": "zdnet.co.kr"
+        "source": "yna.co.kr"
       },
       {
-        "title": "반도체·AI 기술유출 정조준… 지식재산처, 기술경찰 확대 개편",
-        "url": "https://biz.chosun.com/science-chosun/science/2026/06/29/K47VO35CD5EWZNHXUJ4TBIM5SA/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+        "title": "배경훈 과기정통부 부총리 \"국산 AI 반도체에 대한민국 기회 있다\"",
+        "url": "https://www.mt.co.kr/tech/2026/06/29/2026062915125730195",
         "date": "06-29",
-        "source": "biz.chosun.com"
+        "source": "mt.co.kr"
       },
       {
-        "title": "[인터뷰] 김용선 처장 “기술경찰 조직 4배로 확대… 연 1.9조 피해 막는...",
-        "url": "https://www.viva100.com/article/20260628500522",
+        "title": "김성환 “반도체 등 첨단산업에 물·전기 필수, 적기 공급 노력 다할 것...",
+        "url": "https://www.kukinews.com/article/view/kuk202606290130",
         "date": "06-29",
-        "source": "viva100.com"
+        "source": "kukinews.com"
       },
       {
-        "title": "靑, 반도체 지방투자 플랜 꺼내든 까닭은",
-        "url": "https://www.m-i.kr/news/articleView.html?idxno=1386238",
+        "title": "배경훈 “2035년까지 AI 데이터센터에 1천조 투자, 피지컬AI 향후 3년 골...",
+        "url": "https://biz.heraldcorp.com/article/10791743?ref=naver",
         "date": "06-29",
-        "source": "m-i.kr"
+        "source": "biz.heraldcorp.com"
       },
       {
-        "title": "SK K-AI 얼라이언스, 美 실리콘밸리서 '유나이트 2026' 개최...글로벌 AI ...",
-        "url": "http://www.sisacast.kr/news/articleView.html?idxno=97190",
+        "title": "미소정보기술·충남TP, 온디바이스 AI 도시안전망 실증사업 선정",
+        "url": "https://www.hellot.net/news/article.html?no=113472",
         "date": "06-29",
-        "source": "sisacast.kr"
+        "source": "hellot.net"
       },
       {
-        "title": "추경호, '대구 삼닉' 청사진 들고 상경…호남권 투자 대응",
-        "url": "https://www.news1.kr/local/daegu-gyeongbuk/6211444",
+        "title": "LS일렉트릭, 美 유타 생산기지 2500억 증설… 전력 인프라 슈퍼사이클 선...",
+        "url": "https://www.energydaily.co.kr/news/articleView.html?idxno=200875",
         "date": "06-29",
-        "source": "news1.kr"
+        "source": "energydaily.co.kr"
+      },
+      {
+        "title": "\"대체불가 대한민국 원년\"…李대통령, AI·반도체 '3대 메가프로젝트' 본...",
+        "url": "http://www.newsian.co.kr/news/articleView.html?idxno=91555",
+        "date": "06-29",
+        "source": "newsian.co.kr"
       }
     ],
     "06-28 (일)": [
@@ -369,12 +344,6 @@
         "url": "https://www.scmp.com/tech/big-tech/article/3358647/faster-ai-lower-costs-dspark-eases-inference-bottlenecks-and-chip-strain-says-deepseek",
         "date": "06-28",
         "source": "South China Morning Post"
-      },
-      {
-        "title": "애플도 가격 올렸다…AI발 메모리 급등에 IT 기기 전방위 인상",
-        "url": "https://www.cbci.co.kr/news/articleView.html?idxno=585166",
-        "date": "06-28",
-        "source": "cbci.co.kr"
       },
       {
         "title": "[AI칩 지정학] ⑫ 용인너머 호남 '듀얼 AI칩 팩토리'···HBM 족쇄 벗는...",
@@ -393,24 +362,6 @@
         "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=02997926645486312",
         "date": "06-28",
         "source": "edaily.co.kr"
-      },
-      {
-        "title": "“135원짜리 주식이 290만원 되기까지”…하이닉스 신화의 모든 것 [이슈...",
-        "url": "https://www.mk.co.kr/article/12085125",
-        "date": "06-28",
-        "source": "mk.co.kr"
-      },
-      {
-        "title": "Ex-Databricks AI Chief Targets a 1,000x Cut in AI Power Use - Technology Org",
-        "url": "https://www.technology.org/2026/06/28/unconventional-ai-un-0-oscillator-chip-power/",
-        "date": "06-28",
-        "source": "Technology Org"
-      },
-      {
-        "title": "\"1800조 로봇시장 잡아라\" 시총 톱10 모두 참전",
-        "url": "https://www.hankyung.com/article/2026062824091",
-        "date": "06-28",
-        "source": "hankyung.com"
       },
       {
         "title": "OpenAI Broadcom Jalapeno Chip: AI Hardware Revolution 2026 - Intellectia AI",
@@ -435,6 +386,30 @@
         "url": "https://www.ajunews.com/view/20260628101738175",
         "date": "06-28",
         "source": "ajunews.com"
+      },
+      {
+        "title": "[코스닥 출범 30년②] AI 반도체가 바꾼 코스닥 시장지형",
+        "url": "https://www.econovill.com/news/articleView.html?idxno=743675",
+        "date": "06-28",
+        "source": "econovill.com"
+      },
+      {
+        "title": "화웨이, 차이나모바일 후베이와 AI 추론 가속 솔루션 상용망 검증",
+        "url": "https://www.businesskorea.co.kr/news/articleView.html?idxno=272105",
+        "date": "06-28",
+        "source": "businesskorea.co.kr"
+      },
+      {
+        "title": "이재용-최태원 발목 잡는 고동진 잔재···HBM도 파운드리 꼴 나라고?",
+        "url": "https://www.womaneconomy.co.kr/news/articleView.html?idxno=255519",
+        "date": "06-28",
+        "source": "womaneconomy.co.kr"
+      },
+      {
+        "title": "[기고]반도체 패권 전쟁 시대, 호남이 대한민국 두 번째 심장이 돼야 한...",
+        "url": "https://www.etnews.com/20260628000014",
+        "date": "06-28",
+        "source": "etnews.com"
       }
     ],
     "06-27 (토)": [
@@ -457,12 +432,6 @@
         "source": "coinreaders.com"
       },
       {
-        "title": "AI도 '옥석가리기'…7월 시장 흔들 변수는 금리[애널리스트의 시각]",
-        "url": "https://www.newsway.co.kr/news/view?ud=2026062714070490032",
-        "date": "06-27",
-        "source": "newsway.co.kr"
-      },
-      {
         "title": "AI Semiconductor Boom 2026: Top Chip Stocks Driving the $1.3T Market - Intellectia AI",
         "url": "https://intellectia.ai/blog/ai-semiconductor-boom-2026",
         "date": "06-27",
@@ -473,18 +442,6 @@
         "url": "https://www.aitimes.com/news/articleView.html?idxno=212176",
         "date": "06-27",
         "source": "aitimes.com"
-      },
-      {
-        "title": "[트럼프 스톡커] ‘1조弗’ 상장 연기, 손정의 칩 투자도 꼬이는가",
-        "url": "https://www.sedaily.com/article/20060836?ref=naver",
-        "date": "06-27",
-        "source": "sedaily.com"
-      },
-      {
-        "title": "\"AI 천재 한 명이 기업을 바꾼다\"…글로벌 빅테크, 인재 확보 '각축전'",
-        "url": "http://www.hansbiz.co.kr/news/articleView.html?idxno=846675",
-        "date": "06-27",
-        "source": "hansbiz.co.kr"
       },
       {
         "title": "'스마트폰 강자' 퀄컴, 메타 동맹 업고 데이터 센터 시장 흔들 수 있을까...",
@@ -499,14 +456,32 @@
         "source": "view.asiae.co.kr"
       },
       {
-        "title": "반도체도 방산도 ‘돈줄’ 막혔다…한국 금융의 뼈아픈 현실",
-        "url": "https://www.sedaily.com/article/20060815?ref=naver",
+        "title": "애플, 최초 터치스크린 맥북에 차세대 칩 대신 기존 M5 프로·맥스 탑재",
+        "url": "https://www.ddaily.co.kr/page/view/2026062709161167778",
+        "date": "06-27",
+        "source": "ddaily.co.kr"
+      },
+      {
+        "title": "퀄컴, 텐스토렌트 인수 타진…설계부터 연결까지 '탈 Arm' 가속",
+        "url": "https://zdnet.co.kr/view/?no=20260626171646",
+        "date": "06-27",
+        "source": "zdnet.co.kr"
+      },
+      {
+        "title": "“하이브리드 본딩 장비 고도화…후공정 패키징 풀 포트폴리오로 매출...",
+        "url": "https://www.sedaily.com/article/20060641?ref=naver",
         "date": "06-27",
         "source": "sedaily.com"
       },
       {
-        "title": "애플, 최초 터치스크린 맥북에 차세대 칩 대신 기존 M5 프로·맥스 탑재",
-        "url": "https://www.ddaily.co.kr/page/view/2026062709161167778",
+        "title": "삼성·하이닉스 몸값 더 뛴다…엔비디아 독점 깨지는 AI 칩 시장[칩톡]",
+        "url": "https://view.asiae.co.kr/article/2026062611263265039",
+        "date": "06-27",
+        "source": "view.asiae.co.kr"
+      },
+      {
+        "title": "[알쓸신기] ⑫ 인간의 뇌를 닮은 칩 '뉴로모픽'",
+        "url": "https://www.ddaily.co.kr/page/view/2026061915132932855",
         "date": "06-27",
         "source": "ddaily.co.kr"
       }
@@ -519,22 +494,16 @@
         "source": "coinreaders.com"
       },
       {
+        "title": "AI prompts a memory-chip boom — and electronics inflation. Get used to it. - SiliconANGLE",
+        "url": "https://siliconangle.com/2026/06/26/ai-prompts-memory-chip-boom-electronics-inflation-get-used/",
+        "date": "06-26",
+        "source": "SiliconANGLE"
+      },
+      {
         "title": "OpenAI Launches It’s Own AI Chip – What Will It Be Used For? - TechRound",
         "url": "https://techround.co.uk/news/openai-launches-own-ai-chip-uses/",
         "date": "06-26",
         "source": "TechRound"
-      },
-      {
-        "title": "ETRI 호남권본부, 광주·제주 딥테크 기술사업화 본격 지원",
-        "url": "https://www.etnews.com/20260626000333",
-        "date": "06-26",
-        "source": "etnews.com"
-      },
-      {
-        "title": "[봇규의 헬로BOT] 피지컬 AI, ‘몸을 가진 AI’에서 대한민국 산업의 '작...",
-        "url": "https://www.hellot.net/news/article.html?no=113420",
-        "date": "06-26",
-        "source": "hellot.net"
       },
       {
         "title": "16인치 맥북 프로 9999달러로 치솟아…고물가에 기름 붓는 칩플레이션",
@@ -543,10 +512,10 @@
         "source": "sedaily.com"
       },
       {
-        "title": "[위크픽 클라우드] \"네오클라우드 2030년 시장 20% 점유\"…퀄컴 차세대 ...",
-        "url": "http://www.itdaily.kr/news/articleView.html?idxno=240068",
+        "title": "온세미, 시냅틱스 10조7700억원에 인수… 피지컬 AI 시장 ‘정조준’",
+        "url": "https://biz.chosun.com/it-science/ict/2026/06/26/WN5FXO6GLRCHDJQDVP347TXEEY/?utm_source=naver&utm_medium=original&utm_campaign=biz",
         "date": "06-26",
-        "source": "itdaily.kr"
+        "source": "biz.chosun.com"
       },
       {
         "title": "\"제2의 HBM 찾아라\"…'AI 병목' 돌파에 사활 건 韓 이공계대학",
@@ -555,34 +524,40 @@
         "source": "hankyung.com"
       },
       {
-        "title": "中 '스스로 학습 가능한 AI 칩' 개발한다…로봇 적응성↑",
-        "url": "https://www.irobotnews.com/news/articleView.html?idxno=47128",
-        "date": "06-26",
-        "source": "irobotnews.com"
-      },
-      {
-        "title": "[데일리픽] '암호화폐 3대장' 반등 신호 언제쯤…애플, AI 메모리 대란에...",
-        "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=678684",
-        "date": "06-26",
-        "source": "digitaltoday.co.kr"
-      },
-      {
         "title": "\"AI 최적화 수요 확대\" 노타, 2분기 수주액 전년比 120%↑",
         "url": "https://www.newsis.com/view/NISX20260626_0003685536",
         "date": "06-26",
         "source": "newsis.com"
       },
       {
-        "title": "\"AI 전력 1000배 절감\"…데이터브릭스 출신 美 스타트업, 새 AI 아키텍처...",
-        "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=678666",
+        "title": "[하이닉스 역전사]③ N·T·S 연합군…AI 시대 흔들린 IDM 왕국",
+        "url": "https://www.bloter.net/news/articleView.html?idxno=666637",
         "date": "06-26",
-        "source": "digitaltoday.co.kr"
+        "source": "bloter.net"
       },
       {
-        "title": "브로드컴(AVGO), 오픈AI 칩 완성...돈은 AMD·마이크론(MU)이 싹쓸이",
-        "url": "http://coinreaders.com/244662",
+        "title": "[Tech & Now] 노타, 2Q 수주액 61억원 '전년비 2배↑'",
+        "url": "https://www.ebn.co.kr/news/articleView.html?idxno=1714088",
         "date": "06-26",
-        "source": "coinreaders.com"
+        "source": "ebn.co.kr"
+      },
+      {
+        "title": "SK하이닉스, 美 AI 투자 세부계획 들여다보니…\"100억달러 2030년까지 순...",
+        "url": "https://www.newsis.com/view/NISX20260626_0003685230",
+        "date": "06-26",
+        "source": "newsis.com"
+      },
+      {
+        "title": "AI inference chip dark horse faces downward pressure amid a pullback, as cooling sentiment in the AI sector triggers profit-taking CBRS has fallen 7% for two consecutive trading days, despite investment banks raising their price targets and maintaining bullish - Moomoo",
+        "url": "https://www.moomoo.com/community/feed/the-dark-horse-inference-chip-stock-has-pulled-back-under-116814094598150",
+        "date": "06-26",
+        "source": "Moomoo"
+      },
+      {
+        "title": "From host node to heterogeneous rack: Rethinking the AI CPU - Arm Newsroom",
+        "url": "https://newsroom.arm.com/blog/agentic-ai-rack-scale-infrastructure",
+        "date": "06-26",
+        "source": "Arm Newsroom"
       }
     ],
     "06-25 (목)": [
@@ -597,12 +572,6 @@
         "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/qualcomm-reveals-hbc-near-memory-ai-architecture-ai250-and-ai350-accelerators-touts-6x-higher-bandwidth-per-watt-compared-to-hbm-200x-capacity-compared-to-on-chip-sram",
         "date": "06-25",
         "source": "Tom's Hardware"
-      },
-      {
-        "title": "[News] Qualcomm Reportedly Plans China AI Chip Push With Export-Control-Compliant Custom Chips - TrendForce",
-        "url": "https://www.trendforce.com/news/2026/06/25/news-qualcomm-reportedly-plans-china-ai-chip-push-with-export-control-compliant-custom-chips/",
-        "date": "06-25",
-        "source": "TrendForce"
       },
       {
         "title": "Top 25+ AI Chip Makers: NVIDIA & Its Competitors - AIMultiple",
@@ -621,12 +590,6 @@
         "url": "https://wccftech.com/qualcomm-dragonfly/",
         "date": "06-25",
         "source": "Wccftech"
-      },
-      {
-        "title": "Which AI Accelerator Stock Has Dominated in 2026: Broadcom or Marvell? - 24/7 Wall St.",
-        "url": "https://247wallst.com/investing/2026/06/24/which-ai-accelerator-stock-has-dominated-in-2026-broadcom-or-marvell/",
-        "date": "06-25",
-        "source": "24/7 Wall St."
       }
     ]
   }
