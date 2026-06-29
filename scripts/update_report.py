@@ -774,6 +774,8 @@ def collect_ai_semi_news(cutoff: datetime.datetime, kst: pytz.BaseTzInfo) -> dic
             arts.append(a)
     resolve_article_urls(arts)  # google-news redirect → 실제 기사 URL
     arts.sort(key=lambda x: x["pub_dt"], reverse=True)
+    # 같은 사건·다른 매체 중복 병합 (LLM 없이 제목 키워드 겹침으로) — 최신 건 유지
+    arts = _dedup_by_keyword_overlap(arts)
     grouped, per_day = {}, {}
     for a in arts:
         date_key = format_date_with_weekday(a["pub_dt"], kst)
