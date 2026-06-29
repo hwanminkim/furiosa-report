@@ -6,12 +6,10 @@ on:
     # ── 아침 KST 공백 보강 (GitHub cron이 정각/:20에 잘 밀려서 off-peak 분으로 중복 배치) ──
     - cron: '43 22 * * *' # 22:43 UTC = 07:43 KST
     - cron: '20 0 * * *'  # 00:20 UTC = 09:20 KST
-    - cron: '11 0 * * *'  # 00:11 UTC = 09:11 KST
     - cron: '47 1 * * *'  # 01:47 UTC = 10:47 KST
     - cron: '20 2 * * *'  # 02:20 UTC = 11:20 KST
     - cron: '11 3 * * *'  # 03:11 UTC = 12:11 KST
     - cron: '20 4 * * *'  # 04:20 UTC = 13:20 KST
-    - cron: '47 4 * * *'  # 04:47 UTC = 13:47 KST
     # ── 오후/저녁 (기존) ──
     - cron: '20 7 * * *'  # 07:20 UTC = 16:20 KST
     - cron: '20 11 * * *' # 11:20 UTC = 20:20 KST
@@ -19,6 +17,12 @@ on:
 
 permissions:
   contents: write
+
+# 같은 시각대 cron이 겹쳐 동시 실행되며 LLM 엔드포인트 경쟁·커밋 충돌하는 것 방지.
+# 실행 중이면 새 트리거는 대기(가장 최근 대기분만 유지, 오래된 대기분은 자동 취소).
+concurrency:
+  group: update-report
+  cancel-in-progress: false
 
 jobs:
   update:
