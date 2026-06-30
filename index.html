@@ -112,6 +112,13 @@ h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; 
 .hl-card-text { font-size: 0.92rem; color: var(--text-news); line-height: 1.55; }
 .item-arrow { font-size: 0.72rem; color: var(--dim); margin-left: 3px; }
 .empty-note { font-size: 0.9rem; color: var(--muted); padding: 6px 2px; }
+/* AI 반도체 동향: 날짜별로 하나의 박스 안에 구분선 리스트 (KSIA 스타일) */
+.ai-day-box { border: 1px solid var(--border); border-radius: 4px; background: var(--card); margin-bottom: 12px; overflow: hidden; }
+.ai-day-box-header { font-family: 'ABCFavorit', sans-serif; font-size: 0.82rem; font-weight: 600; color: var(--text-label); padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--card-strong); }
+.ai-news-row { display: block; padding: 10px 16px; border-bottom: 1px solid var(--border-soft); color: var(--text-news); font-size: 0.92rem; line-height: 1.5; text-decoration: none; cursor: pointer; }
+.ai-news-row:last-child { border-bottom: none; }
+.ai-news-row:hover { background: var(--hover-bg-soft); }
+.ai-news-src { color: var(--text-label); font-size: 0.8rem; }
 .daily-footer { text-align: center; font-size: 0.75rem; color: var(--dim); padding: 16px 0 8px; }
 
 /* Company cards */
@@ -441,23 +448,21 @@ function renderLinkList(groupedItems, containerId) {
         return;
     }
     Object.entries(groupedItems).forEach(([dateKey, articles]) => {
-        const groupDiv = document.createElement('div');
-        groupDiv.className = 'date-group';
+        const box = document.createElement('div');
+        box.className = 'ai-day-box';
         const header = document.createElement('div');
-        header.className = 'sticky-date-header';
+        header.className = 'ai-day-box-header';
         header.textContent = dateKey;
-        groupDiv.appendChild(header);
+        box.appendChild(header);
         articles.forEach(item => {
             const a = document.createElement('a');
-            a.className = 'hl-card linked furiosa-card';
+            a.className = 'ai-news-row';
             a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
-            a.style.display = 'block';
-            a.style.textDecoration = 'none';
-            const src = item.source ? ` <span style="color:var(--text-label);font-size:0.8rem;">— ${escapeHtml(item.source)}</span>` : '';
-            a.innerHTML = `<span class="hl-card-text">${escapeHtml(item.title)}${src}</span>`;
-            groupDiv.appendChild(a);
+            const src = item.source ? ` <span class="ai-news-src">— ${escapeHtml(item.source)}</span>` : '';
+            a.innerHTML = `${escapeHtml(item.title)}${src}`;
+            box.appendChild(a);
         });
-        el.appendChild(groupDiv);
+        el.appendChild(box);
     });
 }
 
