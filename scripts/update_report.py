@@ -30,7 +30,8 @@ REPO_ROOT = Path(__file__).parent.parent
 REPORT_PATH = REPO_ROOT / "report.json"
 
 FURIOSA_BASE_URL = "https://endpoint.access.furiosa.dev/v1"
-EXAONE_MODEL = "furiosa-ai/EXAONE-4.0-32B-FP8"
+EXAONE_MODEL = "furiosa-ai/EXAONE-4.0-32B-FP8"      # 한국어 요약 생성용
+SCORING_MODEL = "furiosa-ai/Qwen3-32B-FP8"          # 관련도 채점·판단용 (지시 준수·일관성)
 EMBEDDING_MODEL = "furiosa-ai/Qwen3-Embedding-8B"
 SIMILARITY_THRESHOLD = 0.85
 COMPETITOR_SIMILARITY_THRESHOLD = 0.85
@@ -507,7 +508,7 @@ def cluster_articles_by_event(articles: list[dict], client: "OpenAI | None") -> 
 {{"clusters": [[0, 2], [1], [3, 4, 5]]}}"""
     try:
         resp = client.chat.completions.create(
-            model=EXAONE_MODEL,
+            model=SCORING_MODEL,
             messages=[{"role": "user", "content": prompt}],
             max_tokens=3000,  # 항목이 많을 때 출력이 잘려 과병합되지 않도록 충분히 확보
             temperature=0.1,
@@ -600,7 +601,7 @@ def score_relevance(subject: str, aliases: list[str], articles: list[dict], clie
         )
         try:
             resp = client.chat.completions.create(
-                model=EXAONE_MODEL,
+                model=SCORING_MODEL,
                 messages=[{"role": "user", "content": _relevance_prompt(subject, numbered)}],
                 max_tokens=2000,
                 temperature=0.1,
@@ -792,7 +793,7 @@ JSON만 응답: {{"items": [{{"id": 0, "keep": 1}}, ...]}}"""
         data = {}
         try:
             resp = client.chat.completions.create(
-                model=EXAONE_MODEL,
+                model=SCORING_MODEL,
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=1200,
                 temperature=0.1,
@@ -1002,7 +1003,7 @@ def main():
         weekly_by_day.setdefault(date_key, []).append(a)
     furiosa_weekly_group = {}
     for date_key, day_arts in weekly_by_day.items():
-        top = sorted(day_arts, key=lambda x: (x.get("relevance", 0), x.get("pub_dt") or _min_dt), reverse=True)[:5]
+        top = sorted(day_arts, key=lambda x: (x.get("relevance", 0), x.get("pub_dt") or _min_dt), reverse=True)[:3]
         top.sort(key=lambda x: x.get("pub_dt") or _min_dt, reverse=True)  # 표시는 최신순
         furiosa_weekly_group[date_key] = [to_output(a, kst) for a in top]
 
