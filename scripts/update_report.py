@@ -952,16 +952,8 @@ def main():
         kept_subject_urls = {a["url"] for a in kept_subject}
         all_furiosa = [a for a in all_furiosa if a["url"] in kept_subject_urls or not in_window(a, weekly_cutoff)]
 
-    in_weekly_window = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
-    if exaone_client:
-        deduped = cluster_articles_by_event(in_weekly_window, exaone_client)
-        print(f"[furiosa] after cluster_articles_by_event: {len(deduped)} (dropped {len(in_weekly_window) - len(deduped)})")
-        deduped_urls = {a["url"] for a in deduped}
-        for a in in_weekly_window:
-            if a["url"] not in deduped_urls:
-                print(f"  [DROPPED by cluster] {a['title'][:80]}")
-        all_furiosa = [a for a in all_furiosa if a["url"] in deduped_urls or not in_window(a, weekly_cutoff)]
-
+    # LLM 이벤트 클러스터링은 과병합으로 별개 사건(예: ETRI-퓨리오사 NPU센터)까지
+    # 지워버려서 제거. 임계값 기반 의미 중복제거(아래)만 사용해 예측 가능하게 처리.
     in_weekly_window_2 = [a for a in all_furiosa if in_window(a, weekly_cutoff)]
     kept = dedup_by_semantic_similarity(in_weekly_window_2, embedding_client)
     print(f"[furiosa] after dedup_by_semantic_similarity: {len(kept)} (dropped {len(in_weekly_window_2) - len(kept)})")

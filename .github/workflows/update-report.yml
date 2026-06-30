@@ -48,6 +48,9 @@ jobs:
           git add report.json
           git diff --staged --quiet && echo "No changes" || (
             git commit -m "chore: update highlights $(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M KST')"
-            git pull --rebase origin main
-            git push
+            # report.json은 매 실행 전체 재생성되므로, 동시 커밋 충돌 시 이번 실행 결과를 채택(-X theirs)
+            for i in 1 2 3; do
+              git pull --rebase -X theirs origin main && git push && break
+              echo "push retry $i"; sleep 5
+            done
           )
