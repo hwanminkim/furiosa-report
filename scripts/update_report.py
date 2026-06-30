@@ -989,15 +989,18 @@ def main():
             furiosa_daily_group[date_key] = []
         furiosa_daily_group[date_key].append(to_output(a, kst))
 
-    furiosa_weekly_group = {}
-    daily_count = {}
-    for a in furiosa_weekly_raw:
+    # 주간: 일자별로 묶되, 하루 3건 캡을 '최신순'이 아니라 '관련도순(동점은 최신순)'으로
+    # 선별 — 관련도 높은 기사가 같은 날 늦게 나온 기사에 밀려 잘리던 문제 보완.
+    _min_dt = datetime.datetime.min.replace(tzinfo=pytz.utc)
+    weekly_by_day = {}
+    for a in furiosa_weekly_raw:  # 이미 최신순 → 날짜 그룹 등장 순서(내림차순) 유지
         date_key = format_date_with_weekday(a.get("pub_dt"), kst)
-        if daily_count.get(date_key, 0) < 3:
-            if date_key not in furiosa_weekly_group:
-                furiosa_weekly_group[date_key] = []
-            furiosa_weekly_group[date_key].append(to_output(a, kst))
-            daily_count[date_key] = daily_count.get(date_key, 0) + 1
+        weekly_by_day.setdefault(date_key, []).append(a)
+    furiosa_weekly_group = {}
+    for date_key, day_arts in weekly_by_day.items():
+        top = sorted(day_arts, key=lambda x: (x.get("relevance", 0), x.get("pub_dt") or _min_dt), reverse=True)[:3]
+        top.sort(key=lambda x: x.get("pub_dt") or _min_dt, reverse=True)  # 표시는 최신순
+        furiosa_weekly_group[date_key] = [to_output(a, kst) for a in top]
 
     # ── 3. AI 반도체 일반 동향 (KSIA 스타일, 요약 없음) ──
     ai_semi_news = collect_ai_semi_news(weekly_cutoff, kst, exaone_client)
