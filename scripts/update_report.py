@@ -998,7 +998,7 @@ def main():
         weekly_by_day.setdefault(date_key, []).append(a)
     furiosa_weekly_group = {}
     for date_key, day_arts in weekly_by_day.items():
-        top = sorted(day_arts, key=lambda x: (x.get("relevance", 0), x.get("pub_dt") or _min_dt), reverse=True)[:3]
+        top = sorted(day_arts, key=lambda x: (x.get("relevance", 0), x.get("pub_dt") or _min_dt), reverse=True)[:5]
         top.sort(key=lambda x: x.get("pub_dt") or _min_dt, reverse=True)  # 표시는 최신순
         furiosa_weekly_group[date_key] = [to_output(a, kst) for a in top]
 
